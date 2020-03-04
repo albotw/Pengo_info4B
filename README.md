@@ -50,7 +50,7 @@ Le score est calculé en fonction du nombre d'animaux tués et le temps de jeu.
 ### Fonctionnalités:
 Les animaux doivent être controlés par des joueurs ou par l'IA.
 
-Dans le cas de l'IA, plusieurs comportement doivent être implémentés (défense des blocs spéciaux, aggression du pingouin, dépôt de bombes autour des blocs spéciaux, etc...)
+Dans le cas de l'IA, plusieurs comportement doivent être implémentés (défense des blocs spéciaux, aggression du pingouin, cassage de blocs autour des blocs spéciaux, etc...)
 
 Un mode coop vs IA en réseau devra être fait, avec plusieurs pingouins sur le plateau
 

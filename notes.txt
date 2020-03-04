@@ -1,0 +1,87 @@
+1ere etape: 1 joueur/pingouin, 3 IA/animaux, local
+2e etape: 1ere etape + score en réseau
+3e etape: 2e etape + 1-3joueurs/pingouins, 3 IA/animaux, serveur
+4e etape: 3e etape + 1-3joueurs/pingouins, 1-3 joueurs/animaux, serveur
+
+map: RESSOURCE CRITIQUE.
+tableau[][] qui contient des pointeurs vers le contenu(animaux / joueur / blocs)
+la carte initiale est contenue dans un fichier texte. et elle est chargé au démarrage / reset du jeu.
+Elle dépend d'un modèle lecteur / rédacteur. Elle est volatile et elle bloque forcément tout pour le rendu.
+
+Entité: ABSTRAITE
+classe abstraite pour faciliter le stockage dans la map. contient les position, une méthode déplacement, une méthode de mort, 
+
+Bloc: RESSOURCE
+classe qui implémente le glissement apres un contact du joueur sinon la destruction. pas de déplacement par un animal.
+peut déclencher la mort d'un animal.
+
+BlocDiamant: RESSOURCE
+classe qui implémente le glissement mais pas de destruction possible ni de déplacement par un animaL.
+
+Mur: COMPORTEMENT IMPLICITE
+si action déclenchée par le joueur, stun les animaux qui touche ce mur. pas de sortie ni de bouclage.
+
+Pingouin: hérite de ENTITE | RESSOURCE
+dépend d'un modèle lecteur / rédacteur.
+implémente déplacement, met a jour sa position sur la map.
+implémente mort: déclenche fin du jeu(), 
+contient sa position, accessible directement par les animaux sans passer par la map.
+peut déclencher le stun si pres du mur.
+
+Animal: hérite de ENTITE | RESSOURCE
+dépend d'un modèle lecteur / rédacteur.
+implémente déplacement, met a jour sa position.
+implémente destruction: peut détruire un bloc sur la map.
+implémente une variable d'état pour le stun.
+implémente mort, appelle la méthode de respawn. 
+
+
+Joueur: THREAD
+référence vers l'élément dirigé par le joueur.
+les méthodes de l'élément sont appelées par le joueur.
+contient une référence vers classe utilitaire pour lire le clavier.
+contient le nombre de vies du jeu.
+
+
+IA: THREAD
+référence vers l'élément dirigé.
+les méthodes de l'évènement sont appelées par l'IA
+contient une référence vers un générateur aléatoire.
+implémente des méthodes correspondant a différents comportements
+implémente une méthode pour faire un GPS (A-star).
+contient une référence vers le pingouin qu'elle chasse.
+
+Dispatcher: THREAD (GIGA SÉMAPHORE)
+Contient une FILE d'évènements invoqués par les autres classes.
+Continent un tableau pour chaque évènement, qui référence les éléments devant répondre a l'évènement.
+met tous les éléments en wait(); le temps du rendu pour éviter un affichage incorrect des informations.
+
+Jeu: RESSOURCE
+fonction de game over
+fonction de victoire
+fonction d'initialisation.
+timer de temps de jeu
+met a jour le score global
+(EN OPTION: en multi, faire un classement des scores par joueur).
+
+Render: THREAD
+affichage.
+fenêtre.
+génération de tick
+
+(Collision: THREAD)
+
+evenements possibles:
+deplacement pingouin
+mort pingouin
+deplacement bloc
+deplacement BlocDiamant
+fin du jeu
+debut du jeu
+stun
+mort animal
+spawn animal
+input utilisateur
+tick
+pause
+destuction bloc
