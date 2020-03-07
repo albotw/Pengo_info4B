@@ -5,5 +5,5 @@ public class Map {
     public Map(Entite[][] tab) {
         this.tab = tab;
     }
-    
+
 }

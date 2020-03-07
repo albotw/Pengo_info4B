@@ -28,6 +28,6 @@ public class BlocDiamant extends Entite {
         if(BlocDiamant."SeTouche"){ // A chaque fois que les bloc de diamant se touche on implémente le compteur de 1;
             cptD++;
         }
-        return cptD;                // on return le nombre de compteur, si il est égale à 3 Penguoin gagne.
+        return cptD;                // on return le nombre de compteur, si il est égale à 3 Pengouin gagne.
     }
 }
