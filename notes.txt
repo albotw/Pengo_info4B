@@ -64,7 +64,7 @@ timer de temps de jeu
 met a jour le score global
 (EN OPTION: en multi, faire un classement des scores par joueur).
 
-Render: THREAD
+Graphics: THREAD
 affichage.
 fenêtre.
 génération de tick
