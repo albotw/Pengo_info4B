@@ -15,7 +15,7 @@ Bloc: RESSOURCE
 classe qui implémente le glissement apres un contact du joueur sinon la destruction. pas de déplacement par un animal.
 peut déclencher la mort d'un animal.
 
-BlocDiamant: RESSOURCE
+com.generic.coreClasses.BlocDiamant: RESSOURCE
 classe qui implémente le glissement mais pas de destruction possible ni de déplacement par un animaL.
 
 Mur: COMPORTEMENT IMPLICITE
@@ -28,7 +28,7 @@ implémente mort: déclenche fin du jeu(),
 contient sa position, accessible directement par les animaux sans passer par la map.
 peut déclencher le stun si pres du mur.
 
-Animal: hérite de ENTITE | RESSOURCE
+com.generic.coreClasses.Animal: hérite de ENTITE | RESSOURCE
 dépend d'un modèle lecteur / rédacteur.
 implémente déplacement, met a jour sa position.
 implémente destruction: peut détruire un bloc sur la map.
@@ -56,7 +56,7 @@ Contient une FILE d'évènements invoqués par les autres classes.
 Continent un tableau pour chaque évènement, qui référence les éléments devant répondre a l'évènement.
 met tous les éléments en wait(); le temps du rendu pour éviter un affichage incorrect des informations.
 
-Jeu: RESSOURCE
+com.generic.coreClasses.Jeu: RESSOURCE
 fonction de game over
 fonction de victoire
 fonction d'initialisation.
@@ -75,7 +75,7 @@ evenements possibles:
 deplacement pingouin
 mort pingouin
 deplacement bloc
-deplacement BlocDiamant
+deplacement com.generic.coreClasses.BlocDiamant
 fin du jeu
 debut du jeu
 stun

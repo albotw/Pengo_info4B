@@ -1,3 +1,5 @@
+package com.generic.coreClasses;
+
 public class Map {
 
     Entite tab[][];

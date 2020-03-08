@@ -1,3 +1,5 @@
+package com.generic.coreClasses;
+
 public class Pengouin extends Entite {
 
 
@@ -6,15 +8,13 @@ public class Pengouin extends Entite {
     }
 
     @Override
-    void moove() {
+    void move() {
 
     }
 
     @Override
-    void isDead() {
-        if(isDead = True){
-            life--;
-        }
+    void destroy() {
+
     }
 
     public void stun(Animal a){

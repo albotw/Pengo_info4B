@@ -26,7 +26,7 @@ Contenu:
 * **Spécification des classes principales** et les méthodes essentielles
 * **Architecture logicielle détaillée** description des couches fonctionelles, les classes les composant, et les services réalisés.
 * **Algorimthes principaux** détaillées
-* **Jeu de tests** pour montrer que le programme marche
+* **com.generic.coreClasses.Jeu de tests** pour montrer que le programme marche
 
 
 ## 3| Projet:

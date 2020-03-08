@@ -1,3 +1,5 @@
+package com.generic.coreClasses;
+
 public class BlocGlace extends Entite {
 
 
@@ -5,17 +7,17 @@ public class BlocGlace extends Entite {
         super(x, y);
     }
 
-    public void Glissade(){
+    public void glissade(){
 
     }
 
     @Override
-    void moove() {
+    void move() {
 
     }
 
     @Override
-    void isDead() {
+    void destroy() {
 
     }
 }

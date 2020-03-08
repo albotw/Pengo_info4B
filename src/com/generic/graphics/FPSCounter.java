@@ -1,3 +1,15 @@
+/**
+ * Nom de la classe: FPSCounter
+ *
+ * Description: Calcul du nombre d'images par secondes a partir d'un timer.
+ *
+ * Version: 1.0
+ *
+ * Date: 08/03/2020
+ *
+ * Auteur: Yann
+ */
+
 package com.generic.graphics;
 
 import java.awt.event.ActionEvent;

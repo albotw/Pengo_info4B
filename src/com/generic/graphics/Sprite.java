@@ -1,3 +1,15 @@
+/**
+ * Nom de la classe: Sprite
+ *
+ * Description: classe conteneur pour une image devant être affichée.
+ *
+ * Version: 2.0
+ *
+ * Date: 08/03/2020
+ *
+ * Auteur: Yann
+ */
+
 package com.generic.graphics;
 
 import javax.swing.*;

@@ -1,3 +1,5 @@
+package com.generic.coreClasses;
+
 abstract class Entite {
     int x;
     int y;
@@ -7,8 +9,8 @@ abstract class Entite {
         this.y = y;
     }
 
-    abstract void moove();
-    abstract void isDead();
+    abstract void move();
+    abstract void destroy();
 
     public int getX() {
         return x;
