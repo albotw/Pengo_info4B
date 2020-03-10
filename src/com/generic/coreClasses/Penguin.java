@@ -15,4 +15,5 @@ public class Penguin extends MapEntity{
     {
 
     }
+
 }

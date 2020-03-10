@@ -13,21 +13,15 @@ public class Jeu {
 
     }
     public void GameOver(){
-        /*if(Penguoin.isDead && Penguoin.Life=0 || Jeu.Timer = 0){
-            return "GAMEOVER";
+
         }
 
-         */
-    }
     public void Victoire(){
-        /*if(CptD = 3 || Animal.isDead=3){
-            return "VICTOIRE";
+
         }
 
-         */
-    }
-    public void Timer(){
-        Timer chrono = new Timer();        // Fonction Timer pour savoir le temps qu'il reste au joueur
+   /* public void Timer(){
+        Timer chrono = new Timer();
         chrono.schedule(new TimerTask() {
 
             int time = 90;
@@ -41,7 +35,7 @@ public class Jeu {
                 time--;
             }
         }, 1000, 1000);
-    }
+    }*/
     public void UpdateScore(int Score){
 
     }
@@ -57,7 +51,7 @@ public class Jeu {
 
     private void InitMap(){
         /*int i;
-        for(i = 0; i<N_BLOCKS*N_BLOCKS;i++){   // création de map bloc par bloc
+        for(i = 0; i< HEIGHT * WIDTH ;i++){   // création de map bloc par bloc
         }
 
          */

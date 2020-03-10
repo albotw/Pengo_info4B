@@ -11,4 +11,7 @@ public class DiamondBlock extends MapBlock {
     {
 
     }
+
+    public void CptD() {
+    }
 }
