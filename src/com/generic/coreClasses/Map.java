@@ -2,9 +2,9 @@ package com.generic.coreClasses;
 
 public class Map {
 
-    Entite tab[][];
+    MapObject tab[][];
 
-    public Map(Entite[][] tab) {
+    public Map(MapObject [][] tab) {
         this.tab = tab;
     }
 

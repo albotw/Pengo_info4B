@@ -1,7 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="68cf4b1d-81a4-465b-b751-96d1a62dc788" name="Default Changelist" comment="" />
+    <list default="true" id="68cf4b1d-81a4-465b-b751-96d1a62dc788" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/DiamondBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/IceBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapBlock.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapObject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/Penguin.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/player/PlayerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/BlocDiamant.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/BlocGlace.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Entite.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Pengouin.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/utils/InputScanner.java" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -65,6 +82,7 @@
       <workItem from="1583680688852" duration="789000" />
       <workItem from="1583681486718" duration="7005000" />
       <workItem from="1583698561158" duration="2600000" />
+      <workItem from="1583839779131" duration="3796000" />
     </task>
     <servers />
   </component>
@@ -88,14 +106,16 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="689" y="323" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583682201613" />
-    <state x="808" y="428" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1583680844821">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="606" y="343" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1583839888493">
+      <screen x="0" y="23" width="1440" height="807" />
     </state>
     <state x="808" y="428" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583680844821" />
-    <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583686459366">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="606" y="343" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.807@0.23.1440.807" timestamp="1583839888493" />
+    <state x="518" y="237" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1583841931710">
+      <screen x="0" y="23" width="1440" height="807" />
     </state>
     <state x="690" y="286" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583686459366" />
+    <state x="518" y="237" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.1440.807@0.23.1440.807" timestamp="1583841931710" />
     <state x="740" y="294" key="FileChooserDialogImpl" timestamp="1583681208761">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
@@ -120,9 +140,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="461" y="182" key="SettingsEditor/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583681476832" />
-    <state x="656" y="363" key="com.intellij.ide.util.TipDialog" timestamp="1583680696432">
-      <screen x="0" y="0" width="1920" height="1080" />
+    <state x="492" y="294" key="com.intellij.ide.util.TipDialog" timestamp="1583839788947">
+      <screen x="0" y="23" width="1440" height="807" />
     </state>
     <state x="656" y="363" key="com.intellij.ide.util.TipDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583680696432" />
+    <state x="492" y="294" key="com.intellij.ide.util.TipDialog/0.23.1440.807@0.23.1440.807" timestamp="1583839788947" />
   </component>
 </project>

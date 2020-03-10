@@ -1,7 +1,7 @@
 package com.generic.coreClasses;
 
-public class Animal extends MapEntity {
-    public Animal(int x, int y)
+public class Penguin extends MapEntity{
+    public Penguin (int x, int y)
     {
         super(x, y);
     }
