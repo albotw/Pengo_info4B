@@ -2,22 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="68cf4b1d-81a4-465b-b751-96d1a62dc788" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/DiamondBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/IceBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapBlock.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapEntity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapObject.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/Penguin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/generic/player/PlayerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/BlocDiamant.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/BlocGlace.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Entite.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/Map.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/Pengouin.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/utils/InputScanner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/MapBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/coreClasses/MapObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/coreClasses/MapObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/utils/CONFIG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/utils/CONFIG.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +71,7 @@
       <workItem from="1583680688852" duration="789000" />
       <workItem from="1583681486718" duration="7005000" />
       <workItem from="1583698561158" duration="2600000" />
-      <workItem from="1583839779131" duration="3796000" />
+      <workItem from="1583839779131" duration="6550000" />
     </task>
     <servers />
   </component>
