@@ -1,9 +1,3 @@
-1ere etape: 1 joueur/pingouin, 3 IA/animaux, local
-2e etape: 1ere etape + score en réseau
-3e etape: 2e etape + 1-3joueurs/pingouins, 3 IA/animaux, serveur
-4e etape: 3e etape + 1-3joueurs/pingouins, 1-3 joueurs/animaux, serveur
-
-
 
 map: RESSOURCE CRITIQUE.
 tableau[][] qui contient des pointeurs vers le contenu(animaux / joueur / blocs)

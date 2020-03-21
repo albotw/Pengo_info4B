@@ -1,10 +1,21 @@
 package com.generic.gameplayClasses;
 
-import com.generic.coreClasses.Animal;
-import com.generic.coreClasses.IceBlock;
-import com.generic.coreClasses.Penguin;
+import com.generic.coreClasses.*;
+import com.generic.player.*;
+import com.generic.graphics.*;
+import com.generic.AI.*;
+import com.generic.utils.*;
+
+import java.util.ArrayList;
+
 
 public class Game {
+    public static Map m;
+    public static ArrayList<PlayerThread> players;
+    public static ArrayList<AI> AIs;
+
+    private RenderThread renderer;
+    private Window w;
 
     public static void reset(){}
 
@@ -15,8 +26,6 @@ public class Game {
     public static void victory(){}
 
     public static void initGame(){}
-
-    public static void initMap(){}
 
     public static void animalKilled(Animal a)
     {
@@ -35,10 +44,21 @@ public class Game {
 
     public static void penguinKilled(Penguin p)
     {
-
+        for(PlayerThread player : players)
+        {
+            if (player.getControlledObject().equals(p))
+            {
+                player.removeLive();
+            }
+        }
     }
 
     public static void iceBlockDestroyed(IceBlock ib)
+    {
+
+    }
+
+    public static void respawnAnimal()
     {
 
     }
