@@ -28,7 +28,7 @@ public class Serveur {
             public void run() {
                 while (isRunning) {
                     try {
-                        Socket client = server.accept();                    // on attend connexion joueur
+                        Socket Joueur = server.accept();                    // on attend connexion joueur
                         System.out.println("Connexion etablit");            //Une fois reçue, on travaille dans un autre thread.
                         Thread th = new Thread(new Joueurs(Joueur));
                         th.start();
