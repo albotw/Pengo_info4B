@@ -14,12 +14,12 @@ public class Map {
         return tab[y][y];
     }
 
-    public void place(MapObject o, int x, int y)
+    public synchronized void place(MapObject o, int x, int y)
     {
         tab[x][y] = o;
     }
 
-    public void release(int x, int y)
+    public synchronized void release(int x, int y)
     {
         tab[x][y] = null;
     }

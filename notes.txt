@@ -3,6 +3,8 @@
 3e etape: 2e etape + 1-3joueurs/pingouins, 3 IA/animaux, serveur
 4e etape: 3e etape + 1-3joueurs/pingouins, 1-3 joueurs/animaux, serveur
 
+
+
 map: RESSOURCE CRITIQUE.
 tableau[][] qui contient des pointeurs vers le contenu(animaux / joueur / blocs)
 la carte initiale est contenue dans un fichier texte. et elle est chargé au démarrage / reset du jeu.
