@@ -20,4 +20,6 @@ public class CONFIG {
     public static int GRID_HEIGHT = 15;
 
     public static int SPRITE_SIZE = 15;
+
+    public static int SERVER_PORT = 8080;
 }

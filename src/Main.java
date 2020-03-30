@@ -16,7 +16,13 @@ public class Main {
 
         renderer.start();
 
-
+        try{
+            InitServer.init();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
         Timer chrono = new Timer();        // Fonction Timer pour savoir le temps qu'il reste au joueur
         chrono.schedule(new TimerTask() {
 

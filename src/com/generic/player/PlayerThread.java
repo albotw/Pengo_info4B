@@ -38,14 +38,15 @@ public class PlayerThread extends Thread implements KeyListener {
 
     public void removeLive()
     {
+        //methode appellée quand un pingouin meurt.
         currentLives--;
         if (currentLives <= 0)
         {
-            Game.gameOver();
+            Game.instance.gameOver();
         }
         else
         {
-            Game.respawnAnimal();
+            Game.instance.respawnPenguin();
         }
     }
 }
