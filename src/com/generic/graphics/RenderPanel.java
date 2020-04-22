@@ -26,7 +26,7 @@ public class RenderPanel extends JPanel {
     }
 
 
-    private synchronized void draw(Graphics g){
+    private void draw(Graphics g){
         Graphics2D g2d = (Graphics2D)g;
 
         g2d.setColor(Color.black);

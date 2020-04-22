@@ -70,6 +70,12 @@ public class RenderThread extends Thread {
         }
     }
 
+    public void flushRenderPile()
+    {
+        foregroundPile.clear();
+        backgroundPile.clear();
+    }
+
     public void run()
     {
         fps.start();

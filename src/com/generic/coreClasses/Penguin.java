@@ -15,13 +15,13 @@ public class Penguin extends MapEntity{
     {
         if (x == 0 || x == GRID_WIDTH || y == 0 || y == GRID_HEIGHT)
         {
-            Game.stunTriggered();
+            Game.instance.stunTriggered();
         }
     }
 
     public void destroy()
     {
-        Game.penguinKilled(this);
+        Game.instance.penguinKilled(this);
     }
 
 }

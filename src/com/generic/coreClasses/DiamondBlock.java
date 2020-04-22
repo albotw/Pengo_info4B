@@ -13,6 +13,6 @@ public class DiamondBlock extends MapBlock {
     public void onMoveTriggered(char direction)
     {
         super.onMoveTriggered(direction);
-        Game.checkDiamondBlocks();
+        Game.instance.checkDiamondBlocks();
     }
 }

@@ -1,21 +1,31 @@
+package com.generic;
+
 import java.util.Timer;
 import java.util.TimerTask;
+
+import com.generic.coreClasses.Map;
+import com.generic.gameplayClasses.MapGenerator;
 import com.generic.graphics.*;
 import com.generic.utils.*;
 
-public class Main {
+public class Debug {
+
+    public static RenderThread renderer;
+    public static Map m;
     public static void main(String[] args) {
 
         Window w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
-        RenderThread renderer = new RenderThread(w);
+        renderer = new RenderThread(w);
 
-        Sprite spr1 = new Sprite(400, 400);
-        spr1.loadImage("src/resources/img1.png");
-
-        renderer.addToRenderPile(spr1, "foreground");
+        //Sprite spr1 = new Sprite(400, 400);
+        //spr1.loadImage("src/resources/img1.png");
+        //renderer.addToRenderPile(spr1, "foreground");
 
         renderer.start();
 
+        m = MapGenerator.generate();
+        System.out.println(m.toString());
+        /*
         try{
             InitServer.init();
         }
@@ -38,6 +48,8 @@ public class Main {
                 time--;
             }
         }, 1000, 1000);
+
+         */
     }
 
 }
