@@ -8,31 +8,73 @@ import com.generic.utils.CONFIG;
 
 import java.util.HashMap;
 
+import static com.generic.utils.CONFIG.GRID_HEIGHT;
+import static com.generic.utils.CONFIG.GRID_WIDTH;
+import static com.generic.utils.Random.RandomizedInt;
+
 
 public class Game {
     public static Game instance;
-    public static Map m;
-    public static HashMap<MapEntity, PlayerThread> players;
-    public static HashMap<MapEntity, AIThread> AIs;
+    private Map m;
+    private HashMap<MapEntity, Player> players;
+    private HashMap<MapEntity, AIThread> AIs;
 
     private RenderThread renderer;
+    private SpriteManager sm;
     private Window w;
+
+    private Player p1;
 
     public Game()
     {
-        //! ATTENTION METHODE LONGUE.
+
         instance = this;
 
-        //initialisation composantes jeu ici.
-
-        w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
+        w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
+        sm = SpriteManager.createSpriteManager();
         renderer = new RenderThread(w);
 
-        players = new HashMap<MapEntity, PlayerThread>();
-        AIs = new HashMap<MapEntity, AIThread>();
+        renderer.start();
 
+        players = new HashMap<MapEntity, Player>();
+        AIs = new HashMap<MapEntity, AIThread>();
+        m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
+        m = MapGenerator.generate();
+
+        p1 = new Player();
+
+        boolean loop = true;
+        do
+        {
+            int initX = RandomizedInt(0, GRID_WIDTH -1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+            if (m.getAt(initX, initY) == null)
+            {
+                loop = false;
+                Penguin p = new Penguin(initX, initY);
+                m.place(p, initX, initY);
+                p1.setControlledObject(p);
+            }
+        }while(loop);
+
+        gameplayLoop();
         //lorsque tous les éléments sont instanciés
         //==> start()
+    }
+
+    private void gameplayLoop()
+    {
+        while (true)
+        {
+            p1.linkInput();
+            try{
+                Thread.currentThread().sleep(16);
+            }catch(Exception e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void reset(){}
@@ -84,6 +126,7 @@ public class Game {
 
     public void stunTriggered()
     {
+        System.out.println("STUN!");
         //méthode appelée quand un pingouin est façe au mur et appelle son action.
         //vérifie les X = 0 | X = GRID_MAX, Y = 0 | y = GRID_MAX pour trouver des animaux.
         //si animal il y a alors a.activateStun();
@@ -93,8 +136,8 @@ public class Game {
     public void penguinKilled(Penguin p)
     {
         //methode appellee quand un pingouin meurt
-        renderer.removeFromRenderPile(p.getSpr());  //on supprime le sprite du rendu
-        PlayerThread owner = players.get(p);    //on recupere le joueur qui le controle
+        //renderer.removeFromRenderPile(p.getSpr());  //on supprime le sprite du rendu
+        Player owner = players.get(p);    //on recupere le joueur qui le controle
         owner.removeLive();     //on appelle la methode pour retirer une vie au joueur
     }
 
@@ -102,7 +145,7 @@ public class Game {
     {
         //methode appellée quand un bloc est détruit (par un animal)
         m.release(ib.getX(), ib.getY());    //supprime le bloc de la map
-        renderer.removeFromRenderPile(ib.getSpr());     //supprime le sprite du rendu
+        //renderer.removeFromRenderPile(ib.getSpr());     //supprime le sprite du rendu
     }
 
     public void respawnAnimal()
@@ -125,5 +168,20 @@ public class Game {
         //cree une instance de penguin
         //envoie son sprite au rendu
         //l'associe au joueur
+    }
+
+    public Map getMap()
+    {
+        return this.m;
+    }
+
+    public RenderThread getRenderer()
+    {
+        return this.renderer;
+    }
+
+    public Window getWindow()
+    {
+        return this.w;
     }
 }

@@ -2,31 +2,20 @@ package com.generic.player;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+
+import com.generic.coreClasses.MapEntity;
 import com.generic.coreClasses.MapObject;
 import com.generic.gameplayClasses.Game;
 
-public class PlayerThread extends Thread implements KeyListener {
+public class Player
+{
     private MapObject controlledObject;
     private int currentLives;
+    private InputHandler ih;
 
-    public PlayerThread()
+    public Player()
     {
-
-    }
-
-    public void keyTyped(KeyEvent key)
-    {
-
-    }
-
-    public void keyPressed(KeyEvent key)
-    {
-
-    }
-
-    public void keyReleased(KeyEvent key)
-    {
-
+        ih = new InputHandler();
     }
 
     public MapObject getControlledObject()
@@ -35,6 +24,16 @@ public class PlayerThread extends Thread implements KeyListener {
     }
 
     public void setControlledObject(MapObject mo){this.controlledObject = mo;}
+
+    public void linkInput()
+    {
+        if (ih.UP == true) {controlledObject.goUp(); }
+        else if (ih.DOWN == true) {controlledObject.goDown(); }
+        else if (ih.LEFT == true) {controlledObject.goLeft(); }
+        else if (ih.RIGHT == true) {controlledObject.goRight(); }
+        else if (ih.ACTION == true) {((MapEntity)(controlledObject)).action(); }
+        ih.flush();
+    }
 
     public void removeLive()
     {

@@ -6,6 +6,7 @@ public class DiamondBlock extends MapBlock {
     public DiamondBlock(int x, int y)
     {
         super(x, y);
+        this.type = "DiamondBlock";
     }
 
     public void destroy(){}

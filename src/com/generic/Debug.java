@@ -1,30 +1,12 @@
 package com.generic;
-
-import java.util.Timer;
-import java.util.TimerTask;
-
-import com.generic.coreClasses.Map;
-import com.generic.gameplayClasses.MapGenerator;
-import com.generic.graphics.*;
-import com.generic.utils.*;
+import com.generic.gameplayClasses.Game;
 
 public class Debug {
 
-    public static RenderThread renderer;
-    public static Map m;
     public static void main(String[] args) {
 
-        Window w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
-        renderer = new RenderThread(w);
+        Game g = new Game();
 
-        //Sprite spr1 = new Sprite(400, 400);
-        //spr1.loadImage("src/resources/img1.png");
-        //renderer.addToRenderPile(spr1, "foreground");
-
-        renderer.start();
-
-        m = MapGenerator.generate();
-        System.out.println(m.toString());
         /*
         try{
             InitServer.init();

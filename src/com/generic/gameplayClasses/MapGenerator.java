@@ -1,11 +1,10 @@
 package com.generic.gameplayClasses;
 
-import com.generic.Debug;
 import com.generic.coreClasses.IceBlock;
 import com.generic.coreClasses.Map;
+import com.generic.graphics.SpriteManager;
 import com.generic.utils.Paire;
 import com.generic.utils.Pile;
-import com.sun.tools.javac.Main;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;
@@ -39,10 +38,13 @@ import static com.generic.utils.Random.RandomizedInt;
  * si les coordonnées mises a jour correspondent à la case de départ, on s'arrète.
  */
 
+/**
+ * ALGO A MODIFIER URGEEEEEEENNNNTT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ */
 public class MapGenerator {
     public static Map generate()
     {
-        Map m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
+        Map m = Game.instance.getMap();
         boolean[][] visited = new boolean[GRID_WIDTH][GRID_HEIGHT];
         Pile historique = new Pile(GRID_HEIGHT * GRID_WIDTH);
 
@@ -89,7 +91,7 @@ public class MapGenerator {
                 if (m.getAt(x, y-1) != null) neighbors++;
                 if (m.getAt(x, y+1) != null) neighbors++;
 
-                System.out.println("neighbors = " + neighbors);
+                //System.out.println("neighbors = " + neighbors);
 
                 if (neighbors > 1)
                 {
@@ -97,13 +99,13 @@ public class MapGenerator {
                     do
                     {
                         int dir = RandomizedInt(0, 3);
-                        System.out.println("dir = " + dir);
+                        //System.out.println("dir = " + dir);
 
                         //HAUT
                         if (dir == 0 && y - 1 >= 0)
                         {
-                            //if (m.getAt(x, y-1) != null)
-                            if (!up)
+                            if (m.getAt(x, y-1) != null)
+                            //if (!up)
                             {
                                 m.release(x, y);
                                 historique.push(new Paire(x, y));
@@ -115,8 +117,8 @@ public class MapGenerator {
                         //BAS
                         if (dir == 1 && y + 1 < GRID_HEIGHT)
                         {
-                            //if (m.getAt(x, y+1) != null)
-                            if (!down)
+                            if (m.getAt(x, y+1) != null)
+                            //if (!down)
                             {
                                 m.release(x, y);
                                 historique.push(new Paire(x, y));
@@ -128,8 +130,8 @@ public class MapGenerator {
                         //GAUCHE
                         if (dir == 2 && x - 1 >= 0)
                         {
-                            //if (m.getAt(x-1, y) != null)
-                            if (!left)
+                            if (m.getAt(x-1, y) != null)
+                            //if (!left)
                             {
                                 m.release(x, y);
                                 historique.push(new Paire(x, y));
@@ -141,8 +143,8 @@ public class MapGenerator {
                         //DROITE
                         if (dir == 3 && x + 1 < GRID_WIDTH)
                         {
-                            //if (m.getAt(x+1, y) !=
-                            if (!right)
+                            if (m.getAt(x+1, y) != null)
+                            //if (!right)
                             {
                                 m.release(x, y);
                                 historique.push(new Paire(x, y));
@@ -168,7 +170,7 @@ public class MapGenerator {
                 y = (Integer)pos.getValue();
             }
 
-            System.out.println("x = " + x + " y = " + y);
+            //System.out.println("x = " + x + " y = " + y);
             //System.out.println(m.toString());
 
             //vérification si toutes les cases possibles ont été parcourues
@@ -180,11 +182,11 @@ public class MapGenerator {
                 }
             }
 
-            MapToRender.transfer(m, Debug.renderer);
+            SpriteManager.instance.transfer(m, Game.instance.getRenderer());
 
             try
             {
-                Thread.currentThread().sleep(300);
+                Thread.currentThread().sleep(10);
             }
             catch(Exception e)
             {
