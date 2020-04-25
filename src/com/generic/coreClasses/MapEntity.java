@@ -6,5 +6,5 @@ public abstract class MapEntity extends MapObject{
         super(x, y);
     }
 
-    abstract void action();
+    public abstract void action();
 }

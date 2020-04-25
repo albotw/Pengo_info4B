@@ -12,62 +12,29 @@
 
 package com.generic.graphics;
 
-import java.util.ArrayList;
+import com.generic.gameplayClasses.Game;
+
 import static com.generic.utils.CONFIG.WINDOW_TITLE;
 
 public class RenderThread extends Thread {
-    private RenderPanel rp;
+
     private boolean continueDrawing;
-    private ArrayList<Sprite> foregroundPile;
-    private ArrayList<Sprite> backgroundPile;
+
     private FPSCounter fps;
     private Window w;
+    private RenderPanel rp;
+
 
     public RenderThread(Window output)
     {
         fps = new FPSCounter();
         rp = new RenderPanel();
-
         rp.setSize(output.getWidth(), output.getHeight());
         output.add(rp);
-
-        foregroundPile = rp.getForegroundPile();
-        backgroundPile = rp.getBackgroundPile();
 
         continueDrawing = true;
 
         w = output;
-    }
-
-    public void addToRenderPile(Sprite spr, String position) {
-        if (position == "foreground")
-        {
-            foregroundPile.add(spr);
-        }
-        else if (position == "background")
-        {
-            backgroundPile.add(spr);
-        }
-        else
-        {
-            System.out.println("Error: invalid parameter, expected foreground | background, found "+ position);
-        }
-    }
-
-    public void removeFromRenderPile(Sprite spr)
-    {
-        if (foregroundPile.contains(spr))
-        {
-            foregroundPile.remove(spr);
-        }
-        else if (backgroundPile.contains(spr))
-        {
-            backgroundPile.remove(spr);
-        }
-        else
-        {
-            System.out.println("Error: invalid parameter, sprite not found");
-        }
     }
 
     public void run()
@@ -75,12 +42,14 @@ public class RenderThread extends Thread {
         fps.start();
         while(continueDrawing == true)
         {
+            SpriteManager.transfer(Game.instance.getMap(), this);
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
             rp.repaint();
+
             try
             {
-                Thread.sleep(16);
+                this.sleep(16);
             }
             catch (InterruptedException e)
             {

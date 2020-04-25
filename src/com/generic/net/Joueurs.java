@@ -13,7 +13,7 @@ public class Joueurs implements Runnable {
     private BufferedInputStream reader = null;
 
     public Joueurs(Socket S){
-        Object socket = s;
+        //Object socket = s;
     }
 
 

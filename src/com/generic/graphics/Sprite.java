@@ -42,7 +42,7 @@ public class  Sprite {
         ImageIcon ii = new ImageIcon(dir);
         this.texture = ii.getImage();
         getImageDimensions();
-        System.out.println("Loaded img: " + dir + " [" + width + "px * " + height + "px]");
+        //System.out.println("Loaded img: " + dir + " [" + width + "px * " + height + "px]");
     }
 
     public int getX(){return x;}

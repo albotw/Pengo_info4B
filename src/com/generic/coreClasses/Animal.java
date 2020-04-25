@@ -30,7 +30,7 @@ public class Animal extends MapEntity {
 
     public void destroy()
     {
-        Game.animalKilled(this);
+        Game.instance.animalKilled(this);
     }
 
     public void goLeft()
