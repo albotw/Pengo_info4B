@@ -12,6 +12,6 @@ public class IceBlock extends MapBlock {
 
     public void destroy()
     {
-        Game.instance.iceBlockDestroyed(this);
+        Game.instance.getMap().release(x, y);
     }
 }

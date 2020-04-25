@@ -18,7 +18,21 @@ public class Penguin extends MapEntity{
         {
             if (m.getAt(x, y-1).getType().equals("IceBlock"))
             {
-                ((MapBlock)(m.getAt(x, y-1))).onMoveTriggered('H');
+                if (m.getAt(x, y - 2) != null)
+                {
+                    if (m.getAt(x, y - 2).getType().equals("IceBlock"))
+                    {
+                        m.getAt(x, y - 1).destroy();
+                    }
+                    else
+                    {
+                        ((MapBlock)(m.getAt(x, y-1))).onMoveTriggered('H');
+                    }
+                }
+                else
+                {
+                    ((MapBlock)(m.getAt(x, y-1))).onMoveTriggered('H');
+                }
             }
         }
         super.goUp();
@@ -29,6 +43,22 @@ public class Penguin extends MapEntity{
         if (m.getAt(x - 1, y) != null)
         {
             if (m.getAt(x - 1, y).getType().equals("IceBlock"))
+            {
+                if (m.getAt(x - 2, y) != null)
+                {
+                    if (m.getAt(x - 2, y).getType().equals("IceBlock"))
+                    {
+                        m.getAt(x - 1, y).destroy();
+                    }
+                    else {
+                        ((MapBlock) (m.getAt(x - 1, y))).onMoveTriggered('G');
+                    }
+                }
+                else {
+                    ((MapBlock) (m.getAt(x - 1, y))).onMoveTriggered('G');
+                }
+            }
+            else
             {
                 ((MapBlock)(m.getAt(x - 1, y))).onMoveTriggered('G');
             }
@@ -42,7 +72,21 @@ public class Penguin extends MapEntity{
         {
             if (m.getAt(x + 1, y).getType().equals("IceBlock"))
             {
-                ((MapBlock)(m.getAt(x + 1, y))).onMoveTriggered('D');
+                if (m.getAt(x + 2, y) != null)
+                {
+                    if (m.getAt(x + 2, y).getType().equals("IceBlock"))
+                    {
+                        m.getAt(x + 1, y).destroy();
+                    }
+                    else
+                    {
+                        ((MapBlock)(m.getAt(x + 1, y))).onMoveTriggered('D');
+                    }
+                }
+                else
+                {
+                    ((MapBlock)(m.getAt(x + 1, y))).onMoveTriggered('D');
+                }
             }
         }
         super.goRight();
@@ -54,7 +98,21 @@ public class Penguin extends MapEntity{
         {
             if (m.getAt(x, y + 1).getType().equals("IceBlock"))
             {
-                ((MapBlock)(m.getAt(x, y + 1))).onMoveTriggered('B');
+                if (m.getAt(x, y + 2) != null)
+                {
+                    if (m.getAt(x, y + 2).getType().equals("IceBlock"))
+                    {
+                        m.getAt(x, y + 1).destroy();
+                    }
+                    else
+                    {
+                        ((MapBlock)(m.getAt(x, y + 1))).onMoveTriggered('B');
+                    }
+                }
+                else
+                {
+                    ((MapBlock)(m.getAt(x, y + 1))).onMoveTriggered('B');
+                }
             }
         }
         super.goDown();

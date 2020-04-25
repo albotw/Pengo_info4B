@@ -141,13 +141,6 @@ public class Game {
         owner.removeLive();     //on appelle la methode pour retirer une vie au joueur
     }
 
-    public void iceBlockDestroyed(IceBlock ib)
-    {
-        //methode appellée quand un bloc est détruit (par un animal)
-        m.release(ib.getX(), ib.getY());    //supprime le bloc de la map
-        //renderer.removeFromRenderPile(ib.getSpr());     //supprime le sprite du rendu
-    }
-
     public void respawnAnimal()
     {
         //methode appellée quand un animal est mort
@@ -178,6 +171,11 @@ public class Game {
     public RenderThread getRenderer()
     {
         return this.renderer;
+    }
+
+    public SpriteManager getSpriteManager()
+    {
+        return this.sm;
     }
 
     public Window getWindow()

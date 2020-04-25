@@ -5,7 +5,7 @@ import com.generic.gameplayClasses.Game;
 import java.awt.event.*;
 
 
-public class InputHandler extends Thread implements KeyListener
+public class InputHandler implements KeyListener
 {
     public boolean UP;
     public boolean DOWN;
