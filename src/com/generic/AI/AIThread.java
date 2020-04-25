@@ -5,7 +5,7 @@ import com.generic.coreClasses.MapObject;
 import com.generic.gameplayClasses.Game;
 
 import static com.generic.utils.CONFIG.*;
-import static com.generic.utils.Equations.VectorialDistance;
+import static com.generic.utils.Random.VectorialDistance;
 
 public class AIThread {
 

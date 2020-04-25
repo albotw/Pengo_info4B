@@ -7,12 +7,11 @@ import com.generic.graphics.*;
 import com.generic.AI.*;
 import com.generic.utils.CONFIG;
 
-import java.awt.*;
 import java.util.HashMap;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;
-import static com.generic.utils.Equations.RandomizedInt;
+import static com.generic.utils.Random.RandomizedInt;
 
 
 public class Game {
@@ -63,7 +62,7 @@ public class Game {
             }
         }while(loop);
 
-<<<<<<< HEAD
+
         loop = true;
         do
         {
@@ -79,7 +78,7 @@ public class Game {
                 ai1.setTarget(p1.getControlledObject());
             }
         }while(loop);
-=======
+
         int cpt = 0;
         for(int k = 0; k<3; k++){
             loop = true;
@@ -94,7 +93,7 @@ public class Game {
                 }
             } while (loop && cpt != 3);
         }
->>>>>>> master
+
         gameplayLoop();
         //lorsque tous les éléments sont instanciés
         //==> start()
