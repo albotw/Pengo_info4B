@@ -8,7 +8,7 @@ import com.generic.utils.Pile;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;
-import static com.generic.utils.Random.RandomizedInt;
+import static com.generic.utils.Equations.RandomizedInt;
 
 
 /**
@@ -39,7 +39,8 @@ import static com.generic.utils.Random.RandomizedInt;
  */
 
 /**
- * ALGO A MODIFIER URGEEEEEEENNNNTT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * ALGO A MODIFIER URGEEEEEEENNNNT
+ * T !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
 public class MapGenerator {
     public static Map generate()

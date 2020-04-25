@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;
-import static com.generic.utils.Random.RandomizedInt;
+import static com.generic.utils.Equations.RandomizedInt;
 
 
 public class Game {
@@ -49,6 +49,7 @@ public class Game {
             int initX = RandomizedInt(0, GRID_WIDTH -1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
+
             if (m.getAt(initX, initY) == null)
             {
                 loop = false;
@@ -58,6 +59,20 @@ public class Game {
             }
         }while(loop);
 
+        int cpt = 0;
+        for(int k = 0; k<3; k++){
+            loop = true;
+            do {
+                int initX = RandomizedInt(1, GRID_WIDTH - 2);
+                int initY = RandomizedInt(1, GRID_HEIGHT - 2);
+
+                if (m.getAt(initX, initY) == null) {
+                    loop = false;
+                    DiamondBlock d1 = new DiamondBlock(initX, initY);
+                    m.place(d1, initX, initY);
+                }
+            } while (loop && cpt != 3);
+        }
         gameplayLoop();
         //lorsque tous les éléments sont instanciés
         //==> start()
