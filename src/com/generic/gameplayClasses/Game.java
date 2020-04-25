@@ -53,6 +53,7 @@ public class Game {
             int initX = RandomizedInt(0, GRID_WIDTH -1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
+
             if (m.getAt(initX, initY) == null)
             {
                 loop = false;
@@ -62,6 +63,7 @@ public class Game {
             }
         }while(loop);
 
+<<<<<<< HEAD
         loop = true;
         do
         {
@@ -77,6 +79,22 @@ public class Game {
                 ai1.setTarget(p1.getControlledObject());
             }
         }while(loop);
+=======
+        int cpt = 0;
+        for(int k = 0; k<3; k++){
+            loop = true;
+            do {
+                int initX = RandomizedInt(1, GRID_WIDTH - 2);
+                int initY = RandomizedInt(1, GRID_HEIGHT - 2);
+
+                if (m.getAt(initX, initY) == null) {
+                    loop = false;
+                    DiamondBlock d1 = new DiamondBlock(initX, initY);
+                    m.place(d1, initX, initY);
+                }
+            } while (loop && cpt != 3);
+        }
+>>>>>>> master
         gameplayLoop();
         //lorsque tous les éléments sont instanciés
         //==> start()

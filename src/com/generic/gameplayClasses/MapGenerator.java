@@ -39,7 +39,8 @@ import static com.generic.utils.Equations.RandomizedInt;
  */
 
 /**
- * ALGO A MODIFIER URGEEEEEEENNNNTT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ * ALGO A MODIFIER URGEEEEEEENNNNT
+ * T !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
  */
 public class MapGenerator {
     public static Map generate()
