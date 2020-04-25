@@ -4,9 +4,7 @@ import com.generic.coreClasses.Map;
 import com.generic.coreClasses.MapObject;
 import com.generic.gameplayClasses.Game;
 
-import java.util.Vector;
-
-import static com.generic.utils.CONFIG.GRID_HEIGHT;
+import static com.generic.utils.CONFIG.*;
 import static com.generic.utils.Equations.VectorialDistance;
 
 public class AIThread {
@@ -35,17 +33,30 @@ public class AIThread {
         double d_left = -1;
         double d_right = -1;
 
-        //test et mesure case au dessus
+        //test et mesure case a gauche
         if (posX > 0)
         {
-            if (m.getAt(posX - 1, posY) == null) d_up = VectorialDistance(posX - 1, target.getX(), posY, target.getY());
+            if (m.getAt(posX - 1, posY) == null) d_left = VectorialDistance(posX - 1, target.getX(), posY, target.getY());
         }
 
-        //test et mesure case au dessous
-        if (posX < GRID_HEIGHT - 1)
+        //test et mesure case a droite
+        if (posX < GRID_WIDTH - 1)
         {
-            
+            if (m.getAt(posX + 1, posY) == null) d_right = VectorialDistance(posX + 1, target.getX(), posY, target.getY());
         }
+
+        //test et mesure case au dessus
+        if (posY > 0)
+        {
+            if(m.getAt(posX, posY - 1) == null) d_up = VectorialDistance(posX, target.getX(), posY - 1, target.getY());
+        }
+
+        //test et mesure en dessous
+        if (posY < GRID_HEIGHT - 1)
+        {
+            if (m.getAt(posX, posY + 1) == null) d_down = VectorialDistance(posX, target.getX(), posY + 1, target.getY());
+        }
+        
     }
 }
 
