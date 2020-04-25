@@ -48,6 +48,14 @@ public class Map {
         tab[x][y] = null;
     }
 
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
     public String toString()
     {
         String s = "";
