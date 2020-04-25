@@ -18,14 +18,14 @@ public class Game {
     public static Game instance;
     private Map m;
     private HashMap<MapEntity, Player> players;
-    private HashMap<MapEntity, AIThread> AIs;
+    private HashMap<MapEntity, AI> AIs;
 
     private RenderThread renderer;
     private SpriteManager sm;
     private Window w;
 
     private Player p1;
-    private AIThread ai1;
+    private AI ai1;
 
     public Game()
     {
@@ -39,12 +39,12 @@ public class Game {
         renderer.start();
 
         players = new HashMap<MapEntity, Player>();
-        AIs = new HashMap<MapEntity, AIThread>();
+        AIs = new HashMap<MapEntity, AI>();
         m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
         m = MapGenerator.generate();
 
         p1 = new Player();
-        ai1 = new AIThread();
+        ai1 = new AI();
 
         boolean loop = true;
         do
@@ -104,9 +104,9 @@ public class Game {
         while (true)
         {
             p1.linkInput();
-            ai1.selectMovement();
+            ai1.process();
             try{
-                Thread.currentThread().sleep(100);
+                Thread.currentThread().sleep(1000);
             }catch(Exception e)
             {
                 e.printStackTrace();

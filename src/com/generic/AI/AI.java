@@ -5,15 +5,54 @@ import com.generic.coreClasses.MapObject;
 import com.generic.gameplayClasses.Game;
 
 import static com.generic.utils.CONFIG.*;
+import static com.generic.utils.Random.RandomizedInt;
 import static com.generic.utils.Random.VectorialDistance;
 
-public class AIThread {
+public class AI {
 
     private MapObject target;
     private MapObject controlledObject;
 
-    private int old_d;
-    public void selectMovement()
+    public AI()
+    {
+
+    }
+
+    public void process()
+    {
+        if (!isNextToTarget())
+        {
+            MoveToTarget();
+        }
+    }
+
+    public boolean isNextToTarget()
+    {
+        Map m = Game.instance.getMap();
+        int posX = controlledObject.getX();
+        int posY = controlledObject.getY();
+
+        boolean output = false;
+        if (m.getAt(posX + 1, posY) != null)
+            if (m.getAt(posX + 1, posY).getType().equals("Penguin"))
+                output = true;
+
+        if (m.getAt(posX - 1, posY) != null)
+            if (m.getAt(posX - 1, posY).getType().equals("Penguin"))
+                output = true;
+
+        if (m.getAt(posX, posY + 1) != null)
+            if (m.getAt(posX, posY + 1).getType().equals("Penguin"))
+                output = true;
+
+        if (m.getAt(posX, posY - 1) != null)
+            if (m.getAt(posX, posY - 1).getType().equals("Penguin"))
+                output = true;
+
+        return output;
+    }
+
+    public void MoveToTarget()
     {
         /**
          * Fonctionnement séléction de mouvement
@@ -22,7 +61,7 @@ public class AIThread {
          * on teste les cases qui lui sont adjacentes (nulles et dans les bords de la map)
          * pour chaque case potentielle on va calculer sa distance vectorielle avec la cible
          * on prend la case avec la plus petite valeur et on appelle la méthode du mouvement associé.
-         * pour éviter tout état indécisif, on fait en sorte que les distances des cases en test soient toujours inférieures à celle précédente.
+         * pour éviter tout état indécisif, on fait un tirage aléatoire pour débloquer le système.
          */
         int posX = controlledObject.getX();
         int posY = controlledObject.getY();
@@ -37,7 +76,6 @@ public class AIThread {
         //test et mesure case a gauche
         if (posX > 0)
         {
-
             if (m.getAt(posX - 1, posY) == null) d_left = VectorialDistance(posX - 1, target.getX(), posY, target.getY());
         }
 
@@ -85,6 +123,41 @@ public class AIThread {
         else
         {
             System.out.println("état indécisif");
+
+            boolean loop = true;
+            do
+            {
+                int d_rand = RandomizedInt(0, 3);
+
+                if (d_up != INFINI && d_rand == 0)
+                {
+                    controlledObject.goUp();
+                    loop = false;
+                    System.out.println("Après tirage décide d'aller en haut");
+                }
+                else if (d_down != INFINI && d_rand == 1)
+                {
+                    controlledObject.goDown();
+                    loop = false;
+                    System.out.println("Après tirage décide d'aller en bas");
+                }
+                else if (d_left != INFINI && d_rand == 2)
+                {
+                    controlledObject.goLeft();
+                    loop = false;
+                    System.out.println("Après tirage décide d'aller à gauche");
+                }
+                else if (d_right != INFINI && d_rand == 3)
+                {
+                    controlledObject.goRight();
+                    loop = false;
+                    System.out.println("Après tirage décide d'aller a droite");
+                }
+                else
+                {
+                    System.out.println("Tirage invalide");
+                }
+            }while(loop);
         }
     }
 
