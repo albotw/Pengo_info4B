@@ -1,16 +1,18 @@
 package com.generic.gameplayClasses;
 
 import com.generic.coreClasses.*;
+import com.generic.graphics.Window;
 import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
 import com.generic.utils.CONFIG;
 
+import java.awt.*;
 import java.util.HashMap;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;
-import static com.generic.utils.Random.RandomizedInt;
+import static com.generic.utils.Equations.RandomizedInt;
 
 
 public class Game {
@@ -24,6 +26,7 @@ public class Game {
     private Window w;
 
     private Player p1;
+    private AIThread ai1;
 
     public Game()
     {
@@ -42,6 +45,7 @@ public class Game {
         m = MapGenerator.generate();
 
         p1 = new Player();
+        ai1 = new AIThread();
 
         boolean loop = true;
         do
@@ -58,6 +62,21 @@ public class Game {
             }
         }while(loop);
 
+        loop = true;
+        do
+        {
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+            if (m.getAt(initX, initY) == null)
+            {
+                loop = false;
+                Animal a = new Animal(initX, initY);
+                m.place(a, initX, initY);
+                ai1.setControlledObject(a);
+                ai1.setTarget(p1.getControlledObject());
+            }
+        }while(loop);
         gameplayLoop();
         //lorsque tous les éléments sont instanciés
         //==> start()
@@ -68,12 +87,14 @@ public class Game {
         while (true)
         {
             p1.linkInput();
+            ai1.selectMovement();
             try{
-                Thread.currentThread().sleep(16);
+                Thread.currentThread().sleep(100);
             }catch(Exception e)
             {
                 e.printStackTrace();
             }
+            System.out.println("------------");
         }
     }
 

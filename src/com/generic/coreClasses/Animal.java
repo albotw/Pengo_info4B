@@ -36,60 +36,75 @@ public class Animal extends MapEntity {
     public void goLeft()
     {
         if (isStun == false) {
-            super.goLeft();
-            if (m.getAt(x - 1, y).type == "Penguin") {
-                m.getAt(x - 1, y).destroy();
-            }
+            if (m.getAt(x - 1, y) != null)
+            {
+                if (m.getAt(x - 1, y).type == "Penguin") {
+                    //m.getAt(x - 1, y).destroy();
+                }
 
-            // A voir en fonction de l'appel a action ou pas
-            if (m.getAt(x - 1, y).type == "Block") {
-                m.getAt(x - 1, y).destroy();
+                // A voir en fonction de l'appel a action ou pas
+                if (m.getAt(x - 1, y).type == "Block") {
+                    m.getAt(x - 1, y).destroy();
+                }
             }
+            super.goLeft();
         }
     }
 
     public void goRight()
     {
         if (isStun == false) {
-            super.goRight();
-            if (m.getAt(x + 1, y).type == "Penguin") {
-                m.getAt(x + 1, y).destroy();
-            }
 
-            // A voir en fonction de l'appel a action ou pas
-            if (m.getAt(x + 1, y).type == "Block") {
-                m.getAt(x + 1, y).destroy();
+            if (m.getAt(x + 1, y) != null)
+            {
+                if (m.getAt(x + 1, y).type == "Penguin") {
+                    //m.getAt(x + 1, y).destroy();
+                }
+
+                // A voir en fonction de l'appel a action ou pas
+                if (m.getAt(x + 1, y).type == "Block") {
+                    m.getAt(x + 1, y).destroy();
+                }
             }
+            super.goRight();
         }
     }
 
     public void goUp()
     {
         if (isStun == false) {
-            super.goLeft();
-            if (m.getAt(x, y - 1).type == "Penguin") {
-                m.getAt(x, y - 1).destroy();
-            }
 
-            // A voir en fonction de l'appel a action ou pas
-            if (m.getAt(x, y - 1).type == "Block") {
-                m.getAt(x, y - 1).destroy();
+            if (m.getAt(x, y - 1) != null)
+            {
+                if (m.getAt(x, y - 1).type == "Penguin") {
+                    //m.getAt(x, y - 1).destroy();
+                }
+
+                // A voir en fonction de l'appel a action ou pas
+                if (m.getAt(x, y - 1).type == "Block") {
+                    m.getAt(x, y - 1).destroy();
+                }
             }
+            super.goUp();
         }
     }
 
     public void goDown()
     {
         if (isStun == false) {
-            super.goLeft();
-            if (m.getAt(x, y + 1).type == "Penguin") {
-                m.getAt(x, y + 1).destroy();
-            }
 
-            // A voir en fonction de l'appel a action ou pas
-            if (m.getAt(x, y + 1).type == "Block") {
-                m.getAt(x, y + 1).destroy();
+            if (m.getAt(x, y + 1) != null)
+            {
+                if (m.getAt(x, y + 1).type == "Penguin") {
+                    //m.getAt(x, y + 1).destroy();
+                }
+
+                // A voir en fonction de l'appel a action ou pas
+                if (m.getAt(x, y + 1).type == "Block") {
+                    m.getAt(x, y + 1).destroy();
+                }
             }
+            super.goDown();
         }
     }
 }

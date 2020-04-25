@@ -30,7 +30,6 @@ public abstract class MapObject implements Movement{
                 m.place(this, x, y);
             }
         }
-        System.out.println("GAUCHE");
     }
 
     public void goRight()
@@ -44,7 +43,6 @@ public abstract class MapObject implements Movement{
                 m.place(this, x, y);
             }
         }
-        System.out.println("DROITE");
     }
 
     public void goUp()
@@ -58,7 +56,6 @@ public abstract class MapObject implements Movement{
                 m.place(this, x, y);
             }
         }
-        System.out.println("HAUT");
     }
 
     public void goDown()
@@ -72,8 +69,6 @@ public abstract class MapObject implements Movement{
                 m.place(this, x, y);
             }
         }
-
-        System.out.println("BAS");
     }
 
     public int getX() {

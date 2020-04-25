@@ -12,6 +12,8 @@
 package com.generic.utils;
 
 public class CONFIG {
+    public static int INFINI = 999999;
+
     public static String WINDOW_TITLE = "Pengo Remake ";
     public static int WINDOW_HEIGHT = 600;
     public static int WINDOW_WIDTH = 800;
