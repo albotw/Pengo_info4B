@@ -116,9 +116,21 @@ public class Penguin extends MapEntity{
     }
     public void action()
     {
-        if (x == 0 || x == GRID_WIDTH -1 || y == 0 || y == GRID_HEIGHT -1)
+        if (x == 0)
         {
-            Game.instance.stunTriggered();
+            Game.instance.stunTriggered('G');
+        }
+        else if(x == GRID_WIDTH - 1)
+        {
+            Game.instance.stunTriggered('D');
+        }
+        else if (y == 0)
+        {
+            Game.instance.stunTriggered('H');
+        }
+        else if (y == GRID_HEIGHT - 1)
+        {
+            Game.instance.stunTriggered('B');
         }
     }
 
