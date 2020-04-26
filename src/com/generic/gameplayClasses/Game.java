@@ -25,7 +25,6 @@ public class Game {
     private Window w;
 
     private Player p1;
-    private AI ai1;
 
     public Game()
     {
@@ -44,7 +43,6 @@ public class Game {
         m = MapGenerator.generate();
 
         p1 = new Player();
-        ai1 = new AI();
 
         boolean loop = true;
         do
@@ -59,25 +57,31 @@ public class Game {
                 Penguin p = new Penguin(initX, initY);
                 m.place(p, initX, initY);
                 p1.setControlledObject(p);
+                p1.start();
             }
         }while(loop);
 
 
-        loop = true;
-        do
+        for (int i = 0; i < 3; i++)
         {
-            int initX = RandomizedInt(0, GRID_WIDTH - 1);
-            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
-
-            if (m.getAt(initX, initY) == null)
+            loop = true;
+            do
             {
-                loop = false;
-                Animal a = new Animal(initX, initY);
-                m.place(a, initX, initY);
-                ai1.setControlledObject(a);
-                ai1.setTarget(p1.getControlledObject());
-            }
-        }while(loop);
+                int initX = RandomizedInt(0, GRID_WIDTH - 1);
+                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+                if (m.getAt(initX, initY) == null)
+                {
+                    loop = false;
+                    Animal a = new Animal(initX, initY);
+                    m.place(a, initX, initY);
+                    AI ai = new AI();
+                    ai.setControlledObject(a);
+                    ai.setTarget(p1.getControlledObject());
+                    ai.start();
+                }
+            }while(loop);
+        }
 
         int cpt = 0;
         for(int k = 0; k<3; k++){
@@ -94,26 +98,11 @@ public class Game {
             } while (loop && cpt != 3);
         }
 
-        gameplayLoop();
+
         //lorsque tous les éléments sont instanciés
         //==> start()
     }
 
-    private void gameplayLoop()
-    {
-        while (true)
-        {
-            p1.linkInput();
-            ai1.process();
-            try{
-                Thread.currentThread().sleep(1000);
-            }catch(Exception e)
-            {
-                e.printStackTrace();
-            }
-            System.out.println("------------");
-        }
-    }
 
     public void reset(){}
 
@@ -157,8 +146,8 @@ public class Game {
     {
         //methode appellée quand un bloc de diamant est déplacé.
         //parcourt la map pour trouver le bloc de diamant. ==> LOCK ICI
-        //on prend le 1er bloc trouvé et on teste x + 1, x + 2 || y + 1, y + 2
-        //si le test est validé, ==>victory()
+        //on prend le 1er bloc trouvé et on teste x + 1, x + 2 OU y + 1, y + 2
+        //si le test est validé, ==> victory()
         //sinon rien ne se passe.
     }
 

@@ -7,7 +7,7 @@ import com.generic.coreClasses.MapEntity;
 import com.generic.coreClasses.MapObject;
 import com.generic.gameplayClasses.Game;
 
-public class Player
+public class Player extends Thread
 {
     private MapObject controlledObject;
     private int currentLives;
@@ -25,6 +25,18 @@ public class Player
 
     public void setControlledObject(MapObject mo){this.controlledObject = mo;}
 
+
+    public void run()
+    {
+        while(true)
+        {
+            linkInput();
+            try
+            {
+                sleep(16);
+            }catch(Exception e) {e.printStackTrace(); }
+        }
+    }
     public void linkInput()
     {
         if (ih.UP == true) {controlledObject.goUp(); }

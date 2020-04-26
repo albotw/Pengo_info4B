@@ -8,7 +8,7 @@ import static com.generic.utils.CONFIG.*;
 import static com.generic.utils.Random.RandomizedInt;
 import static com.generic.utils.Random.VectorialDistance;
 
-public class AI {
+public class AI extends Thread{
 
     private MapObject target;
     private MapObject controlledObject;
@@ -18,6 +18,17 @@ public class AI {
 
     }
 
+    public void run()
+    {
+        while(true)
+        {
+            process();
+            try
+            {
+                sleep(500);
+            }catch(Exception e) { e.printStackTrace(); }
+        }
+    }
     public void process()
     {
         if (!isNextToTarget())
