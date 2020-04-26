@@ -58,11 +58,13 @@ public class Game {
                 m.place(p, initX, initY);
                 p1.setControlledObject(p);
                 p1.start();
+
+                players.put(p, p1);
             }
         }while(loop);
 
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 1; i++)
         {
             loop = true;
             do
@@ -151,13 +153,70 @@ public class Game {
         //sinon rien ne se passe.
     }
 
-    public void stunTriggered()
+    public void stunTriggered(char dirMur)
     {
         System.out.println("STUN!");
         //méthode appelée quand un pingouin est façe au mur et appelle son action.
         //vérifie les X = 0 | X = GRID_MAX, Y = 0 | y = GRID_MAX pour trouver des animaux.
         //si animal il y a alors a.activateStun();
         //GESTION TIMER A DETERMINER.
+
+        if (dirMur == 'G')      //x == 0
+        {
+            for (int i = 0; i < GRID_HEIGHT; i++)
+            {
+                MapObject mo = m.getAt(0, i);
+                if (mo != null)
+                {
+                    if (mo.getType().equals("Animal"))
+                    {
+                        ((Animal)(mo)).activateStun();
+                    }
+                }
+            }
+        }
+        else if (dirMur == 'D')     // x == GRID_WIDTH - 1
+        {
+            for (int i = 0; i < GRID_HEIGHT; i++)
+            {
+                MapObject mo = m.getAt(GRID_WIDTH - 1, i);
+                if (mo != null)
+                {
+                    if (mo.getType().equals("Animal"))
+                    {
+                        ((Animal)(mo)).activateStun();
+                    }
+                }
+            }
+        }
+        else if (dirMur == 'H')     //y == 0
+        {
+            for (int i = 0; i < GRID_WIDTH; i++)
+            {
+                MapObject mo = m.getAt(i, 0);
+                if (mo != null)
+                {
+                    if (mo.getType().equals("Animal"))
+                    {
+                        ((Animal)(mo)).activateStun();
+                    }
+                }
+            }
+        }
+        else if (dirMur == 'B')     //y == GRID_HEIGHT - 1
+        {
+            for (int i = 0; i < GRID_WIDTH; i++)
+            {
+                MapObject mo = m.getAt(i, GRID_HEIGHT - 1);
+                if (mo != null)
+                {
+                    if (mo.getType().equals("Animal"))
+                    {
+                        ((Animal)(mo)).activateStun();
+                    }
+                }
+            }
+        }
     }
 
     public void penguinKilled(Penguin p)

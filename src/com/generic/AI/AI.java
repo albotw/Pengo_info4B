@@ -1,5 +1,6 @@
 package com.generic.AI;
 
+import com.generic.coreClasses.Animal;
 import com.generic.coreClasses.Map;
 import com.generic.coreClasses.MapObject;
 import com.generic.gameplayClasses.Game;
@@ -13,6 +14,8 @@ public class AI extends Thread{
     private MapObject target;
     private MapObject controlledObject;
 
+    private boolean stunActive;     //a déplacer dans la classe de controle spé animal
+    private int stunTimer;          //a déplacer dans la classe de controle spé animal (temps de stun, var locale basée sur la constante de CONFIG
     public AI()
     {
 
@@ -25,19 +28,46 @@ public class AI extends Thread{
             process();
             try
             {
-                sleep(500);
+                sleep(AI_TICK_RATE);
             }catch(Exception e) { e.printStackTrace(); }
         }
     }
     public void process()
     {
+        checkStun();
         if (!isNextToTarget())
         {
             MoveToTarget();
         }
     }
 
-    public boolean isNextToTarget()
+    public void checkStun()
+    {
+        if (controlledObject.getType().equals("Animal"))
+        {
+            Animal a = (Animal)(controlledObject);
+            if (stunActive == false && a.isStun())
+            {
+                stunActive = true;
+                stunTimer = STUN_TIME;
+                System.out.println("Stun Actif " + stunTimer + " ms restant");
+            }
+
+            if (stunActive == true)
+            {
+                stunTimer -= AI_TICK_RATE;
+                System.out.println("Stun Actif " + stunTimer + " ms restant");
+            }
+
+            if (stunTimer == 0)
+            {
+                stunActive = false;
+                a.deactivateStun();
+            }
+        }
+    }
+
+    public boolean isNextToTarget()         //a généraliser et déplacer dans les classes de controle spécifiques
     {
         Map m = Game.instance.getMap();
         int posX = controlledObject.getX();
