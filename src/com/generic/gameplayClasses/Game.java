@@ -7,6 +7,7 @@ import com.generic.graphics.*;
 import com.generic.AI.*;
 import com.generic.utils.CONFIG;
 
+import javax.swing.*;
 import java.util.HashMap;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
@@ -62,7 +63,7 @@ public class Game {
         }while(loop);
 
 
-        for (int i = 0; i < 3; i++)
+        /*for (int i = 0; i < 3; i++)
         {
             loop = true;
             do
@@ -81,7 +82,7 @@ public class Game {
                     ai.start();
                 }
             }while(loop);
-        }
+        }*/
 
         int cpt = 0;
         for(int k = 0; k<3; k++){
@@ -92,8 +93,8 @@ public class Game {
 
                 if (m.getAt(initX, initY) == null) {
                     loop = false;
-                    DiamondBlock d1 = new DiamondBlock(initX, initY);
-                    m.place(d1, initX, initY);
+                    DiamondBlock d = new DiamondBlock(initX, initY);
+                    m.place(d, initX, initY);
                 }
             } while (loop && cpt != 3);
         }
@@ -126,6 +127,7 @@ public class Game {
 
     public void victory()
     {
+        System.out.println("VICTOIRE");
         //supprime le plateau
         //supprime toutes les instances de tous les objets
         //sauf le rendu et le renderThread
@@ -142,14 +144,35 @@ public class Game {
         //sinon ==> victory()
     }
 
-    public void checkDiamondBlocks()
-    {
+    public void checkDiamondBlocks() {
+        Map m = Game.instance.getMap();
+        for (int i = 0; i < GRID_WIDTH; i++) {
+            for (int j = 0; j < GRID_HEIGHT; j++) {
+                MapObject tmp = m.getAt(i, j);
+                if ( m.getAt(i,j) != null){
+                if (m.getAt(i, j).getType().equals("DiamondBlock") ) {
+                    if (m.getAt(i + 1, j) != null && m.getAt(i + 2, j) != null) {
+                        if (((m.getAt(i + 1, j).getType().equals("DiamondBlock") && m.getAt(i + 2, j).getType().equals("DiamondBlock")))) {
+                            victory();
+                        }
+                    }
+                    if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null) {
+                        if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
+                            victory();
+                        }
+
+                    }
+
+                }
+                }
+            }
+        }
+    }
         //methode appellée quand un bloc de diamant est déplacé.
         //parcourt la map pour trouver le bloc de diamant. ==> LOCK ICI
         //on prend le 1er bloc trouvé et on teste x + 1, x + 2 OU y + 1, y + 2
         //si le test est validé, ==> victory()
         //sinon rien ne se passe.
-    }
 
     public void stunTriggered()
     {
@@ -189,6 +212,22 @@ public class Game {
         //envoie son sprite au rendu
         //l'associe au joueur
     }
+         /* public void Timer(){
+        Timer chrono = new Timer();
+        chrono.schedule(new TimerTask() {
+
+            int time = 90;
+            @Override
+            public void run() {
+                System.out.println("Time : " + time);
+
+                if(time==0){
+                    cancel();
+                }
+                time--;
+            }
+        }, 1000, 1000);
+    }*/
 
     public Map getMap()
     {
@@ -209,4 +248,5 @@ public class Game {
     {
         return this.w;
     }
+
 }

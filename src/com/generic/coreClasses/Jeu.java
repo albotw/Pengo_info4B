@@ -18,24 +18,10 @@ public class Jeu {
 
     public void Victoire(){
 
+
+
         }
 
-   /* public void Timer(){
-        Timer chrono = new Timer();
-        chrono.schedule(new TimerTask() {
-
-            int time = 90;
-            @Override
-            public void run() {
-                System.out.println("Time : " + time);
-
-                if(time==0){
-                    cancel();
-                }
-                time--;
-            }
-        }, 1000, 1000);
-    }*/
     public void UpdateScore(int Score){
 
     }
