@@ -26,6 +26,7 @@ public class AI extends Thread{
         while(true)
         {
             process();
+
             try
             {
                 sleep(AI_TICK_RATE);
@@ -34,9 +35,9 @@ public class AI extends Thread{
     }
     public void process()
     {
-        checkStun();
-        if (!isNextToTarget())
+        if (controlledObject != null)   //si l'animal n'a pas été tué
         {
+            checkStun();
             MoveToTarget();
         }
     }
@@ -104,8 +105,8 @@ public class AI extends Thread{
          * on prend la case avec la plus petite valeur et on appelle la méthode du mouvement associé.
          * pour éviter tout état indécisif, on fait un tirage aléatoire pour débloquer le système.
          */
-        int posX = controlledObject.getX();
-        int posY = controlledObject.getY();
+        int x = controlledObject.getX();
+        int y = controlledObject.getY();
 
         Map m = Game.instance.getMap();
 
@@ -115,27 +116,31 @@ public class AI extends Thread{
         double d_right = INFINI;
 
         //test et mesure case a gauche
-        if (posX > 0)
+        if (x > 0)
         {
-            if (m.getAt(posX - 1, posY) == null) d_left = VectorialDistance(posX - 1, target.getX(), posY, target.getY());
+            if (m.getAt(x - 1, y) == null) d_left = VectorialDistance(x - 1, target.getX(), y, target.getY());
+            else if (m.getAt(x - 1, y).equals(target)) d_left = VectorialDistance(x - 1, target.getX(), y, target.getY());
         }
 
         //test et mesure case a droite
-        if (posX < GRID_WIDTH - 1)
+        if (x < GRID_WIDTH - 1)
         {
-            if (m.getAt(posX + 1, posY) == null) d_right = VectorialDistance(posX + 1, target.getX(), posY, target.getY());
+            if (m.getAt(x + 1, y) == null) d_right = VectorialDistance(x + 1, target.getX(), y, target.getY());
+            else if (m.getAt(x + 1, y).equals(target)) d_right = VectorialDistance(x + 1, target.getX(), y, target.getY());
         }
 
         //test et mesure case au dessus
-        if (posY > 0)
+        if (y > 0)
         {
-            if(m.getAt(posX, posY - 1) == null) d_up = VectorialDistance(posX, target.getX(), posY - 1, target.getY());
+            if(m.getAt(x, y - 1) == null) d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
+            else if (m.getAt(x, y - 1).equals(target)) d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
         }
 
         //test et mesure en dessous
-        if (posY < GRID_HEIGHT - 1)
+        if (y < GRID_HEIGHT - 1)
         {
-            if (m.getAt(posX, posY + 1) == null) d_down = VectorialDistance(posX, target.getX(), posY + 1, target.getY());
+            if (m.getAt(x, y + 1) == null) d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
+            else if (m.getAt(x, y + 1).equals(target)) d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
         }
 
         System.out.println("h = " + d_up + " | b = " + d_down + " | g = " + d_left + " | d = " + d_right);

@@ -82,6 +82,8 @@ public class Game {
                     ai.setControlledObject(a);
                     ai.setTarget(p1.getControlledObject());
                     ai.start();
+
+                    AIs.put(a, ai);
                 }
             }while(loop);
         }
@@ -140,32 +142,44 @@ public class Game {
 
     public void animalKilled(Animal a)
     {
+        AI owner = AIs.get(a);
+        owner.setControlledObject(null);
+        System.out.println("Animal Tué");
         //methode appellee quand un animal meurt.
         //verifie qu'il reste des animaux
         //si c'est le cas ==> respawnAnimal()
         //sinon ==> victory()
     }
 
-    public void checkDiamondBlocks() {
+    public void checkDiamondBlocks()
+    {
+        // OPTI ?
         Map m = Game.instance.getMap();
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
                 MapObject tmp = m.getAt(i, j);
-                if ( m.getAt(i,j) != null){
-                if (m.getAt(i, j).getType().equals("DiamondBlock") ) {
-                    if (m.getAt(i + 1, j) != null && m.getAt(i + 2, j) != null) {
-                        if (((m.getAt(i + 1, j).getType().equals("DiamondBlock") && m.getAt(i + 2, j).getType().equals("DiamondBlock")))) {
-                            victory();
+
+                if ( m.getAt(i,j) != null)
+                {
+                    if (m.getAt(i, j).getType().equals("DiamondBlock"))
+                    {
+                        if (m.getAt(i + 1, j) != null && m.getAt(i + 2, j) != null)
+                        {
+                            if (((m.getAt(i + 1, j).getType().equals("DiamondBlock") && m.getAt(i + 2, j).getType().equals("DiamondBlock"))))
+                            {
+                                victory();
+                            }
                         }
-                    }
-                    if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null) {
-                        if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
-                            victory();
+                        if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null)
+                        {
+                            if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock"))))
+                            {
+                                victory();
+                            }
+
                         }
 
                     }
-
-                }
                 }
             }
         }
@@ -178,6 +192,7 @@ public class Game {
 
     public void stunTriggered(char dirMur)
     {
+        // OPTI ?
         System.out.println("STUN!");
         //méthode appelée quand un pingouin est façe au mur et appelle son action.
         //vérifie les X = 0 | X = GRID_MAX, Y = 0 | y = GRID_MAX pour trouver des animaux.
@@ -244,10 +259,9 @@ public class Game {
 
     public void penguinKilled(Penguin p)
     {
-        //methode appellee quand un pingouin meurt
-        //renderer.removeFromRenderPile(p.getSpr());  //on supprime le sprite du rendu
-        Player owner = players.get(p);    //on recupere le joueur qui le controle
-        owner.removeLive();     //on appelle la methode pour retirer une vie au joueur
+        System.out.println("Pingouin tué");
+        Player owner = players.get(p);
+        owner.setControlledObject(null);
     }
 
     public void respawnAnimal()

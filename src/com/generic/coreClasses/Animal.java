@@ -30,6 +30,7 @@ public class Animal extends MapEntity {
 
     public void destroy()
     {
+        Game.instance.getMap().release(x, y);
         Game.instance.animalKilled(this);
     }
 
@@ -39,13 +40,13 @@ public class Animal extends MapEntity {
             if (m.getAt(x - 1, y) != null)
             {
                 if (m.getAt(x - 1, y).getType().equals("Penguin")) {
-                    //m.getAt(x - 1, y).destroy();
+                    m.getAt(x - 1, y).destroy();
                 }
 
                 // A voir en fonction de l'appel a action ou pas
-                if (m.getAt(x - 1, y).type == "Block") {
+                /*if (m.getAt(x - 1, y).type == "Block") {
                     m.getAt(x - 1, y).destroy();
-                }
+                }*/
             }
             super.goLeft();
         }
@@ -58,13 +59,13 @@ public class Animal extends MapEntity {
             if (m.getAt(x + 1, y) != null)
             {
                 if (m.getAt(x + 1, y).getType().equals("Penguin")) {
-                    //m.getAt(x + 1, y).destroy();
+                    m.getAt(x + 1, y).destroy();
                 }
 
                 // A voir en fonction de l'appel a action ou pas
-                if (m.getAt(x + 1, y).type == "Block") {
+                /*if (m.getAt(x + 1, y).type == "Block") {
                     m.getAt(x + 1, y).destroy();
-                }
+                }*/
             }
             super.goRight();
         }
@@ -77,13 +78,13 @@ public class Animal extends MapEntity {
             if (m.getAt(x, y - 1) != null)
             {
                 if (m.getAt(x, y - 1).getType().equals("Penguin")) {
-                    //m.getAt(x, y - 1).destroy();
+                    m.getAt(x, y - 1).destroy();
                 }
 
                 // A voir en fonction de l'appel a action ou pas
-                if (m.getAt(x, y - 1).type == "Block") {
+                /*if (m.getAt(x, y - 1).type == "Block") {
                     m.getAt(x, y - 1).destroy();
-                }
+                }*/
             }
             super.goUp();
         }
@@ -96,13 +97,13 @@ public class Animal extends MapEntity {
             if (m.getAt(x, y + 1) != null)
             {
                 if (m.getAt(x, y + 1).getType().equals("Penguin")) {
-                    //m.getAt(x, y + 1).destroy();
+                    m.getAt(x, y + 1).destroy();
                 }
 
                 // A voir en fonction de l'appel a action ou pas
-                if (m.getAt(x, y + 1).type == "Block") {
+                /*$if (m.getAt(x, y + 1).type == "Block") {
                     m.getAt(x, y + 1).destroy();
-                }
+                }*/
             }
             super.goDown();
         }

@@ -1,7 +1,6 @@
 package com.generic.coreClasses;
 
-import static com.generic.utils.CONFIG.GRID_HEIGHT;
-import static com.generic.utils.CONFIG.GRID_WIDTH;
+import static com.generic.utils.CONFIG.*;
 
 public abstract class MapBlock extends MapObject{
     public MapBlock(int x, int y)
@@ -39,7 +38,8 @@ public abstract class MapBlock extends MapObject{
                 do
                 {
                     if (m.getAt(x, y + 1) != null) {
-                        if (m.getAt(x, y + 1).getType().equals("Animal")) {
+                        if (m.getAt(x, y + 1).getType().equals("Animal"))
+                        {
                             m.getAt(x, y + 1).destroy();
                         }
                     }

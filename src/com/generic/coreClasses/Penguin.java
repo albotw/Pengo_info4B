@@ -20,7 +20,7 @@ public class Penguin extends MapEntity{
             {
                 if (m.getAt(x, y - 2) != null)
                 {
-                    if (m.getAt(x, y - 2).getType().equals("IceBlock"))
+                    if (m.getAt(x, y - 2).getType().equals("IceBlock") || m.getAt(x, y - 2).getType().equals("DiamondBlock"))
                     {
                         m.getAt(x, y - 1).destroy();
                     }
@@ -46,7 +46,7 @@ public class Penguin extends MapEntity{
             {
                 if (m.getAt(x - 2, y) != null)
                 {
-                    if (m.getAt(x - 2, y).getType().equals("IceBlock"))
+                    if (m.getAt(x - 2, y).getType().equals("IceBlock") || m.getAt(x - 2, y).getType().equals("DiamondBlock"))
                     {
                         m.getAt(x - 1, y).destroy();
                     }
@@ -71,7 +71,7 @@ public class Penguin extends MapEntity{
             {
                 if (m.getAt(x + 2, y) != null)
                 {
-                    if (m.getAt(x + 2, y).getType().equals("IceBlock"))
+                    if (m.getAt(x + 2, y).getType().equals("IceBlock") || m.getAt(x + 2, y).getType().equals("DiamondBlock"))
                     {
                         m.getAt(x + 1, y).destroy();
                     }
@@ -97,7 +97,7 @@ public class Penguin extends MapEntity{
             {
                 if (m.getAt(x, y + 2) != null)
                 {
-                    if (m.getAt(x, y + 2).getType().equals("IceBlock"))
+                    if (m.getAt(x, y + 2).getType().equals("IceBlock") || m.getAt(x, y + 2).getType().equals("DiamondBlock"))
                     {
                         m.getAt(x, y + 1).destroy();
                     }
@@ -136,6 +136,7 @@ public class Penguin extends MapEntity{
 
     public void destroy()
     {
+        Game.instance.getMap().release(x, y);
         Game.instance.penguinKilled(this);
     }
 

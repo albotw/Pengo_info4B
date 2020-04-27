@@ -30,7 +30,10 @@ public class Player extends Thread
     {
         while(true)
         {
-            linkInput();
+            if (controlledObject != null)
+            {
+                linkInput();
+            }
             try
             {
                 sleep(16);
