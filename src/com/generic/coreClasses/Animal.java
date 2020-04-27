@@ -38,7 +38,7 @@ public class Animal extends MapEntity {
         if (isStun == false) {
             if (m.getAt(x - 1, y) != null)
             {
-                if (m.getAt(x - 1, y).type == "Penguin") {
+                if (m.getAt(x - 1, y).getType().equals("Penguin")) {
                     //m.getAt(x - 1, y).destroy();
                 }
 
@@ -57,7 +57,7 @@ public class Animal extends MapEntity {
 
             if (m.getAt(x + 1, y) != null)
             {
-                if (m.getAt(x + 1, y).type == "Penguin") {
+                if (m.getAt(x + 1, y).getType().equals("Penguin")) {
                     //m.getAt(x + 1, y).destroy();
                 }
 
@@ -76,7 +76,7 @@ public class Animal extends MapEntity {
 
             if (m.getAt(x, y - 1) != null)
             {
-                if (m.getAt(x, y - 1).type == "Penguin") {
+                if (m.getAt(x, y - 1).getType().equals("Penguin")) {
                     //m.getAt(x, y - 1).destroy();
                 }
 
@@ -95,7 +95,7 @@ public class Animal extends MapEntity {
 
             if (m.getAt(x, y + 1) != null)
             {
-                if (m.getAt(x, y + 1).type == "Penguin") {
+                if (m.getAt(x, y + 1).getType().equals("Penguin")) {
                     //m.getAt(x, y + 1).destroy();
                 }
 

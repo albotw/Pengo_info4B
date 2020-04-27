@@ -3,11 +3,11 @@
  *
  * Description: Classe utilitaire contenant des constantes pour l'éxécution du programme.
  *
- * Version: 1.0
+ * @version 1.0
  *
- * Date: 08/03/2020
+ * @Date 08/03/2020
  *
- * Auteur: Yann
+ * @Author Yann
  */
 package com.generic.utils;
 

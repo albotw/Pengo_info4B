@@ -21,58 +21,62 @@ public abstract class MapBlock extends MapObject{
         switch (direction)
         {
             case 'H':
-                while (y != 0 && m.getAt(x, y -1) == null)
+                do
                 {
-                    /*if (m.getAt(x , y -1).type == "Animal")
+                    if (m.getAt(x, y - 1) != null)
                     {
-                        m.getAt(x, y-1).destroy();
+                        if (m.getAt(x , y -1).getType().equals("Animal"))
+                        {
+                            m.getAt(x, y-1).destroy();
+                        }
                     }
 
-                     */
                     goUp();
                     tick_wait();
-                }
+                }while (y != 0 && m.getAt(x, y -1) == null);
                 break;
             case 'B':
-                while (y < GRID_HEIGHT - 1 && m.getAt(x, y + 1) == null)
+                do
                 {
-                    //ATTENTION VERIF A FAIRE AUTREMENT
-                    /*if (m.getAt(x , y + 1).type == "Animal")
-                    {
-                        m.getAt(x, y + 1).destroy();
+                    if (m.getAt(x, y + 1) != null) {
+                        if (m.getAt(x, y + 1).getType().equals("Animal")) {
+                            m.getAt(x, y + 1).destroy();
+                        }
                     }
 
-                     */
                     goDown();
                     tick_wait();
-                }
+                }while (y < GRID_HEIGHT - 1 && m.getAt(x, y + 1) == null);
                 break;
             case 'G':
-                while (x != 0 && m.getAt(x - 1, y) == null)
+                do
                 {
-                    /*if (m.getAt(x - 1, y).type == "Animal")
+                    if (m.getAt(x - 1, y) != null)
                     {
-                        m.getAt(x - 1, y).destroy();
+                        if (m.getAt(x - 1, y).type == "Animal")
+                        {
+                            m.getAt(x - 1, y).destroy();
+                        }
                     }
 
-                     */
                     goLeft();
                     tick_wait();
-                }
+                }while (x != 0 && m.getAt(x - 1, y) == null);
                 break;
             case 'D':
-                while (x < GRID_WIDTH - 1 && m.getAt(x + 1, y) == null)
+                do
                 {
-                    /*
-                    if (m.getAt(x + 1, y).type == "Animal")
-                    {
-                        m.getAt(x + 1, y).destroy();
-                    }
 
-                     */
+                    if (m.getAt(x + 1, y) != null)
+                    {
+                        if (m.getAt(x + 1, y).getType().equals("Animal"))
+                        {
+                            m.getAt(x + 1, y).destroy();
+                        }
+                    }
                     goRight();
                     tick_wait();
-                }
+                }while (x < GRID_WIDTH - 1 && m.getAt(x + 1, y) == null);
                 break;
         }
     }
