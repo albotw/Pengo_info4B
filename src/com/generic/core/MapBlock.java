@@ -17,66 +17,82 @@ public abstract class MapBlock extends MapObject{
 
     public void onMoveTriggered(char direction)
     {
+        tick_wait();
         switch (direction)
         {
             case 'H':
-                do
+                if (y != 0)
                 {
-                    if (m.getAt(x, y - 1) != null)
+                    if (m.getAt(x, y -1) != null)
                     {
-                        if (m.getAt(x , y -1).getType().equals("Animal"))
+                        if (m.getAt(x, y - 1).getType().equals("Animal"))
                         {
-                            m.getAt(x, y-1).destroy();
+                            m.getAt(x, y - 1).destroy();
+                            onMoveTriggered(direction);
                         }
                     }
-
-                    goUp();
-                    tick_wait();
-                }while (y != 0 && m.getAt(x, y -1) == null);
+                    else
+                    {
+                        goUp();
+                        onMoveTriggered(direction);
+                    }
+                }
                 break;
             case 'B':
-                do
+                if (y < GRID_HEIGHT - 1)
                 {
-                    if (m.getAt(x, y + 1) != null) {
+                    if (m.getAt(x, y + 1) != null)
+                    {
                         if (m.getAt(x, y + 1).getType().equals("Animal"))
                         {
                             m.getAt(x, y + 1).destroy();
+                            onMoveTriggered(direction);
                         }
                     }
-
-                    goDown();
-                    tick_wait();
-                }while (y < GRID_HEIGHT - 1 && m.getAt(x, y + 1) == null);
+                    else
+                    {
+                        goDown();
+                        onMoveTriggered(direction);
+                    }
+                }
                 break;
             case 'G':
-                do
+
+                if (x != 0)
                 {
-                    if (m.getAt(x - 1, y) != null)
+                    if(m.getAt(x - 1, y) != null)
                     {
-                        if (m.getAt(x - 1, y).type == "Animal")
+                        if(m.getAt(x - 1, y).getType().equals("Animal"))
                         {
                             m.getAt(x - 1, y).destroy();
+                            onMoveTriggered(direction);
                         }
                     }
-
-                    goLeft();
-                    tick_wait();
-                }while (x != 0 && m.getAt(x - 1, y) == null);
+                    else
+                    {
+                        goLeft();
+                        onMoveTriggered(direction);
+                    }
+                }
                 break;
             case 'D':
-                do
-                {
 
-                    if (m.getAt(x + 1, y) != null)
-                    {
+
+                if (x < GRID_WIDTH - 1)
+                {
+                    if(m.getAt(x + 1, y) != null) {
                         if (m.getAt(x + 1, y).getType().equals("Animal"))
                         {
                             m.getAt(x + 1, y).destroy();
+                            onMoveTriggered(direction);
                         }
                     }
-                    goRight();
-                    tick_wait();
-                }while (x < GRID_WIDTH - 1 && m.getAt(x + 1, y) == null);
+                    else
+                    {
+                        goRight();
+                        onMoveTriggered(direction);
+                    }
+                }
                 break;
         }
     }

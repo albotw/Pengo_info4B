@@ -1,0 +1,14 @@
+Crushing a Sno-Bee with an ice block awards the player 400 points. This bonus becomes 1,600 if two are crushed in one push, 3,200 if three and 6,400 if four. Walking over a stunned Sno-Bee awards 100 points. 10,000 points are awarded for aligning the three diamond blocks together if at least one is not touching a wall, but only 5,000 if all are against a wall.
+
+Smashing an ice block will award 30 points, or 500 points if it contains a Sno-Bee egg.
+
+A bonus is awarded upon round completion, depending on time elapsed:
+
+    5,000 points for under 20 seconds.
+    2,000 points for between 20–29 seconds.
+    1,000 points for between 30–39 seconds.
+    500 points for between 40–49 seconds.
+    10 points for between 50–59 seconds.
+    0 points for 60 seconds or more.
+
+By default, Pengo begins with three lives and a bonus life is awarded at 30,000 points. These values can be changed (anywhere from 2 to 5 lives, and the bonus life can be awarded at 50,000 instead) through DIP switch settings
