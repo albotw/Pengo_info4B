@@ -126,9 +126,10 @@ public class Game {
 
     public void gameOver()
     {
-        Map.deleteMap();
+        //a ajouter: déréférencement dans les objets
         AIs.clear();
         players.clear();
+        Map.deleteMap();
         System.out.println("Score");
         System.out.println("GAME OVER");
         //supprime le plateau
@@ -142,9 +143,10 @@ public class Game {
 
     public void victory()
     {
-        Map.deleteMap();
+        //a ajouter: déréférencement dans les objets.
         AIs.clear();
         players.clear();
+        Map.deleteMap();
         System.out.println("Score");
         System.out.println("VICTOIRE");
 
