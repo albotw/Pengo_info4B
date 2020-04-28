@@ -77,4 +77,8 @@ public class Map {
 
         return s;
     }
+
+    public static void deleteMap(){
+        instance = null;
+    }
 }

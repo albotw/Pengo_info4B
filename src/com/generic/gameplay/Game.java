@@ -128,6 +128,11 @@ public class Game {
 
     public void gameOver()
     {
+        Map.deleteMap();
+        AIs.clear();
+        players.clear();
+        System.out.println("Score");
+        System.out.println("GAME OVER");
         //supprime le plateau
         //supprime toutes les instances de tous les objets
         //sauf le rendu et le renderThread
@@ -139,7 +144,12 @@ public class Game {
 
     public void victory()
     {
+        Map.deleteMap();
+        AIs.clear();
+        players.clear();
+        System.out.println("Score");
         System.out.println("VICTOIRE");
+
         //supprime le plateau
         //supprime toutes les instances de tous les objets
         //sauf le rendu et le renderThread
@@ -192,11 +202,6 @@ public class Game {
             }
         }
     }
-        //methode appellée quand un bloc de diamant est déplacé.
-        //parcourt la map pour trouver le bloc de diamant. ==> LOCK ICI
-        //on prend le 1er bloc trouvé et on teste x + 1, x + 2 OU y + 1, y + 2
-        //si le test est validé, ==> victory()
-        //sinon rien ne se passe.
 
     public void stunTriggered(char dirMur)
     {
