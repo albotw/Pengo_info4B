@@ -12,7 +12,6 @@ import static com.generic.utils.Equations.*;
 
 
 /**
- * a chaque fois que case double impaire --> changement direction. ??
  *
  * utilisation de l'algorithme d"exploration exhaustive
  *

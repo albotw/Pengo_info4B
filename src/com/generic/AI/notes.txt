@@ -10,3 +10,11 @@ Object Contexte
         |- Strategy stratégieB
 
 @see IA.drawio
+
+
+Analyse
+jaune -> se déplace sur la carte dans le sens des aiguilles d'une montre et au premier blocage, change de direction aléatoirement
+bleu -> si il voit le joueur, il va commencer à se déplacer vers lui
+vert -> comme le bleumais si il est à 3 blocs ou moins du joueur, il va le chasser frénétiquement
+rose -> utilise A* pour immédiatement chasser le joueur peu importe sa position
+rouge -> évite le joueur a tout prix ainsi que les blocs qui lui sont envoyés

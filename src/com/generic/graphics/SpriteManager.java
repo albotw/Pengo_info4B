@@ -117,10 +117,8 @@ public class SpriteManager {
                         spr.loadImage("src/resources/Wall.png");
                         instance.addSprite(spr, "background");
                     }
-
                     xpos += SPRITE_SIZE;
                 }
-
                 ypos += SPRITE_SIZE;
             }
         }

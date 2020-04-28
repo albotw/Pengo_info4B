@@ -47,16 +47,15 @@ public class Game {
         AIs = new HashMap<MapEntity, AI>();
         mg.path_init();
 
-        System.out.println(m.toString());
 
         p1 = new Player();
 
         time = new GameTimer();
 
-        //time.start();
-        //initDiamondBlocks();
-        //initPlayers();
-        //initIA();
+        time.start();
+        initDiamondBlocks();
+        initPlayers();
+        initIA();
     }
 
     public void initDiamondBlocks()
