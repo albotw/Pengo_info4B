@@ -1,13 +1,13 @@
 package com.generic.AI;
 
-import com.generic.coreClasses.Animal;
-import com.generic.coreClasses.Map;
-import com.generic.coreClasses.MapObject;
-import com.generic.gameplayClasses.Game;
+import com.generic.core.Animal;
+import com.generic.core.Map;
+import com.generic.core.MapObject;
+import com.generic.gameplay.Game;
 
 import static com.generic.utils.CONFIG.*;
-import static com.generic.utils.Random.RandomizedInt;
-import static com.generic.utils.Random.VectorialDistance;
+import static com.generic.utils.Equations.RandomizedInt;
+import static com.generic.utils.Equations.VectorialDistance;
 
 public class AI extends Thread{
 

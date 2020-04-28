@@ -1,6 +1,6 @@
 package com.generic.utils;
 
-public class Random {
+public class Equations {
 
     public static int RandomizedInt(int a, int b)
     {

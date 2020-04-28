@@ -1,6 +1,6 @@
 package com.generic.player;
 
-import com.generic.gameplayClasses.Game;
+import com.generic.gameplay.Game;
 
 import java.awt.event.*;
 

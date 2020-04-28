@@ -1,4 +1,4 @@
-package com.generic.coreClasses;
+package com.generic.core;
 
 public class Map {
     //pattern singleton utilisé.

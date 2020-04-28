@@ -1,6 +1,6 @@
-package com.generic.coreClasses;
+package com.generic.core;
 
-import com.generic.gameplayClasses.Game;
+import com.generic.gameplay.Game;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;

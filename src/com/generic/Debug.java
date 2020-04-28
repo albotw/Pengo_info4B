@@ -1,5 +1,5 @@
 package com.generic;
-import com.generic.gameplayClasses.Game;
+import com.generic.gameplay.Game;
 
 public class Debug {
 

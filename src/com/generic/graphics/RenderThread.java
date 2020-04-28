@@ -12,7 +12,7 @@
 
 package com.generic.graphics;
 
-import com.generic.gameplayClasses.Game;
+import com.generic.gameplay.Game;
 
 import static com.generic.utils.CONFIG.WINDOW_TITLE;
 

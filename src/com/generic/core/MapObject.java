@@ -1,7 +1,7 @@
-package com.generic.coreClasses;
+package com.generic.core;
 
-import com.generic.gameplayClasses.Game;
-import com.generic.graphics.Sprite;
+import com.generic.gameplay.Game;
+
 import static com.generic.utils.CONFIG.*;
 
 public abstract class MapObject implements Movement{

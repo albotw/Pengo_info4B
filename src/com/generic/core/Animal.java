@@ -1,6 +1,6 @@
-package com.generic.coreClasses;
+package com.generic.core;
 
-import com.generic.gameplayClasses.Game;
+import com.generic.gameplay.Game;
 
 public class Animal extends MapEntity {
     private boolean isStun;

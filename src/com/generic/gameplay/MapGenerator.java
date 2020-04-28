@@ -1,14 +1,14 @@
-package com.generic.gameplayClasses;
+package com.generic.gameplay;
 
-import com.generic.coreClasses.IceBlock;
-import com.generic.coreClasses.Map;
+import com.generic.core.IceBlock;
+import com.generic.core.Map;
 import com.generic.graphics.SpriteManager;
 import com.generic.utils.Paire;
 import com.generic.utils.Pile;
 
 import static com.generic.utils.CONFIG.GRID_HEIGHT;
 import static com.generic.utils.CONFIG.GRID_WIDTH;
-import static com.generic.utils.Random.*;
+import static com.generic.utils.Equations.*;
 
 
 /**

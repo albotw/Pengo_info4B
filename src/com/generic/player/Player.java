@@ -1,11 +1,8 @@
 package com.generic.player;
 
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-
-import com.generic.coreClasses.MapEntity;
-import com.generic.coreClasses.MapObject;
-import com.generic.gameplayClasses.Game;
+import com.generic.core.MapEntity;
+import com.generic.core.MapObject;
+import com.generic.gameplay.Game;
 
 public class Player extends Thread
 {

@@ -1,4 +1,4 @@
-package com.generic.coreClasses;
+package com.generic.core;
 
 import static com.generic.utils.CONFIG.*;
 

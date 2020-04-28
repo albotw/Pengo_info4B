@@ -1,6 +1,6 @@
 package com.generic.graphics;
 
-import com.generic.coreClasses.Map;
+import com.generic.core.Map;
 
 import java.util.ArrayList;
 
