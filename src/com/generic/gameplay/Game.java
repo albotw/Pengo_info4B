@@ -26,6 +26,8 @@ public class Game {
 
     private Player p1;
 
+    private GameTimer time;
+
     public Game()
     {
 
@@ -44,10 +46,12 @@ public class Game {
 
         p1 = new Player();
 
+        time = new GameTimer();
+
         boolean loop = true;
         do
         {
-            int initX = RandomizedInt(0, GRID_WIDTH -1);
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
 
@@ -104,9 +108,14 @@ public class Game {
 
 
         //lorsque tous les éléments sont instanciés
+        time.start();
         //==> start()
     }
 
+    public void timerEnded()
+    {
+
+    }
 
     public void reset(){}
 
@@ -284,22 +293,7 @@ public class Game {
         //envoie son sprite au rendu
         //l'associe au joueur
     }
-         /* public void Timer(){
-        Timer chrono = new Timer();
-        chrono.schedule(new TimerTask() {
 
-            int time = 90;
-            @Override
-            public void run() {
-                System.out.println("Time : " + time);
-
-                if(time==0){
-                    cancel();
-                }
-                time--;
-            }
-        }, 1000, 1000);
-    }*/
 
     public Map getMap()
     {
