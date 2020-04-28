@@ -82,31 +82,40 @@ public class SpriteManager {
 
             int xpos = 0;
             int ypos = 0;
-            for (int i = 0; i < GRID_HEIGHT; i++)
+            for (int i = -1; i <= GRID_HEIGHT; i++)
             {
                 xpos = 0;
-                for (int j = 0; j < GRID_WIDTH; j++)
+                for (int j = -1; j <= GRID_WIDTH; j++)
                 {
-                    if (m.getAt(j, i) != null)
+                    if (i != -1 && i != GRID_HEIGHT && j != -1 && j != GRID_WIDTH)
+                    {
+                        if (m.getAt(j, i) != null)
+                        {
+                            Sprite spr = new Sprite(xpos, ypos);
+                            if(m.getAt(j, i).getType().equals("IceBlock"))
+                            {
+                                spr.loadImage("src/resources/IceBlock.png");
+                            }
+                            else if (m.getAt(j, i).getType().equals("Penguin"))
+                            {
+                                spr.loadImage("src/resources/Penguin.png");
+                            }
+                            else if (m.getAt(j, i).getType().equals("DiamondBlock"))
+                            {
+                                spr.loadImage("src/resources/DiamondBlock.png");
+                            }
+                            else if (m.getAt(j, i).getType().equals("Animal"))
+                            {
+                                spr.loadImage("src/resources/Animal.png");
+                            }
+                            instance.addSprite(spr, "foreground");
+                        }
+                    }
+                    else
                     {
                         Sprite spr = new Sprite(xpos, ypos);
-                        if(m.getAt(j, i).getType().equals("IceBlock"))
-                        {
-                            spr.loadImage("src/resources/IceBlock.png");
-                        }
-                        else if (m.getAt(j, i).getType().equals("Penguin"))
-                        {
-                            spr.loadImage("src/resources/Penguin.png");
-                        }
-                        else if (m.getAt(j, i).getType().equals("DiamondBlock"))
-                        {
-                            spr.loadImage("src/resources/DiamondBlock.png");
-                        }
-                        else if (m.getAt(j, i).getType().equals("Animal"))
-                        {
-                            spr.loadImage("src/resources/Animal.png");
-                        }
-                        instance.addSprite(spr, "foreground");
+                        spr.loadImage("src/resources/Wall.png");
+                        instance.addSprite(spr, "background");
                     }
 
                     xpos += SPRITE_SIZE;

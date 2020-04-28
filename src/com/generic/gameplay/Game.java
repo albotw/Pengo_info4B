@@ -23,6 +23,7 @@ public class Game {
     private RenderThread renderer;
     private SpriteManager sm;
     private Window w;
+    private MapGenerator mg;
 
     private Player p1;
 
@@ -33,25 +34,29 @@ public class Game {
 
         instance = this;
 
+        m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
+        mg = new MapGenerator();
+
         w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
         sm = SpriteManager.createSpriteManager();
         renderer = new RenderThread(w);
 
-        renderer.start();
 
+        renderer.start();
         players = new HashMap<MapEntity, Player>();
         AIs = new HashMap<MapEntity, AI>();
-        m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
-        m = MapGenerator.generate();
+        mg.path_init();
+
+        System.out.println(m.toString());
 
         p1 = new Player();
 
         time = new GameTimer();
 
-        time.start();
-        initDiamondBlocks();
-        initPlayers();
-        initIA();
+        //time.start();
+        //initDiamondBlocks();
+        //initPlayers();
+        //initIA();
     }
 
     public void initDiamondBlocks()

@@ -40,12 +40,18 @@ public class Map {
 
     public synchronized void place(MapObject o, int x, int y)
     {
-        tab[x][y] = o;
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            tab[x][y] = o;
+        }
     }
 
     public synchronized void release(int x, int y)
     {
-        tab[x][y] = null;
+        if (x >= 0 && x < width && y >= 0 && y < height)
+        {
+            tab[x][y] = null;
+        }
     }
 
     public int getWidth() {
@@ -59,11 +65,11 @@ public class Map {
     public String toString()
     {
         String s = "";
-        for (int i = 0; i < width; i++)
+        for (int i = 0; i < height; i++)
         {
-            for(int j = 0; j < height; j++)
+            for(int j = 0; j < width; j++)
             {
-                if (tab[i][j] == null)
+                if (tab[j][i] == null)
                 {
                     s += ".";
                 }

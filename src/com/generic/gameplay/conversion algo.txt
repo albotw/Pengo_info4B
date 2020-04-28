@@ -1,0 +1,64 @@
+ALGO GENERATEUR
+
+remplissage de la map avec des IceBlock partout sauf en bas a gauche
+
+path_init()
+for (int y = GRID_HEIGHT - 1; y > 0; y = y - 2)
+{
+    position courante = colonne la plus à gauche de la ligne ??
+    for (int x = 0; x < GRID_WIDTH; x = x + 2)
+    {
+        if (position == null)
+        {
+            if(pos +2H == null) path_generating()            //chemin de la position courante à deux blocs au dessus
+            else if (pos +2B == null) path_generating()     //chemin de la position courante à deux blocs en dessous
+            else if (pos +2D == null) path_generating()       //chemin de la position courante à deux blocs à droite
+            else if (pos +2G == null) path_generating()       //chemin de la position courante à deux blocs à gauche
+        }
+    }
+    position courante = position 2 blocs à droite
+}
+
+path_generating()
+{
+    bool loop = true;
+    while(loop){
+        dir = rand(0, 3);
+        if (dir == 0 && pos +2H == null)
+        {
+            loop = false
+            pos +1H = null
+            pos +2H = null
+            path_continue()
+        }
+        if (dir == 1 && pos +2B == null)
+        {
+            loop = false
+            pos +1B = null
+            pos +2B = null
+            path_continue()
+        }
+        if(dir == 2 && pos +2G == null)
+        {
+            loop = false
+            pos +1G = null
+            pos +2G = null
+            path_continue()
+        }
+        if(dir == 3 && pos +2D == null)
+        {
+            loop = false
+            pos +1D = null
+            pos +2D = null
+            path_continue()
+        }
+}
+
+path_continue()
+{
+    if (pos +2H == null) path_generating()
+    else if (pos +2B == null) path_generating()
+    else if (pos +2G == null) path_generating()
+    else if (pos +2D == null) path_generating()
+    else path_initialisation()
+}
