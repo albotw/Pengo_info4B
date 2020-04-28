@@ -163,6 +163,9 @@ public class Game {
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
         System.out.println("Animal Tué");
+        //test nombre animaux
+        respawnAnimal(owner);
+
         //methode appellee quand un animal meurt.
         //verifie qu'il reste des animaux
         //si c'est le cas ==> respawnAnimal()
@@ -278,7 +281,7 @@ public class Game {
         owner.removeLive();
         players.remove(p, owner);
     }
-    public void respawnAnimal()
+    public void respawnAnimal(AI owner)
     {
         boolean loop = true;
         do {
@@ -286,18 +289,18 @@ public class Game {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-
-            if (m.getAt(initX, initY).getType().equals("IceBlock"))
+            if (m.getAt(initX, initY) != null)
             {
-                loop = false;
-                Animal a = new Animal(initX, initY);
-                m.place(a, initX, initY);
-                AI ai = new AI();
-                ai.setControlledObject(a);
-                ai.setTarget(p1.getControlledObject());
-                ai.start();
-                AIs.put(a, ai);
+                if (m.getAt(initX, initY).getType().equals("IceBlock"))
+                {
+                    loop = false;
+                    Animal a = new Animal(initX, initY);
+                    m.place(a, initX, initY);
+                    owner.setControlledObject(a);
+
+                    AIs.put(a, owner);
                 }
+            }
 
         }while (loop);
         //methode appellée quand un animal est mort
@@ -317,7 +320,6 @@ public class Game {
         do {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
-
 
             if (m.getAt(initX, initY) == null)
             {
