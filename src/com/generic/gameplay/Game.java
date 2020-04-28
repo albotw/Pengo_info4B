@@ -278,9 +278,28 @@ public class Game {
         owner.removeLive();
         players.remove(p, owner);
     }
-
     public void respawnAnimal()
     {
+        boolean loop = true;
+        do {
+
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+
+            if (m.getAt(initX, initY).getType().equals("IceBlock"))
+            {
+                loop = false;
+                Animal a = new Animal(initX, initY);
+                m.place(a, initX, initY);
+                AI ai = new AI();
+                ai.setControlledObject(a);
+                ai.setTarget(p1.getControlledObject());
+                ai.start();
+                AIs.put(a, ai);
+                }
+
+        }while (loop);
         //methode appellée quand un animal est mort
         //prend un bloc de glace au hasard
         //le detruit

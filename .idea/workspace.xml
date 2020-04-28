@@ -3,26 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="bcb0f6eb-6f87-4262-970f-a0296307cefd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/AI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/AI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/notes.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/Debug.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/Debug.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/Animal.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/DiamondBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/IceBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/Map.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/MapBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/MapEntity.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/MapObject.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/Movement.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/coreClasses/Penguin.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplayClasses/Game.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplayClasses/MapGenerator.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/RenderThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/RenderThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/SpriteManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/SpriteManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/player/InputHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/player/InputHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/player/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/utils/Random.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/core/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/META-INF/projet_info4B_2019_2020.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/PathFinder.class~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/PathFinder.class~master" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/utils/Equations.class~HEAD" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/utils/Equations.class~master" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/Game.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -128,7 +113,7 @@
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
     <state x="361" y="71" key="#Project_Structure" timestamp="1583844406364">
