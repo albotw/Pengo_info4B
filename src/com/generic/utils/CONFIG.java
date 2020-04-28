@@ -27,4 +27,6 @@ public class CONFIG {
     public static int SPRITE_SIZE = 15;
 
     public static int SERVER_PORT = 8080;
+
+    public static int PLAYER_INIT_LIVES = 3;
 }

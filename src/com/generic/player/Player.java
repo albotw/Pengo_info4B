@@ -4,6 +4,8 @@ import com.generic.core.MapEntity;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
 
+import static com.generic.utils.CONFIG.PLAYER_INIT_LIVES;
+
 public class Player extends Thread
 {
     private MapObject controlledObject;
@@ -12,6 +14,7 @@ public class Player extends Thread
 
     public Player()
     {
+        currentLives = PLAYER_INIT_LIVES;
         ih = new InputHandler();
     }
 
@@ -57,7 +60,7 @@ public class Player extends Thread
         }
         else
         {
-            Game.instance.respawnPenguin();
+            Game.instance.respawnPenguin(this);
         }
     }
 }

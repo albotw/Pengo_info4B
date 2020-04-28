@@ -275,6 +275,8 @@ public class Game {
         System.out.println("Pingouin tué");
         Player owner = players.get(p);
         owner.setControlledObject(null);
+        owner.removeLive();
+        players.remove(p, owner);
     }
 
     public void respawnAnimal()
@@ -290,8 +292,25 @@ public class Game {
         //et il est liée à une IA.
     }
 
-    public void respawnPenguin()
+    public void respawnPenguin(Player owner)
     {
+        boolean loop = true;
+        do {
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+
+            if (m.getAt(initX, initY) == null)
+            {
+                loop = false;
+                Penguin p = new Penguin(initX, initY);
+                m.place(p, initX, initY);
+                owner.setControlledObject(p);
+
+                players.put(p, owner);
+            }
+        }while (loop);
+
         //methode appellée si le joueur est mort et si il lui reste des vies.
         //prend un espace vide de la map
         //cree une instance de penguin
