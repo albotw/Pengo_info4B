@@ -63,14 +63,14 @@
   </component>
   <component name="RunManager" selected="Application.Pengo">
     <configuration name="Pengo" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.generic.Debug" />
+      <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
       <module name="projet_info4B_2019_2020" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <configuration name="Render Debug" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="com.generic.Debug" />
+      <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
       <module name="projet_info4B_2019_2020" />
       <method v="2">
         <option name="MakeNoErrorCheck" enabled="true" />
@@ -123,6 +123,7 @@
       <workItem from="1587993665958" duration="488000" />
       <workItem from="1587999073005" duration="1936000" />
       <workItem from="1588064524893" duration="6001000" />
+      <workItem from="1588082014843" duration="458000" />
     </task>
     <servers />
   </component>

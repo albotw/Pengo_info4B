@@ -48,26 +48,35 @@ public class Game {
 
         time = new GameTimer();
 
+        time.start();
+        initDiamondBlocks();
+        initPlayers();
+        initIA();
+    }
+
+    public void initDiamondBlocks()
+    {
         boolean loop = true;
-        do
-        {
-            int initX = RandomizedInt(0, GRID_WIDTH - 1);
-            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+        int cpt = 0;
+        for(int k = 0; k<3; k++){
+            loop = true;
+            do {
+                int initX = RandomizedInt(1, GRID_WIDTH - 2);
+                int initY = RandomizedInt(1, GRID_HEIGHT - 2);
 
+                if (m.getAt(initX, initY) == null) {
+                    loop = false;
+                    DiamondBlock d = new DiamondBlock(initX, initY);
+                    m.place(d, initX, initY);
+                }
+            } while (loop && cpt != 3);
+        }
+    }
 
-            if (m.getAt(initX, initY) == null)
-            {
-                loop = false;
-                Penguin p = new Penguin(initX, initY);
-                m.place(p, initX, initY);
-                p1.setControlledObject(p);
-                p1.start();
-
-                players.put(p, p1);
-            }
-        }while(loop);
-
-
+    public void initIA()
+    {
+        // A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
+        boolean loop = true;
         for (int i = 0; i < 1; i++)
         {
             loop = true;
@@ -90,40 +99,29 @@ public class Game {
                 }
             }while(loop);
         }
-
-        int cpt = 0;
-        for(int k = 0; k<3; k++){
-            loop = true;
-            do {
-                int initX = RandomizedInt(1, GRID_WIDTH - 2);
-                int initY = RandomizedInt(1, GRID_HEIGHT - 2);
-
-                if (m.getAt(initX, initY) == null) {
-                    loop = false;
-                    DiamondBlock d = new DiamondBlock(initX, initY);
-                    m.place(d, initX, initY);
-                }
-            } while (loop && cpt != 3);
-        }
-
-
-        //lorsque tous les éléments sont instanciés
-        time.start();
-        //==> start()
     }
 
-    public void timerEnded()
+    public void initPlayers()
     {
+        //A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
+        boolean loop = true;
+        do
+        {
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-    }
 
-    public void reset(){}
+            if (m.getAt(initX, initY) == null)
+            {
+                loop = false;
+                Penguin p = new Penguin(initX, initY);
+                m.place(p, initX, initY);
+                p1.setControlledObject(p);
+                p1.start();
 
-    public void start()
-    {
-        //active le thread de rendu
-        //active les thread des joueurs
-        //active les thread des IAs
+                players.put(p, p1);
+            }
+        }while(loop);
     }
 
     public void gameOver()
