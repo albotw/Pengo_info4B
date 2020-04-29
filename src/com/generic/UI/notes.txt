@@ -7,6 +7,14 @@ Comme le main est indépendant de Game on peut s'en servir comme pont entre le l
 A voir si on fait des versions réseau des classes importantes (Map, Player et AI notamment) ou si on utilise les interfaces intensivement.
 Le serveur est hébergé sur une machine qui joue aussi, pas de système P2P décentralisé.
 
+notes a l'écran (en jeu):
+Pseudo
+Score de chaque joueur
+Vies de chaque joueur
+meilleur score
+niveau
++copyright
+
 L'interface doit indiquer (vrac):
     - Serveurs disponibles
     - Mode Hors Ligne

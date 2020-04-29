@@ -13,6 +13,7 @@
 package com.generic.graphics;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Window extends JFrame
 {
@@ -22,6 +23,7 @@ public class Window extends JFrame
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);
+        this.setLayout(new BorderLayout());
     }
 
 }

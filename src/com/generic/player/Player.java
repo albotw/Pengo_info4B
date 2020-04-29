@@ -4,7 +4,7 @@ import com.generic.core.MapEntity;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
 
-import static com.generic.utils.CONFIG.PLAYER_INIT_LIVES;
+import static com.generic.gameplay.CONFIG_GAME.PLAYER_INIT_LIVES;
 
 public class Player extends Thread
 {
@@ -24,7 +24,6 @@ public class Player extends Thread
     }
 
     public void setControlledObject(MapObject mo){this.controlledObject = mo;}
-
 
     public void run()
     {

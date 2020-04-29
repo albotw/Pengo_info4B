@@ -6,8 +6,8 @@ import com.generic.graphics.SpriteManager;
 import com.generic.utils.Paire;
 import com.generic.utils.Pile;
 
-import static com.generic.utils.CONFIG.GRID_HEIGHT;
-import static com.generic.utils.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.*;
 
 

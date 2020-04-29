@@ -1,6 +1,6 @@
 package com.generic.core;
 
-import static com.generic.utils.CONFIG.*;
+import static com.generic.gameplay.CONFIG.*;
 
 public abstract class MapBlock extends MapObject{
     public MapBlock(int x, int y)

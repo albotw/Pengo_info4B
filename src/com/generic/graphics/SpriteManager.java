@@ -4,8 +4,8 @@ import com.generic.core.Map;
 
 import java.util.ArrayList;
 
-import static com.generic.utils.CONFIG.*;
-import static com.generic.utils.CONFIG.SPRITE_SIZE;
+import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG.SPRITE_SIZE;
 
 public class SpriteManager {
     public static SpriteManager instance;

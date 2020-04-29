@@ -14,7 +14,9 @@ package com.generic.graphics;
 
 import com.generic.gameplay.Game;
 
-import static com.generic.utils.CONFIG.WINDOW_TITLE;
+import java.awt.*;
+
+import static com.generic.gameplay.CONFIG.WINDOW_TITLE;
 
 public class RenderThread extends Thread {
 
@@ -30,7 +32,7 @@ public class RenderThread extends Thread {
         fps = new FPSCounter();
         rp = new RenderPanel();
         rp.setSize(output.getWidth(), output.getHeight());
-        output.add(rp);
+        output.add(rp, BorderLayout.CENTER);
 
         continueDrawing = true;
 

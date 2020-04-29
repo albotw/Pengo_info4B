@@ -2,8 +2,8 @@ package com.generic.core;
 
 import com.generic.gameplay.Game;
 
-import static com.generic.utils.CONFIG.GRID_HEIGHT;
-import static com.generic.utils.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 
 public class Penguin extends MapEntity{
     public Penguin (int x, int y)

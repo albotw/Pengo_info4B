@@ -5,12 +5,11 @@ import com.generic.graphics.Window;
 import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
-import com.generic.utils.CONFIG;
 
 import java.util.HashMap;
 
-import static com.generic.utils.CONFIG.GRID_HEIGHT;
-import static com.generic.utils.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.RandomizedInt;
 
 
@@ -68,10 +67,13 @@ public class Game {
                 int initX = RandomizedInt(1, GRID_WIDTH - 2);
                 int initY = RandomizedInt(1, GRID_HEIGHT - 2);
 
-                if (m.getAt(initX, initY) == null) {
-                    loop = false;
-                    DiamondBlock d = new DiamondBlock(initX, initY);
-                    m.place(d, initX, initY);
+                if (m.getAt(initX, initY) != null) {
+                    if (m.getAt(initX, initY).getType().equals("IceBlock"))
+                    {
+                        loop = false;
+                        DiamondBlock d = new DiamondBlock(initX, initY);
+                        m.place(d, initX, initY);
+                    }
                 }
             } while (loop && cpt != 3);
         }

@@ -3,6 +3,8 @@ package com.generic.graphics;
 import javax.swing.*;
 import java.awt.*;
 
+import static com.generic.gameplay.CONFIG.BG_DEFAULT_COLOR;
+
 public class RenderPanel extends JPanel {
 
     private SpriteManager sm = SpriteManager.instance;
@@ -10,6 +12,7 @@ public class RenderPanel extends JPanel {
     public RenderPanel()
     {
         super();
+        this.setBackground(BG_DEFAULT_COLOR);
     }
 
     private void draw(Graphics g){

@@ -2,7 +2,7 @@ package com.generic.core;
 
 import com.generic.gameplay.Game;
 
-import static com.generic.utils.CONFIG.*;
+import static com.generic.gameplay.CONFIG.*;
 
 public abstract class MapObject implements Movement{
     protected int x;

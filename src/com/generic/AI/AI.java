@@ -5,7 +5,7 @@ import com.generic.core.Map;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
 
-import static com.generic.utils.CONFIG.*;
+import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
@@ -16,6 +16,7 @@ public class AI extends Thread{
 
     private boolean stunActive;     //a déplacer dans la classe de controle spé animal
     private int stunTimer;          //a déplacer dans la classe de controle spé animal (temps de stun, var locale basée sur la constante de CONFIG
+
     public AI()
     {
 
