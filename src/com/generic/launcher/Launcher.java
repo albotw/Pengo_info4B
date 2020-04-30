@@ -18,6 +18,8 @@ public class Launcher
         players.add(new PlayerContainer("GEO"));
         players.add(new PlayerContainer("MIC"));
         players.add(new PlayerContainer("PED"));
+
+
     }
 
     public ArrayList<PlayerContainer> getPlayers()
