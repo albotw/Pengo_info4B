@@ -8,6 +8,7 @@ A voir si on fait des versions réseau des classes importantes (Map, Player et A
 Le serveur est hébergé sur une machine qui joue aussi, pas de système P2P décentralisé.
 
 notes a l'écran (en jeu):
+Pseudo
 Score de chaque joueur
 Vies de chaque joueur
 meilleur score

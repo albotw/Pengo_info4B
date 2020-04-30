@@ -16,6 +16,7 @@ import com.generic.gameplay.Game;
 
 import java.awt.*;
 
+import static com.generic.gameplay.CONFIG.RP_WIDTH;
 import static com.generic.gameplay.CONFIG.WINDOW_TITLE;
 
 public class RenderThread extends Thread {
@@ -31,7 +32,6 @@ public class RenderThread extends Thread {
     {
         fps = new FPSCounter();
         rp = new RenderPanel();
-        rp.setSize(output.getWidth(), output.getHeight());
         output.add(rp, BorderLayout.CENTER);
 
         continueDrawing = true;
@@ -42,12 +42,13 @@ public class RenderThread extends Thread {
     public void run()
     {
         fps.start();
-        while(continueDrawing == true)
+        while(continueDrawing)
         {
             SpriteManager.transfer(Game.instance.getMap(), this);
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
             rp.repaint();
+            w.getGameOverlay().updateValues();
 
             try
             {

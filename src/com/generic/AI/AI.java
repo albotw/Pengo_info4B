@@ -144,32 +144,32 @@ public class AI extends Thread{
             else if (m.getAt(x, y + 1).equals(target)) d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
         }
 
-        System.out.println("h = " + d_up + " | b = " + d_down + " | g = " + d_left + " | d = " + d_right);
+        //System.out.println("h = " + d_up + " | b = " + d_down + " | g = " + d_left + " | d = " + d_right);
 
         //on prend la plus petite valeur et on se déplace sur la case
         if (d_up < d_down && d_up < d_left && d_up < d_right)
         {
-            System.out.println("Décide d'aller en haut");
+            //System.out.println("Décide d'aller en haut");
             controlledObject.goUp();
         }
         else if (d_down < d_up && d_down < d_left && d_down < d_right)
         {
-            System.out.println("Décide d'aller en bas");
+            //System.out.println("Décide d'aller en bas");
             controlledObject.goDown();
         }
         else if (d_left < d_up && d_left < d_right && d_left < d_down)
         {
-            System.out.println("Décide d'aller a gauche");
+            //System.out.println("Décide d'aller a gauche");
             controlledObject.goLeft();
         }
         else if (d_right < d_up && d_right < d_down && d_right < d_left)
         {
-            System.out.println("Décide d'aller a droite");
+            //System.out.println("Décide d'aller a droite");
             controlledObject.goRight();
         }
         else
         {
-            System.out.println("état indécisif");
+            //System.out.println("état indécisif");
 
             boolean loop = true;
             do
@@ -180,29 +180,29 @@ public class AI extends Thread{
                 {
                     controlledObject.goUp();
                     loop = false;
-                    System.out.println("Après tirage décide d'aller en haut");
+                    //System.out.println("Après tirage décide d'aller en haut");
                 }
                 else if (d_down != INFINI && d_rand == 1)
                 {
                     controlledObject.goDown();
                     loop = false;
-                    System.out.println("Après tirage décide d'aller en bas");
+                    //System.out.println("Après tirage décide d'aller en bas");
                 }
                 else if (d_left != INFINI && d_rand == 2)
                 {
                     controlledObject.goLeft();
                     loop = false;
-                    System.out.println("Après tirage décide d'aller à gauche");
+                    //System.out.println("Après tirage décide d'aller à gauche");
                 }
                 else if (d_right != INFINI && d_rand == 3)
                 {
                     controlledObject.goRight();
                     loop = false;
-                    System.out.println("Après tirage décide d'aller a droite");
+                    //System.out.println("Après tirage décide d'aller a droite");
                 }
                 else
                 {
-                    System.out.println("Tirage invalide");
+                    //System.out.println("Tirage invalide");
                 }
             }while(loop);
         }

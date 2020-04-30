@@ -11,6 +11,7 @@ import java.util.HashMap;
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.RandomizedInt;
+import static java.lang.Thread.sleep;
 
 
 public class Game {
@@ -27,6 +28,8 @@ public class Game {
     private Player p1;
 
     private GameTimer time;
+
+    private Score sc;
 
     public Game()
     {
@@ -46,6 +49,7 @@ public class Game {
         AIs = new HashMap<MapEntity, AI>();
         mg.path_init();
 
+        sc = new Score();
 
         p1 = new Player();
 
@@ -133,11 +137,18 @@ public class Game {
     public void gameOver()
     {
         //a ajouter: déréférencement dans les objets
+        time.stopTimer();
         AIs.clear();
         players.clear();
         Map.deleteMap();
         System.out.println("Score");
-        System.out.println("GAME OVER");
+        try{
+            System.out.println("DEFAIRE");
+            sleep(2000);
+        }
+        catch(Exception e){
+            System.exit(0);
+    }
         //supprime le plateau
         //supprime toutes les instances de tous les objets
         //sauf le rendu et le renderThread
@@ -150,11 +161,19 @@ public class Game {
     public void victory()
     {
         //a ajouter: déréférencement dans les objets.
+        sc.setPoints("GameEnd", time.getTime());
+        time.stopTimer();
         AIs.clear();
         players.clear();
         Map.deleteMap();
         System.out.println("Score");
-        System.out.println("VICTOIRE");
+        try{
+            System.out.println("VICTOIRE");
+            sleep(2000);
+        }
+        catch(Exception e){
+            System.exit(0);
+        }
 
         //supprime le plateau
         //supprime toutes les instances de tous les objets
@@ -166,11 +185,13 @@ public class Game {
 
     public void animalKilled(Animal a)
     {
+        sc.setPoints("AnimalKilled", 0);
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
         System.out.println("Animal Tué");
         //test nombre animaux
         respawnAnimal(owner);
+
 
         //methode appellee quand un animal meurt.
         //verifie qu'il reste des animaux
@@ -287,6 +308,7 @@ public class Game {
         owner.removeLive();
         players.remove(p, owner);
     }
+
     public void respawnAnimal(AI owner)
     {
         boolean loop = true;
@@ -366,4 +388,10 @@ public class Game {
         return this.w;
     }
 
+    public HashMap<MapEntity, Player> getPlayers() {return this.players;}
+
+    public Score getScore()
+    {
+        return this.sc;
+    }
 }

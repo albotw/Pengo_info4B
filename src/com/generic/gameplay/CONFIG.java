@@ -18,7 +18,9 @@ public class CONFIG {
 
     public static String WINDOW_TITLE = "Pengo Remake ";
     public static int WINDOW_HEIGHT = 380;
-    public static int WINDOW_WIDTH = 500;
+    public static int WINDOW_WIDTH = 450;
+    public static int RP_WIDTH = 300;
+    public static int OVERLAY_WIDTH = 150;
 
     public static int AI_TICK_RATE = 500;
     public static int STUN_TIME = 2000;
