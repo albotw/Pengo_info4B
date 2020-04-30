@@ -59,6 +59,9 @@ public class RenderThread extends Thread {
                 e.printStackTrace();
             }
         }
+
+        w.setVisible(false);
+        w.dispose();
     }
 
     public void stopRendering()

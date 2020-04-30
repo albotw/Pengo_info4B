@@ -3,6 +3,7 @@ package com.generic.UI;
 import com.generic.gameplay.Game;
 import com.generic.launcher.Launcher;
 import com.generic.player.PlayerContainer;
+import com.generic.player.PlayerManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class GameOverlay extends JPanel{
         w.add(this, BorderLayout.EAST);
         setLayout(new GridLayout(4, 0));
         panels = new ArrayList<PlayerPanel>();
-        for(PlayerContainer pc : Launcher.instance.getPlayers())
+        for(PlayerContainer pc : PlayerManager.instance.getPlayersProfiles())
         {
             System.out.println(pc.getPseudo().toString());
             PlayerPanel pp = new PlayerPanel(pc);

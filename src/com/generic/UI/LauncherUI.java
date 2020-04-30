@@ -90,6 +90,11 @@ public class LauncherUI extends JPanel {
         add(copyright);
         repaint();
     }
+
+    public void updateProfileMode(String pseudo)
+    {
+        Profile.setText("Profils (" + pseudo + ")");
+    }
 }
 
 /**

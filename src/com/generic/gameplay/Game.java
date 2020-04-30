@@ -2,6 +2,7 @@ package com.generic.gameplay;
 
 import com.generic.core.*;
 import com.generic.graphics.Window;
+import com.generic.launcher.Launcher;
 import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
@@ -33,18 +34,14 @@ public class Game {
 
     public Game()
     {
-
         instance = this;
-
-        m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
-        mg = new MapGenerator();
-
         w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
         sm = SpriteManager.createSpriteManager();
         renderer = new RenderThread(w);
-
-
         renderer.start();
+
+        m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
+        mg = new MapGenerator();
         players = new HashMap<MapEntity, Player>();
         AIs = new HashMap<MapEntity, AI>();
         mg.path_init();
@@ -142,12 +139,13 @@ public class Game {
         players.clear();
         Map.deleteMap();
         System.out.println("Score");
-        try{
-            System.out.println("DEFAIRE");
+        System.out.println("DEFAITE");
+        try {
             sleep(2000);
-        }
-        catch(Exception e){
-            System.exit(0);
+        }catch(Exception e){e.printStackTrace();
+
+        Launcher.instance.onGameEnded();
+        renderer.stopRendering();
     }
         //supprime le plateau
         //supprime toutes les instances de tous les objets
@@ -167,13 +165,14 @@ public class Game {
         players.clear();
         Map.deleteMap();
         System.out.println("Score");
+        System.out.println("VICTOIRE");
         try{
-            System.out.println("VICTOIRE");
             sleep(2000);
         }
-        catch(Exception e){
-            System.exit(0);
-        }
+        catch(Exception e){e.printStackTrace();}
+
+        Launcher.instance.onGameEnded();
+        renderer.stopRendering();
 
         //supprime le plateau
         //supprime toutes les instances de tous les objets

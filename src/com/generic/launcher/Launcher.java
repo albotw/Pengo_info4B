@@ -1,18 +1,19 @@
 package com.generic.launcher;
 
 import com.generic.UI.LauncherUI;
+import com.generic.gameplay.Game;
 import com.generic.player.PlayerContainer;
+import com.generic.player.PlayerManager;
 
 import javax.swing.*;
 import java.util.ArrayList;
 
 public class Launcher extends JFrame
 {
-    public ArrayList<PlayerContainer> players;
-
     public static Launcher instance;
 
     private LauncherUI UI;
+    private PlayerManager pm;
 
     public Launcher()
     {
@@ -27,22 +28,17 @@ public class Launcher extends JFrame
         setTitle("Pengo Launcher");
         setSize(600, 400);
 
-        players = new ArrayList<PlayerContainer>();
-        players.add(new PlayerContainer("IAN"));
-        players.add(new PlayerContainer("GEO"));
-        players.add(new PlayerContainer("MIC"));
-        players.add(new PlayerContainer("PED"));
+        pm = new PlayerManager();
     }
-
-    public ArrayList<PlayerContainer> getPlayers()
-    {
-        return this.players;
-    }
-
 
     public void SoloModeSelected()
     {
         System.out.println("Solo séléctionné");
+        if (pm.isMainProfileChosen())
+        {
+            this.setVisible(false);
+            Game g = new Game();
+        }
     }
 
     public void SoloSettingsSelected()
@@ -58,5 +54,16 @@ public class Launcher extends JFrame
     public void ProfileModeSelected()
     {
         System.out.println("Profil séléctionné");
+        ProfileDialog modal = new ProfileDialog(this, true);
+
+        if (pm.getMainProfile() != null)
+        {
+            UI.updateProfileMode(pm.getMainProfile().getPseudo());
+        }
+    }
+
+    public void onGameEnded()
+    {
+        this.setVisible(true);
     }
 }

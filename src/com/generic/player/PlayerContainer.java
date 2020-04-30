@@ -21,4 +21,10 @@ public class PlayerContainer {
     {
         return this.score;
     }
+
+    public void setScore(int newScore){this.score = newScore;}
+
+    public Player getPlayer(){return this.p;}
+
+    public void setPlayer(Player p){this.p = p;}
 }
