@@ -12,7 +12,7 @@ public class PlayerContainer {
         this.pseudo = pseudo;
     }
 
-public String getPseudo()
+    public String getPseudo()
     {
         return this.pseudo;
     }

@@ -15,7 +15,6 @@ package com.generic.graphics;
 import com.generic.UI.GameOverlay;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Window extends JFrame

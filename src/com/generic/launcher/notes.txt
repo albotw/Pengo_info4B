@@ -1,0 +1,27 @@
+Arborescence (simplifiée)
+
+- meilleurs scores
+
+- Mode Solo
+    -> démarrer une partie
+    -> paramétrage de la partie
+
+- Mode en ligne
+    -> Rejoindre une partie (en indiquant IP + Port)
+        -> séléction d'équipe
+        -> composition des équipes
+        -> paramètres
+
+    -> héberger une partie
+        -> séléction d'équipe
+        -> composition des équipes
+        -> paramétrage de la partie
+        -> lancer la partie
+
+
+PlayerContainer -> haut niveau
+PlayerContainer -> Player -> Score
+
+A coté du bouton de démarrage faire un bouton de réglages
+PlayerContainer sérialisable pour sauvegarde de partie
+si les réglages sont inchangés, charge la configuration par défaut.

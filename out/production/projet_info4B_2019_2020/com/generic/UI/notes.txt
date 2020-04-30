@@ -24,21 +24,6 @@ L'interface doit indiquer (vrac):
     - paramétrage d'une partie (Hôte uniquement)
     - lancer la partie (Hôte uniquement)
 
-Arborescence (simplifiée)
-- Mode Solo
-    -> démarrer une partie
-
-- Mode en ligne
-    -> Rejoindre une partie
-        -> séléction d'équipe
-        -> composition des équipes
-
-    -> héberger une partie
-        -> séléction d'équipe
-        -> composition des équipes
-        -> paramétrage de la partie
-        -> lancer la partie
-
 spécifications:
 PvE:
     de 1 a 4 joueurs
