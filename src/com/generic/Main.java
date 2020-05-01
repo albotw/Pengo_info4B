@@ -8,7 +8,6 @@ public class Main {
 
         Launcher l = new Launcher();
         System.out.println("fin init launcher");
-
         //Game g = new Game();
 
     }

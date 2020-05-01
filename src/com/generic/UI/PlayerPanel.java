@@ -1,21 +1,24 @@
 package com.generic.UI;
 
-import com.generic.player.PlayerContainer;
+import com.generic.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
 
 class PlayerPanel extends JPanel
 {
-    JLabel pseudoLabel;
-    JLabel score;
-    JLabel vies;
+    private JLabel pseudoLabel;
+    private JLabel score;
+    private JLabel vies;
 
-    public PlayerPanel(PlayerContainer pc)
+    private Player p;
+
+    public PlayerPanel(Player p)
     {
         super();
+        this.p = p;
         setLayout(new FlowLayout());
-        pseudoLabel = new JLabel(pc.getPseudo());
+        pseudoLabel = new JLabel(p.getPseudo());
         add(pseudoLabel);
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(2, 2));
@@ -28,13 +31,7 @@ class PlayerPanel extends JPanel
         add(center);
     }
 
-    public void updateScore(int newScore)
-    {
-        score.setText(Integer.toString(newScore));
-    }
+    public void updateScore(){ this.score.setText(Integer.toString(p.getScore().getPoints()));}
 
-    public void updateVies(int newVies)
-    {
-        vies.setText(Integer.toString(newVies));
-    }
+    public void updateVies(){ this.vies.setText(Integer.toString(p.getRemainigLives()));}
 }

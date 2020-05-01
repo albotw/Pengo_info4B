@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.gameplay.CONFIG.SPRITE_SIZE;
 
+//Singleton OK
+
 public class SpriteManager {
     public static SpriteManager instance;
 
@@ -15,6 +17,7 @@ public class SpriteManager {
 
     private SpriteManager()
     {
+        instance = this;
         foreground = new ArrayList<Sprite>();
         background = new ArrayList<Sprite>();
     }
@@ -122,6 +125,5 @@ public class SpriteManager {
                 ypos += SPRITE_SIZE;
             }
         }
-
     }
 }

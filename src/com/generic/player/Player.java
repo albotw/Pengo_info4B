@@ -3,36 +3,42 @@ package com.generic.player;
 import com.generic.core.MapEntity;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
+import com.generic.gameplay.Score;
 
 import static com.generic.gameplay.CONFIG_GAME.PLAYER_INIT_LIVES;
+
+/**
+ * TODO: création du inputHandler différée ?
+ * TODO: généralisation pour toute MapEntity
+ */
 
 public class Player extends Thread
 {
     private MapObject controlledObject;
     private int currentLives;
     private InputHandler ih;
+    private Score s;
+    private String pseudo;
+    private boolean canMove;
 
-    public Player()
+    public Player(String pseudo)
     {
+        this.pseudo = pseudo;
+        this.s = new Score();
         currentLives = PLAYER_INIT_LIVES;
-        ih = new InputHandler();
     }
 
-    public MapObject getControlledObject()
-    {
-        return this.controlledObject;
-    }
-
-    public void setControlledObject(MapObject mo){this.controlledObject = mo;}
 
     public void run()
     {
+        ih = new InputHandler();
         while(true)
         {
             if (controlledObject != null)
             {
                 linkInput();
             }
+
             try
             {
                 sleep(16);
@@ -62,4 +68,20 @@ public class Player extends Thread
             Game.instance.respawnPenguin(this);
         }
     }
+
+    public MapObject getControlledObject()
+    {
+        return this.controlledObject;
+    }
+
+    public void setControlledObject(MapObject mo){this.controlledObject = mo;}
+
+    public String getPseudo()
+    {
+        return this.pseudo;
+    }
+
+    public Score getScore() {return this.s;}
+
+    public int getRemainigLives(){ return this.currentLives;}
 }

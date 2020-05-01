@@ -9,11 +9,11 @@ public class DiamondBlock extends MapBlock {
         this.type = "DiamondBlock";
     }
 
-    public void destroy(){}
+    public void destroy(MapObject killer){}
 
-    public void onMoveTriggered(char direction)
+    public void onMoveTriggered(char direction, MapEntity source)
     {
-        super.onMoveTriggered(direction);
+        super.onMoveTriggered(direction, source);
         Game.instance.checkDiamondBlocks();
     }
 }

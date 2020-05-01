@@ -1,6 +1,6 @@
 package com.generic.launcher;
 
-import com.generic.player.PlayerContainer;
+import com.generic.player.Player;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
@@ -94,9 +94,9 @@ public class ProfileDialog extends JDialog {
     public void refreshList()
     {
         mod.removeAllElements();
-        for (int i = 0; i < pm.getPlayersProfiles().size(); i++)
+        for (Player p : pm.getPlayers())
         {
-            mod.addElement(pm.getPlayersProfiles().get(i).getPseudo());
+            mod.addElement(p.getPseudo());
         }
     }
 

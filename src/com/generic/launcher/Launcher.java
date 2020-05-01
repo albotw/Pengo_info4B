@@ -2,11 +2,9 @@ package com.generic.launcher;
 
 import com.generic.UI.LauncherUI;
 import com.generic.gameplay.Game;
-import com.generic.player.PlayerContainer;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class Launcher extends JFrame
 {
@@ -15,10 +13,11 @@ public class Launcher extends JFrame
     private LauncherUI UI;
     private PlayerManager pm;
 
-    public Launcher()
+    public  Launcher()
     {
         super();
         instance = this;
+
         UI = new LauncherUI();
         add(UI);
 

@@ -14,10 +14,19 @@ import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
+/**
+ * TODO: évaluer l'utilisation du pattern singleton
+ * TODO: Intégrer compteur de vies pour l'IA
+ * TODO: méthode pour commencer et finir la partie.
+ * TODO: rendre animalKilled/penguinKilled indépendant de IA ou Player
+ */
 
 public class Game {
     public static Game instance;
-    private Map m;
+
+    /**
+     * Hashmap ? ou alors juste pour le réseau ?
+     */
     private HashMap<MapEntity, Player> players;
     private HashMap<MapEntity, AI> AIs;
 
@@ -25,37 +34,37 @@ public class Game {
     private SpriteManager sm;
     private Window w;
     private MapGenerator mg;
+    private Map m;
 
-    private Player p1;
-
+    private Player localPlayer;
+    private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
 
-    private Score sc;
 
     public Game()
     {
         instance = this;
+
         w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
         sm = SpriteManager.createSpriteManager();
+        System.out.println(sm.toString());
         renderer = new RenderThread(w);
         renderer.start();
 
         m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
         mg = new MapGenerator();
+
         players = new HashMap<MapEntity, Player>();
         AIs = new HashMap<MapEntity, AI>();
-        mg.path_init();
 
-        sc = new Score();
 
-        p1 = new Player();
+        localPlayer = pm.getMainProfile();
 
         time = new GameTimer();
 
-        time.start();
-        initDiamondBlocks();
-        initPlayers();
-        initIA();
+        mg.path_init();
+
+        start();
     }
 
     public void initDiamondBlocks()
@@ -99,7 +108,7 @@ public class Game {
                     m.place(a, initX, initY);
                     AI ai = new AI();
                     ai.setControlledObject(a);
-                    ai.setTarget(p1.getControlledObject());
+                    ai.setTarget(localPlayer.getControlledObject());
                     ai.start();
 
                     AIs.put(a, ai);
@@ -123,12 +132,20 @@ public class Game {
                 loop = false;
                 Penguin p = new Penguin(initX, initY);
                 m.place(p, initX, initY);
-                p1.setControlledObject(p);
-                p1.start();
+                localPlayer.setControlledObject(p);
+                localPlayer.start();
 
-                players.put(p, p1);
+                players.put(p, localPlayer);
             }
         }while(loop);
+    }
+
+    public void start()
+    {
+        time.start();
+        initDiamondBlocks();
+        initPlayers();
+        initIA();
     }
 
     public void gameOver()
@@ -159,7 +176,7 @@ public class Game {
     public void victory()
     {
         //a ajouter: déréférencement dans les objets.
-        sc.setPoints("GameEnd", time.getTime());
+        pm.getMainProfile().getScore().setPoints("GameEnded", time.getTime());
         time.stopTimer();
         AIs.clear();
         players.clear();
@@ -182,11 +199,12 @@ public class Game {
         //==> init(2);
     }
 
-    public void animalKilled(Animal a)
+    public void animalKilled(Animal a, MapObject killer)
     {
-        sc.setPoints("AnimalKilled", 0);
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
+
+        pm.getMainProfile().getScore().setPoints("AnimalKilled", 0);
         System.out.println("Animal Tué");
         //test nombre animaux
         respawnAnimal(owner);
@@ -299,11 +317,13 @@ public class Game {
         }
     }
 
-    public void penguinKilled(Penguin p)
+    public void penguinKilled(Penguin p, MapObject Killer)
     {
         System.out.println("Pingouin tué");
         Player owner = players.get(p);
         owner.setControlledObject(null);
+
+
         owner.removeLive();
         players.remove(p, owner);
     }
@@ -389,8 +409,4 @@ public class Game {
 
     public HashMap<MapEntity, Player> getPlayers() {return this.players;}
 
-    public Score getScore()
-    {
-        return this.sc;
-    }
 }

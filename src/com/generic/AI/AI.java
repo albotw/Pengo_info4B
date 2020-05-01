@@ -9,6 +9,10 @@ import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
+/**
+ * TODO: Implémenter pattern Strategy
+ */
+
 public class AI extends Thread{
 
     private MapObject target;
@@ -105,6 +109,8 @@ public class AI extends Thread{
          * pour chaque case potentielle on va calculer sa distance vectorielle avec la cible
          * on prend la case avec la plus petite valeur et on appelle la méthode du mouvement associé.
          * pour éviter tout état indécisif, on fait un tirage aléatoire pour débloquer le système.
+         *
+         * TODO: rendre le système plus fonctionnel en évitant les allers retours
          */
         int x = controlledObject.getX();
         int y = controlledObject.getY();

@@ -28,10 +28,10 @@ public class Animal extends MapEntity {
         return this.isStun;
     }
 
-    public void destroy()
+    public void destroy(MapObject source)
     {
         Game.instance.getMap().release(x, y);
-        Game.instance.animalKilled(this);
+        Game.instance.animalKilled(this, source);
     }
 
     public void goLeft()
@@ -40,7 +40,7 @@ public class Animal extends MapEntity {
             if (m.getAt(x - 1, y) != null)
             {
                 if (m.getAt(x - 1, y).getType().equals("Penguin")) {
-                    m.getAt(x - 1, y).destroy();
+                    m.getAt(x - 1, y).destroy(this);
                 }
 
                 // A voir en fonction de l'appel a action ou pas
@@ -59,7 +59,7 @@ public class Animal extends MapEntity {
             if (m.getAt(x + 1, y) != null)
             {
                 if (m.getAt(x + 1, y).getType().equals("Penguin")) {
-                    m.getAt(x + 1, y).destroy();
+                    m.getAt(x + 1, y).destroy(this);
                 }
 
                 // A voir en fonction de l'appel a action ou pas
@@ -78,7 +78,7 @@ public class Animal extends MapEntity {
             if (m.getAt(x, y - 1) != null)
             {
                 if (m.getAt(x, y - 1).getType().equals("Penguin")) {
-                    m.getAt(x, y - 1).destroy();
+                    m.getAt(x, y - 1).destroy(this);
                 }
 
                 // A voir en fonction de l'appel a action ou pas
@@ -97,7 +97,7 @@ public class Animal extends MapEntity {
             if (m.getAt(x, y + 1) != null)
             {
                 if (m.getAt(x, y + 1).getType().equals("Penguin")) {
-                    m.getAt(x, y + 1).destroy();
+                    m.getAt(x, y + 1).destroy(this);
                 }
 
                 // A voir en fonction de l'appel a action ou pas

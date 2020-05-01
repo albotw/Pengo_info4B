@@ -1,8 +1,7 @@
 package com.generic.UI;
 
 import com.generic.gameplay.Game;
-import com.generic.launcher.Launcher;
-import com.generic.player.PlayerContainer;
+import com.generic.player.Player;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
@@ -13,6 +12,7 @@ import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.OVERLAY_WIDTH;
 
 public class GameOverlay extends JPanel{
+
     private Game g = Game.instance;
     private ArrayList<PlayerPanel> panels;
 
@@ -23,12 +23,14 @@ public class GameOverlay extends JPanel{
         w.add(this, BorderLayout.EAST);
         setLayout(new GridLayout(4, 0));
         panels = new ArrayList<PlayerPanel>();
-        for(PlayerContainer pc : PlayerManager.instance.getPlayersProfiles())
+        if (PlayerManager.instance != null)
         {
-            System.out.println(pc.getPseudo().toString());
-            PlayerPanel pp = new PlayerPanel(pc);
-            add(pp);
-            panels.add(pp);
+            for(Player p : PlayerManager.instance.getPlayers())
+            {
+                PlayerPanel pp = new PlayerPanel(p);
+                add(pp);
+                panels.add(pp);
+            }
         }
     }
 
@@ -36,10 +38,8 @@ public class GameOverlay extends JPanel{
     {
         for(PlayerPanel pp : panels)
         {
-            if (g.getScore() != null)
-            {
-                pp.updateScore(g.getScore().getPoints());
-            }
+            pp.updateScore();
+            pp.updateVies();
         }
     }
 }

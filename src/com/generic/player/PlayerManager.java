@@ -1,84 +1,62 @@
 package com.generic.player;
-
-import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
+
+/**
+ * TODO: Chargement automatique des précédents profils via fichier (sérialisé ou StreamTokenizer
+ * TODO: lien Player -> Score -> PlayerContainer
+ * TODO: Pattern singleton ?
+ */
 
 public class PlayerManager {
     public static PlayerManager instance;
-    private CopyOnWriteArrayList<PlayerContainer> playerProfiles;
-    private int mainProfile = -1;
+    private CopyOnWriteArrayList<Player> playerProfiles;
+    private Player mainProfile;
 
     public PlayerManager()
     {
         instance = this;
-        playerProfiles = new CopyOnWriteArrayList<PlayerContainer>();
+        playerProfiles = new CopyOnWriteArrayList<Player>();
+        playerProfiles.add(new Player("Yann"));
+        setMainProfile("Yann");
     }
 
     public void addPlayer(String pseudo)
     {
-        PlayerContainer pc = new PlayerContainer(pseudo);
-        playerProfiles.add(pc);
+        Player p = new Player(pseudo);
+        playerProfiles.add(p);
     }
 
-    public CopyOnWriteArrayList<PlayerContainer> getPlayersProfiles()
+    public CopyOnWriteArrayList<Player> getPlayers()
     {
         return this.playerProfiles;
     }
 
-    public ArrayList<Player> getPlayers()
-    {
-        ArrayList<Player> output = new ArrayList<Player>();
-        for (PlayerContainer pc : playerProfiles)
-        {
-            output.add(pc.getPlayer());
-        }
-
-        return output;
-    }
 
     public void removePlayer(String pseudo)
     {
-        for (PlayerContainer pc : playerProfiles)
-        {
-            if (pc.getPseudo().equals(pseudo))
-                playerProfiles.remove(pc);
-        }
+        playerProfiles.removeIf(p -> p.getPseudo().equals(pseudo));
     }
 
     public void setMainProfile(String pseudo)
     {
-        int i = 0;
-        for (PlayerContainer pc : playerProfiles)
+        for (Player p : playerProfiles)
         {
-            if (pc.getPseudo().equals(pseudo))
-                mainProfile = i;
-            else
-                i++;
+            if (p.getPseudo().equals(pseudo))
+            {
+                mainProfile = p;
+            }
         }
 
-        System.out.println("Main profile set to " + mainProfile + " | " + playerProfiles.get(mainProfile).getPseudo());
+        System.out.println("Main profile set to " + mainProfile + " | " + mainProfile.getPseudo());
     }
 
-    public PlayerContainer getMainProfile()
+    public Player getMainProfile()
     {
-        if (mainProfile != -1)
-        {
-            return playerProfiles.get(mainProfile);
-        }
-        else
-        {
-            return null;
-        }
+        return this.mainProfile;
     }
 
     public boolean isMainProfileChosen()
     {
-        if (mainProfile != -1) {
-            if (playerProfiles.get(mainProfile) != null) {
-                return true;
-            }
-            else return false;
-        }
-        else return false;
+        return mainProfile != null;
     }
 }

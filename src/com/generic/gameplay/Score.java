@@ -4,6 +4,13 @@ import com.generic.core.Animal;
 
 import java.io.IOException;
 
+/**
+ * TODO: gestion des scores indépendante pour chaque joueur
+ * TODO: Envoi des scores
+ * TODO: gestion des scores
+ * TODO: Leaderboard
+ */
+
 public class Score {
 
     private int points = 0;

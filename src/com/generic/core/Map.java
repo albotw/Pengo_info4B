@@ -1,7 +1,8 @@
 package com.generic.core;
 
 public class Map {
-    //pattern singleton utilisé.
+    //SINGLETON OK
+
     //faire en sorte de "sémaphoriser" la classe.
     public static Map instance = null;
     private MapObject tab[][];
@@ -11,7 +12,7 @@ public class Map {
     private Map(int width, int height)
     {
         this.tab = new MapObject[width][height];
-        this.instance = this;
+        instance = this;
         this.width = width;
         this.height = height;
     }

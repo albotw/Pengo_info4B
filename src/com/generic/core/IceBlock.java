@@ -10,7 +10,7 @@ public class IceBlock extends MapBlock {
         this.type = "IceBlock";
     }
 
-    public void destroy()
+    public void destroy(MapObject killer)
     {
         Game.instance.getMap().release(x, y);
     }

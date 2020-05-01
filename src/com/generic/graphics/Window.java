@@ -1,13 +1,5 @@
 /**
- * Nom de la classe: RenderThread
- *
- * Description: thread responsable de l'affichage et de la gestion de sprites dans un JPanel
- *
- * Version: 1.0
- *
- * Date: 08/03/2020
- *
- * Auteur: Yann
+ * TODO: rendre l'utilisation indépendante de l'overlay pour permettre une utilisation avec Launcher
  */
 
 package com.generic.graphics;

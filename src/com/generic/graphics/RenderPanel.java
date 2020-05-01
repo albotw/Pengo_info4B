@@ -5,7 +5,7 @@ import java.awt.*;
 
 import static com.generic.gameplay.CONFIG.*;
 
-public class RenderPanel extends JPanel {
+public class RenderPanel extends JPanel implements Runnable{
 
     private SpriteManager sm = SpriteManager.instance;
 
@@ -30,6 +30,16 @@ public class RenderPanel extends JPanel {
         {
             Sprite sp = sm.getSprite(i, "foreground");
             if (sp != null) g2d.drawImage(sp.getTexture(), sp.getX(), sp.getY(), this);
+        }
+
+        System.out.println("repainted");
+    }
+
+    public void run()
+    {
+        while(true)
+        {
+            this.repaint();
         }
     }
 

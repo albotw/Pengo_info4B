@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class LauncherUI extends JPanel {
-    private Launcher manager = Launcher.instance;
+    private Launcher manager;
 
     private JButton SoloMode;
     private JButton SoloSettings;
@@ -23,6 +23,8 @@ public class LauncherUI extends JPanel {
         super();
         setLayout(null);
 
+        manager = Launcher.instance;
+        System.out.println(manager.toString());
         SoloMode = new JButton("Mode Solo");
         SoloSettings = new JButton("Réglages (Solo)");
         MultiMode = new JButton("Mode Réseau");

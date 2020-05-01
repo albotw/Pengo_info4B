@@ -26,12 +26,15 @@ public class RenderThread extends Thread {
     private FPSCounter fps;
     private Window w;
     private RenderPanel rp;
-
+    private Thread rpThread;
 
     public RenderThread(Window output)
     {
         fps = new FPSCounter();
         rp = new RenderPanel();
+
+        rpThread = new Thread(rp);
+
         output.add(rp, BorderLayout.CENTER);
 
         continueDrawing = true;
@@ -48,11 +51,13 @@ public class RenderThread extends Thread {
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
             rp.repaint();
+            System.out.println("post repaint");
             w.getGameOverlay().updateValues();
+
 
             try
             {
-                this.sleep(16);
+                sleep(16);
             }
             catch (InterruptedException e)
             {

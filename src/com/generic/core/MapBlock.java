@@ -15,7 +15,7 @@ public abstract class MapBlock extends MapObject{
         }catch(Exception e ){e.printStackTrace(); }
     }
 
-    public void onMoveTriggered(char direction)
+    public void onMoveTriggered(char direction, MapEntity source)
     {
         tick_wait();
         switch (direction)
@@ -27,14 +27,14 @@ public abstract class MapBlock extends MapObject{
                     {
                         if (m.getAt(x, y - 1).getType().equals("Animal"))
                         {
-                            m.getAt(x, y - 1).destroy();
-                            onMoveTriggered(direction);
+                            m.getAt(x, y - 1).destroy(source);
+                            onMoveTriggered(direction, source);
                         }
                     }
                     else
                     {
                         goUp();
-                        onMoveTriggered(direction);
+                        onMoveTriggered(direction, source);
                     }
                 }
                 break;
@@ -45,14 +45,14 @@ public abstract class MapBlock extends MapObject{
                     {
                         if (m.getAt(x, y + 1).getType().equals("Animal"))
                         {
-                            m.getAt(x, y + 1).destroy();
-                            onMoveTriggered(direction);
+                            m.getAt(x, y + 1).destroy(source);
+                            onMoveTriggered(direction, source);
                         }
                     }
                     else
                     {
                         goDown();
-                        onMoveTriggered(direction);
+                        onMoveTriggered(direction, source);
                     }
                 }
                 break;
@@ -64,14 +64,14 @@ public abstract class MapBlock extends MapObject{
                     {
                         if(m.getAt(x - 1, y).getType().equals("Animal"))
                         {
-                            m.getAt(x - 1, y).destroy();
-                            onMoveTriggered(direction);
+                            m.getAt(x - 1, y).destroy(source);
+                            onMoveTriggered(direction, source);
                         }
                     }
                     else
                     {
                         goLeft();
-                        onMoveTriggered(direction);
+                        onMoveTriggered(direction, source);
                     }
                 }
                 break;
@@ -83,14 +83,14 @@ public abstract class MapBlock extends MapObject{
                     if(m.getAt(x + 1, y) != null) {
                         if (m.getAt(x + 1, y).getType().equals("Animal"))
                         {
-                            m.getAt(x + 1, y).destroy();
-                            onMoveTriggered(direction);
+                            m.getAt(x + 1, y).destroy(source);
+                            onMoveTriggered(direction, source);
                         }
                     }
                     else
                     {
                         goRight();
-                        onMoveTriggered(direction);
+                        onMoveTriggered(direction, source);
                     }
                 }
                 break;

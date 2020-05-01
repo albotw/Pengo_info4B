@@ -17,7 +17,7 @@ public abstract class MapObject implements Movement{
         this.m = Game.instance.getMap();
     }
 
-    abstract void destroy();
+    abstract void destroy(MapObject killer);
 
     public void goLeft()
     {
