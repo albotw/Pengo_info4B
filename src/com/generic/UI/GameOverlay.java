@@ -8,40 +8,58 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.OVERLAY_WIDTH;
+import static com.generic.gameplay.CONFIG.*;
 
 public class GameOverlay extends JPanel{
 
     private Game g = Game.instance;
-    private ArrayList<PlayerPanel> panels;
 
-    public GameOverlay(Window w)
+    private JLabel points;
+    private JLabel hiscore;
+    private JLabel lives;
+    private JLabel remainingEnemies;
+
+    private Player localPlayer = g.getLocalPlayer();
+
+    public GameOverlay()
     {
         super();
-        setSize(OVERLAY_WIDTH, GRID_HEIGHT);
-        w.add(this, BorderLayout.EAST);
-        setLayout(new GridLayout(4, 0));
-        panels = new ArrayList<PlayerPanel>();
-        if (PlayerManager.instance != null)
-        {
-            for(Player p : PlayerManager.instance.getPlayers())
-            {
-                PlayerPanel pp = new PlayerPanel(p);
-                add(pp);
-                panels.add(pp);
-            }
-        }
+        setLayout(new GridLayout(2,1));
+
+        JLabel OnePlayer = new JLabel("1P | "+ localPlayer.getPseudo());
+
+        points = new JLabel("Score | 0");
+        lives = new JLabel("Vies | " + localPlayer.getRemainigLives());
+        remainingEnemies = new JLabel("Restants | " + g.getAIlives());
+        hiscore = new JLabel("HI | 20000");
+
+        JPanel top = new JPanel();
+        top.setLayout(new GridLayout(1, 3));
+        top.add(OnePlayer);
+        top.add(points);
+        top.add(hiscore);
+
+        JPanel bottom = new JPanel();
+        bottom.setLayout(new GridLayout(1, 2));
+        bottom.add(lives);
+        bottom.add(remainingEnemies);
+
+
+        add(top);
+        add(bottom);
+
+        setBackground(Color.BLACK);
     }
 
-    public void updateValues()
+    public void update()
     {
-        for(PlayerPanel pp : panels)
-        {
-            pp.updateScore();
-            pp.updateVies();
-        }
+
     }
 }
+
+/**
+ * w.add(this);
+ *
+ */
 
 

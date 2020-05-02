@@ -5,14 +5,13 @@ import java.awt.*;
 
 import static com.generic.gameplay.CONFIG.*;
 
-public class RenderPanel extends JPanel implements Runnable{
+public class RenderPanel extends JPanel{
 
     private SpriteManager sm = SpriteManager.instance;
 
     public RenderPanel()
     {
         super();
-        this.setSize(RP_WIDTH, GRID_HEIGHT);
         this.setBackground(BG_DEFAULT_COLOR);
     }
 
@@ -32,7 +31,7 @@ public class RenderPanel extends JPanel implements Runnable{
             if (sp != null) g2d.drawImage(sp.getTexture(), sp.getX(), sp.getY(), this);
         }
 
-        System.out.println("repainted");
+        //System.out.println("repainted");
     }
 
     public void run()

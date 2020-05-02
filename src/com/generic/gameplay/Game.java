@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG_GAME.AI_INIT_LIVES;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
@@ -40,16 +41,13 @@ public class Game {
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
 
+    private int AIlives = AI_INIT_LIVES;
 
     public Game()
     {
         instance = this;
 
-        w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
-        sm = SpriteManager.createSpriteManager();
-        System.out.println(sm.toString());
-        renderer = new RenderThread(w);
-        renderer.start();
+
 
         m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
         mg = new MapGenerator();
@@ -59,8 +57,14 @@ public class Game {
 
 
         localPlayer = pm.getMainProfile();
+        //localPlayer = new Player("Yann");
 
         time = new GameTimer();
+
+        w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
+        sm = SpriteManager.createSpriteManager();
+        renderer = new RenderThread(w);
+        renderer.start();
 
         mg.path_init();
 
@@ -409,4 +413,7 @@ public class Game {
 
     public HashMap<MapEntity, Player> getPlayers() {return this.players;}
 
+    public Player getLocalPlayer() {return this.localPlayer;}
+
+    public int getAIlives(){ return this.AIlives;}
 }

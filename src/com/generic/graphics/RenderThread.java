@@ -12,11 +12,11 @@
 
 package com.generic.graphics;
 
+import com.generic.UI.GameOverlay;
 import com.generic.gameplay.Game;
 
 import java.awt.*;
 
-import static com.generic.gameplay.CONFIG.RP_WIDTH;
 import static com.generic.gameplay.CONFIG.WINDOW_TITLE;
 
 public class RenderThread extends Thread {
@@ -26,16 +26,16 @@ public class RenderThread extends Thread {
     private FPSCounter fps;
     private Window w;
     private RenderPanel rp;
-    private Thread rpThread;
 
+    private GameOverlay go;
     public RenderThread(Window output)
     {
         fps = new FPSCounter();
         rp = new RenderPanel();
-
-        rpThread = new Thread(rp);
-
+        go = new GameOverlay();
+        output.setLayout(new BorderLayout());
         output.add(rp, BorderLayout.CENTER);
+        output.add(go, BorderLayout.NORTH);
 
         continueDrawing = true;
 
@@ -51,9 +51,7 @@ public class RenderThread extends Thread {
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
             rp.repaint();
-            System.out.println("post repaint");
-            w.getGameOverlay().updateValues();
-
+            go.repaint();
 
             try
             {
