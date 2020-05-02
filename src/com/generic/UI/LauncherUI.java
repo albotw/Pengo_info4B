@@ -80,7 +80,7 @@ public class LauncherUI extends JPanel {
 
         Quit.setBounds(145, 305, 290, 30);
 
-        JLabel copyright = new JLabel("(c) Sega 1992 | (c) Yann Trou, Wassim Djellat, 2020");
+        JLabel copyright = new JLabel("(c) Sega 1982 | (c) Yann Trou, Wassim Djellat, 2020");
         copyright.setBounds(5, 335, 300, 30);
 
         add(Pengo);

@@ -186,6 +186,10 @@ public class AI extends Thread{
             boolean loop = true;
             do
             {
+                if (controlledObject == null)
+                {
+                    loop = false;
+                }
                 int d_rand = RandomizedInt(0, 3);
 
                 if (d_up != INFINI && d_rand == 0 && bannedDir != 'H')
