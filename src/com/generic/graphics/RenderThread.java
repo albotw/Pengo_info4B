@@ -51,6 +51,7 @@ public class RenderThread extends Thread {
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
             rp.repaint();
+            go.update();
             go.repaint();
 
             try

@@ -9,101 +9,62 @@ import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
-/**
- * TODO: Implémenter pattern Strategy
- */
-
-public class AI extends Thread{
-
+public class GenericStrategy implements Strategy{
     private MapObject target;
-    private MapObject controlledObject;
-
-    private boolean stunActive;     //a déplacer dans la classe de controle spé animal
-    private int stunTimer;          //a déplacer dans la classe de controle spé animal (temps de stun, var locale basée sur la constante de CONFIG
-
+    private AI bot;
+    private MapObject co;
     private char bannedDir;
 
-    public AI()
+    public GenericStrategy(AI bot)
     {
-
+        this.co = bot.getControlledObject();
+        this.bot = bot;
     }
 
-    public void run()
-    {
-        while(true)
-        {
-            process();
-
-            try
-            {
-                sleep(AI_TICK_RATE);
-            }catch(Exception e) { e.printStackTrace(); }
-        }
-    }
     public void process()
     {
-        if (controlledObject != null)   //si l'animal n'a pas été tué
+        if (target == null)
         {
-            checkStun();
-            MoveToTarget();
+            target = acquireTarget();
         }
-        else
-        {
-            bannedDir = 'R';
-            System.out.println("reset bannedDir");
-        }
+        MoveToTarget();
+        System.out.println("process");
     }
 
-    public void checkStun()
+    public MapObject acquireTarget()
     {
-        if (controlledObject.getType().equals("Animal"))
-        {
-            Animal a = (Animal)(controlledObject);
-            if (stunActive == false && a.isStun())
+        int x = 0;
+        int y = 0;
+        MapObject output = null;
+        boolean loop = true;
+        do {
+            MapObject tmp = Game.instance.getMap().getAt(x, y);
+            if (tmp != null)
             {
-                stunActive = true;
-                stunTimer = STUN_TIME;
-                System.out.println("Stun Actif " + stunTimer + " ms restant");
+                if (tmp.getType().equals("Penguin"))
+                {
+                    output = tmp;
+                    loop = false;
+                }
             }
-
-            if (stunActive == true)
+            else
             {
-                stunTimer -= AI_TICK_RATE;
-                System.out.println("Stun Actif " + stunTimer + " ms restant");
+                if (x != GRID_WIDTH) x++;
+                else
+                {
+                    x = 0;
+                    y++;
+                }
             }
-
-            if (stunTimer == 0)
-            {
-                stunActive = false;
-                a.deactivateStun();
-            }
-        }
-    }
-
-    public boolean isNextToTarget()         //a généraliser et déplacer dans les classes de controle spécifiques
-    {
-        Map m = Game.instance.getMap();
-        int posX = controlledObject.getX();
-        int posY = controlledObject.getY();
-
-        boolean output = false;
-        if (m.getAt(posX + 1, posY) != null)
-            if (m.getAt(posX + 1, posY).getType().equals("Penguin"))
-                output = true;
-
-        if (m.getAt(posX - 1, posY) != null)
-            if (m.getAt(posX - 1, posY).getType().equals("Penguin"))
-                output = true;
-
-        if (m.getAt(posX, posY + 1) != null)
-            if (m.getAt(posX, posY + 1).getType().equals("Penguin"))
-                output = true;
-
-        if (m.getAt(posX, posY - 1) != null)
-            if (m.getAt(posX, posY - 1).getType().equals("Penguin"))
-                output = true;
+        }while(y != GRID_HEIGHT && loop);
 
         return output;
+    }
+
+    public void updateCo(MapObject co)
+    {
+        bannedDir = '\0';
+        this.co = co;
     }
 
     public void MoveToTarget()
@@ -119,8 +80,8 @@ public class AI extends Thread{
          *
          * TODO: rendre le système plus fonctionnel en évitant les allers retours
          */
-        int x = controlledObject.getX();
-        int y = controlledObject.getY();
+        int x = co.getX();
+        int y = co.getY();
 
         Map m = Game.instance.getMap();
 
@@ -162,90 +123,74 @@ public class AI extends Thread{
         //on prend la plus petite valeur et on se déplace sur la case
         if (d_up < d_down && d_up < d_left && d_up < d_right && bannedDir != 'H')
         {
-            //System.out.println("Décide d'aller en haut");
-            controlledObject.goUp();
+            System.out.println("Décide d'aller en haut");
+            co.goUp();
             bannedDir = 'B';
         }
         else if (d_down < d_up && d_down < d_left && d_down < d_right && bannedDir != 'B')
         {
-            //System.out.println("Décide d'aller en bas");
-            controlledObject.goDown();
+            System.out.println("Décide d'aller en bas");
+            co.goDown();
             bannedDir = 'H';
         }
         else if (d_left < d_up && d_left < d_right && d_left < d_down && bannedDir != 'G')
         {
-            //System.out.println("Décide d'aller a gauche");
-            controlledObject.goLeft();
+            System.out.println("Décide d'aller a gauche");
+            co.goLeft();
             bannedDir = 'D';
         }
         else if (d_right < d_up && d_right < d_down && d_right < d_left && bannedDir != 'D')
         {
-            //System.out.println("Décide d'aller a droite");
-            controlledObject.goRight();
+            System.out.println("Décide d'aller a droite");
+            co.goRight();
             bannedDir = 'G';
         }
         else
         {
-            //System.out.println("état indécisif");
+            System.out.println("état indécisif");
 
             boolean loop = true;
             do
             {
+                if (co == null)
+                {
+                    loop = false;
+                }
                 int d_rand = RandomizedInt(0, 3);
 
                 if (d_up != INFINI && d_rand == 0 && bannedDir != 'H')
                 {
-                    controlledObject.goUp();
+                    co.goUp();
                     loop = false;
                     bannedDir = 'B';
-                    //System.out.println("Après tirage décide d'aller en haut");
+                    System.out.println("Après tirage décide d'aller en haut");
                 }
                 else if (d_down != INFINI && d_rand == 1 && bannedDir != 'B')
                 {
-                    controlledObject.goDown();
+                    co.goDown();
                     loop = false;
                     bannedDir = 'H';
-                    //System.out.println("Après tirage décide d'aller en bas");
+                    System.out.println("Après tirage décide d'aller en bas");
                 }
                 else if (d_left != INFINI && d_rand == 2 && bannedDir != 'G')
                 {
-                    controlledObject.goLeft();
+                    co.goLeft();
                     loop = false;
                     bannedDir = 'D';
-                    //System.out.println("Après tirage décide d'aller à gauche");
+                    System.out.println("Après tirage décide d'aller à gauche");
                 }
                 else if (d_right != INFINI && d_rand == 3 && bannedDir != 'D')
                 {
-                    controlledObject.goRight();
+                    co.goRight();
                     loop = false;
                     bannedDir = 'G';
-                    //System.out.println("Après tirage décide d'aller a droite");
+                    System.out.println("Après tirage décide d'aller a droite");
                 }
                 else
                 {
-                    //System.out.println("Tirage invalide");
+                    System.out.println("Tirage invalide");
                 }
             }while(loop);
         }
     }
-
-    public MapObject getTarget() {
-        return target;
-    }
-
-    public void setTarget(MapObject target) {
-        this.target = target;
-    }
-
-    public MapObject getControlledObject() {
-        return controlledObject;
-    }
-
-    public void setControlledObject(MapObject controlledObject) {
-        System.out.println("reset bannedDir");
-        bannedDir = '\0';
-        this.controlledObject = controlledObject;
-    }
 }
-
-
