@@ -50,6 +50,22 @@ public class PlayerManager {
         System.out.println("Main profile set to " + mainProfile + " | " + mainProfile.getPseudo());
     }
 
+    public int getNBPlayers()
+    {
+        return this.playerProfiles.size();
+    }
+    public Player getPlayer(int i)
+    {
+        if (i >= 0 && i < playerProfiles.size())
+        {
+            return playerProfiles.get(i);
+        }
+        else
+        {
+            return null;
+        }
+    }
+
     public Player getMainProfile()
     {
         return this.mainProfile;
