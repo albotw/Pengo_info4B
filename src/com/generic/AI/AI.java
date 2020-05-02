@@ -157,31 +157,31 @@ public class AI extends Thread{
         //on prend la plus petite valeur et on se déplace sur la case
         if (d_up < d_down && d_up < d_left && d_up < d_right && bannedDir != 'H')
         {
-            //System.out.println("Décide d'aller en haut");
+            System.out.println("Décide d'aller en haut");
             controlledObject.goUp();
             bannedDir = 'B';
         }
         else if (d_down < d_up && d_down < d_left && d_down < d_right && bannedDir != 'B')
         {
-            //System.out.println("Décide d'aller en bas");
+            System.out.println("Décide d'aller en bas");
             controlledObject.goDown();
             bannedDir = 'H';
         }
         else if (d_left < d_up && d_left < d_right && d_left < d_down && bannedDir != 'G')
         {
-            //System.out.println("Décide d'aller a gauche");
+            System.out.println("Décide d'aller a gauche");
             controlledObject.goLeft();
             bannedDir = 'D';
         }
         else if (d_right < d_up && d_right < d_down && d_right < d_left && bannedDir != 'D')
         {
-            //System.out.println("Décide d'aller a droite");
+            System.out.println("Décide d'aller a droite");
             controlledObject.goRight();
             bannedDir = 'G';
         }
         else
         {
-            //System.out.println("état indécisif");
+            System.out.println("état indécisif");
 
             boolean loop = true;
             do
@@ -193,32 +193,32 @@ public class AI extends Thread{
                     controlledObject.goUp();
                     loop = false;
                     bannedDir = 'B';
-                    //System.out.println("Après tirage décide d'aller en haut");
+                    System.out.println("Après tirage décide d'aller en haut");
                 }
                 else if (d_down != INFINI && d_rand == 1 && bannedDir != 'B')
                 {
                     controlledObject.goDown();
                     loop = false;
                     bannedDir = 'H';
-                    //System.out.println("Après tirage décide d'aller en bas");
+                    System.out.println("Après tirage décide d'aller en bas");
                 }
                 else if (d_left != INFINI && d_rand == 2 && bannedDir != 'G')
                 {
                     controlledObject.goLeft();
                     loop = false;
                     bannedDir = 'D';
-                    //System.out.println("Après tirage décide d'aller à gauche");
+                    System.out.println("Après tirage décide d'aller à gauche");
                 }
                 else if (d_right != INFINI && d_rand == 3 && bannedDir != 'D')
                 {
                     controlledObject.goRight();
                     loop = false;
                     bannedDir = 'G';
-                    //System.out.println("Après tirage décide d'aller a droite");
+                    System.out.println("Après tirage décide d'aller a droite");
                 }
                 else
                 {
-                    //System.out.println("Tirage invalide");
+                    System.out.println("Tirage invalide");
                 }
             }while(loop);
         }
@@ -237,6 +237,8 @@ public class AI extends Thread{
     }
 
     public void setControlledObject(MapObject controlledObject) {
+        System.out.println("reset bannedDir");
+        bannedDir = '\0';
         this.controlledObject = controlledObject;
     }
 }
