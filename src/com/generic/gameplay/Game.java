@@ -41,7 +41,7 @@ public class Game {
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
 
-    private int AIlives = AI_INIT_LIVES;
+    private int AIlives = 3;
 
     public Game()
     {
@@ -203,22 +203,27 @@ public class Game {
         //==> init(2);
     }
 
-    public void animalKilled(Animal a, MapObject killer)
-    {
+    public void animalKilled(Animal a, MapObject killer) {
+
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
 
         pm.getMainProfile().getScore().setPoints("AnimalKilled", 0);
         System.out.println("Animal Tué");
+        AIlives = AIlives - 1;
+        if (AIlives == 0) {
+            victory();
+        }
+        else{
+            respawnAnimal(owner);
+        }
         //test nombre animaux
-        respawnAnimal(owner);
-
+    }
 
         //methode appellee quand un animal meurt.
         //verifie qu'il reste des animaux
         //si c'est le cas ==> respawnAnimal()
         //sinon ==> victory()
-    }
 
     public void checkDiamondBlocks()
     {
