@@ -50,10 +50,9 @@ public class Leaderboard {
                 tab[i+1]=p.getScore().getPlayer[i];
             }
 
-        }
+        }*/
 
     }
-     */
-}
+
 
 
