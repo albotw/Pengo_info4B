@@ -3,13 +3,15 @@ package com.generic.net;
 import java.io.Serializable;
 
 public class Command implements Serializable {
-    String c;
-    String param;
+    String c;           //valeur de la commande
+    String param;       //set de paramètres
+    String source;      //string
 
-    public Command(String c, String param)
+    public Command(String c, String param, String source)
     {
         this.c = c;
         this.param = param;
+        this.source = source;
     }
 
     @Override

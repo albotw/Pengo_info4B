@@ -3,7 +3,6 @@ package com.generic.player;
 import com.generic.core.MapEntity;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
-import com.generic.gameplay.Score;
 
 import static com.generic.gameplay.CONFIG_GAME.PLAYER_INIT_LIVES;
 
@@ -17,14 +16,14 @@ public class Player extends Thread
     private MapObject controlledObject;
     private int currentLives;
     private InputHandler ih;
-    private Score s;
     private String pseudo;
     private boolean canMove;
+    private int points;
 
     public Player(String pseudo)
     {
         this.pseudo = pseudo;
-        this.s = new Score();
+        this.points = 0;
         currentLives = PLAYER_INIT_LIVES;
     }
 
@@ -69,6 +68,39 @@ public class Player extends Thread
         }
     }
 
+    public void setPoints(String context, int time){
+        switch (context)
+        {
+            case "AnimalKilled":
+                points = points + 400;
+                break;
+
+            case "GameEnd":
+                if(time <= 20){
+                    points = points + 5000;
+                }
+                if(time > 20 && time <= 29){
+                    points = points + 2000;
+                }
+                if(time > 29 && time <= 39){
+                    points = points + 1000;
+                }
+                if(time > 39 && time <= 60){
+                    points = points + 500;
+                }
+                else
+                    points = points + 150;
+
+                break;
+
+        }
+        System.out.println("Points = " + points);
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
     public MapObject getControlledObject()
     {
         return this.controlledObject;
@@ -80,8 +112,6 @@ public class Player extends Thread
     {
         return this.pseudo;
     }
-
-    public Score getScore() {return this.s;}
 
     public int getRemainigLives(){ return this.currentLives;}
 }

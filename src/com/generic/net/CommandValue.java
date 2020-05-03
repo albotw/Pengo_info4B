@@ -1,15 +1,13 @@
 package com.generic.net;
 
 public enum CommandValue {
-    PUSH_SCORE("GET SCORE", "", "SERVER"),
-    PULL_SCORE("SET SCORE", "", "SERVER");
+    ACTION("ACTION"),
+    PUSH_SCORE("GET SCORE"),
+    PULL_SCORE("SET SCORE");
 
     private String value = "";
-    private String param = "";
-    private String source = "";
-    //private String
 
-    CommandValue(String value, String param, String source)
+    CommandValue(String value)
     {
         this.value = value;
     }
@@ -17,15 +15,5 @@ public enum CommandValue {
     public String val()
     {
         return value;
-    }
-
-    public String param()
-    {
-        return param;
-    }
-
-    public String source()
-    {
-        return source;
     }
 }

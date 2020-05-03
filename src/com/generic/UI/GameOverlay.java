@@ -53,7 +53,7 @@ public class GameOverlay extends JPanel{
 
     public void update()
     {
-        points.setText("Score | " + localPlayer.getScore().getPoints());
+        points.setText("Score | " + localPlayer.getPoints());
         remainingEnemies.setText("Restants | " + g.getAIlives());
         lives.setText("Vies | " + localPlayer.getRemainigLives());
     }

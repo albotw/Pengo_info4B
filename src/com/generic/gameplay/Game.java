@@ -180,7 +180,7 @@ public class Game {
     public void victory()
     {
         //a ajouter: déréférencement dans les objets.
-        pm.getMainProfile().getScore().setPoints("GameEnded", time.getTime());
+        pm.getMainProfile().setPoints("GameEnded", time.getTime());
         time.stopTimer();
         AIs.clear();
         players.clear();
@@ -208,7 +208,7 @@ public class Game {
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
 
-        pm.getMainProfile().getScore().setPoints("AnimalKilled", 0);
+        pm.getMainProfile().setPoints("AnimalKilled", 0);
         System.out.println("Animal Tué");
         AIlives = AIlives - 1;
         if (AIlives == 0) {

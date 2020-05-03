@@ -16,7 +16,7 @@ public class Leaderboard {
 
     public void addToLeaderboard(Player p)
     {
-        ScorePair toInsert = new ScorePair(p.getPseudo(), p.getScore().getPoints());
+        ScorePair toInsert = new ScorePair(p.getPseudo(), p.getPoints());
 
         boolean added = false;
         for (int i = 0; i < ladder.size(); i++)
@@ -56,30 +56,4 @@ public class Leaderboard {
      */
 }
 
-class ScorePair
-{
-    private String pseudo;
-    private int score;
 
-    public ScorePair(String pseudo, int score)
-    {
-        this.pseudo = pseudo;
-        this.score = score;
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
-    }
-
-    public int getScore() {
-        return score;
-    }
-
-    public void setScore(int score) {
-        this.score = score;
-    }
-}
