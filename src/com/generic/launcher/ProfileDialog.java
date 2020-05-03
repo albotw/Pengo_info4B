@@ -32,7 +32,7 @@ public class ProfileDialog extends JDialog {
         addProfile = new JButton("Ajouter un profil");
         deleteProfile = new JButton("Supprimer un profil");
         profileName = new JTextField();
-        profileName.setText("Entrez le nom du profil");
+        profileName.setText("Entrez le nom du profil ici");
         selectProfile = new JButton("Séléctionner le profil");
 
         setLayout(new BorderLayout());

@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 
         Launcher l = new Launcher();
-        System.out.println("fin init launcher");
+
         //Game g = new Game();
 
     }

@@ -81,15 +81,4 @@ public class PlayerManager {
         return this.playerProfiles.size();
     }
 
-    public Player getPlayer(int i)
-    {
-        if (i >= 0 && i < playerProfiles.size())
-        {
-            return playerProfiles.get(i);
-        }
-        else
-        {
-            return null;
-        }
-    }
 }

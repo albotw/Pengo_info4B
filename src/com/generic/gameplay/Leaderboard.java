@@ -3,34 +3,40 @@ package com.generic.gameplay;
 import com.generic.player.Player;
 import com.generic.player.PlayerManager;
 
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class Leaderboard {
-    //pseudo | highscore
-    private HashMap<String, Integer> ladder;
+    //contient des paires Pseudo[string] | score[Integer]
+    private ArrayList<ScorePair> ladder;
 
     public Leaderboard()
     {
-        ladder = new HashMap<String, Integer>();
+        ladder = new ArrayList<ScorePair>();
     }
 
-    public void classement(Player j, Score s) {
-
-
-    }
-    public void afficheClassement(Player joueurs, Time temps)
+    public void addToLeaderboard(Player p)
     {
+        ScorePair toInsert = new ScorePair(p.getPseudo(), p.getScore().getPoints());
 
+        boolean added = false;
+        for (int i = 0; i < ladder.size(); i++)
+        {
+            if (ladder.get(i).getScore() <=toInsert.getScore())
+            {
+                ladder.add(i, toInsert);
+                added = true;
+            }
+        }
+
+        if (!added)
+        {
+            ladder.add(toInsert);
+        }
     }
 
-    public int getHighscore()
-    {
-        return 20000;
-    }
 
+
+    /**
     public void compareScore(Score s, PlayerManager P, Player p){
         int tab[]= new int[P.getNBPlayers()];
         for(int i = 0; i < P.getNBPlayers(); i++){
@@ -46,5 +52,34 @@ public class Leaderboard {
 
         }
 
+    }
+     */
+}
+
+class ScorePair
+{
+    private String pseudo;
+    private int score;
+
+    public ScorePair(String pseudo, int score)
+    {
+        this.pseudo = pseudo;
+        this.score = score;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public void setPseudo(String pseudo) {
+        this.pseudo = pseudo;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

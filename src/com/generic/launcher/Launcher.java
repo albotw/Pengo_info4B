@@ -25,7 +25,7 @@ public class Launcher extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setTitle("Pengo Launcher");
-        setSize(600, 400);
+        setSize(600, 450);
 
         pm = new PlayerManager();
     }
@@ -59,6 +59,11 @@ public class Launcher extends JFrame
         {
             UI.updateProfileMode(pm.getMainProfile().getPseudo());
         }
+    }
+
+    public void leaderboardSelected()
+    {
+
     }
 
     public void onGameEnded()

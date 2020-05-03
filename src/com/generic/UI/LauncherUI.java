@@ -15,6 +15,7 @@ public class LauncherUI extends JPanel {
     private JButton MultiMode;
     private JButton Profile;
     private JButton Quit;
+    private JButton leaderboard;
 
     private ImagePanel Pengo;
 
@@ -29,6 +30,7 @@ public class LauncherUI extends JPanel {
         SoloSettings = new JButton("Réglages (Solo)");
         MultiMode = new JButton("Mode Réseau");
         Profile = new JButton("Profils");
+        leaderboard = new JButton("Leaderboard");
         Quit = new JButton("Quitter");
 
         SoloMode.addActionListener(new ActionListener() {
@@ -59,6 +61,13 @@ public class LauncherUI extends JPanel {
             }
         });
 
+        leaderboard.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.leaderboardSelected();
+            }
+        });
+
         Quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -78,16 +87,19 @@ public class LauncherUI extends JPanel {
 
         Profile.setBounds(145, 265, 290, 30);
 
-        Quit.setBounds(145, 305, 290, 30);
+        leaderboard.setBounds(145, 305, 290, 30);
+
+        Quit.setBounds(145, 345, 290, 30);
 
         JLabel copyright = new JLabel("(c) Sega 1982 | (c) Yann Trou, Wassim Djellat, 2020");
-        copyright.setBounds(5, 335, 300, 30);
+        copyright.setBounds(5, 380, 300, 30);
 
         add(Pengo);
         add(SoloMode);
         add(SoloSettings);
         add(MultiMode);
         add(Profile);
+        add(leaderboard);
         add(Quit);
         add(copyright);
         repaint();
