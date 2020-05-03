@@ -1,4 +1,4 @@
-package com.generic.net;
+package com.generic.net.multiplayer;
 
 import java.io.IOException;
 import java.io.BufferedInputStream;

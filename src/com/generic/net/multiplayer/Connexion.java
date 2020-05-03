@@ -1,4 +1,6 @@
-package com.generic.net;
+package com.generic.net.multiplayer;
+
+import com.generic.net.Command;
 
 import java.io.*;
 import java.net.Socket;
@@ -37,8 +39,9 @@ public class Connexion extends Thread {
             while(true)
             {
                 Command cmd = (Command)(commandIn.readObject());
-                if (cmd.c.equals("QUIT")) break;
+                //if (cmd.c.equals("QUIT")) break;
                 //PARSING COMMANDE ICI
+                break;
             }
 
             //FIN DE CONNEXION ICI

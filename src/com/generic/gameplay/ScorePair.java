@@ -4,11 +4,13 @@ public class ScorePair {
 
         private String pseudo;
         private int score;
+        private boolean local;
 
-        public ScorePair(String pseudo, int score)
+        public ScorePair(String pseudo, int score, boolean local)
         {
             this.pseudo = pseudo;
             this.score = score;
+            this.local = local;
         }
 
         public String getPseudo() {
@@ -25,6 +27,16 @@ public class ScorePair {
 
         public void setScore(int score) {
             this.score = score;
+        }
+
+        public boolean isLocal()
+        {
+            return this.local;
+        }
+
+        public void setLocal(boolean local)
+        {
+            this.local = local;
         }
     }
 

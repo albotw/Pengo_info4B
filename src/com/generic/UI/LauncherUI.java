@@ -122,33 +122,3 @@ public class LauncherUI extends JPanel {
  * OU 145(vide) | 140(bouton) | 10(vide) | 140(bouton) | 145(vide)
  *
  */
-
-/*
-super();
-        setLayout(new BorderLayout());
-
-        SoloMode = new JButton("Mode Solo");
-        SoloSettings = new JButton("Réglages (Solo)");
-        MultiMode = new JButton("Mode Réseau");
-        Profile = new JButton("Profils");
-
-        ImageIcon pengoLogo = new ImageIcon("src/resources/Pengo-Logo.png");
-        Pengo = new ImagePanel(pengoLogo.getImage());
-
-        add(Pengo, BorderLayout.CENTER);
-
-        JPanel center = new JPanel();
-        center.setLayout(new GridLayout(3, 1));
-
-        JPanel solo = new JPanel();
-        solo.setLayout(new GridLayout(1, 2));
-
-        solo.add(SoloMode);
-        solo.add(SoloSettings);
-
-        center.add(solo);
-        center.add(MultiMode);
-        center.add(Profile);
-
-        add(center, BorderLayout.SOUTH);
- */

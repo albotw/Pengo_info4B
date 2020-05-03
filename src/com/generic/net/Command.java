@@ -14,6 +14,21 @@ public class Command implements Serializable {
         this.source = source;
     }
 
+    public String getVal()
+    {
+        return this.c;
+    }
+
+    public String getParam()
+    {
+        return this.param;
+    }
+
+    public String getSource()
+    {
+        return this.source;
+    }
+
     @Override
     public String toString() {
         return "Command{" +

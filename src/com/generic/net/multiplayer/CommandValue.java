@@ -1,4 +1,4 @@
-package com.generic.net;
+package com.generic.net.multiplayer;
 
 public enum CommandValue {
     ACTION("ACTION"),

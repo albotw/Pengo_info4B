@@ -87,6 +87,7 @@ public class ProfileDialog extends JDialog {
         refreshList();
 
         setSize(350, 300);
+        setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
@@ -96,7 +97,14 @@ public class ProfileDialog extends JDialog {
         mod.removeAllElements();
         for (Player p : pm.getPlayers())
         {
-            mod.addElement(p.getPseudo());
+            if (p == pm.getMainProfile())
+            {
+                mod.addElement(p.getPseudo() + " (Séléctionné)");
+            }
+            else
+            {
+                mod.addElement(p.getPseudo());
+            }
         }
     }
 

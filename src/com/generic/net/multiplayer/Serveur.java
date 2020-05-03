@@ -1,4 +1,4 @@
-package com.generic.net;
+package com.generic.net.multiplayer;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -9,8 +9,6 @@ import java.net.Socket;
 import java.util.Scanner;
 
 public class Serveur extends Thread{
-    private boolean isRunning = true;
-    public static ServerSocket server;
 
     public Serveur()
     {
