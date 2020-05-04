@@ -34,9 +34,12 @@ public class Animal extends MapEntity {
         Game.instance.animalKilled(this, source);
     }
 
+    /**
+     * TODO: Déplacement opti ?
+     */
     public void goLeft()
     {
-        if (isStun == false) {
+        if (!isStun) {
             if (m.getAt(x - 1, y) != null)
             {
                 if (m.getAt(x - 1, y).getType().equals("Penguin")) {
@@ -54,7 +57,7 @@ public class Animal extends MapEntity {
 
     public void goRight()
     {
-        if (isStun == false) {
+        if (!isStun) {
 
             if (m.getAt(x + 1, y) != null)
             {
@@ -73,7 +76,7 @@ public class Animal extends MapEntity {
 
     public void goUp()
     {
-        if (isStun == false) {
+        if (!isStun) {
 
             if (m.getAt(x, y - 1) != null)
             {
@@ -92,7 +95,7 @@ public class Animal extends MapEntity {
 
     public void goDown()
     {
-        if (isStun == false) {
+        if (!isStun) {
 
             if (m.getAt(x, y + 1) != null)
             {

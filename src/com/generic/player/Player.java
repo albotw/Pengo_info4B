@@ -17,7 +17,6 @@ public class Player extends Thread
     private int currentLives;
     private InputHandler ih;
     private String pseudo;
-    private boolean canMove;
     private int points;
 
     public Player(String pseudo)
@@ -44,6 +43,7 @@ public class Player extends Thread
             }catch(Exception e) {e.printStackTrace(); }
         }
     }
+
     public void linkInput()
     {
         if (ih.UP == true) {controlledObject.goUp(); }

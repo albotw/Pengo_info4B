@@ -1,7 +1,7 @@
 package com.generic.gameplay;
 
 /**
- * TODO: Permettre l'utilisation du timer comme chrono ou compteur.
+ * TODO: Permettre l'utilisation du timer comme chrono ou compteur. ? A voir
  */
 public class GameTimer extends Thread{
     private boolean stop;

@@ -4,6 +4,7 @@ public class Map {
     //SINGLETON OK
 
     //faire en sorte de "sémaphoriser" la classe.
+    //Pas besoin car pas d'erreur de modification concurrente détéctée pour le moment.
     public static Map instance = null;
     private MapObject tab[][];
     private int width;

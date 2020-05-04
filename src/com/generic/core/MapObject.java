@@ -4,7 +4,7 @@ import com.generic.gameplay.Game;
 
 import static com.generic.gameplay.CONFIG.*;
 
-public abstract class MapObject implements Movement{
+public abstract class MapObject{
     protected int x;
     protected int y;
     protected Map m;

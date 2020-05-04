@@ -16,19 +16,12 @@ import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
 /**
- * TODO: évaluer l'utilisation du pattern singleton
- * TODO: Intégrer compteur de vies pour l'IA
- * TODO: méthode pour commencer et finir la partie.
  * TODO: rendre animalKilled/penguinKilled indépendant de IA ou Player
  */
 
 public class Game {
     public static Game instance;
 
-    /**
-     * Hashmap ? ou alors juste pour le réseau ?
-     */
-    private HashMap<MapEntity, Player> players;
     private HashMap<MapEntity, AI> AIs;
 
     private RenderThread renderer;
@@ -36,7 +29,6 @@ public class Game {
     private Window w;
     private MapGenerator mg;
     private Map m;
-
     private Player localPlayer;
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
@@ -52,7 +44,6 @@ public class Game {
         m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
         mg = new MapGenerator();
 
-        players = new HashMap<MapEntity, Player>();
         AIs = new HashMap<MapEntity, AI>();
 
 
@@ -139,7 +130,6 @@ public class Game {
                 localPlayer.setControlledObject(p);
                 localPlayer.start();
 
-                players.put(p, localPlayer);
             }
         }while(loop);
     }
@@ -157,24 +147,15 @@ public class Game {
         //a ajouter: déréférencement dans les objets
         time.stopTimer();
         AIs.clear();
-        players.clear();
         Map.deleteMap();
         System.out.println("Score");
         System.out.println("DEFAITE");
         try {
             sleep(2000);
-        }catch(Exception e){e.printStackTrace();
+        }catch(Exception e){e.printStackTrace();}
 
         Launcher.instance.onGameEnded();
         renderer.stopRendering();
-    }
-        //supprime le plateau
-        //supprime toutes les instances de tous les objets
-        //sauf le rendu et le renderThread
-        //affiche le score
-        //affiche le texte Game Over
-        //propose de rejouer ==> reset()
-        //sinon ==> quit()
     }
 
     public void victory()
@@ -183,7 +164,6 @@ public class Game {
         pm.getMainProfile().setPoints("GameEnded", time.getTime());
         time.stopTimer();
         AIs.clear();
-        players.clear();
         Map.deleteMap();
         System.out.println("Score");
         System.out.println("VICTOIRE");
@@ -194,13 +174,6 @@ public class Game {
 
         Launcher.instance.onGameEnded();
         renderer.stopRendering();
-
-        //supprime le plateau
-        //supprime toutes les instances de tous les objets
-        //sauf le rendu et le renderThread
-        //affiche le score
-        //affiche le texte de victoire
-        //==> init(2);
     }
 
     public void animalKilled(Animal a, MapObject killer) {
@@ -208,7 +181,7 @@ public class Game {
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
 
-        pm.getMainProfile().setPoints("AnimalKilled", 0);
+        localPlayer.setPoints("AnimalKilled", 0);
         System.out.println("Animal Tué");
         AIlives = AIlives - 1;
         if (AIlives == 0) {
@@ -217,17 +190,14 @@ public class Game {
         else{
             respawnAnimal(owner);
         }
-        //test nombre animaux
     }
-
-        //methode appellee quand un animal meurt.
-        //verifie qu'il reste des animaux
-        //si c'est le cas ==> respawnAnimal()
-        //sinon ==> victory()
 
     public void checkDiamondBlocks()
     {
-        // OPTI ?
+
+        /**
+         * TODO: Optimisation
+         */
         Map m = Game.instance.getMap();
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
@@ -261,80 +231,77 @@ public class Game {
 
     public void stunTriggered(char dirMur)
     {
-        // OPTI ?
+        /**
+         * TODO: Optimisation
+         */
         System.out.println("STUN!");
-        //méthode appelée quand un pingouin est façe au mur et appelle son action.
-        //vérifie les X = 0 | X = GRID_MAX, Y = 0 | y = GRID_MAX pour trouver des animaux.
-        //si animal il y a alors a.activateStun();
-        //GESTION TIMER A DETERMINER.
 
-        if (dirMur == 'G')      //x == 0
+        switch(dirMur)
         {
-            for (int i = 0; i < GRID_HEIGHT; i++)
-            {
-                MapObject mo = m.getAt(0, i);
-                if (mo != null)
+            case 'G':
+                for (int i = 0; i < GRID_HEIGHT; i++)
                 {
-                    if (mo.getType().equals("Animal"))
+                    MapObject mo = m.getAt(0, i);
+                    if (mo != null)
                     {
-                        ((Animal)(mo)).activateStun();
+                        if (mo.getType().equals("Animal"))
+                        {
+                            ((Animal)(mo)).activateStun();
+                        }
                     }
                 }
-            }
-        }
-        else if (dirMur == 'D')     // x == GRID_WIDTH - 1
-        {
-            for (int i = 0; i < GRID_HEIGHT; i++)
-            {
-                MapObject mo = m.getAt(GRID_WIDTH - 1, i);
-                if (mo != null)
+                break;
+
+            case 'D':
+                for (int i = 0; i < GRID_HEIGHT; i++)
                 {
-                    if (mo.getType().equals("Animal"))
+                    MapObject mo = m.getAt(GRID_WIDTH - 1, i);
+                    if (mo != null)
                     {
-                        ((Animal)(mo)).activateStun();
+                        if (mo.getType().equals("Animal"))
+                        {
+                            ((Animal)(mo)).activateStun();
+                        }
                     }
                 }
-            }
-        }
-        else if (dirMur == 'H')     //y == 0
-        {
-            for (int i = 0; i < GRID_WIDTH; i++)
-            {
-                MapObject mo = m.getAt(i, 0);
-                if (mo != null)
+                break;
+
+            case 'H':
+                for (int i = 0; i < GRID_WIDTH; i++)
                 {
-                    if (mo.getType().equals("Animal"))
+                    MapObject mo = m.getAt(i, 0);
+                    if (mo != null)
                     {
-                        ((Animal)(mo)).activateStun();
+                        if (mo.getType().equals("Animal"))
+                        {
+                            ((Animal)(mo)).activateStun();
+                        }
                     }
                 }
-            }
-        }
-        else if (dirMur == 'B')     //y == GRID_HEIGHT - 1
-        {
-            for (int i = 0; i < GRID_WIDTH; i++)
-            {
-                MapObject mo = m.getAt(i, GRID_HEIGHT - 1);
-                if (mo != null)
+                break;
+
+            case 'B':
+                for (int i = 0; i < GRID_WIDTH; i++)
                 {
-                    if (mo.getType().equals("Animal"))
+                    MapObject mo = m.getAt(i, GRID_HEIGHT - 1);
+                    if (mo != null)
                     {
-                        ((Animal)(mo)).activateStun();
+                        if (mo.getType().equals("Animal"))
+                        {
+                            ((Animal)(mo)).activateStun();
+                        }
                     }
                 }
-            }
+                break;
         }
+
     }
 
     public void penguinKilled(Penguin p, MapObject Killer)
     {
         System.out.println("Pingouin tué");
-        Player owner = players.get(p);
-        owner.setControlledObject(null);
-
-
-        owner.removeLive();
-        players.remove(p, owner);
+        localPlayer.setControlledObject(null);
+        localPlayer.removeLive();
     }
 
     public void respawnAnimal(AI owner)
@@ -359,19 +326,14 @@ public class Game {
             }
 
         }while (loop);
-        //methode appellée quand un animal est mort
-        //prend un bloc de glace au hasard
-        //le detruit
-        //cree une instance intermediaire d'animal
-        //genere un timer
-        //si au bout de X secondes l'instance intermediare n'est pas détruite
-        //un nouvel animal est crée
-        //son sprite est envoyé au rendu
-        //et il est liée à une IA.
     }
 
     public void respawnPenguin(Player owner)
     {
+        try{
+            sleep(500);
+        }catch(Exception e){e.printStackTrace();}
+
         boolean loop = true;
         do {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
@@ -383,16 +345,8 @@ public class Game {
                 Penguin p = new Penguin(initX, initY);
                 m.place(p, initX, initY);
                 owner.setControlledObject(p);
-
-                players.put(p, owner);
             }
         }while (loop);
-
-        //methode appellée si le joueur est mort et si il lui reste des vies.
-        //prend un espace vide de la map
-        //cree une instance de penguin
-        //envoie son sprite au rendu
-        //l'associe au joueur
     }
 
 
@@ -416,7 +370,6 @@ public class Game {
         return this.w;
     }
 
-    public HashMap<MapEntity, Player> getPlayers() {return this.players;}
 
     public Player getLocalPlayer() {return this.localPlayer;}
 

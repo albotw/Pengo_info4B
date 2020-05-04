@@ -1,7 +1,3 @@
-/**
- * TODO: rendre l'utilisation indépendante de l'overlay pour permettre une utilisation avec Launcher
- */
-
 package com.generic.graphics;
 
 import com.generic.UI.GameOverlay;
@@ -15,6 +11,7 @@ public class Window extends JFrame
     {
 
         this.setSize(width, height);
+        this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(false);

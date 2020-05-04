@@ -3,7 +3,6 @@ package com.generic.UI;
 import com.generic.launcher.Launcher;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

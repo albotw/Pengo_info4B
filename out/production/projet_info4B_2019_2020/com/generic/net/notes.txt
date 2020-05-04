@@ -1,8 +1,0 @@
-possibilités réseau:
-
-Leaderboard décentralisé : se met a jour uniquement quand le joueur host/rejoint une partie, dans ce cas le serveur récupère tous les leaderboards de chaque joueur connecté, les fusionne
-puis les renvoie à chaque joueur.
-
-Serveur local : le mode solo est en fait une partie multi sur un serveur mais avec un seul joueur.
-
-hybride: Le joueur peut démarrer une partie solo sans serveur, mais si il part en ligne,

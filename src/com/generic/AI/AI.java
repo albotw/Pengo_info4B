@@ -23,6 +23,9 @@ public class AI extends Thread{
 
     private char bannedDir;
 
+    private boolean respawnActive;
+    private int respawnTimer;
+
     public AI()
     {
 
@@ -45,12 +48,29 @@ public class AI extends Thread{
         if (controlledObject != null)   //si l'animal n'a pas été tué
         {
             checkStun();
-            MoveToTarget();
+            checkRespawn();
+            if (!respawnActive)
+            {
+                MoveToTarget();
+            }
         }
         else
         {
             bannedDir = 'R';
             System.out.println("reset bannedDir");
+        }
+    }
+
+    public void checkRespawn()
+    {
+        if(respawnActive)
+        {
+            respawnTimer -= AI_TICK_RATE;
+        }
+
+        if (respawnTimer <= 0)
+        {
+            respawnActive = false;
         }
     }
 
@@ -116,8 +136,7 @@ public class AI extends Thread{
          * pour chaque case potentielle on va calculer sa distance vectorielle avec la cible
          * on prend la case avec la plus petite valeur et on appelle la méthode du mouvement associé.
          * pour éviter tout état indécisif, on fait un tirage aléatoire pour débloquer le système.
-         *
-         * TODO: rendre le système plus fonctionnel en évitant les allers retours
+
          */
         int x = controlledObject.getX();
         int y = controlledObject.getY();
@@ -243,6 +262,8 @@ public class AI extends Thread{
 
     public void setControlledObject(MapObject controlledObject) {
         System.out.println("reset bannedDir");
+        respawnActive = true;
+        respawnTimer = 2000;
         bannedDir = '\0';
         this.controlledObject = controlledObject;
     }

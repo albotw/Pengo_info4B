@@ -108,6 +108,7 @@ public class Leaderboard {
 
             commandIn.close();
             commandOut.close();
+
             socket.close();
 
         }catch(Exception e)
@@ -125,11 +126,8 @@ public class Leaderboard {
             Socket socket = new Socket("127.0.0.1", 9090);
             ObjectOutputStream commandOut = new ObjectOutputStream(socket.getOutputStream());
 
-            for (int i = 0; i < ladder.size(); i++)
-            {
-                ScorePair tmp = ladder.get(i);
-                if (tmp.isLocal())
-                {
+            for (ScorePair tmp : ladder) {
+                if (tmp.isLocal()) {
                     commandOut.writeObject(new Command("SET SCORE", Integer.toString(tmp.getScore()), tmp.getPseudo()));
                     tmp.setLocal(false);
                 }

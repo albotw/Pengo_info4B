@@ -15,6 +15,9 @@ public abstract class MapBlock extends MapObject{
         }catch(Exception e ){e.printStackTrace(); }
     }
 
+    /**
+     * TODO: Optimisation ?
+     */
     public void onMoveTriggered(char direction, MapEntity source)
     {
         tick_wait();

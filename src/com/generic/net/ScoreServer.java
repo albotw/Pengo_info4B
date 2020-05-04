@@ -86,8 +86,9 @@ class Connexion extends Thread
                 }
             }
 
-            commandOut.close();
             commandIn.close();
+            commandOut.close();
+
             connexion.close();
         }
         catch(Exception e)
