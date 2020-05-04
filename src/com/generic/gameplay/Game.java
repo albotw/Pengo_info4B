@@ -1,5 +1,7 @@
 package com.generic.gameplay;
 
+import com.generic.UI.GameEndDialog;
+import com.generic.UI.ImagePanel;
 import com.generic.core.*;
 import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
@@ -7,6 +9,11 @@ import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
@@ -41,12 +48,10 @@ public class Game {
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
 
-    private int AIlives = 3;
+    private int AIlives = 1;
 
-    public Game()
-    {
+    public Game() {
         instance = this;
-
 
 
         m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
@@ -61,7 +66,7 @@ public class Game {
 
         time = new GameTimer();
 
-        w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
+        w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
         sm = SpriteManager.createSpriteManager();
         renderer = new RenderThread(w);
         renderer.start();
@@ -71,19 +76,17 @@ public class Game {
         start();
     }
 
-    public void initDiamondBlocks()
-    {
+    public void initDiamondBlocks() {
         boolean loop = true;
         int cpt = 0;
-        for(int k = 0; k<3; k++){
+        for (int k = 0; k < 3; k++) {
             loop = true;
             do {
                 int initX = RandomizedInt(1, GRID_WIDTH - 2);
                 int initY = RandomizedInt(1, GRID_HEIGHT - 2);
 
                 if (m.getAt(initX, initY) != null) {
-                    if (m.getAt(initX, initY).getType().equals("IceBlock"))
-                    {
+                    if (m.getAt(initX, initY).getType().equals("IceBlock")) {
                         loop = false;
                         DiamondBlock d = new DiamondBlock(initX, initY);
                         m.place(d, initX, initY);
@@ -93,20 +96,16 @@ public class Game {
         }
     }
 
-    public void initIA()
-    {
+    public void initIA() {
         // A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
         boolean loop = true;
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             loop = true;
-            do
-            {
+            do {
                 int initX = RandomizedInt(0, GRID_WIDTH - 1);
                 int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (m.getAt(initX, initY) == null)
-                {
+                if (m.getAt(initX, initY) == null) {
                     loop = false;
                     Animal a = new Animal(initX, initY);
                     m.place(a, initX, initY);
@@ -117,22 +116,19 @@ public class Game {
 
                     AIs.put(a, ai);
                 }
-            }while(loop);
+            } while (loop);
         }
     }
 
-    public void initPlayers()
-    {
+    public void initPlayers() {
         //A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
         boolean loop = true;
-        do
-        {
+        do {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
 
-            if (m.getAt(initX, initY) == null)
-            {
+            if (m.getAt(initX, initY) == null) {
                 loop = false;
                 Penguin p = new Penguin(initX, initY);
                 m.place(p, initX, initY);
@@ -141,19 +137,17 @@ public class Game {
 
                 players.put(p, localPlayer);
             }
-        }while(loop);
+        } while (loop);
     }
 
-    public void start()
-    {
+    public void start() {
         time.start();
         initDiamondBlocks();
         initPlayers();
         initIA();
     }
 
-    public void gameOver()
-    {
+    public void gameOver() {
         //a ajouter: déréférencement dans les objets
         time.stopTimer();
         AIs.clear();
@@ -163,11 +157,12 @@ public class Game {
         System.out.println("DEFAITE");
         try {
             sleep(2000);
-        }catch(Exception e){e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
 
-        Launcher.instance.onGameEnded();
-        renderer.stopRendering();
-    }
+            Launcher.instance.onGameEnded();
+            renderer.stopRendering();
+        }
         //supprime le plateau
         //supprime toutes les instances de tous les objets
         //sauf le rendu et le renderThread
@@ -177,188 +172,163 @@ public class Game {
         //sinon ==> quit()
     }
 
-    public void victory()
-    {
-        //a ajouter: déréférencement dans les objets.
-        pm.getMainProfile().setPoints("GameEnded", time.getTime());
-        time.stopTimer();
-        AIs.clear();
-        players.clear();
-        Map.deleteMap();
-        System.out.println("Score");
-        System.out.println("VICTOIRE");
-        try{
-            sleep(2000);
+        public void victory() {
+            //a ajouter: déréférencement dans les objets.
+            pm.getMainProfile().setPoints("GameEnded", time.getTime());
+            time.stopTimer();
+            AIs.clear();
+            players.clear();
+            Map.deleteMap();
+            System.out.println("Score");
+            System.out.println("VICTOIRE");
+
+            try {
+                GameEndDialog GED = new GameEndDialog(w,true,true);
+                sleep(2000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            Launcher.instance.onGameEnded();
+            renderer.stopRendering();
+
+            //supprime le plateau
+            //supprime toutes les instances de tous les objets
+            //sauf le rendu et le renderThread
+            //affiche le score
+            //affiche le texte de victoire
+            //==> init(2);
         }
-        catch(Exception e){e.printStackTrace();}
 
-        Launcher.instance.onGameEnded();
-        renderer.stopRendering();
+        public void animalKilled(Animal a, MapObject killer) {
 
-        //supprime le plateau
-        //supprime toutes les instances de tous les objets
-        //sauf le rendu et le renderThread
-        //affiche le score
-        //affiche le texte de victoire
-        //==> init(2);
-    }
+            AI owner = AIs.get(a);
+            owner.setControlledObject(null);
 
-    public void animalKilled(Animal a, MapObject killer) {
-
-        AI owner = AIs.get(a);
-        owner.setControlledObject(null);
-
-        pm.getMainProfile().setPoints("AnimalKilled", 0);
-        System.out.println("Animal Tué");
-        AIlives = AIlives - 1;
-        if (AIlives == 0) {
-            victory();
+            pm.getMainProfile().setPoints("AnimalKilled", 0);
+            System.out.println("Animal Tué");
+            AIlives = AIlives - 1;
+            if (AIlives == 0) {
+                victory();
+            } else {
+                respawnAnimal(owner);
+            }
+            //test nombre animaux
         }
-        else{
-            respawnAnimal(owner);
-        }
-        //test nombre animaux
-    }
+
 
         //methode appellee quand un animal meurt.
         //verifie qu'il reste des animaux
         //si c'est le cas ==> respawnAnimal()
         //sinon ==> victory()
 
-    public void checkDiamondBlocks()
-    {
-        // OPTI ?
-        Map m = Game.instance.getMap();
-        for (int i = 0; i < GRID_WIDTH; i++) {
-            for (int j = 0; j < GRID_HEIGHT; j++) {
-                MapObject tmp = m.getAt(i, j);
+        public void checkDiamondBlocks() {
+            // OPTI ?
+            Map m = Game.instance.getMap();
+            for (int i = 0; i < GRID_WIDTH; i++) {
+                for (int j = 0; j < GRID_HEIGHT; j++) {
+                    MapObject tmp = m.getAt(i, j);
 
-                if ( m.getAt(i,j) != null)
-                {
-                    if (m.getAt(i, j).getType().equals("DiamondBlock"))
-                    {
-                        if (m.getAt(i + 1, j) != null && m.getAt(i + 2, j) != null)
-                        {
-                            if (((m.getAt(i + 1, j).getType().equals("DiamondBlock") && m.getAt(i + 2, j).getType().equals("DiamondBlock"))))
-                            {
-                                victory();
+                    if (m.getAt(i, j) != null) {
+                        if (m.getAt(i, j).getType().equals("DiamondBlock")) {
+                            if (m.getAt(i + 1, j) != null && m.getAt(i + 2, j) != null) {
+                                if (((m.getAt(i + 1, j).getType().equals("DiamondBlock") && m.getAt(i + 2, j).getType().equals("DiamondBlock")))) {
+                                    victory();
+                                }
                             }
-                        }
-                        if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null)
-                        {
-                            if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock"))))
-                            {
-                                victory();
+                            if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null) {
+                                if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
+                                    victory();
+                                }
+
                             }
 
                         }
-
                     }
                 }
             }
         }
-    }
 
-    public void stunTriggered(char dirMur)
-    {
-        // OPTI ?
-        System.out.println("STUN!");
-        //méthode appelée quand un pingouin est façe au mur et appelle son action.
-        //vérifie les X = 0 | X = GRID_MAX, Y = 0 | y = GRID_MAX pour trouver des animaux.
-        //si animal il y a alors a.activateStun();
-        //GESTION TIMER A DETERMINER.
+        public void stunTriggered(char dirMur) {
+            // OPTI ?
+            System.out.println("STUN!");
+            //méthode appelée quand un pingouin est façe au mur et appelle son action.
+            //vérifie les X = 0 | X = GRID_MAX, Y = 0 | y = GRID_MAX pour trouver des animaux.
+            //si animal il y a alors a.activateStun();
+            //GESTION TIMER A DETERMINER.
 
-        if (dirMur == 'G')      //x == 0
-        {
-            for (int i = 0; i < GRID_HEIGHT; i++)
+            if (dirMur == 'G')      //x == 0
             {
-                MapObject mo = m.getAt(0, i);
-                if (mo != null)
-                {
-                    if (mo.getType().equals("Animal"))
-                    {
-                        ((Animal)(mo)).activateStun();
+                for (int i = 0; i < GRID_HEIGHT; i++) {
+                    MapObject mo = m.getAt(0, i);
+                    if (mo != null) {
+                        if (mo.getType().equals("Animal")) {
+                            ((Animal) (mo)).activateStun();
+                        }
+                    }
+                }
+            } else if (dirMur == 'D')     // x == GRID_WIDTH - 1
+            {
+                for (int i = 0; i < GRID_HEIGHT; i++) {
+                    MapObject mo = m.getAt(GRID_WIDTH - 1, i);
+                    if (mo != null) {
+                        if (mo.getType().equals("Animal")) {
+                            ((Animal) (mo)).activateStun();
+                        }
+                    }
+                }
+            } else if (dirMur == 'H')     //y == 0
+            {
+                for (int i = 0; i < GRID_WIDTH; i++) {
+                    MapObject mo = m.getAt(i, 0);
+                    if (mo != null) {
+                        if (mo.getType().equals("Animal")) {
+                            ((Animal) (mo)).activateStun();
+                        }
+                    }
+                }
+            } else if (dirMur == 'B')     //y == GRID_HEIGHT - 1
+            {
+                for (int i = 0; i < GRID_WIDTH; i++) {
+                    MapObject mo = m.getAt(i, GRID_HEIGHT - 1);
+                    if (mo != null) {
+                        if (mo.getType().equals("Animal")) {
+                            ((Animal) (mo)).activateStun();
+                        }
                     }
                 }
             }
         }
-        else if (dirMur == 'D')     // x == GRID_WIDTH - 1
-        {
-            for (int i = 0; i < GRID_HEIGHT; i++)
-            {
-                MapObject mo = m.getAt(GRID_WIDTH - 1, i);
-                if (mo != null)
-                {
-                    if (mo.getType().equals("Animal"))
-                    {
-                        ((Animal)(mo)).activateStun();
+
+        public void penguinKilled(Penguin p, MapObject Killer) {
+            System.out.println("Pingouin tué");
+            Player owner = players.get(p);
+            owner.setControlledObject(null);
+            owner.removeLive();
+            players.remove(p, owner);
+        }
+
+        public void respawnAnimal(AI owner) {
+            boolean loop = true;
+            do {
+
+                int initX = RandomizedInt(0, GRID_WIDTH - 1);
+                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+                if (m.getAt(initX, initY) != null) {
+                    if (m.getAt(initX, initY).getType().equals("IceBlock")) {
+                        loop = false;
+                        Animal a = new Animal(initX, initY);
+                        m.place(a, initX, initY);
+                        owner.setControlledObject(a);
+
+                        AIs.put(a, owner);
                     }
                 }
-            }
+            } while (loop);
         }
-        else if (dirMur == 'H')     //y == 0
-        {
-            for (int i = 0; i < GRID_WIDTH; i++)
-            {
-                MapObject mo = m.getAt(i, 0);
-                if (mo != null)
-                {
-                    if (mo.getType().equals("Animal"))
-                    {
-                        ((Animal)(mo)).activateStun();
-                    }
-                }
-            }
-        }
-        else if (dirMur == 'B')     //y == GRID_HEIGHT - 1
-        {
-            for (int i = 0; i < GRID_WIDTH; i++)
-            {
-                MapObject mo = m.getAt(i, GRID_HEIGHT - 1);
-                if (mo != null)
-                {
-                    if (mo.getType().equals("Animal"))
-                    {
-                        ((Animal)(mo)).activateStun();
-                    }
-                }
-            }
-        }
-    }
-
-    public void penguinKilled(Penguin p, MapObject Killer)
-    {
-        System.out.println("Pingouin tué");
-        Player owner = players.get(p);
-        owner.setControlledObject(null);
 
 
-        owner.removeLive();
-        players.remove(p, owner);
-    }
-
-    public void respawnAnimal(AI owner)
-    {
-        boolean loop = true;
-        do {
-
-            int initX = RandomizedInt(0, GRID_WIDTH - 1);
-            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
-
-            if (m.getAt(initX, initY) != null)
-            {
-                if (m.getAt(initX, initY).getType().equals("IceBlock"))
-                {
-                    loop = false;
-                    Animal a = new Animal(initX, initY);
-                    m.place(a, initX, initY);
-                    owner.setControlledObject(a);
-
-                    AIs.put(a, owner);
-                }
-            }
-
-        }while (loop);
         //methode appellée quand un animal est mort
         //prend un bloc de glace au hasard
         //le detruit
@@ -368,57 +338,56 @@ public class Game {
         //un nouvel animal est crée
         //son sprite est envoyé au rendu
         //et il est liée à une IA.
+
+        public void respawnPenguin(Player owner) {
+            boolean loop = true;
+            do {
+                int initX = RandomizedInt(0, GRID_WIDTH - 1);
+                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+
+                if (m.getAt(initX, initY) == null) {
+                    loop = false;
+                    Penguin p = new Penguin(initX, initY);
+                    m.place(p, initX, initY);
+                    owner.setControlledObject(p);
+
+                    players.put(p, owner);
+                }
+            } while (loop);
+
+            //methode appellée si le joueur est mort et si il lui reste des vies.
+            //prend un espace vide de la map
+            //cree une instance de penguin
+            //envoie son sprite au rendu
+            //l'associe au joueur
+        }
+
+
+        public Map getMap() {
+            return this.m;
+        }
+
+        public RenderThread getRenderer() {
+            return this.renderer;
+        }
+
+        public SpriteManager getSpriteManager() {
+            return this.sm;
+        }
+
+        public Window getWindow() {
+            return this.w;
+        }
+
+        public HashMap<MapEntity, Player> getPlayers() {
+            return this.players;
+        }
+
+        public Player getLocalPlayer() {
+            return this.localPlayer;
+        }
+
+        public int getAIlives() {
+            return this.AIlives;
+        }
     }
-
-    public void respawnPenguin(Player owner)
-    {
-        boolean loop = true;
-        do {
-            int initX = RandomizedInt(0, GRID_WIDTH - 1);
-            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
-
-            if (m.getAt(initX, initY) == null)
-            {
-                loop = false;
-                Penguin p = new Penguin(initX, initY);
-                m.place(p, initX, initY);
-                owner.setControlledObject(p);
-
-                players.put(p, owner);
-            }
-        }while (loop);
-
-        //methode appellée si le joueur est mort et si il lui reste des vies.
-        //prend un espace vide de la map
-        //cree une instance de penguin
-        //envoie son sprite au rendu
-        //l'associe au joueur
-    }
-
-
-    public Map getMap()
-    {
-        return this.m;
-    }
-
-    public RenderThread getRenderer()
-    {
-        return this.renderer;
-    }
-
-    public SpriteManager getSpriteManager()
-    {
-        return this.sm;
-    }
-
-    public Window getWindow()
-    {
-        return this.w;
-    }
-
-    public HashMap<MapEntity, Player> getPlayers() {return this.players;}
-
-    public Player getLocalPlayer() {return this.localPlayer;}
-
-    public int getAIlives(){ return this.AIlives;}
-}
