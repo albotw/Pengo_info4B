@@ -1,5 +1,7 @@
 package com.generic.gameplay;
 
+import com.generic.UI.GameEndDialog;
+import com.generic.UI.ImagePanel;
 import com.generic.core.*;
 import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
@@ -7,6 +9,11 @@ import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
@@ -33,12 +40,10 @@ public class Game {
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
 
-    private int AIlives = 3;
+    private int AIlives = 1;
 
-    public Game()
-    {
+    public Game() {
         instance = this;
-
 
 
         m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
@@ -52,7 +57,7 @@ public class Game {
 
         time = new GameTimer();
 
-        w = new Window(CONFIG.WINDOW_WIDTH,  CONFIG.WINDOW_HEIGHT);
+        w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
         sm = SpriteManager.createSpriteManager();
         renderer = new RenderThread(w);
         renderer.start();
@@ -62,19 +67,17 @@ public class Game {
         start();
     }
 
-    public void initDiamondBlocks()
-    {
+    public void initDiamondBlocks() {
         boolean loop = true;
         int cpt = 0;
-        for(int k = 0; k<3; k++){
+        for (int k = 0; k < 3; k++) {
             loop = true;
             do {
                 int initX = RandomizedInt(1, GRID_WIDTH - 2);
                 int initY = RandomizedInt(1, GRID_HEIGHT - 2);
 
                 if (m.getAt(initX, initY) != null) {
-                    if (m.getAt(initX, initY).getType().equals("IceBlock"))
-                    {
+                    if (m.getAt(initX, initY).getType().equals("IceBlock")) {
                         loop = false;
                         DiamondBlock d = new DiamondBlock(initX, initY);
                         m.place(d, initX, initY);
@@ -84,20 +87,16 @@ public class Game {
         }
     }
 
-    public void initIA()
-    {
+    public void initIA() {
         // A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
         boolean loop = true;
-        for (int i = 0; i < 1; i++)
-        {
+        for (int i = 0; i < 1; i++) {
             loop = true;
-            do
-            {
+            do {
                 int initX = RandomizedInt(0, GRID_WIDTH - 1);
                 int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (m.getAt(initX, initY) == null)
-                {
+                if (m.getAt(initX, initY) == null) {
                     loop = false;
                     Animal a = new Animal(initX, initY);
                     m.place(a, initX, initY);
@@ -108,22 +107,19 @@ public class Game {
 
                     AIs.put(a, ai);
                 }
-            }while(loop);
+            } while (loop);
         }
     }
 
-    public void initPlayers()
-    {
+    public void initPlayers() {
         //A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
         boolean loop = true;
-        do
-        {
+        do {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
 
-            if (m.getAt(initX, initY) == null)
-            {
+            if (m.getAt(initX, initY) == null) {
                 loop = false;
                 Penguin p = new Penguin(initX, initY);
                 m.place(p, initX, initY);
@@ -131,19 +127,17 @@ public class Game {
                 localPlayer.start();
 
             }
-        }while(loop);
+        } while (loop);
     }
 
-    public void start()
-    {
+    public void start() {
         time.start();
         initDiamondBlocks();
         initPlayers();
         initIA();
     }
 
-    public void gameOver()
-    {
+    public void gameOver() {
         //a ajouter: déréférencement dans les objets
         time.stopTimer();
         AIs.clear();
@@ -176,10 +170,10 @@ public class Game {
         renderer.stopRendering();
     }
 
-    public void animalKilled(Animal a, MapObject killer) {
+        public void animalKilled(Animal a, MapObject killer) {
 
-        AI owner = AIs.get(a);
-        owner.setControlledObject(null);
+            AI owner = AIs.get(a);
+            owner.setControlledObject(null);
 
         localPlayer.setPoints("AnimalKilled", 0);
         System.out.println("Animal Tué");
@@ -213,16 +207,14 @@ public class Game {
                             {
                                 victory();
                             }
-                        }
-                        if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null)
-                        {
-                            if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock"))))
-                            {
-                                victory();
+                            if (m.getAt(i, j + 1) != null && m.getAt(i, j + 2) != null) {
+                                if (((m.getAt(i, j + 1).getType().equals("DiamondBlock") && m.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
+                                    victory();
+                                }
+
                             }
 
                         }
-
                     }
                 }
             }
@@ -304,29 +296,25 @@ public class Game {
         localPlayer.removeLive();
     }
 
-    public void respawnAnimal(AI owner)
-    {
-        boolean loop = true;
-        do {
+        public void respawnAnimal(AI owner) {
+            boolean loop = true;
+            do {
 
-            int initX = RandomizedInt(0, GRID_WIDTH - 1);
-            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+                int initX = RandomizedInt(0, GRID_WIDTH - 1);
+                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (m.getAt(initX, initY) != null)
-            {
-                if (m.getAt(initX, initY).getType().equals("IceBlock"))
-                {
-                    loop = false;
-                    Animal a = new Animal(initX, initY);
-                    m.place(a, initX, initY);
-                    owner.setControlledObject(a);
+                if (m.getAt(initX, initY) != null) {
+                    if (m.getAt(initX, initY).getType().equals("IceBlock")) {
+                        loop = false;
+                        Animal a = new Animal(initX, initY);
+                        m.place(a, initX, initY);
+                        owner.setControlledObject(a);
 
-                    AIs.put(a, owner);
+                        AIs.put(a, owner);
+                    }
                 }
-            }
-
-        }while (loop);
-    }
+            } while (loop);
+        }
 
     public void respawnPenguin(Player owner)
     {
@@ -350,28 +338,28 @@ public class Game {
     }
 
 
-    public Map getMap()
-    {
-        return this.m;
+        public Map getMap() {
+            return this.m;
+        }
+
+        public RenderThread getRenderer() {
+            return this.renderer;
+        }
+
+        public SpriteManager getSpriteManager() {
+            return this.sm;
+        }
+
+        public Window getWindow() {
+            return this.w;
+        }
+
+
+        public Player getLocalPlayer() {
+            return this.localPlayer;
+        }
+
+        public int getAIlives() {
+            return this.AIlives;
+        }
     }
-
-    public RenderThread getRenderer()
-    {
-        return this.renderer;
-    }
-
-    public SpriteManager getSpriteManager()
-    {
-        return this.sm;
-    }
-
-    public Window getWindow()
-    {
-        return this.w;
-    }
-
-
-    public Player getLocalPlayer() {return this.localPlayer;}
-
-    public int getAIlives(){ return this.AIlives;}
-}
