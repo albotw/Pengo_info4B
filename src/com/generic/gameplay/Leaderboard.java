@@ -61,11 +61,23 @@ public class Leaderboard {
         return this.ladder;
     }
 
-    //appelée uniquement au démarrage du launcher
+    private void flush()
+    {
+        for (int i = 0; i < ladder.size(); i++)
+        {
+            if (!ladder.get(i).isLocal())
+            {
+                ladder.remove(i);
+            }
+        }
+    }
+
+    //appelée uniquement au démarrage du launcher OU actualisation via dialog
     public void pull()
     {
         try
         {
+            flush();
             Socket socket = new Socket("127.0.0.1", 9090);
             System.out.println("SOCKET CREE =>" + socket.toString());
 
@@ -112,8 +124,6 @@ public class Leaderboard {
         {
             Socket socket = new Socket("127.0.0.1", 9090);
             ObjectOutputStream commandOut = new ObjectOutputStream(socket.getOutputStream());
-            ObjectInputStream commandIn = new ObjectInputStream(socket.getInputStream());
-
 
             for (int i = 0; i < ladder.size(); i++)
             {
@@ -127,7 +137,6 @@ public class Leaderboard {
 
             commandOut.writeObject(new Command("SET SCORE", "END", ""));
 
-            commandIn.close();
             commandOut.close();
             socket.close();
         }catch(Exception e)
