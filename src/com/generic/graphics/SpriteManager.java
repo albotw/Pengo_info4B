@@ -97,19 +97,19 @@ public class SpriteManager {
                             Sprite spr = new Sprite(xpos, ypos);
                             if(m.getAt(j, i).getType().equals("IceBlock"))
                             {
-                                spr.loadImage("src/resources/IceBlock.png");
+                                spr.loadImage("src/ressources/IceBlock.png");
                             }
                             else if (m.getAt(j, i).getType().equals("Penguin"))
                             {
-                                spr.loadImage("src/resources/Penguin.png");
+                                spr.loadImage("src/ressources/Penguin.png");
                             }
                             else if (m.getAt(j, i).getType().equals("DiamondBlock"))
                             {
-                                spr.loadImage("src/resources/DiamondBlock.png");
+                                spr.loadImage("src/ressources/DiamondBlock.png");
                             }
                             else if (m.getAt(j, i).getType().equals("Animal"))
                             {
-                                spr.loadImage("src/resources/Animal.png");
+                                spr.loadImage("src/ressources/Animal.png");
                             }
                             instance.addSprite(spr, "foreground");
                         }
@@ -117,7 +117,7 @@ public class SpriteManager {
                     else
                     {
                         Sprite spr = new Sprite(xpos, ypos);
-                        spr.loadImage("src/resources/Wall.png");
+                        spr.loadImage("src/ressources/Wall.png");
                         instance.addSprite(spr, "background");
                     }
                     xpos += SPRITE_SIZE;

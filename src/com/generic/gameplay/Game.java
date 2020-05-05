@@ -162,7 +162,6 @@ public class Game {
         System.out.println("Score");
         System.out.println("VICTOIRE");
         GameEndDialog ged = new GameEndDialog(w, true, true);
-
         Launcher.instance.onGameEnded();
         renderer.stopRendering();
     }

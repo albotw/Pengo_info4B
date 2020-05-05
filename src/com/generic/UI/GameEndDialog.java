@@ -11,17 +11,17 @@ public class GameEndDialog extends JDialog {
             super(parent, modal);
 
             if (victoire) {
-                ImageIcon victory = new ImageIcon("src/resources/victoire.png");
+                ImageIcon victory = new ImageIcon("src/ressources/victoire.png");
                 img = new ImagePanel(victory.getImage());
                 System.out.println(victory.toString());
             } else {
-                ImageIcon defeat = new ImageIcon("src/ressource/defeat.png");
+                ImageIcon defeat = new ImageIcon("src/ressources/defeat.png");
                 img = new ImagePanel(defeat.getImage());
             }
-            img.setBounds(0, 0, 580, 170);
-            setLayout(null);
+            img.setBounds(0, 0, 600, 600);
             add(img);
-            setSize(580, 170);
+            setLayout(new BorderLayout());
+            setSize(537,523);
             setLocationRelativeTo(null);
             setVisible(true);
             setDefaultCloseOperation(DISPOSE_ON_CLOSE);
