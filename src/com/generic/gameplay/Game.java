@@ -161,29 +161,26 @@ public class Game {
         Map.deleteMap();
         System.out.println("Score");
         System.out.println("VICTOIRE");
-        try{
-            sleep(2000);
-        }
-        catch(Exception e){e.printStackTrace();}
+        GameEndDialog ged = new GameEndDialog(w, true, true);
 
         Launcher.instance.onGameEnded();
         renderer.stopRendering();
     }
 
-        public void animalKilled(Animal a, MapObject killer) {
+    public void animalKilled(Animal a, MapObject killer) {
 
-            AI owner = AIs.get(a);
-            owner.setControlledObject(null);
+        AI owner = AIs.get(a);
+        owner.setControlledObject(null);
 
-        localPlayer.setPoints("AnimalKilled", 0);
-        System.out.println("Animal Tué");
-        AIlives = AIlives - 1;
-        if (AIlives == 0) {
-            victory();
-        }
-        else{
-            respawnAnimal(owner);
-        }
+    localPlayer.setPoints("AnimalKilled", 0);
+    System.out.println("Animal Tué");
+    AIlives = AIlives - 1;
+    if (AIlives == 0) {
+        victory();
+    }
+    else{
+        respawnAnimal(owner);
+    }
     }
 
     public void checkDiamondBlocks()

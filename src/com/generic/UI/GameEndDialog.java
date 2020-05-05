@@ -11,9 +11,9 @@ public class GameEndDialog extends JDialog {
             super(parent, modal);
 
             if (victoire) {
-                ImageIcon victory = new ImageIcon("src/ressource/victoire.png");
+                ImageIcon victory = new ImageIcon("src/resources/victoire.png");
                 img = new ImagePanel(victory.getImage());
-             
+                System.out.println(victory.toString());
             } else {
                 ImageIcon defeat = new ImageIcon("src/ressource/defeat.png");
                 img = new ImagePanel(defeat.getImage());
