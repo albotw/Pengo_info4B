@@ -7,7 +7,6 @@ import com.generic.gameplay.ScorePair;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class Launcher extends JFrame
 {
@@ -55,7 +54,7 @@ public class Launcher extends JFrame
     public void SoloSettingsSelected()
     {
         System.out.println("Réglages solo séléctionnés");
-        SettingDialog SD = new SettingDialog(this,true);
+        SettingsDialog SD = new SettingsDialog(this,true);
     }
 
     public void MultiModeSelected()

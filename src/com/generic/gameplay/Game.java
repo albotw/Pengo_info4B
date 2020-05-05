@@ -52,11 +52,11 @@ public class Game {
 
         time = new GameTimer();
 
-        w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
-        sm = SpriteManager.createSpriteManager();
-        renderer = new RenderThread(w);
-        renderer.start();
 
+        sm = SpriteManager.createSpriteManager();
+        renderer = new RenderThread();
+        renderer.start();
+        this.w = renderer.getWindow();
         mg.path_init();
 
         start();

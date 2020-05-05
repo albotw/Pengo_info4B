@@ -31,20 +31,19 @@ public class RenderPanel extends JPanel{
             if (sp != null) g2d.drawImage(sp.getTexture(), sp.getX(), sp.getY(), this);
         }
 
-        //System.out.println("repainted");
+        System.out.println("repainted");
     }
 
-    public void run()
+    @Override
+    public Dimension getPreferredSize()
     {
-        while(true)
-        {
-            this.repaint();
-        }
+        return new Dimension(this.getWidth(), this.getHeight());
     }
 
     @Override
     public void paintComponent(Graphics g)
     {
+        System.out.println("called paintComponent");
         super.paintComponent(g);
         draw(g);
         Toolkit.getDefaultToolkit().sync();

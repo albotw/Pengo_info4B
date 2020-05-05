@@ -1,5 +1,6 @@
 package com.generic.launcher;
 
+import com.generic.UI.PlaceHolderTextField;
 import com.generic.player.Player;
 import com.generic.player.PlayerManager;
 
@@ -13,7 +14,7 @@ public class ProfileDialog extends JDialog {
     private DefaultListModel mod;
     private JButton addProfile;
     private JButton deleteProfile;
-    private JTextField profileName;
+    private PlaceHolderTextField profileName;
     private JButton selectProfile;
     private JButton Close;
 
@@ -31,8 +32,7 @@ public class ProfileDialog extends JDialog {
 
         addProfile = new JButton("Ajouter un profil");
         deleteProfile = new JButton("Supprimer un profil");
-        profileName = new JTextField();
-        profileName.setText("Entrez le nom du profil ici");
+        profileName = new PlaceHolderTextField("Entrez le nom du profil ici");
         selectProfile = new JButton("Séléctionner le profil");
 
         setLayout(new BorderLayout());
@@ -40,10 +40,17 @@ public class ProfileDialog extends JDialog {
 
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(1, 2));
-        center.add(profileList);
+
+        JPanel profilPanel = new JPanel();
+        profilPanel.setLayout(new GridLayout(1, 1));
+        profilPanel.setBorder(BorderFactory.createTitledBorder("Liste des profils"));
+        profilPanel.add(profileList);
+
+        center.add(profilPanel);
 
         JPanel droite = new JPanel();
         droite.setLayout(new GridLayout(4, 1));
+        droite.setBorder(BorderFactory.createTitledBorder("Gestion"));
         droite.add(profileName);
         droite.add(addProfile);
         droite.add(deleteProfile);
@@ -81,6 +88,7 @@ public class ProfileDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 selectProfileSelected();
+                refreshList();
             }
         });
 

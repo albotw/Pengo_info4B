@@ -13,6 +13,7 @@
 package com.generic.graphics;
 
 import com.generic.UI.GameOverlay;
+import com.generic.gameplay.CONFIG;
 import com.generic.gameplay.Game;
 
 import java.awt.*;
@@ -28,18 +29,17 @@ public class RenderThread extends Thread {
     private RenderPanel rp;
 
     private GameOverlay go;
-    public RenderThread(Window output)
+    public RenderThread()
     {
+        this.w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
         fps = new FPSCounter();
         rp = new RenderPanel();
         go = new GameOverlay();
-        output.setLayout(new BorderLayout());
-        output.add(rp, BorderLayout.CENTER);
-        output.add(go, BorderLayout.NORTH);
+        w.setLayout(new BorderLayout());
+        w.add(rp, BorderLayout.CENTER);
+        w.add(go, BorderLayout.NORTH);
 
         continueDrawing = true;
-
-        w = output;
     }
 
     public void run()
@@ -50,6 +50,7 @@ public class RenderThread extends Thread {
             SpriteManager.transfer(Game.instance.getMap(), this);
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
+            w.revalidate();
             rp.repaint();
             go.update();
             go.repaint();
@@ -73,5 +74,10 @@ public class RenderThread extends Thread {
     {
         continueDrawing = false;
         fps.stop();
+    }
+
+    public Window getWindow()
+    {
+        return this.w;
     }
 }
