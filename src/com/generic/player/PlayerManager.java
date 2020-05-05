@@ -11,6 +11,7 @@ public class PlayerManager {
     public static PlayerManager instance;
     private CopyOnWriteArrayList<Player> playerProfiles;
     private Player mainProfile;
+    
 
     public PlayerManager()
     {
@@ -76,9 +77,5 @@ public class PlayerManager {
         return mainProfile != null;
     }
 
-    public int getNPlayers()
-    {
-        return this.playerProfiles.size();
-    }
 
 }

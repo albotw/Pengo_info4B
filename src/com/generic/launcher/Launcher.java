@@ -55,6 +55,7 @@ public class Launcher extends JFrame
     public void SoloSettingsSelected()
     {
         System.out.println("Réglages solo séléctionnés");
+        SettingDialog SD = new SettingDialog(this,true);
     }
 
     public void MultiModeSelected()
