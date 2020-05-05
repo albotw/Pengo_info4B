@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bcb0f6eb-6f87-4262-970f-a0296307cefd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/com/generic/launcher/SettingDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/UI/GameEndDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/UI/GameEndDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/ressources/defeat.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/ressources/defeat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/ressources/victoire.png" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/ressources/victoire.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/UI/GameEndDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/UI/GameEndDialog.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/CONFIG_GAME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/CONFIG_GAME.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ressources/defeat.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ressources/defeat.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ressources/victoire.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/ressources/victoire.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/launcher/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/launcher/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/player/PlayerManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/player/PlayerManager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
