@@ -4,14 +4,15 @@ import com.generic.core.MapEntity;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
 
-import static com.generic.gameplay.CONFIG_GAME.PLAYER_INIT_LIVES;
+import static com.generic.gameplay.CONFIG_GAME.*;
+import static java.lang.Thread.sleep;
 
 /**
  * TODO: création du inputHandler différée ?
  * TODO: généralisation pour toute MapEntity
  */
 
-public class Player extends Thread
+public class Player implements Runnable
 {
     private MapObject controlledObject;
     private int currentLives;
@@ -30,6 +31,7 @@ public class Player extends Thread
 
     public void run()
     {
+        System.out.println("Démarrage player");
         ih = new InputHandler();
         while(!flush)
         {
@@ -47,6 +49,7 @@ public class Player extends Thread
         this.controlledObject = null;
         ih.flush();
         this.ih = null;
+        this.flush = false;
     }
 
     public void linkInput()
@@ -55,7 +58,12 @@ public class Player extends Thread
         else if (ih.DOWN == true) {controlledObject.goDown(); }
         else if (ih.LEFT == true) {controlledObject.goLeft(); }
         else if (ih.RIGHT == true) {controlledObject.goRight(); }
-        else if (ih.ACTION == true) {((MapEntity)(controlledObject)).action(); }
+        else if (ih.ACTION == true)
+        {
+            if (controlledObject.getType().equals("Penguin")) {
+                ((MapEntity) (controlledObject)).action();
+            }
+        }
         ih.flush();
     }
 
@@ -77,7 +85,14 @@ public class Player extends Thread
         }
         else
         {
-            Game.instance.respawnPenguin(this);
+            if(PLAYER_IS_PENGUIN)
+            {
+                Game.instance.respawnPenguin(this);
+            }
+            else if (PLAYER_IS_ANIMAL)
+            {
+                Game.instance.respawnAnimal(this);
+            }
         }
     }
 

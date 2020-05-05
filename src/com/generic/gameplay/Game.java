@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG_GAME.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
@@ -31,9 +31,11 @@ public class Game {
     private Window w;
     private MapGenerator mg;
     private GameMap m;
-    private Player localPlayer;
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
+
+    private Player localPlayer;
+    private Thread LPThread;
 
     private int AIlives = 1;
 
@@ -93,14 +95,25 @@ public class Game {
 
                 if (m.getAt(initX, initY) == null) {
                     loop = false;
-                    Animal a = new Animal(initX, initY);
-                    m.place(a, initX, initY);
                     AI ai = new AI();
-                    ai.setControlledObject(a);
+
+                    if (PLAYER_IS_PENGUIN)
+                    {
+                        Animal a = new Animal(initX, initY);
+                        m.place(a, initX, initY);
+                        ai.setControlledObject(a);
+                        AIs.put(a, ai);
+                    }
+                    else if (PLAYER_IS_ANIMAL)
+                    {
+                        Penguin p = new Penguin(initX, initY);
+                        m.place(p, initX, initY);
+                        ai.setControlledObject(p);
+                        AIs.put(p, ai);
+                    }
+
                     ai.setTarget(localPlayer.getControlledObject());
                     ai.start();
-
-                    AIs.put(a, ai);
                 }
             } while (loop);
         }
@@ -116,11 +129,22 @@ public class Game {
 
             if (m.getAt(initX, initY) == null) {
                 loop = false;
-                Penguin p = new Penguin(initX, initY);
-                m.place(p, initX, initY);
-                localPlayer.setControlledObject(p);
-                localPlayer.start();
 
+                if (PLAYER_IS_PENGUIN)
+                {
+                    Penguin p = new Penguin(initX, initY);
+                    m.place(p, initX, initY);
+                    localPlayer.setControlledObject(p);
+                }
+                else if (PLAYER_IS_ANIMAL)
+                {
+                    Animal a = new Animal(initX, initY);
+                    m.place(a, initX, initY);
+                    localPlayer.setControlledObject(a);
+                }
+
+                LPThread = new Thread (localPlayer);
+                LPThread.start();
             }
         } while (loop);
     }
@@ -153,10 +177,20 @@ public class Game {
             Map.Entry pair = (Map.Entry)it.next();
             AI tmp = (AI)pair.getValue();
             tmp.flush();
+            try{
+                System.out.println("En attente de l'arrêt d'un Thread IA");
+                tmp.interrupt();
+                tmp.join();
+            }catch(Exception e){e.printStackTrace();}
             it.remove();
         }
 
         localPlayer.flush();
+        try{
+            System.out.println("En attente de l'arrêt d'un Thread Player");
+            LPThread.interrupt();
+            LPThread.join();
+        }catch(Exception e){ e.printStackTrace();}
         m.deleteMap();
 
     }
@@ -178,17 +212,24 @@ public class Game {
 
     public void animalKilled(Animal a, MapObject killer) {
 
-        AI owner = AIs.get(a);
-        owner.setControlledObject(null);
+        if (PLAYER_IS_PENGUIN) {
+            AI owner = AIs.get(a);
+            owner.setControlledObject(null);
 
-        localPlayer.setPoints("AnimalKilled", 0);
-        System.out.println("Animal Tué");
-        AIlives = AIlives - 1;
-        if (AIlives == 0) {
-            victory();
+            localPlayer.setPoints("AnimalKilled", 0);
+
+            AIlives = AIlives - 1;
+            if (AIlives == 0) {
+                victory();
+            } else {
+                respawnAnimal(owner);
+            }
         }
-        else{
-            respawnAnimal(owner);
+        else if (PLAYER_IS_ANIMAL)
+        {
+            System.out.println("Animal tué");
+            localPlayer.setControlledObject(null);
+            localPlayer.removeLive();
         }
     }
 
@@ -297,32 +338,59 @@ public class Game {
 
     public void penguinKilled(Penguin p, MapObject Killer)
     {
-        System.out.println("Pingouin tué");
-        localPlayer.setControlledObject(null);
-        localPlayer.removeLive();
+        if (PLAYER_IS_PENGUIN)
+        {
+            System.out.println("Pingouin tué");
+            localPlayer.setControlledObject(null);
+            localPlayer.removeLive();
+        }
+        else if (PLAYER_IS_ANIMAL)
+        {
+            AI owner = AIs.get(p);
+            owner.setControlledObject(null);
+
+            localPlayer.setPoints("PenguinKilled", 0);
+
+            AIlives = AIlives - 1;
+            if (AIlives == 0) {
+                victory();
+            } else {
+                respawnPenguin(owner);
+            }
+        }
     }
 
-        public void respawnAnimal(AI owner) {
-            boolean loop = true;
-            do {
+    public void respawnAnimal(Object owner) {
+        boolean loop = true;
+        do {
 
-                int initX = RandomizedInt(0, GRID_WIDTH - 1);
-                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (m.getAt(initX, initY) != null) {
-                    if (m.getAt(initX, initY).getType().equals("IceBlock")) {
-                        loop = false;
-                        Animal a = new Animal(initX, initY);
+            if (m.getAt(initX, initY) != null) {
+                if (m.getAt(initX, initY).getType().equals("IceBlock")) {
+                    loop = false;
+                    Animal a = new Animal(initX, initY);
+                    if (PLAYER_IS_PENGUIN)
+                    {
+                        AI bot = (AI)(owner);
                         m.place(a, initX, initY);
-                        owner.setControlledObject(a);
+                        bot.setControlledObject(a);
 
-                        AIs.put(a, owner);
+                        AIs.put(a, bot);
+                    }
+                    else if (PLAYER_IS_ANIMAL)
+                    {
+                        Player pl = (Player)(owner);
+                        m.place(a, initX, initY);
+                        pl.setControlledObject(a);
                     }
                 }
-            } while (loop);
-        }
+            }
+        } while (loop);
+    }
 
-    public void respawnPenguin(Player owner)
+    public void respawnPenguin(Object owner)
     {
         try{
             sleep(500);
@@ -337,8 +405,21 @@ public class Game {
             {
                 loop = false;
                 Penguin p = new Penguin(initX, initY);
-                m.place(p, initX, initY);
-                owner.setControlledObject(p);
+
+                if (PLAYER_IS_PENGUIN)
+                {
+                    Player pl = (Player)owner;
+                    m.place(p, initX, initY);
+                    pl.setControlledObject(p);
+                }
+                else if (PLAYER_IS_ANIMAL)
+                {
+                    AI bot = (AI)(owner);
+                    m.place(p, initX, initY);
+                    bot.setControlledObject(p);
+
+                    AIs.put(p, bot);
+                }
             }
         }while (loop);
     }

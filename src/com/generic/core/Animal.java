@@ -45,11 +45,10 @@ public class Animal extends MapEntity {
                 if (m.getAt(x - 1, y).getType().equals("Penguin")) {
                     m.getAt(x - 1, y).destroy(this);
                 }
-
-                // A voir en fonction de l'appel a action ou pas
-                /*if (m.getAt(x - 1, y).type == "Block") {
-                    m.getAt(x - 1, y).destroy();
-                }*/
+                else if (m.getAt(x - 1, y).getType().equals("IceBlock"))
+                {
+                    m.getAt(x - 1, y).destroy(this);
+                }
             }
             super.goLeft();
         }
@@ -64,11 +63,10 @@ public class Animal extends MapEntity {
                 if (m.getAt(x + 1, y).getType().equals("Penguin")) {
                     m.getAt(x + 1, y).destroy(this);
                 }
-
-                // A voir en fonction de l'appel a action ou pas
-                /*if (m.getAt(x + 1, y).type == "Block") {
-                    m.getAt(x + 1, y).destroy();
-                }*/
+                else if (m.getAt(x + 1, y).getType().equals("IceBlock"))
+                {
+                    m.getAt(x + 1, y).destroy(this);
+                }
             }
             super.goRight();
         }
@@ -83,11 +81,10 @@ public class Animal extends MapEntity {
                 if (m.getAt(x, y - 1).getType().equals("Penguin")) {
                     m.getAt(x, y - 1).destroy(this);
                 }
-
-                // A voir en fonction de l'appel a action ou pas
-                /*if (m.getAt(x, y - 1).type == "Block") {
-                    m.getAt(x, y - 1).destroy();
-                }*/
+                else if (m.getAt(x, y - 1).getType().equals("IceBlock"))
+                {
+                    m.getAt(x, y - 1).destroy(this);
+                }
             }
             super.goUp();
         }
@@ -102,11 +99,10 @@ public class Animal extends MapEntity {
                 if (m.getAt(x, y + 1).getType().equals("Penguin")) {
                     m.getAt(x, y + 1).destroy(this);
                 }
-
-                // A voir en fonction de l'appel a action ou pas
-                /*$if (m.getAt(x, y + 1).type == "Block") {
-                    m.getAt(x, y + 1).destroy();
-                }*/
+                else if (m.getAt(x, y + 1).getType().equals("IceBlock"))
+                {
+                    m.getAt(x, y + 1).destroy(this);
+                }
             }
             super.goDown();
         }
