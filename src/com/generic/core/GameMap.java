@@ -1,16 +1,16 @@
 package com.generic.core;
 
-public class Map {
+public class GameMap {
     //SINGLETON OK
 
     //faire en sorte de "sémaphoriser" la classe.
     //Pas besoin car pas d'erreur de modification concurrente détéctée pour le moment.
-    public static Map instance = null;
+    public static GameMap instance = null;
     private MapObject tab[][];
     private int width;
     private int height;
 
-    private Map(int width, int height)
+    private GameMap(int width, int height)
     {
         this.tab = new MapObject[width][height];
         instance = this;
@@ -18,11 +18,11 @@ public class Map {
         this.height = height;
     }
 
-    public static Map createMap(int width, int height)
+    public static GameMap createMap(int width, int height)
     {
         if (instance == null)
         {
-            instance = new Map(width, height);
+            instance = new GameMap(width, height);
         }
 
         return instance;
@@ -30,7 +30,7 @@ public class Map {
 
     public MapObject getAt(int x, int y)
     {
-        if (x < 0 ||x >= width || y < 0 || y >= height)
+        if (x < 0 ||x >= width || y < 0 || y >= height || tab == null)
         {
             return null;
         }
@@ -42,7 +42,7 @@ public class Map {
 
     public synchronized void place(MapObject o, int x, int y)
     {
-        if (x >= 0 && x < width && y >= 0 && y < height)
+        if (x >= 0 && x < width && y >= 0 && y < height && tab != null)
         {
             tab[x][y] = o;
         }
@@ -50,7 +50,7 @@ public class Map {
 
     public synchronized void release(int x, int y)
     {
-        if (x >= 0 && x < width && y >= 0 && y < height)
+        if (x >= 0 && x < width && y >= 0 && y < height && tab != null)
         {
             tab[x][y] = null;
         }
@@ -86,7 +86,15 @@ public class Map {
         return s;
     }
 
-    public static void deleteMap(){
+    public void deleteMap(){
+        for (int i = 0; i < height; i++)
+        {
+            for(int j = 0; j < width; j++)
+            {
+                tab[j][i] = null;
+            }
+        }
+        tab = null;
         instance = null;
     }
 }

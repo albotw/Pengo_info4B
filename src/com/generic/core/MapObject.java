@@ -7,7 +7,7 @@ import static com.generic.gameplay.CONFIG.*;
 public abstract class MapObject{
     protected int x;
     protected int y;
-    protected Map m;
+    protected GameMap m;
     protected String type;
 
     public MapObject(int x, int y)

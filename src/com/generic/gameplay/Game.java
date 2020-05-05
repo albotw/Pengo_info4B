@@ -1,7 +1,6 @@
 package com.generic.gameplay;
 
 import com.generic.UI.GameEndDialog;
-import com.generic.UI.ImagePanel;
 import com.generic.core.*;
 import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
@@ -9,16 +8,12 @@ import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.io.File;
-import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
-import static com.generic.gameplay.CONFIG_GAME.AI_INIT_LIVES;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
@@ -35,7 +30,7 @@ public class Game {
     private SpriteManager sm;
     private Window w;
     private MapGenerator mg;
-    private Map m;
+    private GameMap m;
     private Player localPlayer;
     private PlayerManager pm = PlayerManager.instance;
     private GameTimer time;
@@ -46,7 +41,7 @@ public class Game {
         instance = this;
 
 
-        m = Map.createMap(GRID_WIDTH, GRID_HEIGHT);
+        m = GameMap.createMap(GRID_WIDTH, GRID_HEIGHT);
         mg = new MapGenerator();
 
         AIs = new HashMap<MapEntity, AI>();
@@ -140,17 +135,30 @@ public class Game {
     public void gameOver() {
         //a ajouter: déréférencement dans les objets
         time.stopTimer();
-        AIs.clear();
-        Map.deleteMap();
-        System.out.println("Score");
-        System.out.println("DEFAITE");
-        GameEndDialog GED = new GameEndDialog(w,true,false);
+        stop();
+        GameEndDialog GED = new GameEndDialog(w,false,false);
         try {
             sleep(2000);
         }catch(Exception e){e.printStackTrace();}
-
-        Launcher.instance.onGameEnded();
+        GED.Fermer();
         renderer.stopRendering();
+        Launcher.instance.onGameEnded();
+    }
+
+    public void stop()
+    {
+        Iterator it= AIs.entrySet().iterator();
+        while(it.hasNext())
+        {
+            Map.Entry pair = (Map.Entry)it.next();
+            AI tmp = (AI)pair.getValue();
+            tmp.flush();
+            it.remove();
+        }
+
+        localPlayer.flush();
+        m.deleteMap();
+
     }
 
     public void victory()
@@ -158,13 +166,14 @@ public class Game {
         //a ajouter: déréférencement dans les objets.
         pm.getMainProfile().setPoints("GameEnded", time.getTime());
         time.stopTimer();
-        AIs.clear();
-        Map.deleteMap();
-        System.out.println("Score");
-        System.out.println("VICTOIRE");
-        GameEndDialog ged = new GameEndDialog(w, true, true);
-        Launcher.instance.onGameEnded();
+        stop();
+        GameEndDialog ged = new GameEndDialog(w, false, true);
+        try {
+            sleep(2000);
+        }catch(Exception e){e.printStackTrace();}
+        ged.Fermer();
         renderer.stopRendering();
+        Launcher.instance.onGameEnded();
     }
 
     public void animalKilled(Animal a, MapObject killer) {
@@ -172,15 +181,15 @@ public class Game {
         AI owner = AIs.get(a);
         owner.setControlledObject(null);
 
-    localPlayer.setPoints("AnimalKilled", 0);
-    System.out.println("Animal Tué");
-    AIlives = AIlives - 1;
-    if (AIlives == 0) {
-        victory();
-    }
-    else{
-        respawnAnimal(owner);
-    }
+        localPlayer.setPoints("AnimalKilled", 0);
+        System.out.println("Animal Tué");
+        AIlives = AIlives - 1;
+        if (AIlives == 0) {
+            victory();
+        }
+        else{
+            respawnAnimal(owner);
+        }
     }
 
     public void checkDiamondBlocks()
@@ -189,7 +198,7 @@ public class Game {
         /**
          * TODO: Optimisation
          */
-        Map m = Game.instance.getMap();
+        GameMap m = Game.instance.getMap();
         for (int i = 0; i < GRID_WIDTH; i++) {
             for (int j = 0; j < GRID_HEIGHT; j++) {
                 MapObject tmp = m.getAt(i, j);
@@ -335,7 +344,7 @@ public class Game {
     }
 
 
-        public Map getMap() {
+        public GameMap getMap() {
             return this.m;
         }
 

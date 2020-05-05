@@ -1,7 +1,6 @@
 package com.generic.AI;
 
-import com.generic.core.Animal;
-import com.generic.core.Map;
+import com.generic.core.GameMap;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
 
@@ -83,7 +82,7 @@ public class GenericStrategy implements Strategy{
         int x = co.getX();
         int y = co.getY();
 
-        Map m = Game.instance.getMap();
+        GameMap m = Game.instance.getMap();
 
         double d_up = INFINI;
         double d_down = INFINI;

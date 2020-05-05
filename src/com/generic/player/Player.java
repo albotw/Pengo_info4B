@@ -18,6 +18,7 @@ public class Player extends Thread
     private InputHandler ih;
     private String pseudo;
     private int points;
+    private boolean flush;
 
     public Player(String pseudo)
     {
@@ -30,7 +31,7 @@ public class Player extends Thread
     public void run()
     {
         ih = new InputHandler();
-        while(true)
+        while(!flush)
         {
             if (controlledObject != null)
             {
@@ -42,6 +43,10 @@ public class Player extends Thread
                 sleep(16);
             }catch(Exception e) {e.printStackTrace(); }
         }
+
+        this.controlledObject = null;
+        ih.flush();
+        this.ih = null;
     }
 
     public void linkInput()
@@ -52,6 +57,14 @@ public class Player extends Thread
         else if (ih.RIGHT == true) {controlledObject.goRight(); }
         else if (ih.ACTION == true) {((MapEntity)(controlledObject)).action(); }
         ih.flush();
+    }
+
+    public void flush()
+    {
+        flush = true;
+        //this.interrupt();
+        //éventuellement clear le score apres upload
+        //et les vies ou appeller reset
     }
 
     public void removeLive()

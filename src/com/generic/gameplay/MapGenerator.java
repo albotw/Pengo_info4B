@@ -1,7 +1,7 @@
 package com.generic.gameplay;
 
+import com.generic.core.GameMap;
 import com.generic.core.IceBlock;
-import com.generic.core.Map;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
@@ -9,7 +9,7 @@ import static com.generic.utils.Equations.RandomizedInt;
 public class MapGenerator {
     int x = 0;
     int y = GRID_HEIGHT - 1;
-    Map m;
+    GameMap m;
 
     public MapGenerator()
     {

@@ -1,6 +1,6 @@
 package com.generic.graphics;
 
-import com.generic.core.Map;
+import com.generic.core.GameMap;
 
 import java.util.ArrayList;
 
@@ -77,7 +77,7 @@ public class SpriteManager {
     }
 
     //Optimisation probable
-    public static void transfer(Map m, RenderThread rt)
+    public static void transfer(GameMap m, RenderThread rt)
     {
         if (m != null)
         {

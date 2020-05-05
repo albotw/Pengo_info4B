@@ -64,6 +64,7 @@ public class RenderThread extends Thread {
             }
         }
 
+        SpriteManager.instance.flushSprites();
         w.setVisible(false);
         w.dispose();
     }

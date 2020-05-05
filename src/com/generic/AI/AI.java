@@ -1,7 +1,7 @@
 package com.generic.AI;
 
 import com.generic.core.Animal;
-import com.generic.core.Map;
+import com.generic.core.GameMap;
 import com.generic.core.MapObject;
 import com.generic.gameplay.Game;
 
@@ -26,6 +26,10 @@ public class AI extends Thread{
     private boolean respawnActive;
     private int respawnTimer;
 
+    private boolean flush;
+
+    private int tickRate = AI_TICK_RATE;
+
     public AI()
     {
 
@@ -33,23 +37,32 @@ public class AI extends Thread{
 
     public void run()
     {
-        while(true)
+        while(!flush)
         {
             process();
 
             try
             {
-                sleep(AI_TICK_RATE);
+                sleep(tickRate);
             }catch(Exception e) { e.printStackTrace(); }
         }
+
+        target = null;
+        controlledObject = null;
     }
+
+    public void flush()
+    {
+        flush = true;
+    }
+
     public void process()
     {
-        if (controlledObject != null)   //si l'animal n'a pas été tué
+        if (controlledObject != null && !flush)   //si l'animal n'a pas été tué
         {
             checkStun();
             checkRespawn();
-            if (!respawnActive)
+            if (!respawnActive && !flush)
             {
                 MoveToTarget();
             }
@@ -102,7 +115,7 @@ public class AI extends Thread{
 
     public boolean isNextToTarget()         //a généraliser et déplacer dans les classes de controle spécifiques
     {
-        Map m = Game.instance.getMap();
+        GameMap m = Game.instance.getMap();
         int posX = controlledObject.getX();
         int posY = controlledObject.getY();
 
@@ -141,7 +154,7 @@ public class AI extends Thread{
         int x = controlledObject.getX();
         int y = controlledObject.getY();
 
-        Map m = Game.instance.getMap();
+        GameMap m = Game.instance.getMap();
 
         double d_up = INFINI;
         double d_down = INFINI;
