@@ -144,6 +144,7 @@ public class Game {
         Map.deleteMap();
         System.out.println("Score");
         System.out.println("DEFAITE");
+        GameEndDialog GED = new GameEndDialog(w,true,false);
         try {
             sleep(2000);
         }catch(Exception e){e.printStackTrace();}

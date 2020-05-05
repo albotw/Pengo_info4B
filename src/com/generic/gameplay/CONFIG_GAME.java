@@ -6,7 +6,7 @@ package com.generic.gameplay;
  */
 
 public class CONFIG_GAME {
-    public static int PLAYER_INIT_LIVES = 3;
+    public static int PLAYER_INIT_LIVES = 1;
     public static int AI_INIT_LIVES = 8;
 
     public static int N_PLAYERS = 1;
