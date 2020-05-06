@@ -59,4 +59,6 @@ public class LeaderboardDialog extends JDialog{
         setVisible(false);
         dispose();
     }
+
+
 }

@@ -1,6 +1,6 @@
 package com.generic.launcher;
 
-import com.generic.UI.PlaceHolderTextField;
+import com.generic.UI.PlaceholderTextField;
 import com.generic.player.Player;
 import com.generic.player.PlayerManager;
 
@@ -14,7 +14,7 @@ public class ProfileDialog extends JDialog {
     private DefaultListModel mod;
     private JButton addProfile;
     private JButton deleteProfile;
-    private PlaceHolderTextField profileName;
+    private PlaceholderTextField profileName;
     private JButton selectProfile;
     private JButton Close;
 
@@ -32,7 +32,7 @@ public class ProfileDialog extends JDialog {
 
         addProfile = new JButton("Ajouter un profil");
         deleteProfile = new JButton("Supprimer un profil");
-        profileName = new PlaceHolderTextField("Entrez le nom du profil ici");
+        profileName = new PlaceholderTextField("Entrez le nom du profil ici");
         selectProfile = new JButton("Séléctionner le profil");
 
         setLayout(new BorderLayout());

@@ -9,47 +9,45 @@ import java.awt.event.ActionListener;
 
 public class OnlineDialog extends JDialog {
 
-    private JButton SearchParty;
-    private JButton HebergerParty;
+    private JButton joinGame;
+    private JButton hostGame;
     private JButton Close;
 
     private Launcher l = Launcher.instance;
-
-    private PlayerManager pm = PlayerManager.instance;
 
     public OnlineDialog(Frame parent, boolean modal)
     {
         super(parent,modal);
 
-        SearchParty = new JButton("Se connecter une partie");
-        HebergerParty = new JButton("Heberger une partie");
+        joinGame = new JButton("Se connecter à une partie");
+        hostGame = new JButton("Héberger une partie");
         Close = new JButton("Fermer");
 
-        SearchParty.addActionListener(new ActionListener() {
+        joinGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                JoinDialog jd = new JoinDialog(l.instance, true);
+                JoinDialog jd = new JoinDialog(l, true);
                 setVisible(true);
             }
         });
-        HebergerParty.addActionListener(new ActionListener() {
+        hostGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                HostDialog hd = new HostDialog(l.instance, true);
+                HostDialog hd = new HostDialog(l, true);
                 setVisible(true);
             }
         });
 
         setLayout(new BorderLayout());
-        setTitle("Gérer les réglages");
+        setTitle("Multijoueur");
 
         JPanel choix = new JPanel();
-        choix.setBorder(BorderFactory.createTitledBorder("Choix Heberger/Rejoindre"));
+        choix.setBorder(BorderFactory.createTitledBorder("Que voulez vous faire ?"));
         choix.setLayout(new GridLayout(1,2));
-        choix.add(SearchParty);
-        choix.add(HebergerParty);
+        choix.add(joinGame);
+        choix.add(hostGame);
 
         JPanel south = new JPanel();
         south.setLayout(new GridLayout(1,1));
@@ -77,7 +75,4 @@ public class OnlineDialog extends JDialog {
         this.setVisible(false);
         this.dispose();
     }
-
-
-
 }

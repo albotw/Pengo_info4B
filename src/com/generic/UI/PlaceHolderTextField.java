@@ -5,10 +5,10 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class PlaceHolderTextField extends JTextField {
+public class PlaceholderTextField extends JTextField {
     private String placeholder;
 
-    public PlaceHolderTextField(String ph)
+    public PlaceholderTextField(String ph)
     {
         super();
         this.placeholder = ph;
