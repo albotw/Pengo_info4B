@@ -20,6 +20,7 @@ public class Player implements Runnable
     private String pseudo;
     private int points;
     private boolean flush;
+    private String team;
 
     public Player(String pseudo)
     {
@@ -142,4 +143,12 @@ public class Player implements Runnable
     }
 
     public int getRemainigLives(){ return this.currentLives;}
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
+    }
 }

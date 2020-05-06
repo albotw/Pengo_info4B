@@ -21,10 +21,26 @@ public class OnlineDialog extends JDialog {
     {
         super(parent,modal);
 
-        SearchParty = new JButton("Chercher une partie");
+        SearchParty = new JButton("Se connecter une partie");
         HebergerParty = new JButton("Heberger une partie");
         Close = new JButton("Fermer");
 
+        SearchParty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                JoinDialog jd = new JoinDialog(l.instance, true);
+                setVisible(true);
+            }
+        });
+        HebergerParty.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                HostDialog hd = new HostDialog(l.instance, true);
+                setVisible(true);
+            }
+        });
 
         setLayout(new BorderLayout());
         setTitle("Gérer les réglages");
@@ -49,13 +65,10 @@ public class OnlineDialog extends JDialog {
             }
         });
 
-        setSize(350, 300);
+        setSize(400, 400);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-
-
 
     }
 

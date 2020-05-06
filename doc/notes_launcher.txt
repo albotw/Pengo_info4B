@@ -10,12 +10,12 @@ Arborescence (simplifiée)
     -> Rejoindre une partie (en indiquant IP + Port)
         -> séléction d'équipe
         -> composition des équipes
-        -> paramètres
+        -> affichage paramètres (option)
 
     -> héberger une partie
         -> séléction d'équipe
         -> composition des équipes
-        -> paramétrage de la partie
+        -> paramétrage de la partie (option)
         -> lancer la partie
 
 

@@ -6,3 +6,21 @@ puis les renvoie à chaque joueur.
 Serveur local : le mode solo est en fait une partie multi sur un serveur mais avec un seul joueur.
 
 hybride: Le joueur peut démarrer une partie solo sans serveur, mais si il part en ligne,
+
+Le serveur démarre en mode lobby et ne crée que si il reçoit la commande de démarrage de partie.
+Le client va avoir une classe nethandler qui va gérer l'envoi et la réception de commandes.
+
+
+SERVEUR SIDE:
+    démarrage en mode lobby avec config préchargée.
+    affichage des connexions/décos des joueurs
+    une fois que la connexion considérée comme host envoie la commande de partie
+    instanciation d'un nethandler et d'un netGame
+    déroulement de la partie
+    a la fin de la partie, retour en mode lobby
+
+Client:
+    dès clic sur mode en ligne, création d'un nethandler
+    dès que l'ip est définie, connexion au serveur et début des échanges de données pour l'interface.
+    quand le serveur démarre la partie création d'un netGame en mode client qui va gérer le rendu et la mise a jour des données locales.
+    a la fin de la partie, retour dans la gestion de partie en mode host ou player.
