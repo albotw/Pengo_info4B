@@ -5,6 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static com.generic.gameplay.CONFIG_GAME.*;
+
 public class SettingsDialog extends JDialog {
 
     private JComboBox NbIA;
@@ -100,6 +102,15 @@ public class SettingsDialog extends JDialog {
 
     public void CloseSelected()
     {
+        int nAI = NbIA.getSelectedIndex() + 3;
+        int nNiveaux = NbNiveau.getSelectedIndex() + 1;
+        boolean playerIsPenguin = PenguinControl.isSelected();
+
+        setnAi(nAI);
+        setnNiveaux(nNiveaux);
+        setPlayerIsPenguin(playerIsPenguin);
+
+        System.out.println("configuration partie: IA = " + nAI + " | niveaux = " + nNiveaux + " | Joueur <=> pingouin = " + playerIsPenguin);
         this.setVisible(false);
         this.dispose();
     }

@@ -14,21 +14,21 @@ package com.generic.gameplay;
 import java.awt.*;
 
 public class CONFIG {
-    public static int INFINI = 999999;
+    public final static int INFINI = 999999;
 
-    public static String WINDOW_TITLE = "Pengo Remake ";
-    public static int WINDOW_HEIGHT = 925;
-    public static int WINDOW_WIDTH = 750;
+    public final static String WINDOW_TITLE = "Pengo Remake ";
+    public final static int WINDOW_HEIGHT = 925;
+    public final static int WINDOW_WIDTH = 750;
 
-    public static int AI_TICK_RATE = 500;
-    public static int STUN_TIME = 2000;
+    public final static int AI_TICK_RATE = 500;
+    public final static int STUN_TIME = 2000;
 
-    public static int GRID_WIDTH = 13;
-    public static int GRID_HEIGHT = 15;
+    public final static int GRID_WIDTH = 13;
+    public final static int GRID_HEIGHT = 15;
 
-    public static int SPRITE_SIZE = 50;
+    public final static int SPRITE_SIZE = 50;
 
-    public static int SERVER_PORT = 8080;
+    public final static int SERVER_PORT = 8080;
 
-    public static Color BG_DEFAULT_COLOR = Color.LIGHT_GRAY;
+    public final static Color BG_DEFAULT_COLOR = Color.LIGHT_GRAY;
 }
