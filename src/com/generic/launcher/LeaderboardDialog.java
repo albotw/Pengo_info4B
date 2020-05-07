@@ -42,9 +42,9 @@ public class LeaderboardDialog extends JDialog{
         for (int i = 0; i < l.getLadder().size(); i++)
         {
             //JLabel tmp = new JLabel(i + " | " + l.getLadder().get(i).getPseudo() + " | " + l.getLadder().get(i).getScore());
-            JLabel index = new JLabel(""+(i+1), JLabel.CENTER);
+            JLabel index  = new JLabel(""+(i+1), JLabel.CENTER);
             JLabel pseudo = new JLabel(l.getLadder().get(i).getPseudo(), JLabel.CENTER);
-            JLabel score = new JLabel(""+ l.getLadder().get(i).getScore(), JLabel.CENTER);
+            JLabel score  = new JLabel(""+ l.getLadder().get(i).getScore(), JLabel.CENTER);
             center.add(index);
             center.add(pseudo);
             center.add(score);

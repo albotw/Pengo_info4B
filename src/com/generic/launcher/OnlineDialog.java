@@ -35,8 +35,8 @@ public class OnlineDialog extends JDialog {
         stage = 0;
 
         onlineUI = new OnlineUI(this);
-        hostUI = new HostUI(this);
-        joinUI = new JoinUI(this);
+        hostUI   = new HostUI(this);
+        joinUI   = new JoinUI(this);
 
         //this.getContentPane().add(onlineUI);
         cardPanel = new JPanel();

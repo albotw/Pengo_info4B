@@ -20,7 +20,7 @@ public class OnlineUI extends JPanel {
 
         joinGame = new JButton("Se connecter à une partie");
         hostGame = new JButton("héberger une partie");
-        Close = new JButton("Fermer");
+        Close    = new JButton("Fermer");
 
         joinGame.addActionListener(new ActionListener() {
             @Override

@@ -23,14 +23,14 @@ public class LauncherUI extends JPanel {
         super();
         setLayout(null);
 
-        manager = Launcher.instance;
+        manager      = Launcher.instance;
         System.out.println(manager.toString());
-        SoloMode = new JButton("Mode Solo");
+        SoloMode     = new JButton("Mode Solo");
         SoloSettings = new JButton("Réglages (Solo)");
-        MultiMode = new JButton("Mode Réseau");
-        Profile = new JButton("Profils");
-        leaderboard = new JButton("Leaderboard");
-        Quit = new JButton("Quitter");
+        MultiMode    = new JButton("Mode Réseau");
+        Profile      = new JButton("Profils");
+        leaderboard  = new JButton("Leaderboard");
+        Quit         = new JButton("Quitter");
 
         SoloMode.addActionListener(new ActionListener() {
             @Override

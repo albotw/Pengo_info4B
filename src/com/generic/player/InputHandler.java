@@ -15,10 +15,10 @@ public class InputHandler implements KeyListener
 
     public void flush()
     {
-        UP = false;
-        DOWN = false;
-        LEFT = false;
-        RIGHT = false;
+        UP     = false;
+        DOWN   = false;
+        LEFT   = false;
+        RIGHT  = false;
         ACTION = false;
     }
 

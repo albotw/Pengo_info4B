@@ -22,16 +22,16 @@ public class LeaderboardDialogUI extends JPanel{
 
         setLayout(new BorderLayout());
 
-        JPanel north = new JPanel();
-        center = new JPanel();
-        JPanel south = new JPanel();
+        JPanel north  = new JPanel();
+               center = new JPanel();
+        JPanel south  = new JPanel();
 
 
         north.setLayout(new GridLayout(1, 1));
         south.setLayout(new GridLayout(1, 1));
 
         refresh = new JButton("Actualiser");
-        close = new JButton("Fermer");
+        close   = new JButton("Fermer");
 
         refresh.addActionListener(new ActionListener() {
             @Override

@@ -12,9 +12,9 @@ public class GameMap {
 
     private GameMap(int width, int height)
     {
-        this.tab = new MapObject[width][height];
-        instance = this;
-        this.width = width;
+        this.tab    = new MapObject[width][height];
+        instance    = this;
+        this.width  = width;
         this.height = height;
     }
 
@@ -94,7 +94,7 @@ public class GameMap {
                 tab[j][i] = null;
             }
         }
-        tab = null;
+        tab      = null;
         instance = null;
     }
 }

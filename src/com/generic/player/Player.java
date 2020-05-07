@@ -24,8 +24,8 @@ public class Player implements Runnable
 
     public Player(String pseudo)
     {
-        this.pseudo = pseudo;
-        this.points = 0;
+        this.pseudo  = pseudo;
+        this.points  = 0;
         currentLives = PLAYER_INIT_LIVES;
     }
 
@@ -49,7 +49,7 @@ public class Player implements Runnable
 
         this.controlledObject = null;
         ih.flush();
-        this.ih = null;
+        this.ih    = null;
         this.flush = false;
     }
 

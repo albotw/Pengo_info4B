@@ -40,25 +40,21 @@ public class Game {
     private int AIlives = 1;
 
     public Game() {
-        instance = this;
+        instance    = this;
 
+        m           = GameMap.createMap(GRID_WIDTH, GRID_HEIGHT);
+        mg          = new MapGenerator();
 
-        m = GameMap.createMap(GRID_WIDTH, GRID_HEIGHT);
-        mg = new MapGenerator();
-
-        AIs = new HashMap<MapEntity, AI>();
-
-
+        AIs         = new HashMap<MapEntity, AI>();
         localPlayer = pm.getMainProfile();
-        //localPlayer = new Player("Yann");
 
-        time = new GameTimer();
-
-
-        sm = SpriteManager.createSpriteManager();
-        renderer = new RenderThread();
+        time        = new GameTimer();
+        sm          = SpriteManager.createSpriteManager();
+        renderer    = new RenderThread();
+        this.w      = renderer.getWindow();
+        
         renderer.start();
-        this.w = renderer.getWindow();
+        
         mg.path_init();
 
         start();

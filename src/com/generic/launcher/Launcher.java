@@ -85,26 +85,6 @@ public class Launcher extends JFrame
         LeaderboardDialog modal = new LeaderboardDialog(this, true);
     }
 
-    public void net_lancerSelected()
-    {
-
-    }
-
-    public void net_SettingsSelected()
-    {
-
-    }
-
-    public void net_Join1Selected()
-    {
-
-    }
-
-    public void net_Join2Selected()
-    {
-
-    }
-
     public void onGameEnded()
     {
         this.setVisible(true);

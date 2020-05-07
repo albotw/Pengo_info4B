@@ -26,12 +26,12 @@ public class HostUI extends JPanel {
         this.manager = od;
         setLayout(new BorderLayout());
         startGame = new JButton("Lancer la partie");
-        Settings = new JButton("Paramètres");
-        Join1 = new JButton("Rejoindre Equipe1");
-        Join2 = new JButton("Rejoindre Equipe2");
-        equipe1 = new JList();
-        equipe2 = new JList();
-        close = new JButton("Retour");
+        Settings  = new JButton("Paramètres");
+        Join1     = new JButton("Rejoindre Equipe1");
+        Join2     = new JButton("Rejoindre Equipe2");
+        equipe1   = new JList();
+        equipe2   = new JList();
+        close     = new JButton("Retour");
 
         modE1 = new DefaultListModel();
         modE2 = new DefaultListModel();

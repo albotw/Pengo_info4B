@@ -2,9 +2,7 @@ package com.generic.player;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
- * TODO: Chargement automatique des précédents profils via fichier (sérialisé ou StreamTokenizer
- * TODO: lien Player -> Score -> PlayerContainer
- * TODO: Pattern singleton ?
+ * TODO: Chargement automatique des précédents profils via fichier (sérialisé ou StreamTokenizer)
  */
 
 public class PlayerManager {
@@ -15,7 +13,7 @@ public class PlayerManager {
 
     public PlayerManager()
     {
-        instance = this;
+        instance       = this;
         playerProfiles = new CopyOnWriteArrayList<Player>();
         playerProfiles.add(new Player("Yann"));
         setMainProfile("Yann");

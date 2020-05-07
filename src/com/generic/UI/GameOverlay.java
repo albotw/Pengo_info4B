@@ -28,10 +28,10 @@ public class GameOverlay extends JPanel{
 
         JLabel OnePlayer = new JLabel("1P | "+ localPlayer.getPseudo());
 
-        points = new JLabel("Score | 0");
-        lives = new JLabel("Vies | " + localPlayer.getRemainigLives());
+        points           = new JLabel("Score | 0");
+        lives            = new JLabel("Vies | " + localPlayer.getRemainigLives());
         remainingEnemies = new JLabel("Restants | " + g.getAIlives());
-        hiscore = new JLabel("HI | 20000");
+        hiscore          = new JLabel("HI | 20000");
 
         JPanel top = new JPanel();
         top.setLayout(new GridLayout(1, 3));

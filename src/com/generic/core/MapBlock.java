@@ -16,7 +16,7 @@ public abstract class MapBlock extends MapObject{
     }
 
     /**
-     * TODO: Optimisation ?
+     * TODO optimisation ?
      */
     public void onMoveTriggered(char direction, MapEntity source)
     {

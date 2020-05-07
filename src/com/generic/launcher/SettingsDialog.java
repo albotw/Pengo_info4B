@@ -24,11 +24,11 @@ public class SettingsDialog extends JDialog {
 
         ButtonGroup bg1 = new ButtonGroup();
 
-        NbIA = new JComboBox();
-        AnimalControl = new JRadioButton("Contrôler un animal");
+        NbIA           = new JComboBox();
+        AnimalControl  = new JRadioButton("Contrôler un animal");
         PenguinControl = new JRadioButton("Contrôler un penguin");
-        NbNiveau = new JComboBox();
-        close = new JButton("Fermer");
+        NbNiveau       = new JComboBox();
+        close          = new JButton("Fermer");
 
         bg1.add(AnimalControl);
         bg1.add(PenguinControl);
@@ -85,6 +85,9 @@ public class SettingsDialog extends JDialog {
 
     public void fillUI()
     {
+        /**
+         * TODO utiliser boucle ici, on est pas des sauvages
+         */
         PenguinControl.setSelected(true);
         AnimalControl.setSelected(false);
         NbIA.addItem("3 instances");
@@ -102,8 +105,8 @@ public class SettingsDialog extends JDialog {
 
     public void CloseSelected()
     {
-        int nAI = NbIA.getSelectedIndex() + 3;
-        int nNiveaux = NbNiveau.getSelectedIndex() + 1;
+        int     nAI             = NbIA.getSelectedIndex() + 3;
+        int     nNiveaux        = NbNiveau.getSelectedIndex() + 1;
         boolean playerIsPenguin = PenguinControl.isSelected();
 
         setnAi(nAI);

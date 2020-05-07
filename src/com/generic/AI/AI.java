@@ -19,7 +19,7 @@ public class AI extends Thread{
     private MapObject controlledObject;
 
     private boolean stunActive;     //a déplacer dans la classe de controle spé animal
-    private int stunTimer;          //a déplacer dans la classe de controle spé animal (temps de stun, var locale basée sur la constante de CONFIG
+    private int stunTimer;  //a déplacer dans la classe de controle spé animal (temps de stun, var locale basée sur la constante de CONFIG
 
     private char bannedDir;
 
@@ -95,7 +95,7 @@ public class AI extends Thread{
             if (stunActive == false && a.isStun())
             {
                 stunActive = true;
-                stunTimer = STUN_TIME;
+                stunTimer  = STUN_TIME;
                 System.out.println("Stun Actif " + stunTimer + " ms restant");
             }
 
@@ -164,28 +164,28 @@ public class AI extends Thread{
         //test et mesure case a gauche
         if (x > 0)
         {
-            if (m.getAt(x - 1, y) == null) d_left = VectorialDistance(x - 1, target.getX(), y, target.getY());
+            if   (m.getAt(x - 1, y) == null) d_left           = VectorialDistance(x - 1, target.getX(), y, target.getY());
             else if (m.getAt(x - 1, y).equals(target)) d_left = VectorialDistance(x - 1, target.getX(), y, target.getY());
         }
 
         //test et mesure case a droite
         if (x < GRID_WIDTH - 1)
         {
-            if (m.getAt(x + 1, y) == null) d_right = VectorialDistance(x + 1, target.getX(), y, target.getY());
+            if   (m.getAt(x + 1, y) == null) d_right           = VectorialDistance(x + 1, target.getX(), y, target.getY());
             else if (m.getAt(x + 1, y).equals(target)) d_right = VectorialDistance(x + 1, target.getX(), y, target.getY());
         }
 
         //test et mesure case au dessus
         if (y > 0)
         {
-            if(m.getAt(x, y - 1) == null) d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
+            if  (m.getAt(x, y - 1) == null) d_up            = VectorialDistance(x, target.getX(), y - 1, target.getY());
             else if (m.getAt(x, y - 1).equals(target)) d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
         }
 
         //test et mesure en dessous
         if (y < GRID_HEIGHT - 1)
         {
-            if (m.getAt(x, y + 1) == null) d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
+            if   (m.getAt(x, y + 1) == null) d_down           = VectorialDistance(x, target.getX(), y + 1, target.getY());
             else if (m.getAt(x, y + 1).equals(target)) d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
         }
 
@@ -228,28 +228,28 @@ public class AI extends Thread{
                 if (d_up != INFINI && d_rand == 0 && bannedDir != 'H')
                 {
                     controlledObject.goUp();
-                    loop = false;
+                    loop      = false;
                     bannedDir = 'B';
                     //System.out.println("Après tirage décide d'aller en haut");
                 }
                 else if (d_down != INFINI && d_rand == 1 && bannedDir != 'B')
                 {
                     controlledObject.goDown();
-                    loop = false;
+                    loop      = false;
                     bannedDir = 'H';
                     //System.out.println("Après tirage décide d'aller en bas");
                 }
                 else if (d_left != INFINI && d_rand == 2 && bannedDir != 'G')
                 {
                     controlledObject.goLeft();
-                    loop = false;
+                    loop      = false;
                     bannedDir = 'D';
                     //System.out.println("Après tirage décide d'aller à gauche");
                 }
                 else if (d_right != INFINI && d_rand == 3 && bannedDir != 'D')
                 {
                     controlledObject.goRight();
-                    loop = false;
+                    loop      = false;
                     bannedDir = 'G';
                     //System.out.println("Après tirage décide d'aller a droite");
                 }
@@ -275,9 +275,9 @@ public class AI extends Thread{
 
     public void setControlledObject(MapObject controlledObject) {
         System.out.println("reset bannedDir");
-        respawnActive = true;
-        respawnTimer = 2000;
-        bannedDir = '\0';
+        respawnActive         = true;
+        respawnTimer          = 2000;
+        bannedDir             = '\0';
         this.controlledObject = controlledObject;
     }
 }

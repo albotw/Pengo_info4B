@@ -27,7 +27,7 @@ public class FPSCounter implements ActionListener {
     public  void start() {
         resetTimer.start();
         current = 0;
-        last = -1;
+        last    = -1;
     }
 
     public  void stop() {

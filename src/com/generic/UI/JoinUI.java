@@ -34,19 +34,17 @@ public class JoinUI extends JPanel {
 
         setLayout(new BorderLayout());
 
-        IP = new PlaceholderTextField("Adresse IP");
-        port = new PlaceholderTextField("Port");
-        connecter = new JButton("Rejoindre");
+        IP          = new PlaceholderTextField("Adresse IP");
+        port        = new PlaceholderTextField("Port");
+        connecter   = new JButton("Rejoindre");
         deconnecter = new JButton("Se déconnecter");
-        join1 = new JButton("Rejoindre l'équipe 1");
-        join2 = new JButton("Rejoindre l'équipe 2");
-        close = new JButton("Fermer");
-
-        equipe1 = new JList();
-        equipe2 = new JList();
-
-        modE1 = new DefaultListModel();
-        modE2 = new DefaultListModel();
+        join1       = new JButton("Rejoindre l'équipe 1");
+        join2       = new JButton("Rejoindre l'équipe 2");
+        close       = new JButton("Fermer");
+        equipe1     = new JList();
+        equipe2     = new JList();
+        modE1       = new DefaultListModel();
+        modE2       = new DefaultListModel();
 
         equipe1.setModel(modE1);
         equipe2.setModel(modE2);

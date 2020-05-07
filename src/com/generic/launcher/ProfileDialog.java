@@ -30,9 +30,9 @@ public class ProfileDialog extends JDialog {
         mod = new DefaultListModel();
         profileList.setModel(mod);
 
-        addProfile = new JButton("Ajouter un profil");
+        addProfile    = new JButton("Ajouter un profil");
         deleteProfile = new JButton("Supprimer un profil");
-        profileName = new PlaceholderTextField("Entrez le nom du profil ici");
+        profileName   = new PlaceholderTextField("Entrez le nom du profil ici");
         selectProfile = new JButton("Séléctionner le profil");
 
         setLayout(new BorderLayout());
