@@ -13,10 +13,14 @@ public class HostDialog extends JDialog {
 
     private Launcher l = Launcher.instance;
     private HostUI UI;
+    private OnlineDialog manager;
 
-    public HostDialog(Frame parent, boolean modal)
+    public HostDialog(Frame parent, boolean modal, OnlineDialog od)
     {
         super(parent,modal);
+
+        this.manager = od;
+
         this.UI = new HostUI(this);
         add(UI);
 

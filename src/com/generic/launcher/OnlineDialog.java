@@ -1,5 +1,6 @@
 package com.generic.launcher;
 
+import com.generic.net.NetworkManager;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
@@ -13,21 +14,33 @@ public class OnlineDialog extends JDialog {
     private JButton hostGame;
     private JButton Close;
 
+    private HostDialog hd;
+    private JoinDialog jd;
+
+    private NetworkManager nm;
+
     private Launcher l = Launcher.instance;
 
     public OnlineDialog(Frame parent, boolean modal)
     {
         super(parent,modal);
 
+        nm = new NetworkManager(this);
+
         joinGame = new JButton("Se connecter à une partie");
         hostGame = new JButton("Héberger une partie");
         Close = new JButton("Fermer");
+        jd = new JoinDialog(l, false, this);
+        hd = new HostDialog(l, false, this);
+
+        jd.setVisible(false);
+        hd.setVisible(false);
 
         joinGame.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                JoinDialog jd = new JoinDialog(l, true);
+                jd.setVisible(true);
                 setVisible(true);
             }
         });
@@ -35,7 +48,7 @@ public class OnlineDialog extends JDialog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                HostDialog hd = new HostDialog(l, true);
+                hd.setVisible(true);
                 setVisible(true);
             }
         });
@@ -70,9 +83,42 @@ public class OnlineDialog extends JDialog {
 
     }
 
+    public void addToTeam1(String pseudo)
+    {
+        jd.addToTeam1(pseudo);
+    }
+
+    public void addToTeam2(String pseudo)
+    {
+        jd.addToTeam2(pseudo);
+    }
+
+    public void gameStart()
+    {
+
+    }
+
+    public void team1Full()
+    {
+
+    }
+
+    public void team2Full()
+    {
+
+    }
+
     public void CloseSelected()
     {
         this.setVisible(false);
         this.dispose();
+    }
+
+    public NetworkManager getNm() {
+        return nm;
+    }
+
+    public void setNm(NetworkManager nm) {
+        this.nm = nm;
     }
 }

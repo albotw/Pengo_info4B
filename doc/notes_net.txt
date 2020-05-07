@@ -11,6 +11,23 @@ Le serveur démarre en mode lobby et ne crée que si il reçoit la commande de d
 Le client va avoir une classe nethandler qui va gérer l'envoi et la réception de commandes.
 
 
+Infos a envoyer:
+    -> tentative de connexion
+    -> envoyer le pseudo
+    -> rejoindre equipe1
+    -> rejoindre equipe2
+    -> deconnecter
+
+    -> lancer la partie
+    -> paramétrage
+    -> arrêt du serveur
+
+Infos a recevoir:
+    -> contenu des équipes
+    -> possibilité de rejoindre une équipe
+    -> possibilité de rejoindre le serveur.
+
+
 SERVEUR SIDE:
     démarrage en mode lobby avec config préchargée.
     affichage des connexions/décos des joueurs

@@ -56,6 +56,20 @@ public class JoinUI extends JPanel{
         join1.setEnabled(false);
         join2.setEnabled(false);
 
+        join1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.join1Selected();
+            }
+        });
+
+        join2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manager.join2Selected();
+            }
+        });
+
         connecter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -126,6 +140,16 @@ public class JoinUI extends JPanel{
         add(center, BorderLayout.CENTER);
         add(south, BorderLayout.SOUTH);
         add(north, BorderLayout.NORTH);
+    }
+
+    public void addToTeam1(String pseudo)
+    {
+        modE1.addElement(pseudo);
+    }
+
+    public void addToTeam2(String pseudo)
+    {
+        modE2.addElement(pseudo);
     }
 
     public PlaceholderTextField getIP() {
