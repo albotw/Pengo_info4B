@@ -1,6 +1,6 @@
 package com.generic.UI;
 
-import com.generic.launcher.HostDialog;
+import com.generic.launcher.OnlineDialog;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,12 +19,11 @@ public class HostUI extends JPanel {
     private JList equipe2;
     private JButton close;
 
-    private HostDialog manager;
+    private OnlineDialog manager;
 
-    public HostUI(HostDialog hd)
-    {
+    public HostUI(OnlineDialog od) {
         super();
-        this.manager = hd;
+        this.manager = od;
         setLayout(new BorderLayout());
         startGame = new JButton("Lancer la partie");
         Settings = new JButton("Paramètres");
@@ -32,7 +31,7 @@ public class HostUI extends JPanel {
         Join2 = new JButton("Rejoindre Equipe2");
         equipe1 = new JList();
         equipe2 = new JList();
-        close = new JButton("Fermer");
+        close = new JButton("Retour");
 
         modE1 = new DefaultListModel();
         modE2 = new DefaultListModel();
@@ -85,22 +84,22 @@ public class HostUI extends JPanel {
         setLayout(new BorderLayout());
 
         JPanel north = new JPanel();
-        north.setLayout(new GridLayout(1,2));
+        north.setLayout(new GridLayout(1, 2));
         north.add(Join1);
         north.add(Join2);
 
         JPanel center = new JPanel();
-        center.setLayout(new GridLayout(1,2));
+        center.setLayout(new GridLayout(1, 2));
         center.setBorder(BorderFactory.createTitledBorder("Composition des équipes"));
         center.add(equipe1);
         center.add(equipe2);
 
         JPanel south = new JPanel();
         JPanel southTop = new JPanel();
-        southTop.setLayout(new GridLayout(1,2));
+        southTop.setLayout(new GridLayout(1, 2));
         southTop.add(startGame);
         southTop.add(Settings);
-        south.setLayout(new GridLayout(2,1));
+        south.setLayout(new GridLayout(2, 1));
         south.add(southTop);
         south.add(close);
 
@@ -181,11 +180,4 @@ public class HostUI extends JPanel {
         this.close = close;
     }
 
-    public HostDialog getManager() {
-        return manager;
-    }
-
-    public void setManager(HostDialog manager) {
-        this.manager = manager;
-    }
 }

@@ -1,13 +1,13 @@
 package com.generic.UI;
 
-import com.generic.launcher.JoinDialog;
+import com.generic.launcher.OnlineDialog;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class JoinUI extends JPanel{
+public class JoinUI extends JPanel {
     private PlaceholderTextField IP;
     private PlaceholderTextField port;
     private JButton connecter;
@@ -25,13 +25,12 @@ public class JoinUI extends JPanel{
 
     private JButton close;
 
-    private JoinDialog manager;
+    private OnlineDialog manager;
 
-    public JoinUI(JoinDialog jd)
-    {
+    public JoinUI(OnlineDialog od) {
         super();
 
-        this.manager = jd;
+        this.manager = od;
 
         setLayout(new BorderLayout());
 
@@ -59,14 +58,18 @@ public class JoinUI extends JPanel{
         join1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                join2.setEnabled(true);
                 manager.join1Selected();
+                join1.setEnabled(false);
             }
         });
 
         join2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                join1.setEnabled(true);
                 manager.join2Selected();
+                join2.setEnabled(false);
             }
         });
 
@@ -142,13 +145,11 @@ public class JoinUI extends JPanel{
         add(north, BorderLayout.NORTH);
     }
 
-    public void addToTeam1(String pseudo)
-    {
+    public void addToTeam1(String pseudo) {
         modE1.addElement(pseudo);
     }
 
-    public void addToTeam2(String pseudo)
-    {
+    public void addToTeam2(String pseudo) {
         modE2.addElement(pseudo);
     }
 
@@ -238,13 +239,5 @@ public class JoinUI extends JPanel{
 
     public void setClose(JButton close) {
         this.close = close;
-    }
-
-    public JoinDialog getManager() {
-        return manager;
-    }
-
-    public void setManager(JoinDialog manager) {
-        this.manager = manager;
     }
 }

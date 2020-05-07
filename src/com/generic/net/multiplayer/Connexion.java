@@ -34,7 +34,7 @@ public class Connexion extends Thread {
             while(loop)
             {
                 Command cmd = (Command)(commandIn.readObject());
-                System.out.println(cmd.toString());
+                System.out.println("SERVER | " +cmd.toString());
 
                 if (cmd.getVal().equals("DISCONNECT"))
                 {

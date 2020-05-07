@@ -29,7 +29,7 @@ public class NetworkManager  extends Thread{
         try {
             while (!endConnexion) {
                 Command cmd = (Command)(commandIn.readObject());
-                System.out.println(cmd.toString());
+                System.out.println("CLIENT | " + cmd.toString());
 
                 if (cmd.getVal().equals("ADD TO TEAM 1"))
                 {
