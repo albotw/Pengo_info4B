@@ -12,15 +12,13 @@ public class Serveur extends Thread{
 
     static ServerSocket ss;
 
-    private HashMap<Connexion, String> equipe1;
-    private HashMap<Connexion, String> equipe2;
+    public static Lobby l;
 
     public Serveur()
     {
         instance = this;
 
-        equipe1 = new HashMap<Connexion, String>();
-        equipe2 = new HashMap<Connexion, String>();
+        l = new Lobby();
 
         try {
             ss = new ServerSocket(port);
@@ -38,25 +36,10 @@ public class Serveur extends Thread{
         {
             try{
                 Connexion c = new Connexion(ss.accept());
+                l.addPlayer(c.getCommandOut());
                 c.start();
             }catch(Exception e){e.printStackTrace();}
         }
-    }
-
-    public HashMap<Connexion, String> getEquipe1() {
-        return equipe1;
-    }
-
-    public void setEquipe1(HashMap<Connexion, String> equipe1) {
-        this.equipe1 = equipe1;
-    }
-
-    public HashMap<Connexion, String> getEquipe2() {
-        return equipe2;
-    }
-
-    public void setEquipe2(HashMap<Connexion, String> equipe2) {
-        this.equipe2 = equipe2;
     }
 }
 

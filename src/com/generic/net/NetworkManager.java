@@ -6,14 +6,14 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 
-public class NetworkManager  extends Thread{
+public class NetworkManager  implements Runnable{
     private Socket socket;
     private int port = 8080;
     private String IP = "127.0.0.1";
     private ObjectInputStream commandIn;
     private ObjectOutputStream commandOut;
 
-    private boolean endConnexion = false;
+    private boolean endConnexion;
 
     private OnlineDialog manager;
 
@@ -55,6 +55,14 @@ public class NetworkManager  extends Thread{
                 {
                     endConnexion = true;
                 }
+                else if (cmd.getVal().equals("REMOVE TEAM 1"))
+                {
+                    manager.removeTeam1(cmd.getParam());
+                }
+                else if (cmd.getVal().equals("REMOVE TEAM 2"))
+                {
+                    manager.removeTeam2(cmd.getParam());
+                }
             }
 
             commandOut.close();
@@ -71,11 +79,9 @@ public class NetworkManager  extends Thread{
     {
         try {
             socket = new Socket(IP, port);
-            System.out.println("SOCKET CREE =>" + socket.toString());
+            System.out.println("CONNEXION [CLIENT] =>" + socket.toString());
             commandOut = new ObjectOutputStream(socket.getOutputStream());
             commandIn = new ObjectInputStream(socket.getInputStream());
-
-            start();
         }catch(Exception e){e.printStackTrace();}
     }
 

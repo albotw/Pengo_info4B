@@ -27,12 +27,19 @@ public class OnlineDialog extends JDialog {
     private JPanel cardPanel;
 
     private NetworkManager net;
+    private Thread networkThread;
+    
+    private DefaultListModel modE1;
+    private DefaultListModel modE2;
 
     private Launcher l = Launcher.instance;
 
     public OnlineDialog(Frame parent, boolean modal) {
         super(parent, modal);
         stage = 0;
+
+        modE1 = new DefaultListModel();
+        modE2 = new DefaultListModel();
 
         onlineUI = new OnlineUI(this);
         hostUI   = new HostUI(this);
@@ -62,12 +69,13 @@ public class OnlineDialog extends JDialog {
 
     public void addToTeam1(String pseudo)
     {
-
+        modE1.addElement(pseudo);
+        
     }
 
     public void addToTeam2(String pseudo)
     {
-
+        modE2.addElement(pseudo);
     }
     public void gameStart() 
     {
@@ -125,7 +133,11 @@ public class OnlineDialog extends JDialog {
     }
 
     public void connectSelected() {
+        
         net.connect("127.0.0.1", 8080);
+        networkThread = new Thread(net);
+        networkThread.start();
+        net.sendPseudo(PlayerManager.instance.getMainProfile().getPseudo());
     }
 
     public void closeSelected() {
@@ -148,8 +160,20 @@ public class OnlineDialog extends JDialog {
         net.joinTeam2(PlayerManager.instance.getMainProfile().getPseudo());
     }
 
+    public void removeTeam1(String pseudo)
+    {
+        modE1.removeElement(pseudo);
+    }
+
+    public void removeTeam2(String pseudo)
+    {
+        modE2.removeElement(pseudo);
+    }
+
     public void disconnectSelected() {
         net.disconnect();
+        modE1.removeAllElements();
+        modE2.removeAllElements();
     }
 
     public void CloseSelected() {
@@ -163,5 +187,15 @@ public class OnlineDialog extends JDialog {
 
     public void setNm(NetworkManager nm) {
         this.net = nm;
+    }
+
+    public DefaultListModel getE1()
+    {
+        return this.modE1;
+    }
+
+    public DefaultListModel getE2()
+    {
+        return this.modE2;
     }
 }

@@ -15,11 +15,12 @@ public class Connexion extends Thread {
 
     private int equipe = 0;
     private boolean refreshClientList;
+    private String pseudo;
 
     public Connexion(Socket s)
     {
         socket = s;
-        System.out.println("CONNEXION => " + s.toString());
+        System.out.println("CONNEXION [SERVER] => " + s.toString());
         try{
             commandOut = new ObjectOutputStream(s.getOutputStream());
             commandIn = new ObjectInputStream(s.getInputStream());
@@ -41,35 +42,32 @@ public class Connexion extends Thread {
                     commandOut.writeObject(new Command("DISCONNECT", "", ""));
                     loop = false;
                 }
+                else if (cmd.getVal().equals("SET PSEUDO"))
+                {
+                    this.pseudo = cmd.getParam();
+                }
                 else if (cmd.getVal().equals("JOIN TEAM 1"))
                 {
-                    if (equipe == 0)
+                    if (equipe == 2)
                     {
-                        Serveur.instance.getEquipe1().put(this, cmd.getParam());
+                        Serveur.l.removeFromTeam2(this);
                     }
-                    else if (equipe == 2)
-                    {
-                        Serveur.instance.getEquipe2().remove(this);
-                        Serveur.instance.getEquipe1().put(this, cmd.getParam());
-                    }
-
-                    refreshClientList = true;
+                    Serveur.l.putOnTeam1(this, pseudo);
+                    this.equipe = 1;
+                    // refreshClientList = true;
                 }
                 else if (cmd.getVal().equals("JOIN TEAM 2"))
                 {
-                    if (equipe == 0)
+                    if(equipe == 1)
                     {
-                        Serveur.instance.getEquipe2().put(this, cmd.getParam());
+                        Serveur.l.removeFromTeam1(this);
                     }
-                    else if (equipe == 1)
-                    {
-                        Serveur.instance.getEquipe1().remove(this);
-                        Serveur.instance.getEquipe2().put(this, cmd.getParam());
-                    }
+                    Serveur.l.putOnTeam2(this, pseudo);
+                    this.equipe = 2;
 
                     refreshClientList = true;
                 }
-
+                /**
                 if (refreshClientList)
                 {
                     Iterator it1 = Serveur.instance.getEquipe1().entrySet().iterator();
@@ -97,11 +95,22 @@ public class Connexion extends Thread {
                         }
                     }
                 }
+                */
             }
-
+            System.out.println("fermeture socket");
             commandOut.close();
             commandIn.close();
             socket.close();
         }catch(Exception e){ e.printStackTrace();}
+    }
+
+    public ObjectOutputStream getCommandOut()
+    {
+        return this.commandOut;
+    }
+
+    public String getPseudo()
+    {
+        return this.pseudo;
     }
 }

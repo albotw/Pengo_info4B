@@ -33,8 +33,8 @@ public class HostUI extends JPanel {
         equipe2   = new JList();
         close     = new JButton("Retour");
 
-        modE1 = new DefaultListModel();
-        modE2 = new DefaultListModel();
+        modE1 = manager.getE1();
+        modE2 = manager.getE2();
 
         equipe1.setModel(modE1);
         equipe2.setModel(modE2);

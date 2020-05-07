@@ -43,8 +43,8 @@ public class JoinUI extends JPanel {
         close       = new JButton("Fermer");
         equipe1     = new JList();
         equipe2     = new JList();
-        modE1       = new DefaultListModel();
-        modE2       = new DefaultListModel();
+        modE1       = manager.getE1();
+        modE2       = manager.getE2();
 
         equipe1.setModel(modE1);
         equipe2.setModel(modE2);
