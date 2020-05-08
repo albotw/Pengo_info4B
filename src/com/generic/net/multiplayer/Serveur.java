@@ -41,6 +41,11 @@ public class Serveur extends Thread{
             }catch(Exception e){e.printStackTrace();}
         }
     }
+
+    public void stopServer()
+    {
+        flush = true;
+    }
 }
 
 

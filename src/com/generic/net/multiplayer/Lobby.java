@@ -14,6 +14,7 @@ public class Lobby {
     public Lobby()
     {
         cmdOuts = new ArrayList<ObjectOutputStream>();
+
         equipe1 = new HashMap<Connexion, String>();
         equipe2 = new HashMap<Connexion, String>();
     }
@@ -21,7 +22,13 @@ public class Lobby {
     public void addPlayer(ObjectOutputStream oos)
     {
         cmdOuts.add(oos);
-        System.out.println(cmdOuts.toString());
+        System.out.println("joueur ajouté");
+    }
+
+    public void removePlayer(ObjectOutputStream oos)
+    {
+        cmdOuts.remove(oos);
+        System.out.println("joueur supprimé");
     }
 
     public void putOnTeam1(Connexion c, String s)

@@ -4,6 +4,7 @@ import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
 import com.generic.net.NetworkManager;
+import com.generic.net.multiplayer.Serveur;
 import com.generic.player.PlayerManager;
 import com.generic.player.Player;
 
@@ -33,6 +34,8 @@ public class OnlineDialog extends JDialog {
     private DefaultListModel modE2;
 
     private Launcher l = Launcher.instance;
+
+    private Serveur srv;
 
     public OnlineDialog(Frame parent, boolean modal) {
         super(parent, modal);
@@ -77,11 +80,12 @@ public class OnlineDialog extends JDialog {
     {
         modE2.addElement(pseudo);
     }
+
     public void gameStart() 
     {
         /**
-         * * est appelée lorsque le netManager a reçu la commande GAME START * doit * *
-         * * doit instancier une netGame
+         * est appellée quand le netManager a reçu la commande GAME START
+         * --> instanciation d'un netGame en mode client.
          */
     }
 
@@ -108,32 +112,31 @@ public class OnlineDialog extends JDialog {
     {
         stage = 1;
         card.show(cardPanel, "1");
+        srv = new Serveur();
+
+        net.connect("127.0.0.1", 8080);
+        networkThread = new Thread(net);
+        networkThread.start();
+        net.sendPseudo(PlayerManager.instance.getMainProfile().getPseudo());
     }
 
     //* options uniquement valable pour l'hote
-    public void startGameSelected() {
-
+    public void startGameSelected()
+    {
+        /**
+         * Quand l'hôte clique sur lancer la partie.
+         */
     }
 
-    public void settingsSelected() {
-
-    }
-
-    public void refreshTeams(ArrayList<Player> al) {
-        // UI.getModE1().removeAllElements();
-        // UI.getModE2().removeAllElements();
-
-        for (Player p : al) {
-            if (p.getTeam().equals("Team1")) {
-                // UI.getModE1().addElement(p.getPseudo());
-            } else if (p.getTeam().equals("Team2")) {
-                // UI.getModE2().addElement(p.getPseudo());
-            }
-        }
+    public void settingsSelected()
+    {
+        /**
+         * Quand l'hôte clique sur réglages.
+         */
     }
 
     public void connectSelected() {
-        
+
         net.connect("127.0.0.1", 8080);
         networkThread = new Thread(net);
         networkThread.start();
@@ -141,6 +144,11 @@ public class OnlineDialog extends JDialog {
     }
 
     public void closeSelected() {
+        if (stage == 1)
+        {
+            net.disconnect();
+            srv.stopServer();
+        }
         if (stage != 0)
         {
             card.show(cardPanel, "0");

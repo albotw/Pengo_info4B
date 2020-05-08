@@ -24,7 +24,6 @@ public class NetworkManager  implements Runnable{
 
     public void run()
     {
-        System.out.println("entrée run");
         //récup commande et appel des fonctions liées
         try {
             while (!endConnexion) {
@@ -69,7 +68,6 @@ public class NetworkManager  implements Runnable{
             commandIn.close();
             socket.close();
 
-
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -82,6 +80,7 @@ public class NetworkManager  implements Runnable{
             System.out.println("CONNEXION [CLIENT] =>" + socket.toString());
             commandOut = new ObjectOutputStream(socket.getOutputStream());
             commandIn = new ObjectInputStream(socket.getInputStream());
+            endConnexion = false;
         }catch(Exception e){e.printStackTrace();}
     }
 

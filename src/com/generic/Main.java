@@ -5,13 +5,11 @@ import com.generic.net.multiplayer.Serveur;
 
 public class Main {
 
-    public static void main(String[] args) {
-
-        Serveur srv = new Serveur();
+    public static void main(String[] args)
+    {
+        //Serveur srv = new Serveur();
         Launcher l = new Launcher();
-
         //Game g = new Game();
-
     }
 
 }
