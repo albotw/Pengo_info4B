@@ -15,6 +15,7 @@ package com.generic.graphics;
 import com.generic.UI.GameOverlay;
 import com.generic.gameplay.CONFIG;
 import com.generic.gameplay.Game;
+import com.generic.gameplay.NetGame_Client;
 
 import java.awt.*;
 
@@ -34,10 +35,10 @@ public class RenderThread extends Thread {
         this.w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
         fps    = new FPSCounter();
         rp     = new RenderPanel();
-        go     = new GameOverlay();
+        //go     = new GameOverlay();
         w.setLayout(new BorderLayout());
         w.add(rp, BorderLayout.CENTER);
-        w.add(go, BorderLayout.NORTH);
+        //w.add(go, BorderLayout.NORTH);
 
         continueDrawing = true;
     }
@@ -47,13 +48,15 @@ public class RenderThread extends Thread {
         fps.start();
         while(continueDrawing)
         {
-            SpriteManager.transfer(Game.instance.getMap(), this);
+            //if online mode
+            //SpriteManager.transfer(Game.instance.getMap(), this);
+            SpriteManager.transfer(NetGame_Client.instance.getMap(), this);
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
             w.revalidate();
             rp.repaint();
-            go.update();
-            go.repaint();
+            //go.update();
+            //go.repaint();
 
             try
             {

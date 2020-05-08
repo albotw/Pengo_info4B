@@ -4,12 +4,17 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.generic.gameplay.NetGame_Server;
 import com.generic.net.Command;
 
 public class Lobby {
     private ArrayList<ObjectOutputStream> cmdOuts;
     private HashMap<Connexion, String> equipe1;
     private HashMap<Connexion, String> equipe2;
+
+    private Connexion host;
+
+    private NetGame_Server game;
     
     public Lobby()
     {
@@ -34,25 +39,25 @@ public class Lobby {
     public void putOnTeam1(Connexion c, String s)
     {
         equipe1.put(c, s);
-        sendCommandToAll(new Command("ADD TO TEAM 1", s, ""));
+        sendCommandToAll(new Command("ADD TO TEAM 1", s, "", ""));
     }
 
     public void putOnTeam2(Connexion c, String s)
     {
         equipe2.put(c, s);
-        sendCommandToAll(new Command("ADD TO TEAM 2", s, ""));
+        sendCommandToAll(new Command("ADD TO TEAM 2", s, "", ""));
     }
 
     public void removeFromTeam1(Connexion c)
     {
         equipe1.remove(c);
-        sendCommandToAll(new Command("REMOVE TEAM 1", c.getPseudo(), ""));
+        sendCommandToAll(new Command("REMOVE TEAM 1", c.getPseudo(), "", ""));
     }
 
     public void removeFromTeam2(Connexion c)
     {
         equipe2.remove(c);
-        sendCommandToAll(new Command("REMOVE TEAM 2", c.getPseudo(), ""));
+        sendCommandToAll(new Command("REMOVE TEAM 2", c.getPseudo(), "", ""));
     }
 
     public void sendCommandToAll(Command c)
@@ -64,9 +69,23 @@ public class Lobby {
             }catch(Exception e){e.printStackTrace();}
         }
     }
+
+    public Connexion getHost() {
+        return host;
+    }
+
+    public void setHost(Connexion host) {
+        this.host = host;
+    }
+
     public void purge(){
         cmdOuts.clear();
         equipe1.clear();
         equipe2.clear();
+    }
+
+    public void startGame()
+    {
+        game = new NetGame_Server();
     }
 }

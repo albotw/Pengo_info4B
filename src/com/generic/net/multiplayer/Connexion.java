@@ -1,12 +1,10 @@
 package com.generic.net.multiplayer;
 
+import com.generic.core.MapEntity;
 import com.generic.net.Command;
 
 import java.io.*;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Iterator;
-import java.util.Map;
 
 public class Connexion extends Thread {
     private Socket socket;
@@ -15,6 +13,7 @@ public class Connexion extends Thread {
 
     private int equipe = 0;
     private String pseudo;
+    private MapEntity controlledObject;
 
     public Connexion(Socket s)
     {
@@ -37,7 +36,7 @@ public class Connexion extends Thread {
 
                 if (cmd.getVal().equals("DISCONNECT"))
                 {
-                    commandOut.writeObject(new Command("DISCONNECT", "", ""));
+                    commandOut.writeObject(new Command("DISCONNECT", "", "", ""));
                     if (equipe == 1) Serveur.l.removeFromTeam1(this);
                     else if (equipe == 2) Serveur.l.removeFromTeam2(this);
 
@@ -46,7 +45,7 @@ public class Connexion extends Thread {
                 }
                 else if (cmd.getVal().equals("SET PSEUDO"))
                 {
-                    this.pseudo = cmd.getParam();
+                    this.pseudo = cmd.getParam0();
                 }
                 else if (cmd.getVal().equals("JOIN TEAM 1"))
                 {
@@ -66,6 +65,30 @@ public class Connexion extends Thread {
                     Serveur.l.putOnTeam2(this, pseudo);
                     this.equipe = 2;
                 }
+                else if (cmd.getVal().equals("SET HOST"))
+                {
+                    Serveur.l.setHost(this);
+                }
+                else if (cmd.getVal().equals("START GAME"))
+                {
+                    Serveur.l.startGame();
+                }
+                else if (cmd.getVal().equals("MOVE UP"))
+                {
+                    controlledObject.goUp();
+                }
+                else if (cmd.getVal().equals("MOVE DOWN"))
+                {
+                    controlledObject.goDown();
+                }
+                else if (cmd.getVal().equals("MOVE LEFT"))
+                {
+                    controlledObject.goLeft();
+                }
+                else if (cmd.getVal().equals("MOVE RIGHT"))
+                {
+                    controlledObject.goRight();
+                }
             }
             commandOut.close();
             commandIn.close();
@@ -81,5 +104,13 @@ public class Connexion extends Thread {
     public String getPseudo()
     {
         return this.pseudo;
+    }
+
+    public MapEntity getControlledObject() {
+        return controlledObject;
+    }
+
+    public void setControlledObject(MapEntity controlledObject) {
+        this.controlledObject = controlledObject;
     }
 }

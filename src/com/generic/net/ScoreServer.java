@@ -68,16 +68,16 @@ class Connexion extends Thread
                 {
                     for (int i = 0; i < ScoreServer.l.getLadder().size(); i++)
                     {
-                        commandOut.writeObject(new Command("SET SCORE", ""+ScoreServer.l.getLadder().get(i).getScore(), ScoreServer.l.getLadder().get(i).getPseudo()));
+                        commandOut.writeObject(new Command("SET SCORE", ""+ScoreServer.l.getLadder().get(i).getScore(), ScoreServer.l.getLadder().get(i).getPseudo(), ""));
                     }
-                    commandOut.writeObject(new Command("SET SCORE", "END", ""));
+                    commandOut.writeObject(new Command("SET SCORE", "END", "", ""));
                     loop = false;
                 }
                 else if (cmd.c.equals("SET SCORE"))
                 {
-                    if (!cmd.param.equals("END"))
+                    if (!cmd.param0.equals("END"))
                     {
-                        ScoreServer.l.addToLeaderboard(new ScorePair(cmd.source, Integer.parseInt(cmd.param), false));
+                        ScoreServer.l.addToLeaderboard(new ScorePair(cmd.param1, Integer.parseInt(cmd.param0), false));
                     }
                     else
                     {

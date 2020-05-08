@@ -11,6 +11,7 @@ Le serveur démarre en mode lobby et ne crée que si il reçoit la commande de d
 Le client va avoir une classe nethandler qui va gérer l'envoi et la réception de commandes.
 
 
+mode LOBBY:
 Infos a envoyer:
     -> tentative de connexion
     -> envoyer le pseudo
@@ -26,6 +27,18 @@ Infos a recevoir:
     -> contenu des équipes
     -> possibilité de rejoindre une équipe
     -> possibilité de rejoindre le serveur.
+
+
+mode GAME:
+Infos a envoyer:
+    -> envoyer touches tapées (direction choisie)
+    -> envoyer la touche d'action
+
+Infos a recevoir:
+    -> toute modification de carte.
+    -> infos sur autre joueurs ?
+    -> données pour l'interface ? (score, vies, vies de l'IA, etc..)
+Les IA sont sur la machine de l'hébergeur.
 
 
 SERVEUR SIDE:

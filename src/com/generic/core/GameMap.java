@@ -1,5 +1,9 @@
 package com.generic.core;
 
+import com.generic.gameplay.NetGame_Server;
+
+import static com.generic.gameplay.CONFIG_GAME.ONLINE_MODE;
+
 public class GameMap {
     //SINGLETON OK
 
@@ -46,6 +50,11 @@ public class GameMap {
         {
             tab[x][y] = o;
         }
+
+        if (ONLINE_MODE)
+        {
+            NetGame_Server.instance.overrideMap(x, y, o.getType());
+        }
     }
 
     public synchronized void release(int x, int y)
@@ -53,6 +62,11 @@ public class GameMap {
         if (x >= 0 && x < width && y >= 0 && y < height && tab != null)
         {
             tab[x][y] = null;
+        }
+
+        if (ONLINE_MODE)
+        {
+            NetGame_Server.instance.overrideMap(x, y, null);
         }
     }
 

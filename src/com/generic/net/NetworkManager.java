@@ -32,11 +32,11 @@ public class NetworkManager  implements Runnable{
 
                 if (cmd.getVal().equals("ADD TO TEAM 1"))
                 {
-                    manager.addToTeam1(cmd.getParam());
+                    manager.addToTeam1(cmd.getParam0());
                 }
                 else if (cmd.getVal().equals("ADD TO TEAM 2"))
                 {
-                    manager.addToTeam2(cmd.getParam());
+                    manager.addToTeam2(cmd.getParam0());
                 }
                 else if (cmd.getVal().equals("GAME START"))
                 {
@@ -56,11 +56,11 @@ public class NetworkManager  implements Runnable{
                 }
                 else if (cmd.getVal().equals("REMOVE TEAM 1"))
                 {
-                    manager.removeTeam1(cmd.getParam());
+                    manager.removeTeam1(cmd.getParam0());
                 }
                 else if (cmd.getVal().equals("REMOVE TEAM 2"))
                 {
-                    manager.removeTeam2(cmd.getParam());
+                    manager.removeTeam2(cmd.getParam0());
                 }
             }
 
@@ -84,10 +84,52 @@ public class NetworkManager  implements Runnable{
         }catch(Exception e){e.printStackTrace();}
     }
 
+    public void setHost()
+    {
+        try{
+            Command cmd = new Command("SET HOST", "", "", "");
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
+    }
+
+    public void UP()
+    {
+        try{
+            Command cmd = new Command("MOVE UP", "", "", "");
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
+    }public void DOWN()
+    {
+        try{
+            Command cmd = new Command("MOVE DOWN", "", "", "");
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
+    }public void LEFT()
+    {
+        try{
+            Command cmd = new Command("MOVE LEFT", "", "", "");
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
+    }public void RIGHT()
+    {
+        try{
+            Command cmd = new Command("MOVE RIGHT", "", "", "");
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
+    }
+
+    public void startGame()
+    {
+        try{
+            Command cmd = new Command("START GAME", "", "", "");
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
+    }
+
     public void sendPseudo(String pseudo)
     {
         try {
-            Command cmd = new Command("SET PSEUDO", pseudo, "");
+            Command cmd = new Command("SET PSEUDO", pseudo, "", "");
             commandOut.writeObject(cmd);
         }catch(Exception e){e.printStackTrace();}
     }
@@ -95,7 +137,7 @@ public class NetworkManager  implements Runnable{
     public void joinTeam1(String pseudo)
     {
         try{
-            Command cmd = new Command("JOIN TEAM 1", pseudo, "");
+            Command cmd = new Command("JOIN TEAM 1", pseudo, "", "");
             commandOut.writeObject(cmd);
         }catch(Exception e){e.printStackTrace();}
     }
@@ -103,7 +145,7 @@ public class NetworkManager  implements Runnable{
     public void joinTeam2(String pseudo)
     {
         try{
-            Command cmd = new Command("JOIN TEAM 2", pseudo, "");
+            Command cmd = new Command("JOIN TEAM 2", pseudo, "", "");
             commandOut.writeObject(cmd);
         }catch(Exception e){e.printStackTrace();}
     }
@@ -111,7 +153,7 @@ public class NetworkManager  implements Runnable{
     public void disconnect()
     {
         try{
-            Command cmd = new Command("DISCONNECT", "", "");
+            Command cmd = new Command("DISCONNECT", "", "", "");
             commandOut.writeObject(cmd);
 
             endConnexion = true;

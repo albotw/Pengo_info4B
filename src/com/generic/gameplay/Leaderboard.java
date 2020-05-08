@@ -84,7 +84,7 @@ public class Leaderboard {
             ObjectOutputStream commandOut = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream commandIn = new ObjectInputStream(socket.getInputStream());
 
-            commandOut.writeObject(new Command("GET SCORE", "", ""));
+            commandOut.writeObject(new Command("GET SCORE", "", "", ""));
 
             boolean loop = true;
             while(loop)
@@ -95,9 +95,9 @@ public class Leaderboard {
 
                 if (cmd.getVal().equals("SET SCORE"))
                 {
-                    if (!cmd.getParam().equals("END"))
+                    if (!cmd.getParam0().equals("END"))
                     {
-                        addToLeaderboard(new ScorePair(cmd.getSource(), Integer.parseInt(cmd.getParam()), false));
+                        addToLeaderboard(new ScorePair(cmd.getParam1(), Integer.parseInt(cmd.getParam0()), false));
                     }
                     else
                     {
@@ -128,12 +128,12 @@ public class Leaderboard {
 
             for (ScorePair tmp : ladder) {
                 if (tmp.isLocal()) {
-                    commandOut.writeObject(new Command("SET SCORE", Integer.toString(tmp.getScore()), tmp.getPseudo()));
+                    commandOut.writeObject(new Command("SET SCORE", Integer.toString(tmp.getScore()), tmp.getPseudo(), ""));
                     tmp.setLocal(false);
                 }
             }
 
-            commandOut.writeObject(new Command("SET SCORE", "END", ""));
+            commandOut.writeObject(new Command("SET SCORE", "END", "", ""));
 
             commandOut.close();
             socket.close();

@@ -13,8 +13,8 @@ public class MapGenerator {
 
     public MapGenerator()
     {
-        m = Game.instance.getMap();
-
+        //m = Game.instance.getMap();
+        m = NetGame_Server.instance.getMap();
         for (int i = 0; i < m.getHeight(); i++)
         {
             for (int j = 0; j < m.getWidth(); j++)

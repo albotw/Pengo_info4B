@@ -3,6 +3,7 @@ package com.generic.launcher;
 import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
+import com.generic.gameplay.NetGame_Client;
 import com.generic.net.NetworkManager;
 import com.generic.net.multiplayer.Serveur;
 import com.generic.player.PlayerManager;
@@ -118,7 +119,7 @@ public class OnlineDialog extends JDialog {
         networkThread = new Thread(net);
         networkThread.start();
         net.sendPseudo(PlayerManager.instance.getMainProfile().getPseudo());
-
+        net.setHost();
 
     }
 
@@ -128,6 +129,11 @@ public class OnlineDialog extends JDialog {
         /**
          * Quand l'hôte clique sur lancer la partie.
          */
+        net.startGame();
+        NetGame_Client ngc = new NetGame_Client(net);
+        setVisible(false);
+        Launcher.instance.setVisible(false);
+        //créer le netGame client
     }
 
     public void settingsSelected()
