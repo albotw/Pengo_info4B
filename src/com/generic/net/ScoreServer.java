@@ -12,8 +12,7 @@ public class ScoreServer {
     static final int port = 9090;
     static Leaderboard l;
 
-    public static void main(String[] args) throws Exception
-    {
+    public static void main(String[] args) throws Exception {
         ServerSocket s = new ServerSocket(port);
 
         System.out.println("SOCKET ECOUTE CREE => " + s);
@@ -26,63 +25,55 @@ public class ScoreServer {
         l.addToLeaderboard(new ScorePair("Wa", 600000, false));
         l.addToLeaderboard(new ScorePair("W", 100000, false));
 
-        while(true)
-        {
+        while (true) {
             Connexion connexion = new Connexion(s.accept());
             connexion.start();
         }
     }
 }
 
-class Connexion extends Thread
-{
+class Connexion extends Thread {
     Socket connexion;
     private ObjectInputStream commandIn;
     private ObjectOutputStream commandOut;
 
-    Connexion(Socket s)
-    {
+    private Leaderboard l = ScoreServer.l;
+
+    Connexion(Socket s) {
         connexion = s;
 
-        try{
+        try {
             commandIn = new ObjectInputStream(s.getInputStream());
             commandOut = new ObjectOutputStream(s.getOutputStream());
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void run()
-    {
-        try
-        {
+    public void run() {
+        try {
             boolean loop = true;
-            while(loop)
-            {
-                Command cmd = (Command)(commandIn.readObject());
+            while (loop) {
+                Command cmd = (Command) (commandIn.readObject());
 
                 System.out.println(cmd.toString());
 
-                if (cmd.c.equals("GET SCORE"))
-                {
-                    for (int i = 0; i < ScoreServer.l.getLadder().size(); i++)
-                    {
-                        commandOut.writeObject(new Command("SET SCORE", ""+ScoreServer.l.getLadder().get(i).getScore(), ScoreServer.l.getLadder().get(i).getPseudo(), ""));
+                if (cmd.c.equals("GET SCORE")) {
+                    for (int i = 0; i < ScoreServer.l.getLadder().size(); i++) {
+                        String score = "" + l.getLadder().get(i).getScore();
+                        String pseudo = "" + l.getLadder().get(i).getPseudo();
+                        Command out = new Command("SET SCORE", new String[] { score, pseudo });
+                        commandOut.writeObject(out);
                     }
-                    commandOut.writeObject(new Command("SET SCORE", "END", "", ""));
+                    commandOut.writeObject(new Command("SET SCORE", new String[] { "END" }));
+                } else if (cmd.c.equals("SET SCORE")) {
+                    if (!cmd.getParam(0).equals("END")) {
+                        String pseudo = cmd.getParam(1);
+                        int score = Integer.parseInt(cmd.getParam(0));
+                        l.addToLeaderboard(new ScorePair(pseudo, score, false));
+                    }
+                } else if (cmd.c.equals("DISCONNECT")) {
                     loop = false;
-                }
-                else if (cmd.c.equals("SET SCORE"))
-                {
-                    if (!cmd.param0.equals("END"))
-                    {
-                        ScoreServer.l.addToLeaderboard(new ScorePair(cmd.param1, Integer.parseInt(cmd.param0), false));
-                    }
-                    else
-                    {
-                        loop = false;
-                    }
                 }
             }
 
@@ -90,9 +81,7 @@ class Connexion extends Thread
             commandOut.close();
 
             connexion.close();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

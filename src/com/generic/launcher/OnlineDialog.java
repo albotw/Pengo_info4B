@@ -82,6 +82,8 @@ public class OnlineDialog extends JDialog {
         modE2.addElement(pseudo);
     }
 
+
+    //méthode pour le client
     public void gameStart() 
     {
         /**

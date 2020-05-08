@@ -20,6 +20,7 @@ import com.generic.gameplay.NetGame_Client;
 import java.awt.*;
 
 import static com.generic.gameplay.CONFIG.WINDOW_TITLE;
+import static com.generic.gameplay.CONFIG_GAME.*;
 
 public class RenderThread extends Thread {
 
@@ -30,40 +31,38 @@ public class RenderThread extends Thread {
     private RenderPanel rp;
 
     private GameOverlay go;
-    public RenderThread()
-    {
+
+    public RenderThread() {
         this.w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
-        fps    = new FPSCounter();
-        rp     = new RenderPanel();
-        //go     = new GameOverlay();
+        fps = new FPSCounter();
+        rp = new RenderPanel();
+        // go = new GameOverlay();
         w.setLayout(new BorderLayout());
         w.add(rp, BorderLayout.CENTER);
-        //w.add(go, BorderLayout.NORTH);
+        // w.add(go, BorderLayout.NORTH);
 
         continueDrawing = true;
     }
 
-    public void run()
-    {
+    public void run() {
         fps.start();
-        while(continueDrawing)
-        {
-            //if online mode
-            //SpriteManager.transfer(Game.instance.getMap(), this);
-            SpriteManager.transfer(NetGame_Client.instance.getMap(), this);
+        while (continueDrawing) {
+            if (ONLINE_MODE)
+                SpriteManager.transfer(NetGame_Client.instance.getMap(), this);
+            else
+                SpriteManager.transfer(Game.instance.getMap(), this);
+
             fps.frame();
-            w.setTitle(WINDOW_TITLE + " | FPS: "+fps.get());
+            w.setTitle(WINDOW_TITLE + " | FPS: " + fps.get());
             w.revalidate();
             rp.repaint();
-            //go.update();
-            //go.repaint();
 
-            try
-            {
+            // go.update();
+            // go.repaint();
+
+            try {
                 sleep(16);
-            }
-            catch (InterruptedException e)
-            {
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
@@ -73,14 +72,12 @@ public class RenderThread extends Thread {
         w.dispose();
     }
 
-    public void stopRendering()
-    {
+    public void stopRendering() {
         continueDrawing = false;
         fps.stop();
     }
 
-    public Window getWindow()
-    {
+    public Window getWindow() {
         return this.w;
     }
 }

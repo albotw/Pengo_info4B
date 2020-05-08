@@ -4,16 +4,12 @@ import java.io.Serializable;
 
 public class Command implements Serializable {
     String c;           //valeur de la commande
-    String param0;       //set de paramètres
-    String param1;      //string
-    String param2;
+    String[] params;
 
-    public Command(String c, String param, String param1, String param2)
+    public Command(String c, String[] params)
     {
         this.c = c;
-        this.param0 = param;
-        this.param1 = param1;
-        this.param2 = param2;
+        this.params = params;
     }
 
     public String getVal()
@@ -21,23 +17,17 @@ public class Command implements Serializable {
         return this.c;
     }
 
-    public String getParam0()
+    public String[] getParams()
     {
-        return this.param0;
+        return this.params;
     }
 
-    public String getParam1()
+    public String getParam(int index)
     {
-        return this.param1;
-    }
-
-    public String getParam2() { return this.param2;}
-
-    @Override
-    public String toString() {
-        return "Command{" +
-                "c='" + c + '\'' +
-                ", param='" + param0 + '\'' +
-                '}';
+        if (index >= 0 && index < params.length)
+        {
+            return params[index];
+        }
+        else return null;
     }
 }

@@ -15,10 +15,10 @@ import static com.generic.gameplay.CONFIG_GAME.PLAYER_IS_ANIMAL;
 import static com.generic.gameplay.CONFIG_GAME.PLAYER_IS_PENGUIN;
 import static com.generic.utils.Equations.RandomizedInt;
 
-public class NetGame_Server extends Thread{
+public class NetGame_Server extends Thread {
     public static NetGame_Server instance;
 
-    //a modifier avec les IA.
+    // a modifier avec les IA.
     private HashMap<MapEntity, Connexion> equipe1;
     private HashMap<MapEntity, Connexion> equipe2;
     private HashMap<MapEntity, AI> AIs;
@@ -33,8 +33,7 @@ public class NetGame_Server extends Thread{
 
     private Connexion host;
 
-    public NetGame_Server()
-    {
+    public NetGame_Server() {
         instance = this;
 
         host = Serveur.l.getHost();
@@ -86,23 +85,20 @@ public class NetGame_Server extends Thread{
                     loop = false;
                     AI ai = new AI();
 
-                    if (PLAYER_IS_PENGUIN)
-                    {
+                    if (PLAYER_IS_PENGUIN) {
                         Animal a = new Animal(initX, initY);
                         m.place(a, initX, initY);
                         ai.setControlledObject(a);
                         AIs.put(a, ai);
-                    }
-                    else if (PLAYER_IS_ANIMAL)
-                    {
+                    } else if (PLAYER_IS_ANIMAL) {
                         Penguin p = new Penguin(initX, initY);
                         m.place(p, initX, initY);
                         ai.setControlledObject(p);
                         AIs.put(p, ai);
                     }
 
-                    //recherche de cible a intégrer dans l'IA
-                    //ai.setTarget(localPlayer.getControlledObject());
+                    // recherche de cible a intégrer dans l'IA
+                    // ai.setTarget(localPlayer.getControlledObject());
                     ai.start();
                 }
             } while (loop);
@@ -110,24 +106,20 @@ public class NetGame_Server extends Thread{
     }
 
     public void initPlayers() {
-        //A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
+        // A ADAPTER POUR PLUSIEURS JOUEURS ET CONTEXTES
         boolean loop = true;
         do {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-
             if (m.getAt(initX, initY) == null) {
                 loop = false;
 
-                if (PLAYER_IS_PENGUIN)
-                {
+                if (PLAYER_IS_PENGUIN) {
                     Penguin p = new Penguin(initX, initY);
                     m.place(p, initX, initY);
                     host.setControlledObject(p);
-                }
-                else if (PLAYER_IS_ANIMAL)
-                {
+                } else if (PLAYER_IS_ANIMAL) {
                     Animal a = new Animal(initX, initY);
                     m.place(a, initX, initY);
                     host.setControlledObject(a);
@@ -136,14 +128,11 @@ public class NetGame_Server extends Thread{
         } while (loop);
     }
 
-    public void overrideMap(int x, int y, String type)
-    {
-        Command cmd = new Command("WRITE MAP", ""+x, ""+y, type);
-        l.sendCommandToAll(cmd);
+    public void overrideMap(int x, int y, String type) {
+        l.sendCommandToAll("WRITE MAP", new String[] { "" + x, "" + y, type });
     }
 
-    public GameMap getMap()
-    {
+    public GameMap getMap() {
         return this.m;
     }
 }

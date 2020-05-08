@@ -15,94 +15,74 @@ public class Connexion extends Thread {
     private String pseudo;
     private MapEntity controlledObject;
 
-    public Connexion(Socket s)
-    {
+    public Connexion(Socket s) {
         socket = s;
         System.out.println("CONNEXION [SERVER] => " + s.toString());
-        try{
+        try {
             commandOut = new ObjectOutputStream(s.getOutputStream());
             commandIn = new ObjectInputStream(s.getInputStream());
-        }catch(Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public void run()
-    {
-        try{
+    public void run() {
+        try {
             boolean loop = true;
-            while(loop)
-            {
-                Command cmd = (Command)(commandIn.readObject());
-                System.out.println("SERVER | " +cmd.toString());
+            while (loop) {
+                Command cmd = (Command) (commandIn.readObject());
+                System.out.println("SERVER | " + cmd.toString());
 
-                if (cmd.getVal().equals("DISCONNECT"))
-                {
-                    commandOut.writeObject(new Command("DISCONNECT", "", "", ""));
-                    if (equipe == 1) Serveur.l.removeFromTeam1(this);
-                    else if (equipe == 2) Serveur.l.removeFromTeam2(this);
+                if (cmd.getVal().equals("DISCONNECT")) {
+                    commandOut.writeObject(new Command("DISCONNECT", null));
+                    if (equipe == 1)
+                        Serveur.l.removeFromTeam1(this);
+                    else if (equipe == 2)
+                        Serveur.l.removeFromTeam2(this);
 
                     Serveur.l.removePlayer(this.commandOut);
                     loop = false;
-                }
-                else if (cmd.getVal().equals("SET PSEUDO"))
-                {
-                    this.pseudo = cmd.getParam0();
-                }
-                else if (cmd.getVal().equals("JOIN TEAM 1"))
-                {
-                    if (equipe == 2)
-                    {
+                } else if (cmd.getVal().equals("SET PSEUDO")) {
+                    this.pseudo = cmd.getParam(0);
+                } else if (cmd.getVal().equals("JOIN TEAM 1")) {
+                    if (equipe == 2) {
                         Serveur.l.removeFromTeam2(this);
                     }
                     Serveur.l.putOnTeam1(this, pseudo);
                     this.equipe = 1;
-                }
-                else if (cmd.getVal().equals("JOIN TEAM 2"))
-                {
-                    if(equipe == 1)
-                    {
+                } else if (cmd.getVal().equals("JOIN TEAM 2")) {
+                    if (equipe == 1) {
                         Serveur.l.removeFromTeam1(this);
                     }
                     Serveur.l.putOnTeam2(this, pseudo);
                     this.equipe = 2;
-                }
-                else if (cmd.getVal().equals("SET HOST"))
-                {
+                } else if (cmd.getVal().equals("SET HOST")) {
                     Serveur.l.setHost(this);
-                }
-                else if (cmd.getVal().equals("START GAME"))
-                {
+                } else if (cmd.getVal().equals("START GAME")) {
                     Serveur.l.startGame();
-                }
-                else if (cmd.getVal().equals("MOVE UP"))
-                {
+                } else if (cmd.getVal().equals("MOVE UP")) {
                     controlledObject.goUp();
-                }
-                else if (cmd.getVal().equals("MOVE DOWN"))
-                {
+                } else if (cmd.getVal().equals("MOVE DOWN")) {
                     controlledObject.goDown();
-                }
-                else if (cmd.getVal().equals("MOVE LEFT"))
-                {
+                } else if (cmd.getVal().equals("MOVE LEFT")) {
                     controlledObject.goLeft();
-                }
-                else if (cmd.getVal().equals("MOVE RIGHT"))
-                {
+                } else if (cmd.getVal().equals("MOVE RIGHT")) {
                     controlledObject.goRight();
                 }
             }
             commandOut.close();
             commandIn.close();
             socket.close();
-        }catch(Exception e){ e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public ObjectOutputStream getCommandOut()
-    {
+    public ObjectOutputStream getCommandOut() {
         return this.commandOut;
     }
 
-    public String getPseudo()
-    {
+    public String getPseudo() {
         return this.pseudo;
     }
 

@@ -15,58 +15,52 @@ public class Lobby {
     private Connexion host;
 
     private NetGame_Server game;
-    
-    public Lobby()
-    {
+
+    public Lobby() {
         cmdOuts = new ArrayList<ObjectOutputStream>();
 
         equipe1 = new HashMap<Connexion, String>();
         equipe2 = new HashMap<Connexion, String>();
     }
 
-    public void addPlayer(ObjectOutputStream oos)
-    {
+    public void addPlayer(ObjectOutputStream oos) {
         cmdOuts.add(oos);
         System.out.println("joueur ajouté");
     }
 
-    public void removePlayer(ObjectOutputStream oos)
-    {
+    public void removePlayer(ObjectOutputStream oos) {
         cmdOuts.remove(oos);
         System.out.println("joueur supprimé");
     }
 
-    public void putOnTeam1(Connexion c, String s)
-    {
+    public void putOnTeam1(Connexion c, String s) {
         equipe1.put(c, s);
-        sendCommandToAll(new Command("ADD TO TEAM 1", s, "", ""));
+        sendCommandToAll("ADD TO TEAM 1", new String[] { s });
     }
 
-    public void putOnTeam2(Connexion c, String s)
-    {
+    public void putOnTeam2(Connexion c, String s) {
         equipe2.put(c, s);
-        sendCommandToAll(new Command("ADD TO TEAM 2", s, "", ""));
+        sendCommandToAll("ADD TO TEAM 2", new String[] { s });
     }
 
-    public void removeFromTeam1(Connexion c)
-    {
+    public void removeFromTeam1(Connexion c) {
         equipe1.remove(c);
-        sendCommandToAll(new Command("REMOVE TEAM 1", c.getPseudo(), "", ""));
+        sendCommandToAll("REMOVE TEAM 1", new String[] { c.getPseudo() });
     }
 
-    public void removeFromTeam2(Connexion c)
-    {
+    public void removeFromTeam2(Connexion c) {
         equipe2.remove(c);
-        sendCommandToAll(new Command("REMOVE TEAM 2", c.getPseudo(), "", ""));
+        sendCommandToAll("REMOVE TEAM 2", new String[] { c.getPseudo() });
     }
 
-    public void sendCommandToAll(Command c)
-    {
-        for (ObjectOutputStream oos : cmdOuts)
-        {
-            try{
-                oos.writeObject(c);
-            }catch(Exception e){e.printStackTrace();}
+    public void sendCommandToAll(String val, String[] params) {
+        Command cmd = new Command(val, params);
+        for (ObjectOutputStream oos : cmdOuts) {
+            try {
+                oos.writeObject(cmd);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -78,14 +72,13 @@ public class Lobby {
         this.host = host;
     }
 
-    public void purge(){
+    public void purge() {
         cmdOuts.clear();
         equipe1.clear();
         equipe2.clear();
     }
 
-    public void startGame()
-    {
+    public void startGame() {
         game = new NetGame_Server();
     }
 }

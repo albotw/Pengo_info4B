@@ -9,74 +9,57 @@ import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Leaderboard {
-    //contient des paires Pseudo[string] | score[Integer]
+    // contient des paires Pseudo[string] | score[Integer]
     private CopyOnWriteArrayList<ScorePair> ladder;
 
-    public Leaderboard()
-    {
+    public Leaderboard() {
         ladder = new CopyOnWriteArrayList<ScorePair>();
     }
 
-    //Cas de leaderboard local
-    public void addToLeaderboard(Player p)
-    {
+    // Cas de leaderboard local
+    public void addToLeaderboard(Player p) {
         ScorePair toInsert = new ScorePair(p.getPseudo(), p.getPoints(), true);
         addToLeaderboard(toInsert);
     }
 
-    //cas de ScoreServer
-    public synchronized void addToLeaderboard(ScorePair sp)
-    {
+    // cas de ScoreServer
+    public synchronized void addToLeaderboard(ScorePair sp) {
         boolean added = false;
         int i = 0;
-        while (i < ladder.size() && !added){
-            if (ladder.get(i).getScore() <= sp.getScore())
-            {
+        while (i < ladder.size() && !added) {
+            if (ladder.get(i).getScore() <= sp.getScore()) {
                 ladder.add(i, sp);
                 added = true;
-            }
-            else i++;
+            } else
+                i++;
         }
 
-        //si c'est le pire score, on l'ajoute a la fin
-        if (!added)
-        {
+        // si c'est le pire score, on l'ajoute a la fin
+        if (!added) {
             ladder.add(sp);
         }
 
-        //System.out.println();
-        //print();
+        // System.out.println();
+        // print();
     }
 
-    public void print()
-    {
-        for (int i = 0; i < ladder.size(); i++)
-        {
+    public void print() {
+        for (int i = 0; i < ladder.size(); i++) {
             System.out.println(i + " | " + ladder.get(i).getPseudo() + " | " + ladder.get(i).getScore());
         }
     }
 
-    public CopyOnWriteArrayList<ScorePair> getLadder()
-    {
+    public CopyOnWriteArrayList<ScorePair> getLadder() {
         return this.ladder;
     }
 
-    private void flush()
-    {
-        for (int i = 0; i < ladder.size(); i++)
-        {
-            if (!ladder.get(i).isLocal())
-            {
-                ladder.remove(i);
-            }
-        }
+    private void flush() {
+        ladder.clear();
     }
 
-    //appelée uniquement au démarrage du launcher OU actualisation via dialog
-    public void pull()
-    {
-        try
-        {
+    // appelée uniquement au démarrage du launcher OU actualisation via dialog
+    public void pull() {
+        try {
             flush();
             Socket socket = new Socket("127.0.0.1", 9090);
             System.out.println("SOCKET CREE =>" + socket.toString());
@@ -84,65 +67,55 @@ public class Leaderboard {
             ObjectOutputStream commandOut = new ObjectOutputStream(socket.getOutputStream());
             ObjectInputStream commandIn = new ObjectInputStream(socket.getInputStream());
 
-            commandOut.writeObject(new Command("GET SCORE", "", "", ""));
+            commandOut.writeObject(new Command("GET SCORE", null));
 
             boolean loop = true;
-            while(loop)
-            {
-                Command cmd = (Command)(commandIn.readObject());
+            while (loop) {
+                Command cmd = (Command) (commandIn.readObject());
 
                 System.out.println(cmd.toString());
 
-                if (cmd.getVal().equals("SET SCORE"))
-                {
-                    if (!cmd.getParam0().equals("END"))
-                    {
-                        addToLeaderboard(new ScorePair(cmd.getParam1(), Integer.parseInt(cmd.getParam0()), false));
-                    }
-                    else
-                    {
+                if (cmd.getVal().equals("SET SCORE")) {
+                    if (!cmd.getParam(0).equals("END")) {
+                        addToLeaderboard(new ScorePair(cmd.getParam(1), Integer.parseInt(cmd.getParam(0)), false));
+                    } else {
                         loop = false;
                     }
                 }
             }
 
+            commandOut.writeObject(new Command("DISCONNECT", null));
+
             commandIn.close();
             commandOut.close();
-
             socket.close();
 
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
-    //appelée en fin de partie
-    public void push()
-    {
-        try
-        {
+    // appelée en fin de partie
+    public void push() {
+        try {
             Socket socket = new Socket("127.0.0.1", 9090);
             ObjectOutputStream commandOut = new ObjectOutputStream(socket.getOutputStream());
 
             for (ScorePair tmp : ladder) {
                 if (tmp.isLocal()) {
-                    commandOut.writeObject(new Command("SET SCORE", Integer.toString(tmp.getScore()), tmp.getPseudo(), ""));
+                    Command cmd = new Command("SET SCORE", new String[] { "" + tmp.getScore(), tmp.getPseudo() });
+                    commandOut.writeObject(cmd);
                     tmp.setLocal(false);
                 }
             }
 
-            commandOut.writeObject(new Command("SET SCORE", "END", "", ""));
-
+            commandOut.writeObject(new Command("SET SCORE", new String[] { "END" }));
+            commandOut.writeObject(new Command("DISCONNECT", null));
             commandOut.close();
             socket.close();
-        }catch(Exception e)
-        {
+        } catch (Exception e) {
             e.printStackTrace();
-        } 
+        }
     }
-} 
-
-
-
+}
