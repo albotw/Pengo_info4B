@@ -1,18 +1,14 @@
 package com.generic.UI;
 
-import com.generic.gameplay.Game;
+import com.generic.gameplay.LocalGame;
 import com.generic.player.Player;
-import com.generic.player.PlayerManager;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
-import static com.generic.gameplay.CONFIG.*;
+public class GameOverlay extends JPanel {
 
-public class GameOverlay extends JPanel{
-
-    private Game g = Game.instance;
+    private LocalGame g = (LocalGame) LocalGame.instance;
 
     private JLabel points;
     private JLabel hiscore;
@@ -21,17 +17,16 @@ public class GameOverlay extends JPanel{
 
     private Player localPlayer = g.getLocalPlayer();
 
-    public GameOverlay()
-    {
+    public GameOverlay() {
         super();
-        setLayout(new GridLayout(2,1));
+        setLayout(new GridLayout(2, 1));
 
-        JLabel OnePlayer = new JLabel("1P | "+ localPlayer.getPseudo());
+        JLabel OnePlayer = new JLabel("1P | " + localPlayer.getPseudo());
 
-        points           = new JLabel("Score | 0");
-        lives            = new JLabel("Vies | " + localPlayer.getRemainigLives());
+        points = new JLabel("Score | 0");
+        lives = new JLabel("Vies | " + localPlayer.getRemainigLives());
         remainingEnemies = new JLabel("Restants | " + g.getAIlives());
-        hiscore          = new JLabel("HI | 20000");
+        hiscore = new JLabel("HI | 20000");
 
         JPanel top = new JPanel();
         top.setLayout(new GridLayout(1, 3));
@@ -44,15 +39,13 @@ public class GameOverlay extends JPanel{
         bottom.add(lives);
         bottom.add(remainingEnemies);
 
-
         add(top);
         add(bottom);
 
         setBackground(Color.BLACK);
     }
 
-    public void update()
-    {
+    public void update() {
         points.setText("Score | " + localPlayer.getPoints());
         remainingEnemies.setText("Restants | " + g.getAIlives());
         lives.setText("Vies | " + localPlayer.getRemainigLives());
@@ -63,5 +56,3 @@ public class GameOverlay extends JPanel{
  * w.add(this);
  *
  */
-
-

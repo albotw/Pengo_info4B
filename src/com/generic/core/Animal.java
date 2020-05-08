@@ -1,52 +1,45 @@
 package com.generic.core;
 
-import com.generic.gameplay.Game;
+import com.generic.gameplay.AbstractGame;
 
 public class Animal extends MapEntity {
     private boolean isStun;
-    public Animal(int x, int y)
-    {
+
+    public Animal(int x, int y) {
         super(x, y);
         this.type = "Animal";
         this.isStun = false;
     }
 
-    public void action(){}
+    public void action() {
+    }
 
-    public void activateStun()
-    {
+    public void activateStun() {
         this.isStun = true;
     }
 
-    public void deactivateStun()
-    {
+    public void deactivateStun() {
         this.isStun = false;
     }
 
-    public boolean isStun()
-    {
+    public boolean isStun() {
         return this.isStun;
     }
 
-    public void destroy(MapObject source)
-    {
-        Game.instance.getMap().release(x, y);
-        Game.instance.animalKilled(this, source);
+    public void destroy(MapObject source) {
+        AbstractGame.instance.getMap().release(x, y);
+        AbstractGame.instance.animalKilled(this, source);
     }
 
     /**
      * TODO: Déplacement opti ?
      */
-    public void goLeft()
-    {
+    public void goLeft() {
         if (!isStun) {
-            if (m.getAt(x - 1, y) != null)
-            {
+            if (m.getAt(x - 1, y) != null) {
                 if (m.getAt(x - 1, y).getType().equals("Penguin")) {
                     m.getAt(x - 1, y).destroy(this);
-                }
-                else if (m.getAt(x - 1, y).getType().equals("IceBlock"))
-                {
+                } else if (m.getAt(x - 1, y).getType().equals("IceBlock")) {
                     m.getAt(x - 1, y).destroy(this);
                 }
             }
@@ -54,17 +47,13 @@ public class Animal extends MapEntity {
         }
     }
 
-    public void goRight()
-    {
+    public void goRight() {
         if (!isStun) {
 
-            if (m.getAt(x + 1, y) != null)
-            {
+            if (m.getAt(x + 1, y) != null) {
                 if (m.getAt(x + 1, y).getType().equals("Penguin")) {
                     m.getAt(x + 1, y).destroy(this);
-                }
-                else if (m.getAt(x + 1, y).getType().equals("IceBlock"))
-                {
+                } else if (m.getAt(x + 1, y).getType().equals("IceBlock")) {
                     m.getAt(x + 1, y).destroy(this);
                 }
             }
@@ -72,17 +61,13 @@ public class Animal extends MapEntity {
         }
     }
 
-    public void goUp()
-    {
+    public void goUp() {
         if (!isStun) {
 
-            if (m.getAt(x, y - 1) != null)
-            {
+            if (m.getAt(x, y - 1) != null) {
                 if (m.getAt(x, y - 1).getType().equals("Penguin")) {
                     m.getAt(x, y - 1).destroy(this);
-                }
-                else if (m.getAt(x, y - 1).getType().equals("IceBlock"))
-                {
+                } else if (m.getAt(x, y - 1).getType().equals("IceBlock")) {
                     m.getAt(x, y - 1).destroy(this);
                 }
             }
@@ -90,17 +75,13 @@ public class Animal extends MapEntity {
         }
     }
 
-    public void goDown()
-    {
+    public void goDown() {
         if (!isStun) {
 
-            if (m.getAt(x, y + 1) != null)
-            {
+            if (m.getAt(x, y + 1) != null) {
                 if (m.getAt(x, y + 1).getType().equals("Penguin")) {
                     m.getAt(x, y + 1).destroy(this);
-                }
-                else if (m.getAt(x, y + 1).getType().equals("IceBlock"))
-                {
+                } else if (m.getAt(x, y + 1).getType().equals("IceBlock")) {
                     m.getAt(x, y + 1).destroy(this);
                 }
             }

@@ -3,17 +3,13 @@ package com.generic.launcher;
 import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
-import com.generic.gameplay.NetGame_Client;
-import com.generic.net.NetworkManager;
+import com.generic.gameplay.OnlineClient;
+import com.generic.net.multiplayer.NetworkManager;
 import com.generic.net.multiplayer.Serveur;
 import com.generic.player.PlayerManager;
-import com.generic.player.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class OnlineDialog extends JDialog {
 
@@ -30,7 +26,7 @@ public class OnlineDialog extends JDialog {
 
     private NetworkManager net;
     private Thread networkThread;
-    
+
     private DefaultListModel modE1;
     private DefaultListModel modE2;
 
@@ -46,10 +42,10 @@ public class OnlineDialog extends JDialog {
         modE2 = new DefaultListModel();
 
         onlineUI = new OnlineUI(this);
-        hostUI   = new HostUI(this);
-        joinUI   = new JoinUI(this);
+        hostUI = new HostUI(this);
+        joinUI = new JoinUI(this);
 
-        //this.getContentPane().add(onlineUI);
+        // this.getContentPane().add(onlineUI);
         cardPanel = new JPanel();
         add(cardPanel);
 
@@ -71,29 +67,24 @@ public class OnlineDialog extends JDialog {
 
     }
 
-    public void addToTeam1(String pseudo)
-    {
+    public void addToTeam1(String pseudo) {
         modE1.addElement(pseudo);
-        
+
     }
 
-    public void addToTeam2(String pseudo)
-    {
+    public void addToTeam2(String pseudo) {
         modE2.addElement(pseudo);
     }
 
-
-    //méthode pour le client
-    public void gameStart() 
-    {
+    // méthode pour le client
+    public void gameStart() {
         /**
-         * est appellée quand le netManager a reçu la commande GAME START
-         * --> instanciation d'un netGame en mode client.
+         * est appellée quand le netManager a reçu la commande GAME START -->
+         * instanciation d'un netGame en mode client.
          */
     }
 
-    public void team1Full() 
-    {
+    public void team1Full() {
         /**
          * * optionnelle, pour bloquer automatiquement le bouton de l'équipe 1
          */
@@ -105,14 +96,12 @@ public class OnlineDialog extends JDialog {
          */
     }
 
-    public void joinGameSelected() 
-    {
+    public void joinGameSelected() {
         stage = 2;
         card.show(cardPanel, "2");
     }
 
-    public void hostGameSelected() 
-    {
+    public void hostGameSelected() {
         stage = 1;
         card.show(cardPanel, "1");
         srv = new Serveur();
@@ -125,21 +114,21 @@ public class OnlineDialog extends JDialog {
 
     }
 
-    //* options uniquement valable pour l'hote
-    public void startGameSelected()
-    {
+    // * options uniquement valable pour l'hote
+    public void startGameSelected() {
         /**
          * Quand l'hôte clique sur lancer la partie.
          */
-        net.startGame();
-        NetGame_Client ngc = new NetGame_Client(net);
         setVisible(false);
         Launcher.instance.setVisible(false);
-        //créer le netGame client
+
+        net.startGame();
+        OnlineClient ngc = new OnlineClient(net);
+
+        // créer le netGame client
     }
 
-    public void settingsSelected()
-    {
+    public void settingsSelected() {
         /**
          * Quand l'hôte clique sur réglages.
          */
@@ -154,19 +143,15 @@ public class OnlineDialog extends JDialog {
     }
 
     public void closeSelected() {
-        if (stage == 1)
-        {
+        if (stage == 1) {
             net.disconnect();
             srv.stopServer();
             modE1.removeAllElements();
             modE2.removeAllElements();
         }
-        if (stage != 0)
-        {
+        if (stage != 0) {
             card.show(cardPanel, "0");
-        }
-        else 
-        {
+        } else {
             this.setVisible(false);
             this.dispose();
         }
@@ -180,13 +165,11 @@ public class OnlineDialog extends JDialog {
         net.joinTeam2(PlayerManager.instance.getMainProfile().getPseudo());
     }
 
-    public void removeTeam1(String pseudo)
-    {
+    public void removeTeam1(String pseudo) {
         modE1.removeElement(pseudo);
     }
 
-    public void removeTeam2(String pseudo)
-    {
+    public void removeTeam2(String pseudo) {
         modE2.removeElement(pseudo);
     }
 
@@ -209,13 +192,11 @@ public class OnlineDialog extends JDialog {
         this.net = nm;
     }
 
-    public DefaultListModel getE1()
-    {
+    public DefaultListModel getE1() {
         return this.modE1;
     }
 
-    public DefaultListModel getE2()
-    {
+    public DefaultListModel getE2() {
         return this.modE2;
     }
 }

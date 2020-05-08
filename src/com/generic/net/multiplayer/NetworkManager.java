@@ -1,6 +1,7 @@
-package com.generic.net;
+package com.generic.net.multiplayer;
 
 import com.generic.launcher.OnlineDialog;
+import com.generic.net.Command;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

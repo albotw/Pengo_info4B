@@ -1,7 +1,5 @@
 package com.generic;
-import com.generic.gameplay.Game;
 import com.generic.launcher.Launcher;
-import com.generic.net.multiplayer.Serveur;
 
 public class Main {
 

@@ -2,7 +2,7 @@ package com.generic.AI;
 
 import com.generic.core.GameMap;
 import com.generic.core.MapObject;
-import com.generic.gameplay.Game;
+import com.generic.gameplay.LocalGame;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
@@ -37,7 +37,7 @@ public class GenericStrategy implements Strategy{
         MapObject output = null;
         boolean loop = true;
         do {
-            MapObject tmp = Game.instance.getMap().getAt(x, y);
+            MapObject tmp = LocalGame.instance.getMap().getAt(x, y);
             if (tmp != null)
             {
                 if (tmp.getType().equals("Penguin"))
@@ -82,7 +82,7 @@ public class GenericStrategy implements Strategy{
         int x = co.getX();
         int y = co.getY();
 
-        GameMap m = Game.instance.getMap();
+        GameMap m = LocalGame.instance.getMap();
 
         double d_up = INFINI;
         double d_down = INFINI;

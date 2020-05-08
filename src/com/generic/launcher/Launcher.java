@@ -1,9 +1,8 @@
 package com.generic.launcher;
 
 import com.generic.UI.LauncherUI;
-import com.generic.gameplay.Game;
-import com.generic.gameplay.Leaderboard;
-import com.generic.gameplay.ScorePair;
+import com.generic.gameplay.LocalGame;
+import com.generic.utils.ScorePair;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
@@ -47,7 +46,7 @@ public class Launcher extends JFrame
         if (pm.isMainProfileChosen())
         {
             this.setVisible(false);
-            Game g = new Game();
+            LocalGame g = new LocalGame();
         }
     }
 

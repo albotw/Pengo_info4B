@@ -14,8 +14,8 @@ package com.generic.graphics;
 
 import com.generic.UI.GameOverlay;
 import com.generic.gameplay.CONFIG;
-import com.generic.gameplay.Game;
-import com.generic.gameplay.NetGame_Client;
+import com.generic.gameplay.LocalGame;
+import com.generic.gameplay.OnlineClient;
 
 import java.awt.*;
 
@@ -45,12 +45,13 @@ public class RenderThread extends Thread {
     }
 
     public void run() {
+        System.out.println("--- RenderThread started ---");
         fps.start();
         while (continueDrawing) {
             if (ONLINE_MODE)
-                SpriteManager.transfer(NetGame_Client.instance.getMap(), this);
+                SpriteManager.transfer(OnlineClient.instance.getMap(), this);
             else
-                SpriteManager.transfer(Game.instance.getMap(), this);
+                SpriteManager.transfer(LocalGame.instance.getMap(), this);
 
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: " + fps.get());
@@ -59,7 +60,6 @@ public class RenderThread extends Thread {
 
             // go.update();
             // go.repaint();
-
             try {
                 sleep(16);
             } catch (InterruptedException e) {

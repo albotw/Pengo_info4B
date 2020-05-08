@@ -2,7 +2,7 @@ package com.generic.player;
 
 import com.generic.core.MapEntity;
 import com.generic.core.MapObject;
-import com.generic.gameplay.Game;
+import com.generic.gameplay.LocalGame;
 
 import static com.generic.gameplay.CONFIG_GAME.*;
 import static java.lang.Thread.sleep;
@@ -33,7 +33,7 @@ public class Player implements Runnable
     public void run()
     {
         System.out.println("Démarrage player");
-        ih = new InputHandler();
+        ih = new InputHandler(((LocalGame)(LocalGame.instance)).getWindow());
         while(!flush)
         {
             if (controlledObject != null)
@@ -82,17 +82,17 @@ public class Player implements Runnable
         currentLives--;
         if (currentLives <= 0)
         {
-            Game.instance.gameOver();
+            LocalGame.instance.gameOver();
         }
         else
         {
             if(PLAYER_IS_PENGUIN)
             {
-                Game.instance.respawnPenguin(this);
+                LocalGame.instance.respawnPenguin(this);
             }
             else if (PLAYER_IS_ANIMAL)
             {
-                Game.instance.respawnAnimal(this);
+                LocalGame.instance.respawnAnimal(this);
             }
         }
     }

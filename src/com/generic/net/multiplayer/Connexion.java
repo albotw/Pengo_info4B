@@ -15,6 +15,8 @@ public class Connexion extends Thread {
     private String pseudo;
     private MapEntity controlledObject;
 
+    private Serveur srv = Serveur.instance;
+
     public Connexion(Socket s) {
         socket = s;
         System.out.println("CONNEXION [SERVER] => " + s.toString());
@@ -36,38 +38,42 @@ public class Connexion extends Thread {
                 if (cmd.getVal().equals("DISCONNECT")) {
                     commandOut.writeObject(new Command("DISCONNECT", null));
                     if (equipe == 1)
-                        Serveur.l.removeFromTeam1(this);
+                        srv.removeFromTeam1(this);
                     else if (equipe == 2)
-                        Serveur.l.removeFromTeam2(this);
+                        srv.removeFromTeam2(this);
 
-                    Serveur.l.removePlayer(this.commandOut);
+                    srv.removePlayer(this.commandOut);
                     loop = false;
                 } else if (cmd.getVal().equals("SET PSEUDO")) {
                     this.pseudo = cmd.getParam(0);
                 } else if (cmd.getVal().equals("JOIN TEAM 1")) {
                     if (equipe == 2) {
-                        Serveur.l.removeFromTeam2(this);
+                        srv.removeFromTeam2(this);
                     }
-                    Serveur.l.putOnTeam1(this, pseudo);
+                    srv.putOnTeam1(this, pseudo);
                     this.equipe = 1;
                 } else if (cmd.getVal().equals("JOIN TEAM 2")) {
                     if (equipe == 1) {
-                        Serveur.l.removeFromTeam1(this);
+                        srv.removeFromTeam1(this);
                     }
-                    Serveur.l.putOnTeam2(this, pseudo);
+                    srv.putOnTeam2(this, pseudo);
                     this.equipe = 2;
                 } else if (cmd.getVal().equals("SET HOST")) {
-                    Serveur.l.setHost(this);
+                    srv.setHost(this);
                 } else if (cmd.getVal().equals("START GAME")) {
-                    Serveur.l.startGame();
+                    srv.startGame();
                 } else if (cmd.getVal().equals("MOVE UP")) {
-                    controlledObject.goUp();
+                    if (controlledObject != null)
+                        controlledObject.goUp();
                 } else if (cmd.getVal().equals("MOVE DOWN")) {
-                    controlledObject.goDown();
+                    if (controlledObject != null)
+                        controlledObject.goDown();
                 } else if (cmd.getVal().equals("MOVE LEFT")) {
-                    controlledObject.goLeft();
+                    if (controlledObject != null)
+                        controlledObject.goLeft();
                 } else if (cmd.getVal().equals("MOVE RIGHT")) {
-                    controlledObject.goRight();
+                    if (controlledObject != null)
+                        controlledObject.goRight();
                 }
             }
             commandOut.close();

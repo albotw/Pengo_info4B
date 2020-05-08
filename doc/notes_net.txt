@@ -39,6 +39,7 @@ Infos a recevoir:
     -> infos sur autre joueurs ?
     -> données pour l'interface ? (score, vies, vies de l'IA, etc..)
 Les IA sont sur la machine de l'hébergeur.
+Dans le cas de la partie hébergée sur le serveur, la classe connexion (package multiplayer) prend la place de la classe player.
 
 
 SERVEUR SIDE:

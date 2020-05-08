@@ -1,4 +1,4 @@
-package com.generic.gameplay;
+package com.generic.utils;
 
 public class ScorePair {
 

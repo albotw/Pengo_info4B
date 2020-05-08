@@ -1,5 +1,6 @@
-package com.generic.gameplay;
+package com.generic.launcher;
 
+import com.generic.utils.ScorePair;
 import com.generic.net.Command;
 import com.generic.player.Player;
 

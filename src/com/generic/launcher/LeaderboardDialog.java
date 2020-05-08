@@ -1,12 +1,9 @@
 package com.generic.launcher;
 
 import com.generic.UI.LeaderboardDialogUI;
-import com.generic.gameplay.Leaderboard;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LeaderboardDialog extends JDialog{
     private Leaderboard l = Launcher.instance.getLeaderboard();

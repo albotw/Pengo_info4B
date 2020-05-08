@@ -1,30 +1,26 @@
 package com.generic.core;
 
-import com.generic.gameplay.Game;
-
 import static com.generic.gameplay.CONFIG.*;
 
-public abstract class MapObject{
+import com.generic.gameplay.AbstractGame;
+
+public abstract class MapObject {
     protected int x;
     protected int y;
     protected GameMap m;
     protected String type;
 
-    public MapObject(int x, int y)
-    {
+    public MapObject(int x, int y) {
         this.x = x;
         this.y = y;
-        this.m = Game.instance.getMap();
+        this.m = AbstractGame.instance.getMap();
     }
 
     abstract void destroy(MapObject killer);
 
-    public void goLeft()
-    {
-        if (x > 0)
-        {
-            if (m.getAt(x - 1, y) == null)
-            {
+    public void goLeft() {
+        if (x > 0) {
+            if (m.getAt(x - 1, y) == null) {
                 m.release(x, y);
                 x--;
                 m.place(this, x, y);
@@ -32,12 +28,9 @@ public abstract class MapObject{
         }
     }
 
-    public void goRight()
-    {
-        if (x < GRID_WIDTH - 1)
-        {
-            if (m.getAt(x + 1, y) == null)
-            {
+    public void goRight() {
+        if (x < GRID_WIDTH - 1) {
+            if (m.getAt(x + 1, y) == null) {
                 m.release(x, y);
                 x++;
                 m.place(this, x, y);
@@ -45,12 +38,9 @@ public abstract class MapObject{
         }
     }
 
-    public void goUp()
-    {
-        if (y > 0)
-        {
-            if (m.getAt(x, y - 1) == null)
-            {
+    public void goUp() {
+        if (y > 0) {
+            if (m.getAt(x, y - 1) == null) {
                 m.release(x, y);
                 y--;
                 m.place(this, x, y);
@@ -58,12 +48,9 @@ public abstract class MapObject{
         }
     }
 
-    public void goDown()
-    {
-        if (y < GRID_HEIGHT - 1)
-        {
-            if (m.getAt(x, y + 1) == null)
-            {
+    public void goDown() {
+        if (y < GRID_HEIGHT - 1) {
+            if (m.getAt(x, y + 1) == null) {
                 m.release(x, y);
                 y++;
                 m.place(this, x, y);
@@ -91,8 +78,7 @@ public abstract class MapObject{
         return type;
     }
 
-    public void setMap()
-    {
-        this.m = Game.instance.getMap();
+    public void setMap() {
+        this.m = AbstractGame.instance.getMap();
     }
 }

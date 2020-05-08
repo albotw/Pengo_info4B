@@ -2,34 +2,39 @@ package com.generic.gameplay;
 
 import com.generic.core.*;
 import com.generic.graphics.RenderThread;
-import com.generic.net.NetworkManager;
-import com.generic.net.multiplayer.Serveur;
+import com.generic.graphics.SpriteManager;
+import com.generic.net.multiplayer.NetworkManager;
 import com.generic.player.InputHandler;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG_GAME.*;
 
-public class NetGame_Client extends Thread {
+public class OnlineClient extends Thread {
     private NetworkManager nm;
     private InputHandler ih;
     private RenderThread rt;
     private GameMap m;
+    private SpriteManager sm;
 
-    public static NetGame_Client instance;
+    public static OnlineClient instance;
 
-    public NetGame_Client(NetworkManager nm) {
+    public OnlineClient(NetworkManager nm) {
+        setOnlineMode(true);
         instance = this;
 
         this.nm = nm;
+        this.sm = SpriteManager.createSpriteManager();
 
         this.rt = new RenderThread();
+        rt.start();
 
         this.m = GameMap.createMap(GRID_WIDTH, GRID_HEIGHT);
         start();
     }
 
     public void run() {
-        this.ih = new InputHandler();
+        this.ih = new InputHandler(rt.getWindow());
         while (true) {
             if (ih.UP)
                 nm.UP();
@@ -39,6 +44,14 @@ public class NetGame_Client extends Thread {
                 nm.LEFT();
             else if (ih.RIGHT)
                 nm.RIGHT();
+
+            ih.flush();
+
+            try {
+                sleep(16);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
