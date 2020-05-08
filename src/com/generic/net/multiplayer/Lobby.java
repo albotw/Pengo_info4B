@@ -64,4 +64,9 @@ public class Lobby {
             }catch(Exception e){e.printStackTrace();}
         }
     }
+    public void purge(){
+        cmdOuts.clear();
+        equipe1.clear();
+        equipe2.clear();
+    }
 }

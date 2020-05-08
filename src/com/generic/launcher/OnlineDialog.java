@@ -118,6 +118,8 @@ public class OnlineDialog extends JDialog {
         networkThread = new Thread(net);
         networkThread.start();
         net.sendPseudo(PlayerManager.instance.getMainProfile().getPseudo());
+
+
     }
 
     //* options uniquement valable pour l'hote
@@ -148,6 +150,8 @@ public class OnlineDialog extends JDialog {
         {
             net.disconnect();
             srv.stopServer();
+            modE1.removeAllElements();
+            modE2.removeAllElements();
         }
         if (stage != 0)
         {

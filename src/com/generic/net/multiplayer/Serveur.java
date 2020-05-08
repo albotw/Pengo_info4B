@@ -38,14 +38,26 @@ public class Serveur extends Thread{
                 Connexion c = new Connexion(ss.accept());
                 l.addPlayer(c.getCommandOut());
                 c.start();
-            }catch(Exception e){e.printStackTrace();}
+            }catch(Exception e){
+                e.printStackTrace();}
         }
+        l.purge();
+        System.out.println("Arret du serveur");
     }
 
     public void stopServer()
     {
         flush = true;
+        try
+        {
+            ss.close();
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+
     }
+
 }
 
 
