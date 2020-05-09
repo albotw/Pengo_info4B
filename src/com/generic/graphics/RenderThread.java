@@ -32,6 +32,8 @@ public class RenderThread extends Thread {
 
     private GameOverlay go;
 
+    private boolean client;
+
     public RenderThread() {
         this.w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
         fps = new FPSCounter();
@@ -44,11 +46,15 @@ public class RenderThread extends Thread {
         continueDrawing = true;
     }
 
+    public void setClient(boolean val){
+        this.client = val;
+    }
+
     public void run() {
         System.out.println("--- RenderThread started ---");
         fps.start();
         while (continueDrawing) {
-            if (ONLINE_MODE)
+            if (client)
                 SpriteManager.transfer(OnlineClient.instance.getMap(), this);
             else
                 SpriteManager.transfer(LocalGame.instance.getMap(), this);

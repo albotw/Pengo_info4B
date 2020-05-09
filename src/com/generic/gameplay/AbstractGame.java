@@ -75,6 +75,40 @@ public abstract class AbstractGame {
                 }
             }
         }
+
+        /**
+         * int i = 0;
+         *         int j = 0;
+         *         boolean found = false;
+         *         while(i < GRID_HEIGHT && !found)
+         *         {
+         *             while(j < GRID_WIDTH && !found)
+         *             {
+         *                 MapObject tmp = map.getAt(i, j);
+         *
+         *                 if (map.getAt(i, j) != null) {
+         *                     if (map.getAt(i, j).getType().equals("DiamondBlock")) {
+         *                         if (map.getAt(i + 1, j) != null && map.getAt(i + 2, j) != null) {
+         *                             if (((map.getAt(i + 1, j).getType().equals("DiamondBlock")
+         *                                     && map.getAt(i + 2, j).getType().equals("DiamondBlock")))) {
+         *                                 victory();
+         *                                 found = true;
+         *                             }
+         *                             if (map.getAt(i, j + 1) != null && map.getAt(i, j + 2) != null) {
+         *                                 if (((map.getAt(i, j + 1).getType().equals("DiamondBlock")
+         *                                         && map.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
+         *                                     victory();
+         *                                 }
+         *                                 found = true;
+         *                             }
+         *
+         *                         }
+         *                     }
+         *                 }
+         *                 j++;
+         *             }
+         *             i++;
+         */
     }
 
     public abstract void initPlayers();

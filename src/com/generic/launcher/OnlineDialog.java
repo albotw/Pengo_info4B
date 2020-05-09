@@ -121,8 +121,9 @@ public class OnlineDialog extends JDialog {
         setVisible(false);
         Launcher.instance.setVisible(false);
 
-        net.startGame();
         Client = new OnlineClient(net);
+        net.startGame();
+
 
         // créer le netGame client
     }

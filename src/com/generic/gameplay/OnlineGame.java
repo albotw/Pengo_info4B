@@ -34,14 +34,15 @@ public class OnlineGame extends AbstractGame implements Runnable {
     private Serveur srv = Serveur.instance;
 
     public OnlineGame() {
-        super();
 
+        super();
+        map.setLocal(false);
         equipe1 = new HashMap<MapEntity, Connexion>();
         equipe2 = new HashMap<MapEntity, Connexion>();
         AIs = new HashMap<MapEntity, AI>();
 
         host = srv.getHost();
-
+        mg.pre_init();
         mg.path_init();
         start();
     }
@@ -194,12 +195,11 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void victory() {
-
+        System.out.println("### APPEL VICTOIRE ##");
         host.setPoints(100);
         time.stopTimer();
         stop();
         srv.sendCommandToAll("GAME END", new String[] {"VICTORY", ""+host.getPoints()});
-
     }
 
     @Override

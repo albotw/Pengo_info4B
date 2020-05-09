@@ -13,12 +13,15 @@ public class MapGenerator {
 
     public MapGenerator() {
         m = AbstractGame.instance.getMap();
+    }
+
+    public void pre_init()
+    {
         for (int i = 0; i < m.getHeight(); i++) {
             for (int j = 0; j < m.getWidth(); j++) {
                 m.place(new IceBlock(j, i), j, i);
             }
         }
-
         m.release(x, y);
     }
 

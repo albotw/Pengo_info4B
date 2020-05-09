@@ -2,7 +2,7 @@ package com.generic.core;
 
 import com.generic.gameplay.OnlineGame;
 
-import static com.generic.gameplay.CONFIG_GAME.ONLINE_MODE;
+import static com.generic.gameplay.CONFIG_GAME.CLIENT;
 
 import com.generic.gameplay.AbstractGame;
 
@@ -15,6 +15,7 @@ public class GameMap {
     private MapObject tab[][];
     private int width;
     private int height;
+    private boolean local;
 
     public GameMap(int width, int height) {
         this.tab = new MapObject[width][height];
@@ -22,6 +23,19 @@ public class GameMap {
         this.height = height;
     }
 
+    public void fill()
+    {
+        for (int i = 0; i < height; i++) {
+            for (int j = 0; j < width; j++) {
+                place(new IceBlock(j, i), j, i);
+            }
+        }
+    }
+
+    public void setLocal(boolean val)
+    {
+        this.local = val;
+    }
 
     public MapObject getAt(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height || tab == null) {
@@ -36,7 +50,7 @@ public class GameMap {
             tab[x][y] = o;
         }
 
-        if (ONLINE_MODE) {
+        if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
             srv.overrideMap(x, y, o.getType());
         }
@@ -47,9 +61,9 @@ public class GameMap {
             tab[x][y] = null;
         }
 
-        if (ONLINE_MODE) {
+        if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
-            srv.overrideMap(x, y, null);
+            srv.overrideMap(x, y, "");
         }
     }
 

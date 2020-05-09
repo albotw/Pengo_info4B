@@ -22,16 +22,17 @@ public class OnlineClient extends Thread {
     public static OnlineClient instance;
 
     public OnlineClient(NetworkManager nm) {
-        setOnlineMode(true);
         instance = this;
 
         this.nm = nm;
         this.sm = SpriteManager.createSpriteManager();
 
         this.rt = new RenderThread();
+        rt.setClient(true);
         rt.start();
 
         this.m = new GameMap(GRID_WIDTH, GRID_HEIGHT);
+        m.setLocal(true);
         start();
     }
 
