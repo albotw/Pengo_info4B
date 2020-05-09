@@ -10,6 +10,7 @@ public class Connexion extends Thread {
     private Socket socket;
     private ObjectOutputStream commandOut;
     private ObjectInputStream commandIn;
+    private int points;
 
     private int equipe = 0;
     private String pseudo;
@@ -98,5 +99,13 @@ public class Connexion extends Thread {
 
     public void setControlledObject(MapEntity controlledObject) {
         this.controlledObject = controlledObject;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public void setPoints(int points) {
+        this.points = points;
     }
 }
