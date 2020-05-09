@@ -51,6 +51,9 @@ public class NetworkManager implements Runnable {
                 } else if (cmd.getVal().equals("REMOVE TEAM 2")) {
                     manager.removeTeam2(cmd.getParam(0));
                 }
+                else if(cmd.getVal().equals("GAME END")){
+                    manager.getClient().gameEnd(cmd.getParams());
+                }
             }
 
             commandOut.close();

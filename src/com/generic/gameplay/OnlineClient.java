@@ -1,8 +1,10 @@
 package com.generic.gameplay;
 
+import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
+import com.generic.launcher.Launcher;
 import com.generic.net.multiplayer.NetworkManager;
 import com.generic.player.InputHandler;
 
@@ -81,5 +83,16 @@ public class OnlineClient extends Thread {
                 m.release(x, y);
                 break;
         }
+    }
+    public void gameEnd(String[] tab){
+        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, false);
+        try{
+            sleep(2000);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        GED.Fermer();
+        Launcher.instance.onGameEnded();
+
     }
 }

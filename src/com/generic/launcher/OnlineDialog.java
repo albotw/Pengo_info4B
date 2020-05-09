@@ -20,7 +20,7 @@ public class OnlineDialog extends JDialog {
     /**
      * 0 = onlineUI 1 = hostUI 2 = joinUI
      */
-
+    private OnlineClient Client;
     private CardLayout card;
     private JPanel cardPanel;
 
@@ -122,7 +122,7 @@ public class OnlineDialog extends JDialog {
         Launcher.instance.setVisible(false);
 
         net.startGame();
-        OnlineClient ngc = new OnlineClient(net);
+        Client = new OnlineClient(net);
 
         // créer le netGame client
     }
@@ -197,5 +197,9 @@ public class OnlineDialog extends JDialog {
 
     public DefaultListModel getE2() {
         return this.modE2;
+    }
+
+    public OnlineClient getClient() {
+        return Client;
     }
 }

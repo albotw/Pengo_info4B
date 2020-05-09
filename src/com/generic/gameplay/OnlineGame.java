@@ -1,10 +1,15 @@
 package com.generic.gameplay;
 
 import com.generic.AI.AI;
+import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
+import com.generic.graphics.RenderThread;
+import com.generic.graphics.Window;
+import com.generic.launcher.Launcher;
 import com.generic.net.multiplayer.Connexion;
 import com.generic.net.multiplayer.Serveur;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -15,11 +20,14 @@ import static com.generic.gameplay.CONFIG_GAME.*;
 import static com.generic.gameplay.CONFIG_GAME.PLAYER_IS_ANIMAL;
 import static com.generic.utils.Equations.RandomizedInt;
 
+import static java.lang.Thread.sleep;
+
 public class OnlineGame extends AbstractGame implements Runnable {
     // a modifier avec les IA.
     private HashMap<MapEntity, Connexion> equipe1;
     private HashMap<MapEntity, Connexion> equipe2;
     private HashMap<MapEntity, AI> AIs;
+    private Window w;
 
     private Connexion host;
 
@@ -148,12 +156,24 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     public void start() {
         time.start();
+        super.initDiamondBlocks();
         initPlayers();
         initIA();
     }
 
     @Override
     public void gameOver() {
+        host.setPoints(100);
+        time.stopTimer();
+        stop();
+        GameEndDialog GED = new GameEndDialog(w, false, false);
+        try {
+            sleep(2000);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        GED.Fermer();
+        Launcher.instance.onGameEnded();
 
     }
 
@@ -174,6 +194,11 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void victory() {
+
+        host.setPoints(100);
+        time.stopTimer();
+        stop();
+        srv.sendCommandToAll("GAME END", new String[] {"VICTORY", ""+host.getPoints()});
 
     }
 
