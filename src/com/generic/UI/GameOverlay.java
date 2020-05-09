@@ -1,58 +1,76 @@
 package com.generic.UI;
 
 import com.generic.gameplay.LocalGame;
+import com.generic.launcher.Launcher;
 import com.generic.player.Player;
+import com.generic.player.PlayerManager;
 
 import javax.swing.*;
 import java.awt.*;
+
+import static com.generic.gameplay.CONFIG_GAME.CLIENT;
 
 public class GameOverlay extends JPanel {
 
     private LocalGame g = (LocalGame) LocalGame.instance;
 
-    private JLabel points;
-    private JLabel hiscore;
-    private JLabel lives;
-    private JLabel remainingEnemies;
+    private String pseudo;
+    private int score;
+    private int vies;
+    private int remainigEnemies;
+
+    private Image background;
 
     private Player localPlayer = g.getLocalPlayer();
 
     public GameOverlay() {
         super();
-        setLayout(new GridLayout(2, 1));
+        this.setPreferredSize(new Dimension(750, 50));
+        //ImageIcon ii = new ImageIcon("src/ressources/PlayerBar.png");
+        //this.background = ii.getImage();
 
-        JLabel OnePlayer = new JLabel("1P | " + localPlayer.getPseudo());
+        pseudo = "YANN";
+        score = 2000;
+        vies = 5;
+        remainigEnemies = 8;
 
-        points = new JLabel("Score | 0");
-        lives = new JLabel("Vies | " + localPlayer.getRemainigLives());
-        remainingEnemies = new JLabel("Restants | " + g.getAIlives());
-        hiscore = new JLabel("HI | 20000");
-
-        JPanel top = new JPanel();
-        top.setLayout(new GridLayout(1, 3));
-        top.add(OnePlayer);
-        top.add(points);
-        top.add(hiscore);
-
-        JPanel bottom = new JPanel();
-        bottom.setLayout(new GridLayout(1, 2));
-        bottom.add(lives);
-        bottom.add(remainingEnemies);
-
-        add(top);
-        add(bottom);
 
         setBackground(Color.BLACK);
     }
 
     public void update() {
-        points.setText("Score | " + localPlayer.getPoints());
-        remainingEnemies.setText("Restants | " + g.getAIlives());
-        lives.setText("Vies | " + localPlayer.getRemainigLives());
+        Player p = PlayerManager.instance.getMainProfile();
+        if (p != null)
+        {
+            pseudo = p.getPseudo();
+            score = p.getPoints();
+            vies= p.getRemainigLives();
+            if (CLIENT == false)
+            {
+                remainigEnemies = ((LocalGame)(LocalGame.instance)).getAIlives();
+            }
+        }
+    }
+
+    public void draw(Graphics g)
+    {
+        if (background != null)
+            g.drawImage(this.background, 0, 0, this);
+        //g.setfont();
+        g.setColor(Color.GREEN);
+        g.drawString(pseudo, 15, 15);
+        g.drawString(""+score + " POINTS", 100, 15);
+        g.drawString("" +vies + " VIES", 200, 15);
+        g.drawString(""+remainigEnemies + " A TUER", 300, 15);
+    }
+
+    @Override
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        draw(g);
     }
 }
 
 /**
- * w.add(this);
  *
  */

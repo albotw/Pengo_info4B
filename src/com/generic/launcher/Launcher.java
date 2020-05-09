@@ -29,7 +29,6 @@ public class Launcher extends JFrame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
 
-
         pm = new PlayerManager();
         l = new Leaderboard();
         l.pull();

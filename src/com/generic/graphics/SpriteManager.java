@@ -2,6 +2,8 @@ package com.generic.graphics;
 
 import com.generic.core.GameMap;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 import static com.generic.gameplay.CONFIG.*;
@@ -117,7 +119,27 @@ public class SpriteManager {
                     else
                     {
                         Sprite spr = new Sprite(xpos, ypos);
-                        spr.loadImage("src/ressources/Wall.png");
+
+                        if (i == -1)
+                        {
+                            if (j == -1) spr.loadImage("src/ressources/WA_HG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/WA_HD.png");
+                            else spr.loadImage("src/ressources/WallH.png");
+                        }
+                        else if (i == GRID_HEIGHT)
+                        {
+                            if(j == -1) spr.loadImage("src/ressources/WA_BG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/WA_BD.png");
+                            else spr.loadImage("src/ressources/WallB.png");
+                        }
+                        else if (j == - 1)
+                        {
+                            spr.loadImage("src/ressources/WallG.png");
+                        }
+                        else if (j == GRID_WIDTH)
+                        {
+                            spr.loadImage("src/ressources/WallD.png");
+                        }
                         instance.addSprite(spr, "background");
                     }
                     xpos += SPRITE_SIZE;

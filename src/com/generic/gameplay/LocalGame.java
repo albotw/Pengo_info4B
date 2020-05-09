@@ -31,16 +31,22 @@ public class LocalGame extends AbstractGame {
 
     private int AIlives = AI_INIT_LIVES;
 
-    public LocalGame() {
+    public LocalGame(){
         super();
+        setCLIENT(false);
+        map.setLocal(true);
 
         AIs = new HashMap<MapEntity, AI>();
         localPlayer = pm.getMainProfile();
         sm = SpriteManager.createSpriteManager();
+
         renderer = new RenderThread();
         this.w = renderer.getWindow();
+
+        renderer.setClient(false);
         renderer.start();
 
+        mg.pre_init();
         mg.path_init();
 
         start();
@@ -64,7 +70,8 @@ public class LocalGame extends AbstractGame {
                         map.place(a, initX, initY);
                         ai.setControlledObject(a);
                         AIs.put(a, ai);
-                    } else if (PLAYER_IS_ANIMAL) {
+                    }
+                    else if (PLAYER_IS_ANIMAL) {
                         Penguin p = new Penguin(initX, initY);
                         map.place(p, initX, initY);
                         ai.setControlledObject(p);
@@ -105,8 +112,9 @@ public class LocalGame extends AbstractGame {
     }
 
     public void start() {
+        System.out.println("--- Game started ---");
         time.start();
-        super.initDiamondBlocks();
+        initDiamondBlocks();
         initPlayers();
         initIA();
     }

@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class ImagePanel extends JPanel {
-    private Image img;
+    protected Image img;
     public ImagePanel(){
         super();
         this.img = null;
@@ -25,12 +25,17 @@ public class ImagePanel extends JPanel {
         this.repaint();
     }
 
-    @Override
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
+    public void draw(Graphics g)
+    {
         if (img != null){
             g.drawImage(img, 0, 0,null);
         }
+    }
+
+    @Override
+    public void paintComponent(Graphics g){
+        super.paintComponent(g);
+        draw(g);
     }
 
     @Override
