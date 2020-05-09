@@ -20,7 +20,7 @@ public abstract class AbstractGame {
     public AbstractGame() {
         instance = this;
 
-        map = GameMap.createMap(GRID_WIDTH, GRID_HEIGHT);
+        map = new GameMap(GRID_WIDTH, GRID_HEIGHT);
         mg = new MapGenerator();
 
         time = new GameTimer();

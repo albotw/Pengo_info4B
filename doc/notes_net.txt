@@ -41,6 +41,7 @@ Infos a recevoir:
 Les IA sont sur la machine de l'hébergeur.
 Dans le cas de la partie hébergée sur le serveur, la classe connexion (package multiplayer) prend la place de la classe player.
 
+Dans le cas du mode PvE, tous les joueurs sont placés dans l'équipe 1.
 
 SERVEUR SIDE:
     démarrage en mode lobby avec config préchargée.

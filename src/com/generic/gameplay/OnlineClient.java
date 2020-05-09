@@ -29,7 +29,7 @@ public class OnlineClient extends Thread {
         this.rt = new RenderThread();
         rt.start();
 
-        this.m = GameMap.createMap(GRID_WIDTH, GRID_HEIGHT);
+        this.m = new GameMap(GRID_WIDTH, GRID_HEIGHT);
         start();
     }
 

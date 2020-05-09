@@ -119,4 +119,19 @@ public class Serveur extends Thread {
         game = new OnlineGame();
     }
 
+    public HashMap<Connexion, String> getEquipe1() {
+        return equipe1;
+    }
+
+    public void setEquipe1(HashMap<Connexion, String> equipe1) {
+        this.equipe1 = equipe1;
+    }
+
+    public HashMap<Connexion, String> getEquipe2() {
+        return equipe2;
+    }
+
+    public void setEquipe2(HashMap<Connexion, String> equipe2) {
+        this.equipe2 = equipe2;
+    }
 }

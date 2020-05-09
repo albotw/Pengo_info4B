@@ -12,25 +12,16 @@ public class GameMap {
     // faire en sorte de "sémaphoriser" la classe.
     // Pas besoin car pas d'erreur de modification concurrente détéctée pour le
     // moment.
-    public static GameMap instance = null;
     private MapObject tab[][];
     private int width;
     private int height;
 
-    private GameMap(int width, int height) {
+    public GameMap(int width, int height) {
         this.tab = new MapObject[width][height];
-        instance = this;
         this.width = width;
         this.height = height;
     }
 
-    public static GameMap createMap(int width, int height) {
-        if (instance == null) {
-            instance = new GameMap(width, height);
-        }
-
-        return instance;
-    }
 
     public MapObject getAt(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height || tab == null) {
@@ -93,6 +84,5 @@ public class GameMap {
             }
         }
         tab = null;
-        instance = null;
     }
 }

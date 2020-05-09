@@ -16,6 +16,13 @@ public class CONFIG_GAME {
     public static int N_NIVEAUX = 1;
     public static boolean ONLINE_MODE = false;
 
+    public static boolean TEAM_1_IS_ANIMAL = false;
+    public static boolean TEAM_2_IS_ANIMAL = true;
+
+    public static boolean PvE = true;
+    public static boolean PvP = false;
+
+
     public static void setPlayerIsPenguin(boolean val) {
         PLAYER_IS_ANIMAL = !val;
         PLAYER_IS_PENGUIN = val;
@@ -39,5 +46,17 @@ public class CONFIG_GAME {
 
     public static void setnNiveaux(int val) {
         N_NIVEAUX = val;
+    }
+
+    public static void setPvP(boolean val)
+    {
+        PvP = val;
+        PvE = !val;
+    }
+
+    public static void setTeam1IsAnimal(boolean val)
+    {
+        TEAM_1_IS_ANIMAL = val;
+        TEAM_2_IS_ANIMAL = !val;
     }
 }

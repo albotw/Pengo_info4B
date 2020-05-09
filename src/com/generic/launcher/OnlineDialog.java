@@ -31,7 +31,6 @@ public class OnlineDialog extends JDialog {
     private DefaultListModel modE2;
 
     private Launcher l = Launcher.instance;
-
     private Serveur srv;
 
     public OnlineDialog(Frame parent, boolean modal) {
