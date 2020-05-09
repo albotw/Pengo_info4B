@@ -26,12 +26,16 @@ public abstract class MapBlock extends MapObject{
             case 'H':
                 if (y != 0)
                 {
-                    if (m.getAt(x, y -1) != null)
+                    if (!m.getAt(x, y -1).getType().equals("void"))
                     {
                         if (m.getAt(x, y - 1).getType().equals("Animal"))
                         {
                             m.getAt(x, y - 1).destroy(source);
                             onMoveTriggered(direction, source);
+                        }
+                        else
+                        {
+                            onGlideEnded();
                         }
                     }
                     else
@@ -44,12 +48,16 @@ public abstract class MapBlock extends MapObject{
             case 'B':
                 if (y < GRID_HEIGHT - 1)
                 {
-                    if (m.getAt(x, y + 1) != null)
+                    if (!m.getAt(x, y + 1).getType().equals("void"))
                     {
                         if (m.getAt(x, y + 1).getType().equals("Animal"))
                         {
                             m.getAt(x, y + 1).destroy(source);
                             onMoveTriggered(direction, source);
+                        }
+                        else
+                        {
+                            onGlideEnded();
                         }
                     }
                     else
@@ -63,12 +71,16 @@ public abstract class MapBlock extends MapObject{
 
                 if (x != 0)
                 {
-                    if(m.getAt(x - 1, y) != null)
+                    if(!m.getAt(x - 1, y).getType().equals("void"))
                     {
                         if(m.getAt(x - 1, y).getType().equals("Animal"))
                         {
                             m.getAt(x - 1, y).destroy(source);
                             onMoveTriggered(direction, source);
+                        }
+                        else
+                        {
+                            onGlideEnded();
                         }
                     }
                     else
@@ -83,11 +95,15 @@ public abstract class MapBlock extends MapObject{
 
                 if (x < GRID_WIDTH - 1)
                 {
-                    if(m.getAt(x + 1, y) != null) {
+                    if(!m.getAt(x + 1, y).getType().equals("void")) {
                         if (m.getAt(x + 1, y).getType().equals("Animal"))
                         {
                             m.getAt(x + 1, y).destroy(source);
                             onMoveTriggered(direction, source);
+                        }
+                        else
+                        {
+                            onGlideEnded();
                         }
                     }
                     else
@@ -99,4 +115,6 @@ public abstract class MapBlock extends MapObject{
                 break;
         }
     }
+
+    public abstract void onGlideEnded();
 }

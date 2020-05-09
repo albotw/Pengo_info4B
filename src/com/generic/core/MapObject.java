@@ -20,7 +20,7 @@ public abstract class MapObject {
 
     public void goLeft() {
         if (x > 0) {
-            if (m.getAt(x - 1, y) == null) {
+            if (m.getAt(x - 1, y).getType().equals("void")) {
                 m.release(x, y);
                 x--;
                 m.place(this, x, y);
@@ -30,7 +30,7 @@ public abstract class MapObject {
 
     public void goRight() {
         if (x < GRID_WIDTH - 1) {
-            if (m.getAt(x + 1, y) == null) {
+            if (m.getAt(x + 1, y).getType().equals("void")) {
                 m.release(x, y);
                 x++;
                 m.place(this, x, y);
@@ -40,7 +40,7 @@ public abstract class MapObject {
 
     public void goUp() {
         if (y > 0) {
-            if (m.getAt(x, y - 1) == null) {
+            if (m.getAt(x, y - 1).getType().equals("void")) {
                 m.release(x, y);
                 y--;
                 m.place(this, x, y);
@@ -50,7 +50,7 @@ public abstract class MapObject {
 
     public void goDown() {
         if (y < GRID_HEIGHT - 1) {
-            if (m.getAt(x, y + 1) == null) {
+            if (m.getAt(x, y + 1).getType().equals("void")) {
                 m.release(x, y);
                 y++;
                 m.place(this, x, y);

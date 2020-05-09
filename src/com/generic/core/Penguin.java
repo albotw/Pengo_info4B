@@ -14,73 +14,45 @@ public class Penguin extends MapEntity {
     }
 
     public void goUp() {
-        if (m.getAt(x, y - 1) != null) {
-            if (m.getAt(x, y - 1).getType().equals("IceBlock") || m.getAt(x, y - 1).getType().equals("DiamondBlock")) {
-                if (m.getAt(x, y - 2) != null) {
-                    if (m.getAt(x, y - 2).getType().equals("IceBlock")
-                            || m.getAt(x, y - 2).getType().equals("DiamondBlock")) {
-                        m.getAt(x, y - 1).destroy(this);
-                    } else {
-                        ((MapBlock) (m.getAt(x, y - 1))).onMoveTriggered('H', this);
-                    }
-                } else {
-                    ((MapBlock) (m.getAt(x, y - 1))).onMoveTriggered('H', this);
-                }
+        if (m.getAt(x, y - 1).getType().equals("IceBlock") || m.getAt(x, y - 1).getType().equals("DiamondBlock")) {
+            if (m.getAt(x, y - 2).getType().equals("IceBlock") || m.getAt(x, y - 2).getType().equals("DiamondBlock")) {
+                m.getAt(x, y - 1).destroy(this);
+            } else{
+                ((MapBlock) (m.getAt(x, y - 1))).onMoveTriggered('H', this);
             }
         }
         super.goUp();
     }
 
     public void goLeft() {
-        if (m.getAt(x - 1, y) != null) {
-            if (m.getAt(x - 1, y).getType().equals("IceBlock") || m.getAt(x - 1, y).getType().equals("DiamondBlock")) {
-                if (m.getAt(x - 2, y) != null) {
-                    if (m.getAt(x - 2, y).getType().equals("IceBlock")
-                            || m.getAt(x - 2, y).getType().equals("DiamondBlock")) {
-                        m.getAt(x - 1, y).destroy(this);
-                    } else {
-                        ((MapBlock) (m.getAt(x - 1, y))).onMoveTriggered('G', this);
-                    }
-                } else {
-                    ((MapBlock) (m.getAt(x - 1, y))).onMoveTriggered('G', this);
-                }
+        if (m.getAt(x - 1, y).getType().equals("IceBlock") || m.getAt(x - 1, y).getType().equals("DiamondBlock")) {
+            if (m.getAt(x - 2, y).getType().equals("IceBlock") || m.getAt(x - 2, y).getType().equals("DiamondBlock")) {
+                m.getAt(x - 1, y).destroy(this);
+            } else{
+                ((MapBlock) (m.getAt(x - 1, y))).onMoveTriggered('G', this);
             }
-
         }
         super.goLeft();
     }
 
     public void goRight() {
-        if (m.getAt(x + 1, y) != null) {
-            if (m.getAt(x + 1, y).getType().equals("IceBlock") || m.getAt(x + 1, y).getType().equals("DiamondBlock")) {
-                if (m.getAt(x + 2, y) != null) {
-                    if (m.getAt(x + 2, y).getType().equals("IceBlock")
-                            || m.getAt(x + 2, y).getType().equals("DiamondBlock")) {
-                        m.getAt(x + 1, y).destroy(this);
-                    } else {
-                        ((MapBlock) (m.getAt(x + 1, y))).onMoveTriggered('D', this);
-                    }
-                } else {
-                    ((MapBlock) (m.getAt(x + 1, y))).onMoveTriggered('D', this);
-                }
+        if (m.getAt(x + 1, y).getType().equals("IceBlock") || m.getAt(x + 1, y).getType().equals("DiamondBlock")) {
+            if (m.getAt(x + 2, y).getType().equals("IceBlock") || m.getAt(x + 2, y).getType().equals("DiamondBlock")) {
+                m.getAt(x + 1, y).destroy(this);
+            } else{
+                ((MapBlock) (m.getAt(x + 1, y))).onMoveTriggered('D', this);
             }
         }
         super.goRight();
     }
 
     public void goDown() {
-        if (m.getAt(x, y + 1) != null) {
-            if (m.getAt(x, y + 1).getType().equals("IceBlock") || m.getAt(x, y + 1).getType().equals("DiamondBlock")) {
-                if (m.getAt(x, y + 2) != null) {
-                    if (m.getAt(x, y + 2).getType().equals("IceBlock")
-                            || m.getAt(x, y + 2).getType().equals("DiamondBlock")) {
-                        m.getAt(x, y + 1).destroy(this);
-                    } else {
-                        ((MapBlock) (m.getAt(x, y + 1))).onMoveTriggered('B', this);
-                    }
-                } else {
-                    ((MapBlock) (m.getAt(x, y + 1))).onMoveTriggered('B', this);
-                }
+        if (m.getAt(x, y + 1).getType().equals("IceBlock") || m.getAt(x, y + 1).getType().equals("DiamondBlock")) {
+            if (m.getAt(x, y + 2).getType().equals("IceBlock")
+                    || m.getAt(x, y + 2).getType().equals("DiamondBlock")) {
+                m.getAt(x, y + 1).destroy(this);
+            } else{
+                ((MapBlock) (m.getAt(x, y + 1))).onMoveTriggered('B', this);
             }
         }
         super.goDown();

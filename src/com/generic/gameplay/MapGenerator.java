@@ -2,6 +2,7 @@ package com.generic.gameplay;
 
 import com.generic.core.GameMap;
 import com.generic.core.IceBlock;
+import com.generic.core.MapObject;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
@@ -31,21 +32,21 @@ public class MapGenerator {
             x = 0;
             for (; x < GRID_WIDTH; x = x + 2) {
                 // System.out.println("position courante x = " + x + " | y = " + y);
-                if (m.getAt(x, y) == null) {
+                if (m.getAt(x, y).getType().equals("void")) {
 
-                    if (m.getAt(x, y - 2) != null && (y - 2) >= 0) {
+                    if (!isEmpty(x, y - 2) && (y - 2) >= 0) {
                         // System.out.println("part en haut vers [" + x + "," + (y - 2) + "]");
                         path_generating();
                     }
-                    if (m.getAt(x, y + 2) != null && (y + 2) < GRID_HEIGHT) {
+                    if (!isEmpty(x, y + 2) && (y + 2) < GRID_HEIGHT) {
                         // System.out.println("part en bas vers [" + x + "," + (y + 2) + "]");
                         path_generating();
                     }
-                    if (m.getAt(x - 2, y) != null && (x - 2) >= 0) {
+                    if (!isEmpty(x - 2, y) && (x - 2) >= 0) {
                         // System.out.println("part à gauche vers [" + (x - 2) + "," + y + "]");
                         path_generating();
                     }
-                    if (m.getAt(x + 2, y) != null && (x + 2) < GRID_WIDTH) {
+                    if (!isEmpty(x + 2, y) && (x + 2) < GRID_WIDTH) {
                         // System.out.println("part à droite vers [" + (x + 2) + "," + y + "]");
                         path_generating();
                     }
@@ -60,7 +61,7 @@ public class MapGenerator {
         while (loop) {
             int dir = RandomizedInt(0, 3);
 
-            if (dir == 0 && (y - 2) >= 0 && m.getAt(x, y - 2) != null) {
+            if (dir == 0 && (y - 2) >= 0 && !isEmpty(x, y - 2)) {
                 loop = false;
                 m.release(x, y - 1);
                 m.release(x, y - 2);
@@ -68,7 +69,7 @@ public class MapGenerator {
                 // System.out.println("a supprimé en haut [" + x + "," + (y - 1) + "], [" + x +
                 // "," + (y - 2) + "]");
                 path_continue();
-            } else if (dir == 1 && (y + 2) < GRID_HEIGHT && m.getAt(x, y + 2) != null) {
+            } else if (dir == 1 && (y + 2) < GRID_HEIGHT && !isEmpty(x, y + 2)) {
                 loop = false;
                 m.release(x, y + 1);
                 m.release(x, y + 2);
@@ -76,7 +77,7 @@ public class MapGenerator {
                 // System.out.println("a supprimé en bas [" + x + "," + (y + 1) + "], [" + x +
                 // "," + (y + 2) + "]");
                 path_continue();
-            } else if (dir == 2 && (x - 2) >= 0 && m.getAt(x - 2, y) != null) {
+            } else if (dir == 2 && (x - 2) >= 0 && !isEmpty(x - 2, y)) {
                 loop = false;
                 m.release(x - 1, y);
                 m.release(x - 2, y);
@@ -84,7 +85,7 @@ public class MapGenerator {
                 // System.out.println("a supprimé à gauche [" + (x - 1) + "," + y + "], [" + (x
                 // - 2) + "," + y + "]");
                 path_continue();
-            } else if (dir == 3 && (x + 2) < GRID_WIDTH && m.getAt(x + 2, y) != null) {
+            } else if (dir == 3 && (x + 2) < GRID_WIDTH && !isEmpty(x + 2, y)) {
                 loop = false;
                 m.release(x + 1, y);
                 m.release(x + 2, y);
@@ -105,15 +106,28 @@ public class MapGenerator {
             e.printStackTrace();
         }
 
-        if (m.getAt(x, y - 2) != null)
+        if (!isEmpty(x, y - 2))
             path_generating();
-        else if (m.getAt(x, y + 2) != null)
+        else if (!isEmpty(x, y + 2))
             path_generating();
-        else if (m.getAt(x - 2, y) != null)
+        else if (!isEmpty(x - 2, y))
             path_generating();
-        else if (m.getAt(x + 2, y) != null)
+        else if (!isEmpty(x + 2, y))
             path_generating();
         else
             path_init();
+    }
+
+    public boolean isEmpty(int x, int y)
+    {
+        MapObject mo = m.getAt(x, y);
+        if (mo.getType().equals("void"))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

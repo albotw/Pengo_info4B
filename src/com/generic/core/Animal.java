@@ -36,12 +36,10 @@ public class Animal extends MapEntity {
      */
     public void goLeft() {
         if (!isStun) {
-            if (m.getAt(x - 1, y) != null) {
-                if (m.getAt(x - 1, y).getType().equals("Penguin")) {
-                    m.getAt(x - 1, y).destroy(this);
-                } else if (m.getAt(x - 1, y).getType().equals("IceBlock")) {
-                    m.getAt(x - 1, y).destroy(this);
-                }
+            if (m.getAt(x - 1, y).getType().equals("Penguin")) {
+                m.getAt(x - 1, y).destroy(this);
+            } else if (m.getAt(x - 1, y).getType().equals("IceBlock")) {
+                m.getAt(x - 1, y).destroy(this);
             }
             super.goLeft();
         }
@@ -49,13 +47,10 @@ public class Animal extends MapEntity {
 
     public void goRight() {
         if (!isStun) {
-
-            if (m.getAt(x + 1, y) != null) {
-                if (m.getAt(x + 1, y).getType().equals("Penguin")) {
-                    m.getAt(x + 1, y).destroy(this);
-                } else if (m.getAt(x + 1, y).getType().equals("IceBlock")) {
-                    m.getAt(x + 1, y).destroy(this);
-                }
+            if (m.getAt(x + 1, y).getType().equals("Penguin")) {
+                m.getAt(x + 1, y).destroy(this);
+            } else if (m.getAt(x + 1, y).getType().equals("IceBlock")) {
+                m.getAt(x + 1, y).destroy(this);
             }
             super.goRight();
         }
@@ -63,13 +58,10 @@ public class Animal extends MapEntity {
 
     public void goUp() {
         if (!isStun) {
-
-            if (m.getAt(x, y - 1) != null) {
-                if (m.getAt(x, y - 1).getType().equals("Penguin")) {
-                    m.getAt(x, y - 1).destroy(this);
-                } else if (m.getAt(x, y - 1).getType().equals("IceBlock")) {
-                    m.getAt(x, y - 1).destroy(this);
-                }
+            if (m.getAt(x, y - 1).getType().equals("Penguin")) {
+                m.getAt(x, y - 1).destroy(this);
+            } else if (m.getAt(x, y - 1).getType().equals("IceBlock")) {
+                m.getAt(x, y - 1).destroy(this);
             }
             super.goUp();
         }
@@ -77,13 +69,10 @@ public class Animal extends MapEntity {
 
     public void goDown() {
         if (!isStun) {
-
-            if (m.getAt(x, y + 1) != null) {
-                if (m.getAt(x, y + 1).getType().equals("Penguin")) {
-                    m.getAt(x, y + 1).destroy(this);
-                } else if (m.getAt(x, y + 1).getType().equals("IceBlock")) {
-                    m.getAt(x, y + 1).destroy(this);
-                }
+            if (m.getAt(x, y + 1).getType().equals("Penguin")) {
+                m.getAt(x, y + 1).destroy(this);
+            } else if (m.getAt(x, y + 1).getType().equals("IceBlock")) {
+                m.getAt(x, y + 1).destroy(this);
             }
             super.goDown();
         }

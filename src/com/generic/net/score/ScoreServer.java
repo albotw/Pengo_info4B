@@ -3,6 +3,7 @@ package com.generic.net.score;
 import com.generic.launcher.Leaderboard;
 import com.generic.utils.ScorePair;
 
+import java.io.FileInputStream;
 import java.net.ServerSocket;
 
 public class ScoreServer {
@@ -15,12 +16,8 @@ public class ScoreServer {
         System.out.println("SOCKET ECOUTE CREE => " + s);
 
         l = new Leaderboard();
-        l.addToLeaderboard(new ScorePair("Wassim", 500000, false));
-        l.addToLeaderboard(new ScorePair("Wassi", 300000, false));
-        l.addToLeaderboard(new ScorePair("Wass", 200000, false));
-        l.addToLeaderboard(new ScorePair("Was", 400000, false));
-        l.addToLeaderboard(new ScorePair("Wa", 600000, false));
-        l.addToLeaderboard(new ScorePair("W", 100000, false));
+
+        FileInputStream flux = new FileInputStream("src/saves/Ladder.sav");
 
         while (true) {
             Connexion connexion = new Connexion(s.accept());
@@ -28,5 +25,3 @@ public class ScoreServer {
         }
     }
 }
-
-

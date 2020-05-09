@@ -92,7 +92,7 @@ public class SpriteManager {
                 {
                     if (i != -1 && i != GRID_HEIGHT && j != -1 && j != GRID_WIDTH)
                     {
-                        if (m.getAt(j, i) != null)
+                        if (!m.getAt(j, i).getType().equals("void"))
                         {
                             Sprite spr = new Sprite(xpos, ypos);
                             if(m.getAt(j, i).getType().equals("IceBlock"))

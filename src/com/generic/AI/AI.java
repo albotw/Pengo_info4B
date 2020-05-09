@@ -150,7 +150,7 @@ public class AI extends Thread {
 
         // test et mesure case a gauche
         if (x > 0) {
-            if (m.getAt(x - 1, y) == null)
+            if (!m.getAt(x - 1, y).getType().equals("void"))
                 d_left = VectorialDistance(x - 1, target.getX(), y, target.getY());
             else if (m.getAt(x - 1, y).equals(target))
                 d_left = VectorialDistance(x - 1, target.getX(), y, target.getY());
@@ -158,7 +158,7 @@ public class AI extends Thread {
 
         // test et mesure case a droite
         if (x < GRID_WIDTH - 1) {
-            if (m.getAt(x + 1, y) == null)
+            if (!m.getAt(x + 1, y).getType().equals("void"))
                 d_right = VectorialDistance(x + 1, target.getX(), y, target.getY());
             else if (m.getAt(x + 1, y).equals(target))
                 d_right = VectorialDistance(x + 1, target.getX(), y, target.getY());
@@ -166,7 +166,7 @@ public class AI extends Thread {
 
         // test et mesure case au dessus
         if (y > 0) {
-            if (m.getAt(x, y - 1) == null)
+            if (!m.getAt(x, y - 1).getType().equals("void"))
                 d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
             else if (m.getAt(x, y - 1).equals(target))
                 d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
@@ -174,7 +174,7 @@ public class AI extends Thread {
 
         // test et mesure en dessous
         if (y < GRID_HEIGHT - 1) {
-            if (m.getAt(x, y + 1) == null)
+            if (!m.getAt(x, y + 1).getType().equals("void"))
                 d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
             else if (m.getAt(x, y + 1).equals(target))
                 d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());

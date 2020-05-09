@@ -55,7 +55,7 @@ public class LocalGame extends AbstractGame {
                 int initX = RandomizedInt(0, GRID_WIDTH - 1);
                 int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (map.getAt(initX, initY) == null) {
+                if (map.getAt(initX, initY).getType().equals("void")) {
                     loop = false;
                     AI ai = new AI();
 
@@ -85,7 +85,7 @@ public class LocalGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY) == null) {
+            if (map.getAt(initX, initY).getType().equals("void")) {
                 loop = false;
 
                 if (PLAYER_IS_PENGUIN) {
@@ -200,10 +200,8 @@ public class LocalGame extends AbstractGame {
             case 'G':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
                     MapObject mo = map.getAt(0, i);
-                    if (mo != null) {
-                        if (mo.getType().equals("Animal")) {
-                            ((Animal) (mo)).activateStun();
-                        }
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
                     }
                 }
                 break;
@@ -211,10 +209,8 @@ public class LocalGame extends AbstractGame {
             case 'D':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
                     MapObject mo = map.getAt(GRID_WIDTH - 1, i);
-                    if (mo != null) {
-                        if (mo.getType().equals("Animal")) {
-                            ((Animal) (mo)).activateStun();
-                        }
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
                     }
                 }
                 break;
@@ -222,10 +218,8 @@ public class LocalGame extends AbstractGame {
             case 'H':
                 for (int i = 0; i < GRID_WIDTH; i++) {
                     MapObject mo = map.getAt(i, 0);
-                    if (mo != null) {
-                        if (mo.getType().equals("Animal")) {
-                            ((Animal) (mo)).activateStun();
-                        }
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
                     }
                 }
                 break;
@@ -233,10 +227,8 @@ public class LocalGame extends AbstractGame {
             case 'B':
                 for (int i = 0; i < GRID_WIDTH; i++) {
                     MapObject mo = map.getAt(i, GRID_HEIGHT - 1);
-                    if (mo != null) {
-                        if (mo.getType().equals("Animal")) {
-                            ((Animal) (mo)).activateStun();
-                        }
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
                     }
                 }
                 break;
@@ -271,21 +263,19 @@ public class LocalGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY) != null) {
-                if (map.getAt(initX, initY).getType().equals("IceBlock")) {
-                    loop = false;
-                    Animal a = new Animal(initX, initY);
-                    if (PLAYER_IS_PENGUIN) {
-                        AI bot = (AI) (owner);
-                        map.place(a, initX, initY);
-                        bot.setControlledObject(a);
+            if (map.getAt(initX, initY).getType().equals("IceBlock")) {
+                loop = false;
+                Animal a = new Animal(initX, initY);
+                if (PLAYER_IS_PENGUIN) {
+                    AI bot = (AI) (owner);
+                    map.place(a, initX, initY);
+                    bot.setControlledObject(a);
 
-                        AIs.put(a, bot);
-                    } else if (PLAYER_IS_ANIMAL) {
-                        Player pl = (Player) (owner);
-                        map.place(a, initX, initY);
-                        pl.setControlledObject(a);
-                    }
+                    AIs.put(a, bot);
+                } else if (PLAYER_IS_ANIMAL) {
+                    Player pl = (Player) (owner);
+                    map.place(a, initX, initY);
+                    pl.setControlledObject(a);
                 }
             }
         } while (loop);
@@ -303,7 +293,7 @@ public class LocalGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY) == null) {
+            if (map.getAt(initX, initY).getType().equals("void")) {
                 loop = false;
                 Penguin p = new Penguin(initX, initY);
 

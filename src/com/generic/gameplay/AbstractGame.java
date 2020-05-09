@@ -46,68 +46,69 @@ public abstract class AbstractGame {
         }
     }
 
-    public void checkDiamondBlocks() {
+    public void checkDiamondBlocks(DiamondBlock db) {
+        System.out.println("### check DiamondBlocks ###");
+        int x = db.getX();
+        int y = db.getY();
 
-        /**
-         * TODO: Optimisation
-         */
-        for (int i = 0; i < GRID_WIDTH; i++) {
-            for (int j = 0; j < GRID_HEIGHT; j++) {
-                MapObject tmp = map.getAt(i, j);
-
-                if (map.getAt(i, j) != null) {
-                    if (map.getAt(i, j).getType().equals("DiamondBlock")) {
-                        if (map.getAt(i + 1, j) != null && map.getAt(i + 2, j) != null) {
-                            if (((map.getAt(i + 1, j).getType().equals("DiamondBlock")
-                                    && map.getAt(i + 2, j).getType().equals("DiamondBlock")))) {
-                                victory();
-                            }
-                            if (map.getAt(i, j + 1) != null && map.getAt(i, j + 2) != null) {
-                                if (((map.getAt(i, j + 1).getType().equals("DiamondBlock")
-                                        && map.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
-                                    victory();
-                                }
-
-                            }
-
-                        }
-                    }
-                }
+        if (map.getAt(x, y - 1).getType().equals("DiamondBlock")) {
+            if (map.getAt(x, y - 2).getType().equals("DiamondBlock")) {
+                victory(); // db en position bas, alignement vertical
             }
         }
 
+        if (map.getAt(x, y + 1).getType().equals("DiamondBlock")) {
+            if (map.getAt(x, y - 1).getType().equals("DiamondBlock")) {
+                victory(); // db en position millieu, alignement vertical
+            }
+        }
+
+        if (map.getAt(x, y + 1).getType().equals("DiamondBlock")) {
+            if (map.getAt(x, y + 2).getType().equals("DiamondBlock")) {
+                victory(); // db en position haut, alignement vertical
+            }
+        }
+
+        if (map.getAt(x - 1, y).getType().equals("DiamondBlock"))
+        {
+            if (map.getAt(x - 2, y).getType().equals("DiamondBlock"))
+            {
+                victory(); //db en position droite, alignement horizontal
+            }
+        }
+
+        if (map.getAt(x - 1, y).getType().equals("DiamondBlock"))
+        {
+            if (map.getAt(x + 1, y).getType().equals("DiamondBlock"))
+            {
+                victory(); //db en position milieu, alignement horizontal
+            }
+        }
+
+        if (map.getAt(x + 1, y).getType().equals("DiamondBlock"))
+        {
+            if (map.getAt(x + 2, y).getType().equals("DiamondBlock"))
+            {
+                victory(); //db en position gauche, alignement horizontal
+            }
+        }
+
+
+
         /**
-         * int i = 0;
-         *         int j = 0;
-         *         boolean found = false;
-         *         while(i < GRID_HEIGHT && !found)
-         *         {
-         *             while(j < GRID_WIDTH && !found)
-         *             {
-         *                 MapObject tmp = map.getAt(i, j);
+         * int i = 0; int j = 0; boolean found = false; while(i < GRID_HEIGHT && !found)
+         * { while(j < GRID_WIDTH && !found) { MapObject tmp = map.getAt(i, j);
          *
-         *                 if (map.getAt(i, j) != null) {
-         *                     if (map.getAt(i, j).getType().equals("DiamondBlock")) {
-         *                         if (map.getAt(i + 1, j) != null && map.getAt(i + 2, j) != null) {
-         *                             if (((map.getAt(i + 1, j).getType().equals("DiamondBlock")
-         *                                     && map.getAt(i + 2, j).getType().equals("DiamondBlock")))) {
-         *                                 victory();
-         *                                 found = true;
-         *                             }
-         *                             if (map.getAt(i, j + 1) != null && map.getAt(i, j + 2) != null) {
-         *                                 if (((map.getAt(i, j + 1).getType().equals("DiamondBlock")
-         *                                         && map.getAt(i, j + 2).getType().equals("DiamondBlock")))) {
-         *                                     victory();
-         *                                 }
-         *                                 found = true;
-         *                             }
+         * if (map.getAt(i, j) != null) { if (map.getAt(i,
+         * j).getType().equals("DiamondBlock")) { if (map.getAt(i + 1, j) != null &&
+         * map.getAt(i + 2, j) != null) { if (((map.getAt(i + 1,
+         * j).getType().equals("DiamondBlock") && map.getAt(i + 2,
+         * j).getType().equals("DiamondBlock")))) { victory(); found = true; } if
+         * (map.getAt(i, j + 1) != null && map.getAt(i, j + 2) != null) { if
+         * (((map.getAt(i, j + 1).getType().equals("DiamondBlock") && map.getAt(i, j +
+         * 2).getType().equals("DiamondBlock")))) { victory(); } found = true; }
          *
-         *                         }
-         *                     }
-         *                 }
-         *                 j++;
-         *             }
-         *             i++;
+         * } } } j++; } i++;
          */
     }
 

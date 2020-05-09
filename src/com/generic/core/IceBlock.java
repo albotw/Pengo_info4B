@@ -20,4 +20,6 @@ public class IceBlock extends MapBlock {
             e.printStackTrace();
         }
     }
+
+    public void onGlideEnded(){}
 }

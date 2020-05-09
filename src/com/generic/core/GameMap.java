@@ -2,8 +2,6 @@ package com.generic.core;
 
 import com.generic.gameplay.OnlineGame;
 
-import static com.generic.gameplay.CONFIG_GAME.CLIENT;
-
 import com.generic.gameplay.AbstractGame;
 
 public class GameMap {
@@ -23,24 +21,17 @@ public class GameMap {
         this.height = height;
     }
 
-    public void fill()
-    {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                place(new IceBlock(j, i), j, i);
-            }
-        }
-    }
-
     public void setLocal(boolean val)
     {
         this.local = val;
     }
 
     public MapObject getAt(int x, int y) {
-        if (x < 0 || x >= width || y < 0 || y >= height || tab == null) {
-            return null;
-        } else {
+        if (x < 0 || x >= width || y < 0 || y >= height || tab == null || tab[x][y] == null) {
+            return new Void(x, y);
+        }
+        else
+        {
             return tab[x][y];
         }
     }

@@ -66,7 +66,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
                 int initX = RandomizedInt(0, GRID_WIDTH - 1);
                 int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (map.getAt(initX, initY) == null) {
+                if (map.getAt(initX, initY).getType().equals("void")) {
                     loop = false;
 
                     if (TEAM_2_IS_ANIMAL) {
@@ -98,7 +98,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
                     int initX = RandomizedInt(0, GRID_WIDTH - 1);
                     int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                    if (map.getAt(initX, initY) == null) {
+                    if (map.getAt(initX, initY).getType().equals("void")) {
                         loop = false;
 
                         if (TEAM_1_IS_ANIMAL) {
@@ -131,7 +131,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
                     int initX = RandomizedInt(0, GRID_WIDTH - 1);
                     int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                    if (map.getAt(initX, initY) == null) {
+                    if (map.getAt(initX, initY).getType().equals("IceBlock")) {
                         loop = false;
                         AI ai = new AI();
 
