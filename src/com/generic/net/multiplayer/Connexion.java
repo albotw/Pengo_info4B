@@ -1,11 +1,19 @@
 package com.generic.net.multiplayer;
 
 import com.generic.core.MapEntity;
+import com.generic.gameplay.OnlineGame;
 import com.generic.net.Command;
 
 import java.io.*;
 import java.net.Socket;
 
+import static com.generic.gameplay.CONFIG_GAME.TEAM_1_IS_ANIMAL;
+import static com.generic.gameplay.CONFIG_GAME.TEAM_2_IS_ANIMAL;
+
+
+/**
+ * TODO: refactor -> OnlinePlayer
+ */
 public class Connexion extends Thread {
     private Socket socket;
     private ObjectOutputStream commandOut;
@@ -15,6 +23,7 @@ public class Connexion extends Thread {
     private int equipe = 0;
     private String pseudo;
     private MapEntity controlledObject;
+    private int currentLives;
 
     private Serveur srv = Serveur.instance;
 
@@ -82,6 +91,31 @@ public class Connexion extends Thread {
             socket.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public void removeLive()
+    {
+        currentLives--;
+        if (currentLives <= 0)
+        {
+            OnlineGame.instance.gameOver();
+        }
+        else
+        {
+            if (equipe == 1 && TEAM_1_IS_ANIMAL)
+            {
+                OnlineGame.instance.respawnAnimal(this);
+            }
+            else if (equipe == 1 && TEAM_2_IS_ANIMAL)
+            {
+                OnlineGame.instance.respawnPenguin(this);
+            }
+            else if (equipe == 2 && TEAM_1_IS_ANIMAL)
+            {
+                OnlineGame.instance.respawnPenguin(this);
+            }
+            else if (equipe == 2 && TEAM_2_IS_ANIMAL);
         }
     }
 

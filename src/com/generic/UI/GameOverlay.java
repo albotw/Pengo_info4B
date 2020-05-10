@@ -21,7 +21,7 @@ public class GameOverlay extends JPanel {
 
     private Image background;
 
-    private Player localPlayer = g.getLocalPlayer();
+    private Player localPlayer;
 
     public GameOverlay() {
         super();
@@ -34,6 +34,10 @@ public class GameOverlay extends JPanel {
         vies = 5;
         remainigEnemies = 8;
 
+        if (!CLIENT)
+        {
+            localPlayer = PlayerManager.instance.getMainProfile();
+        }
 
         setBackground(Color.BLACK);
     }

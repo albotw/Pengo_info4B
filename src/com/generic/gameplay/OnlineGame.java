@@ -33,6 +33,8 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     private Serveur srv = Serveur.instance;
 
+    private int AILives = AI_INIT_LIVES;
+
     public OnlineGame() {
 
         super();
@@ -157,7 +159,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     public void start() {
         time.start();
-        super.initDiamondBlocks();
+        initDiamondBlocks();
         initPlayers();
         initIA();
     }
@@ -204,7 +206,32 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void animalKilled(Animal a, MapObject killer) {
+        if (PvE)
+        {
+            if (!TEAM_1_IS_ANIMAL)  //animal == IA
+            {
+                AI owner = AIs.get(a);
+                owner.setControlledObject(null);
 
+                //setPoints;
+
+                AILives = AILives - 1;
+                if (AILives == 0)
+                {
+                    victory();
+                }
+                else
+                {
+                    respawnAnimal(owner);
+                }
+            }
+            else    //animal == Connexion
+            {
+                Connexion owner = equipe1.get(a);
+                owner.setControlledObject(null);
+                owner.removeLive();
+            }
+        }
     }
 
     @Override
