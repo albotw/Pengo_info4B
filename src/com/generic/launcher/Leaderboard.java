@@ -2,7 +2,7 @@ package com.generic.launcher;
 
 import com.generic.utils.ScorePair;
 import com.generic.net.Command;
-import com.generic.player.Player;
+import com.generic.gameplay.Player;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;

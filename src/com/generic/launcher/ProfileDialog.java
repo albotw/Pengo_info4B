@@ -1,8 +1,7 @@
 package com.generic.launcher;
 
 import com.generic.UI.PlaceholderTextField;
-import com.generic.player.Player;
-import com.generic.player.PlayerManager;
+import com.generic.gameplay.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,9 +17,7 @@ public class ProfileDialog extends JDialog {
     private JButton selectProfile;
     private JButton Close;
 
-    private Launcher l = Launcher.instance;
-
-    private PlayerManager pm = PlayerManager.instance;
+    private Launcher launcher = Launcher.instance;
 
     public ProfileDialog(Frame parent, boolean modal)
     {
@@ -103,9 +100,9 @@ public class ProfileDialog extends JDialog {
     public void refreshList()
     {
         mod.removeAllElements();
-        for (Player p : pm.getPlayers())
+        for (Player p : launcher.getPlayers())
         {
-            if (p == pm.getMainProfile())
+            if (p == launcher.getMainProfile())
             {
                 mod.addElement(p.getPseudo() + " (Séléctionné)");
             }
@@ -126,7 +123,7 @@ public class ProfileDialog extends JDialog {
     {
         if (!profileName.getText().equals(""))
         {
-            pm.addPlayer(profileName.getText());
+            launcher.addPlayer(profileName.getText());
             refreshList();
         }
     }
@@ -137,7 +134,7 @@ public class ProfileDialog extends JDialog {
         if (index != -1)
         {
             String pseudo = (String)mod.get(index);
-            pm.removePlayer(pseudo);
+            launcher.removePlayer(pseudo);
             refreshList();
         }
     }
@@ -148,7 +145,7 @@ public class ProfileDialog extends JDialog {
         if (index != -1)
         {
             String pseudo = (String)mod.get(index);
-            pm.setMainProfile(pseudo);
+            launcher.setMainProfile(pseudo);
         }
     }
 }

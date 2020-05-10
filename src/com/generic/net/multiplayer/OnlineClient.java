@@ -5,7 +5,7 @@ import com.generic.core.*;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
 import com.generic.launcher.Launcher;
-import com.generic.player.InputHandler;
+import com.generic.utils.InputHandler;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;

@@ -230,6 +230,11 @@ public class AI extends Thread {
                 } else {
                     // System.out.println("Tirage invalide");
                 }
+
+                if (flush)
+                {
+                    loop = false;
+                }
             } while (loop);
         }
     }

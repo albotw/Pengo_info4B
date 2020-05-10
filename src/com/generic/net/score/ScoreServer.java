@@ -43,8 +43,16 @@ public class ScoreServer {
             Object tmp = ois.readObject();
 
             l = (Leaderboard)(tmp);
-            System.out.println("--- Loaded savefile ---");
-            l.print();
+            if (l != null) {
+                System.out.println("--- Loaded savefile ---");
+                l.print();
+            }
+            else
+            {
+                System.out.println("--- Error on load -> blank ladder ---");
+                l = new Leaderboard();
+            }
+
         }catch(Exception e){e.printStackTrace();}
     }
 

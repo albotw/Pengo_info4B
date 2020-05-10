@@ -2,6 +2,7 @@ package com.generic.gameplay;
 
 import com.generic.core.*;
 import com.generic.graphics.Window;
+import com.generic.launcher.Launcher;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.*;
@@ -12,6 +13,7 @@ public abstract class AbstractGame {
     protected MapGenerator mg;
     protected GameMap map;
     protected GameTimer time;
+    protected Launcher launcher = Launcher.instance;
 
     public AbstractGame() {
         instance = this;

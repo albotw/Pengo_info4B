@@ -155,7 +155,6 @@ public class OnlineGame extends AbstractGame implements Runnable {
     @Override
     public void gameOver() {
         System.out.println("### APPEL GAME OVER ##");
-        host.setPoints(100);
         time.stopTimer();
         stop();
         srv.sendCommandToAll("GAME END", new String[] { "DEFEAT", "" + host.getPoints() });
@@ -244,7 +243,6 @@ public class OnlineGame extends AbstractGame implements Runnable {
     @Override
     public void victory() {
         System.out.println("### APPEL VICTOIRE ##");
-        host.setPoints(100);
         time.stopTimer();
         stop();
         srv.sendCommandToAll("GAME END", new String[] { "VICTORY", "" + host.getPoints() });

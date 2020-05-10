@@ -6,7 +6,6 @@ import com.generic.UI.OnlineUI;
 import com.generic.net.multiplayer.OnlineClient;
 import com.generic.net.multiplayer.NetworkManager;
 import com.generic.net.multiplayer.Serveur;
-import com.generic.player.PlayerManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -115,7 +114,7 @@ public class Online extends JDialog {
         net.connect("127.0.0.1", 8080);
         networkThread = new Thread(net);
         networkThread.start();
-        net.sendPseudo(PlayerManager.instance.getMainProfile().getPseudo());
+        net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());
         net.setHost();
 
     }
@@ -136,7 +135,7 @@ public class Online extends JDialog {
         net.connect("127.0.0.1", 8080);
         networkThread = new Thread(net);
         networkThread.start();
-        net.sendPseudo(PlayerManager.instance.getMainProfile().getPseudo());
+        net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());
     }
 
     public void closeSelected() {
@@ -155,11 +154,11 @@ public class Online extends JDialog {
     }
 
     public void join1Selected() {
-        net.joinTeam1(PlayerManager.instance.getMainProfile().getPseudo());
+        net.joinTeam1(Launcher.instance.getMainProfile().getPseudo());
     }
 
     public void join2Selected() {
-        net.joinTeam2(PlayerManager.instance.getMainProfile().getPseudo());
+        net.joinTeam2(Launcher.instance.getMainProfile().getPseudo());
     }
 
     public void removeTeam1(String pseudo) {

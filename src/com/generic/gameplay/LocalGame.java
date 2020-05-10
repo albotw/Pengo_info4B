@@ -4,7 +4,6 @@ import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
 import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
-import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
 
@@ -25,7 +24,6 @@ public class LocalGame extends AbstractGame {
     private SpriteManager sm;
     private Window w;
 
-    private PlayerManager pm = PlayerManager.instance;
     private Player localPlayer;
     private Thread LPThread;
 
@@ -37,7 +35,7 @@ public class LocalGame extends AbstractGame {
         map.setLocal(true);
 
         AIs = new HashMap<MapEntity, AI>();
-        localPlayer = pm.getMainProfile();
+        localPlayer = launcher.getMainProfile();
         sm = SpriteManager.createSpriteManager();
 
         renderer = new RenderThread();
@@ -160,7 +158,7 @@ public class LocalGame extends AbstractGame {
 
     public void victory() {
         // a ajouter: déréférencement dans les objets.
-        pm.getMainProfile().setPoints("GameEnded", time.getTime());
+        launcher.getMainProfile().setPoints("GameEnded", time.getTime());
         time.stopTimer();
         stop();
         GameEndDialog ged = new GameEndDialog(w, false, true);

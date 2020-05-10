@@ -46,7 +46,8 @@ public class Serveur extends Thread {
             try {
                 OnlinePlayer c = new OnlinePlayer(ss.accept());
                 cmdOuts.add(c.getCommandOut());
-                c.start();
+                Thread threadConnexion = new Thread(c);
+                threadConnexion.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
