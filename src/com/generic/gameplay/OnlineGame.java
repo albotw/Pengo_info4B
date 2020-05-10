@@ -187,7 +187,35 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void respawnPenguin(Object owner) {
+        try{
+            sleep(500);
+        }catch(Exception e){
+            e.printStackTrace();
+         boolean loop = true;
+         do{
+             int initX = RandomizedInt(0, GRID_WIDTH - 1);
+             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
+             if(map.getAt(initX,initY).getType().equals("void")){
+                 loop = false;
+                 Penguin p = new Penguin(initX,initY);
+                 if(PvE) {
+                     if (TEAM_1_IS_ANIMAL) {
+                         AI bot =(AI) owner;
+                         map.place(p,initX,initY);
+                         bot.setControlledObject(p);
+                         AIs.put(p,bot);
+                     } else if (!TEAM_1_IS_ANIMAL) {
+                         Connexion bot = (Connexion) owner;
+                         map.place(p, initX,initY);
+                         bot.setControlledObject(p);
+                         AIs.put(p,bot);
+                     }
+                 }
+             }
+         }while(loop);
+
+        }
     }
 
     @Override
@@ -236,9 +264,24 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
-    if(Connexion.){
+        if (PvE)
+        {
+            if (TEAM_1_IS_ANIMAL)  //Penquin == IA
+            {
+                Connexion owner = equipe1.get(p);
+                owner.setControlledObject(null);
 
-    }
+                //setPoints;
+
+                owner.removeLive();
+            }
+            else    //animal == Connexion
+            {
+                Connexion owner = equipe1.get(p);
+                owner.setControlledObject(null);
+                owner.removeLive();
+            }
+        }
     }
 
     @Override
