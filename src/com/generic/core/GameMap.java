@@ -1,6 +1,6 @@
 package com.generic.core;
 
-import com.generic.gameplay.OnlineGame;
+import com.generic.net.multiplayer.OnlineGame;
 
 import com.generic.gameplay.AbstractGame;
 

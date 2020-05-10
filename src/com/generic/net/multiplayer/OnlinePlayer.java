@@ -1,7 +1,6 @@
 package com.generic.net.multiplayer;
 
 import com.generic.core.MapEntity;
-import com.generic.gameplay.OnlineGame;
 import com.generic.net.Command;
 
 import java.io.*;
@@ -14,7 +13,7 @@ import static com.generic.gameplay.CONFIG_GAME.TEAM_2_IS_ANIMAL;
 /**
  * TODO: refactor -> OnlinePlayer
  */
-public class Connexion extends Thread {
+public class OnlinePlayer extends Thread {
     private Socket socket;
     private ObjectOutputStream commandOut;
     private ObjectInputStream commandIn;
@@ -27,7 +26,7 @@ public class Connexion extends Thread {
 
     private Serveur srv = Serveur.instance;
 
-    public Connexion(Socket s) {
+    public OnlinePlayer(Socket s) {
         socket = s;
         System.out.println("CONNEXION [SERVER] => " + s.toString());
         try {

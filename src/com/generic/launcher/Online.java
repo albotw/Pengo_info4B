@@ -3,15 +3,16 @@ package com.generic.launcher;
 import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
-import com.generic.gameplay.OnlineClient;
+import com.generic.net.multiplayer.OnlineClient;
 import com.generic.net.multiplayer.NetworkManager;
 import com.generic.net.multiplayer.Serveur;
 import com.generic.player.PlayerManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.net.InetAddress;
 
-public class OnlineDialog extends JDialog {
+public class Online extends JDialog {
 
     private OnlineUI onlineUI;
     private HostUI hostUI;
@@ -33,7 +34,7 @@ public class OnlineDialog extends JDialog {
     private Launcher l = Launcher.instance;
     private Serveur srv;
 
-    public OnlineDialog(Frame parent, boolean modal) {
+    public Online(Frame parent, boolean modal) {
         super(parent, modal);
         stage = 0;
 
@@ -77,10 +78,10 @@ public class OnlineDialog extends JDialog {
 
     // méthode pour le client
     public void gameStart() {
-        /**
-         * est appellée quand le netManager a reçu la commande GAME START -->
-         * instanciation d'un netGame en mode client.
-         */
+        setVisible(false);
+        Launcher.instance.setVisible(false);
+
+        Client = new OnlineClient(net);
     }
 
     public void team1Full() {
@@ -102,7 +103,13 @@ public class OnlineDialog extends JDialog {
 
     public void hostGameSelected() {
         stage = 1;
+        try {
+            setTitle("Multijoueur | " + InetAddress.getLocalHost().getHostAddress());
+        } catch (Exception e) {
+        }
+        ;
         card.show(cardPanel, "1");
+
         srv = new Serveur();
 
         net.connect("127.0.0.1", 8080);
@@ -115,17 +122,7 @@ public class OnlineDialog extends JDialog {
 
     // * options uniquement valable pour l'hote
     public void startGameSelected() {
-        /**
-         * Quand l'hôte clique sur lancer la partie.
-         */
-        setVisible(false);
-        Launcher.instance.setVisible(false);
-
-        Client = new OnlineClient(net);
         net.startGame();
-
-
-        // créer le netGame client
     }
 
     public void settingsSelected() {

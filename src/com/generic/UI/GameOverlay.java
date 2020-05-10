@@ -1,7 +1,6 @@
 package com.generic.UI;
 
 import com.generic.gameplay.LocalGame;
-import com.generic.launcher.Launcher;
 import com.generic.player.Player;
 import com.generic.player.PlayerManager;
 

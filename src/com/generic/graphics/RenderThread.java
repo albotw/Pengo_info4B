@@ -15,12 +15,11 @@ package com.generic.graphics;
 import com.generic.UI.GameOverlay;
 import com.generic.gameplay.CONFIG;
 import com.generic.gameplay.LocalGame;
-import com.generic.gameplay.OnlineClient;
+import com.generic.net.multiplayer.OnlineClient;
 
 import java.awt.*;
 
 import static com.generic.gameplay.CONFIG.WINDOW_TITLE;
-import static com.generic.gameplay.CONFIG_GAME.*;
 
 public class RenderThread extends Thread {
 

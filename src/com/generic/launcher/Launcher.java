@@ -58,7 +58,7 @@ public class Launcher extends JFrame
     public void MultiModeSelected()
     {
         System.out.println("Mode Multi séléctionné");
-        OnlineDialog OD = new OnlineDialog(this,true);
+        Online OD = new Online(this,true);
     }
 
     public void ProfileModeSelected()

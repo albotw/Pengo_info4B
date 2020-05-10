@@ -1,6 +1,8 @@
 package com.generic.utils;
 
-public class ScorePair {
+import java.io.Serializable;
+
+public class ScorePair implements Serializable {
 
         private String pseudo;
         private int score;

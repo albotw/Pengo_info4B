@@ -1,6 +1,6 @@
 package com.generic.UI;
 
-import com.generic.launcher.OnlineDialog;
+import com.generic.launcher.Online;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +25,9 @@ public class JoinUI extends JPanel {
 
     private JButton close;
 
-    private OnlineDialog manager;
+    private Online manager;
 
-    public JoinUI(OnlineDialog od) {
+    public JoinUI(Online od) {
         super();
 
         this.manager = od;

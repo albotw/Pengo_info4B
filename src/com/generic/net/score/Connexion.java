@@ -13,7 +13,7 @@ public class Connexion extends Thread {
     private ObjectInputStream commandIn;
     private ObjectOutputStream commandOut;
 
-    private Leaderboard l = ScoreServer.l;
+    private Leaderboard l = ScoreServer.instance.getLeaderboard();
 
     Connexion(Socket s) {
         connexion = s;
@@ -35,7 +35,7 @@ public class Connexion extends Thread {
                 System.out.println(cmd.toString());
 
                 if (cmd.getVal().equals("GET SCORE")) {
-                    for (int i = 0; i < ScoreServer.l.getLadder().size(); i++) {
+                    for (int i = 0; i < l.getLadder().size(); i++) {
                         String score = "" + l.getLadder().get(i).getScore();
                         String pseudo = "" + l.getLadder().get(i).getPseudo();
                         Command out = new Command("SET SCORE", new String[] { score, pseudo });
@@ -60,5 +60,7 @@ public class Connexion extends Thread {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        ScoreServer.instance.writeSavefile();
     }
 }
