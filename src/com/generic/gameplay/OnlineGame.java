@@ -52,17 +52,16 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void initPlayers() {
-        //Penguin p_host = new Penguin(10, 10);
-        //map.place(p_host, 10, 10);
-        //host.setControlledObject(p_host);
+        // Penguin p_host = new Penguin(10, 10);
+        // map.place(p_host, 10, 10);
+        // host.setControlledObject(p_host);
 
         Set<Connexion> set1 = Serveur.instance.getEquipe1().keySet();
         Set<Connexion> set2 = Serveur.instance.getEquipe2().keySet();
 
         Iterator it1 = set1.iterator();
-        while(it1.hasNext())
-        {
-            Connexion owner = (Connexion)(it1.next());
+        while (it1.hasNext()) {
+            Connexion owner = (Connexion) (it1.next());
 
             boolean loop = true;
             do {
@@ -89,12 +88,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
             } while (loop);
         }
 
-        if (PvP)
-        {
+        if (PvP) {
             Iterator it2 = set2.iterator();
-            while(it2.hasNext())
-            {
-                Connexion owner = (Connexion)(it2.next());
+            while (it2.hasNext()) {
+                Connexion owner = (Connexion) (it2.next());
 
                 boolean loop = true;
                 do {
@@ -125,8 +122,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void initIA() {
-        if (PvE)
-        {
+        if (PvE) {
             boolean loop = true;
             for (int i = 0; i < N_AI; i++) {
                 loop = true;
@@ -171,12 +167,11 @@ public class OnlineGame extends AbstractGame implements Runnable {
         host.setPoints(100);
         time.stopTimer();
         stop();
-        srv.sendCommandToAll("GAME END", new String[] {"DEFEAT", ""+host.getPoints()});
+        srv.sendCommandToAll("GAME END", new String[] { "DEFEAT", "" + host.getPoints() });
         srv.stopServer();
     }
 
-    public void stop()
-    {
+    public void stop() {
         Iterator it = AIs.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
@@ -201,26 +196,23 @@ public class OnlineGame extends AbstractGame implements Runnable {
     public void respawnAnimal(Object owner) {
         boolean loop = true;
         do {
-            int initX = RandomizedInt(0,GRID_WIDTH - 1);
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY).getType().equals("IceBlock"))
-            {
+            if (map.getAt(initX, initY).getType().equals("IceBlock")) {
                 loop = false;
-                Animal a = new Animal (initX, initY);
-                if (PvE)
-                {
-                    if (TEAM_1_IS_ANIMAL)   // connexion = animal
+                Animal a = new Animal(initX, initY);
+                if (PvE) {
+                    if (TEAM_1_IS_ANIMAL) // connexion = animal
                     {
-                        Connexion player = (Connexion)(owner);
+                        Connexion player = (Connexion) (owner);
                         map.place(a, initX, initY);
                         player.setControlledObject(a);
 
                         equipe1.put(a, player);
-                    }
-                    else    //IA = animal
+                    } else // IA = animal
                     {
-                        AI bot = (AI)(owner);
+                        AI bot = (AI) (owner);
                         map.place(a, initX, initY);
                         bot.setControlledObject(a);
 
@@ -228,12 +220,40 @@ public class OnlineGame extends AbstractGame implements Runnable {
                     }
                 }
             }
-        }while(loop);
+        } while (loop);
     }
 
     @Override
     public void respawnPenguin(Object owner) {
+        try {
+            sleep(500);
+        } catch (Exception e) {
+            e.printStackTrace();
+            boolean loop = true;
+            do {
+                int initX = RandomizedInt(0, GRID_WIDTH - 1);
+                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
+                if (map.getAt(initX, initY).getType().equals("void")) {
+                    loop = false;
+                    Penguin p = new Penguin(initX, initY);
+                    if (PvE) {
+                        if (TEAM_1_IS_ANIMAL) {
+                            AI bot = (AI) owner;
+                            map.place(p, initX, initY);
+                            bot.setControlledObject(p);
+                            AIs.put(p, bot);
+                        } else if (!TEAM_1_IS_ANIMAL) {
+                            Connexion bot = (Connexion) owner;
+                            map.place(p, initX, initY);
+                            bot.setControlledObject(p);
+                            AIs.put(p, bot);
+                        }
+                    }
+                }
+            } while (loop);
+
+        }
     }
 
     @Override
@@ -242,52 +262,102 @@ public class OnlineGame extends AbstractGame implements Runnable {
         host.setPoints(100);
         time.stopTimer();
         stop();
-        srv.sendCommandToAll("GAME END", new String[] {"VICTORY", ""+host.getPoints()});
+        srv.sendCommandToAll("GAME END", new String[] { "VICTORY", "" + host.getPoints() });
         srv.stopServer();
     }
 
     @Override
     public void animalKilled(Animal a, MapObject killer) {
-        if (PvE)
-        {
-            if (!TEAM_1_IS_ANIMAL)  //animal == IA
+        if (PvE) {
+            if (!TEAM_1_IS_ANIMAL) // animal == IA
             {
                 AI owner = AIs.get(a);
 
                 owner.setControlledObject(null);
-                //setPoints;
+                // setPoints;
 
                 AILives = AILives - 1;
-                if (AILives == 0)
-                {
+                if (AILives == 0) {
                     victory();
-                }
-                else
-                {
+                } else {
                     respawnAnimal(owner);
                 }
-            }
-            else    //animal == Connexion
+            } else // animal == Connexion
             {
                 Connexion owner = equipe1.get(a);
                 equipe1.remove(a);
                 owner.setControlledObject(null);
                 owner.removeLive();
             }
-        }
-        else if (PvP)
-        {
+        } else if (PvP) {
 
         }
     }
 
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
+        if (PvE) {
+            if (TEAM_1_IS_ANIMAL) // Penquin == IA
+            {
+                Connexion owner = equipe1.get(p);
+                owner.setControlledObject(null);
 
+                // setPoints;
+
+                owner.removeLive();
+            } else // animal == Connexion
+            {
+                Connexion owner = equipe1.get(p);
+                owner.setControlledObject(null);
+                owner.removeLive();
+            }
+        }
     }
 
     @Override
     public void stunTriggered(char dirMur) {
+        /**
+         * TODO: Optimisation
+         */
+        System.out.println("STUN!");
+
+        switch (dirMur) {
+            case 'G':
+                for (int i = 0; i < GRID_HEIGHT; i++) {
+                    MapObject mo = map.getAt(0, i);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+
+            case 'D':
+                for (int i = 0; i < GRID_HEIGHT; i++) {
+                    MapObject mo = map.getAt(GRID_WIDTH - 1, i);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+
+            case 'H':
+                for (int i = 0; i < GRID_WIDTH; i++) {
+                    MapObject mo = map.getAt(i, 0);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+
+            case 'B':
+                for (int i = 0; i < GRID_WIDTH; i++) {
+                    MapObject mo = map.getAt(i, GRID_HEIGHT - 1);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+        }
 
     }
 

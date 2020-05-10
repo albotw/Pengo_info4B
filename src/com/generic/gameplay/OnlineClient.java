@@ -87,14 +87,16 @@ public class OnlineClient extends Thread {
                 break;
         }
     }
-    public void gameEnd(String[] params){
+
+    public void gameEnd(String[] params) {
         stopClient = true;
         boolean victoire = false;
-        if (params[0].equals("VICTORY")) victoire = true;
+        if (params[0].equals("VICTORY"))
+            victoire = true;
         GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, victoire);
-        try{
+        try {
             sleep(2000);
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         GED.Fermer();
