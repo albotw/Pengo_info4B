@@ -85,6 +85,13 @@ public class Connexion extends Thread {
                     if (controlledObject != null)
                         controlledObject.goRight();
                 }
+                else if (cmd.getVal().equals("ACTION"))
+                {
+                    if (controlledObject != null)
+                    {
+                        controlledObject.action();
+                    }
+                }
             }
             commandOut.close();
             commandIn.close();

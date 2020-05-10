@@ -50,6 +50,9 @@ public class OnlineClient extends Thread {
             else if (ih.RIGHT)
                 nm.RIGHT();
 
+            if (ih.ACTION)
+                nm.ACTION();
+
             ih.flush();
 
             try {

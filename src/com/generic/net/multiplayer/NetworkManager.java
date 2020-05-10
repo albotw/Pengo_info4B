@@ -111,6 +111,8 @@ public class NetworkManager implements Runnable {
         sendCommand("MOVE RIGHT", null);
     }
 
+    public void ACTION() { sendCommand("ACTION", null);}
+
     public void startGame() {
         sendCommand("START GAME", null);
     }

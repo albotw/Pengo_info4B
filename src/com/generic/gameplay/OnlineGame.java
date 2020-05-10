@@ -77,12 +77,14 @@ public class OnlineGame extends AbstractGame implements Runnable {
                         owner.setControlledObject(p);
 
                         equipe1.put(p, owner);
+                        System.out.println("### added player to team 1 ###");
                     } else if (TEAM_1_IS_ANIMAL) {
                         Animal a = new Animal(initX, initY);
                         map.place(a, initX, initY);
                         owner.setControlledObject(a);
 
                         equipe1.put(a, owner);
+                        System.out.println("### added player to team 1 ###");
                     }
                 }
             } while (loop);
@@ -244,10 +246,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
                             bot.setControlledObject(p);
                             AIs.put(p, bot);
                         } else if (!TEAM_1_IS_ANIMAL) {
-                            Connexion bot = (Connexion) owner;
+                            Connexion player = (Connexion) owner;
                             map.place(p, initX, initY);
-                            bot.setControlledObject(p);
-                            AIs.put(p, bot);
+                            player.setControlledObject(p);
+                            equipe1.put(p, player);
                         }
                     }
                 }
@@ -297,7 +299,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
         if (PvE) {
-            if (TEAM_1_IS_ANIMAL) // Penquin == IA
+            if (!TEAM_1_IS_ANIMAL) // Penquin = connexion
             {
                 Connexion owner = equipe1.get(p);
                 owner.setControlledObject(null);
@@ -305,11 +307,19 @@ public class OnlineGame extends AbstractGame implements Runnable {
                 // setPoints;
 
                 owner.removeLive();
-            } else // animal == Connexion
+            } else //penguin = IA
             {
-                Connexion owner = equipe1.get(p);
+                AI owner = AIs.get(p);
+
                 owner.setControlledObject(null);
-                owner.removeLive();
+                // setPoints;
+
+                AILives = AILives - 1;
+                if (AILives == 0) {
+                    victory();
+                } else {
+                    respawnPenguin(owner);
+                }
             }
         }
     }
