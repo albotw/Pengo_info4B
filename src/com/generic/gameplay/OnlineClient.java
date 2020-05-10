@@ -86,6 +86,7 @@ public class OnlineClient extends Thread {
         }
     }
     public void gameEnd(String[] tab){
+
         GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, false);
         try{
             sleep(2000);

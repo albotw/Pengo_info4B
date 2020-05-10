@@ -209,11 +209,55 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
+    if(Connexion.){
 
+    }
     }
 
     @Override
     public void stunTriggered(char dirMur) {
+        /**
+         * TODO: Optimisation
+         */
+        System.out.println("STUN!");
+
+        switch (dirMur) {
+            case 'G':
+                for (int i = 0; i < GRID_HEIGHT; i++) {
+                    MapObject mo = map.getAt(0, i);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+
+            case 'D':
+                for (int i = 0; i < GRID_HEIGHT; i++) {
+                    MapObject mo = map.getAt(GRID_WIDTH - 1, i);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+
+            case 'H':
+                for (int i = 0; i < GRID_WIDTH; i++) {
+                    MapObject mo = map.getAt(i, 0);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+
+            case 'B':
+                for (int i = 0; i < GRID_WIDTH; i++) {
+                    MapObject mo = map.getAt(i, GRID_HEIGHT - 1);
+                    if (mo.getType().equals("Animal")) {
+                        ((Animal) (mo)).activateStun();
+                    }
+                }
+                break;
+        }
 
     }
 
