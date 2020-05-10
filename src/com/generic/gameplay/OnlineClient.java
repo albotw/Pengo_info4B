@@ -21,9 +21,11 @@ public class OnlineClient extends Thread {
 
     public static OnlineClient instance;
 
+    private boolean stopClient;
+
     public OnlineClient(NetworkManager nm) {
         instance = this;
-
+        setCLIENT(true);
         this.nm = nm;
         this.sm = SpriteManager.createSpriteManager();
 
@@ -38,7 +40,7 @@ public class OnlineClient extends Thread {
 
     public void run() {
         this.ih = new InputHandler(rt.getWindow());
-        while (true) {
+        while (!stopClient) {
             if (ih.UP)
                 nm.UP();
             else if (ih.DOWN)
@@ -85,14 +87,21 @@ public class OnlineClient extends Thread {
                 break;
         }
     }
-    public void gameEnd(String[] tab){
-        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, false);
+    public void gameEnd(String[] params){
+        stopClient = true;
+        boolean victoire = false;
+        if (params[0].equals("VICTORY")) victoire = true;
+        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, victoire);
         try{
             sleep(2000);
         }catch(Exception e){
             e.printStackTrace();
         }
         GED.Fermer();
+        nm.sendCommand("DISCONNECT", null);
+        rt.stopRendering();
+        ih.flush();
+
         Launcher.instance.onGameEnded();
 
     }

@@ -12,6 +12,7 @@ import com.generic.net.multiplayer.Serveur;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
@@ -166,32 +167,72 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
     @Override
     public void gameOver() {
+        System.out.println("### APPEL GAME OVER ##");
         host.setPoints(100);
         time.stopTimer();
         stop();
-        GameEndDialog GED = new GameEndDialog(w, false, false);
-        try {
-            sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        GED.Fermer();
-        Launcher.instance.onGameEnded();
+        srv.sendCommandToAll("GAME END", new String[] {"DEFEAT", ""+host.getPoints()});
+        srv.stopServer();
+    }
 
+    public void stop()
+    {
+        Iterator it = AIs.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            AI tmp = (AI) pair.getValue();
+            tmp.flush();
+            try {
+                System.out.println("En attente de l'arrêt d'un Thread IA");
+                tmp.join();
+                tmp.interrupt();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            it.remove();
+        }
+
+        equipe1.clear();
+        equipe2.clear();
+        map.deleteMap();
     }
 
     @Override
     public void respawnAnimal(Object owner) {
+        boolean loop = true;
+        do {
+            int initX = RandomizedInt(0,GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
+            if (map.getAt(initX, initY).getType().equals("IceBlock"))
+            {
+                loop = false;
+                Animal a = new Animal (initX, initY);
+                if (PvE)
+                {
+                    if (TEAM_1_IS_ANIMAL)   // connexion = animal
+                    {
+                        Connexion player = (Connexion)(owner);
+                        map.place(a, initX, initY);
+                        player.setControlledObject(a);
+
+                        equipe1.put(a, player);
+                    }
+                    else    //IA = animal
+                    {
+                        AI bot = (AI)(owner);
+                        map.place(a, initX, initY);
+                        bot.setControlledObject(a);
+
+                        AIs.put(a, bot);
+                    }
+                }
+            }
+        }while(loop);
     }
 
     @Override
     public void respawnPenguin(Object owner) {
-
-    }
-
-    @Override
-    public void stop() {
 
     }
 
@@ -202,6 +243,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
         time.stopTimer();
         stop();
         srv.sendCommandToAll("GAME END", new String[] {"VICTORY", ""+host.getPoints()});
+        srv.stopServer();
     }
 
     @Override
@@ -211,8 +253,8 @@ public class OnlineGame extends AbstractGame implements Runnable {
             if (!TEAM_1_IS_ANIMAL)  //animal == IA
             {
                 AI owner = AIs.get(a);
-                owner.setControlledObject(null);
 
+                owner.setControlledObject(null);
                 //setPoints;
 
                 AILives = AILives - 1;
@@ -228,9 +270,14 @@ public class OnlineGame extends AbstractGame implements Runnable {
             else    //animal == Connexion
             {
                 Connexion owner = equipe1.get(a);
+                equipe1.remove(a);
                 owner.setControlledObject(null);
                 owner.removeLive();
             }
+        }
+        else if (PvP)
+        {
+
         }
     }
 

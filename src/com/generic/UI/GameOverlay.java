@@ -12,7 +12,7 @@ import static com.generic.gameplay.CONFIG_GAME.CLIENT;
 
 public class GameOverlay extends JPanel {
 
-    private LocalGame g = (LocalGame) LocalGame.instance;
+    private LocalGame g;
 
     private String pseudo;
     private int score;
@@ -37,6 +37,7 @@ public class GameOverlay extends JPanel {
         if (!CLIENT)
         {
             localPlayer = PlayerManager.instance.getMainProfile();
+            g = (LocalGame) LocalGame.instance;
         }
 
         setBackground(Color.BLACK);

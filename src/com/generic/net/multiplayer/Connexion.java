@@ -115,7 +115,10 @@ public class Connexion extends Thread {
             {
                 OnlineGame.instance.respawnPenguin(this);
             }
-            else if (equipe == 2 && TEAM_2_IS_ANIMAL);
+            else if (equipe == 2 && TEAM_2_IS_ANIMAL)
+            {
+                OnlineGame.instance.respawnAnimal(this);
+            }
         }
     }
 
