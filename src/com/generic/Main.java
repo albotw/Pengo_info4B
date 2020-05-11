@@ -1,4 +1,5 @@
 package com.generic;
+import com.generic.gameplay.CONFIG;
 import com.generic.launcher.Launcher;
 import com.generic.launcher.Leaderboard;
 import com.generic.net.score.ScoreServer;
@@ -10,9 +11,18 @@ public class Main {
 
     public static void main(String[] args)
     {
-        //generateDummySaveFiles();
+        if (args.length != 0)
+        {
+            if (args[0].equals("-createSave"))
+            {
+                generateDummySaveFiles();
+            }
+            else if (args[0].equals("-lowResMode"))
+            {
+                CONFIG.setLowResMode(true);
+            }
+        }
         Launcher l = new Launcher();
-        //Game g = new Game();
     }
 
     public static void generateDummySaveFiles()

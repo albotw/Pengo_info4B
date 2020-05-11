@@ -36,4 +36,9 @@ public class CONFIG {
     public final static int SPRITE_SIZE_SD        = 25;
 
     public final static Color BG_DEFAULT_COLOR = new Color(0, 24, 24);
+
+    public static void setLowResMode(boolean val)
+    {
+        LOW_RES_MODE = val;
+    }
 }

@@ -7,6 +7,8 @@ import com.generic.gameplay.Player;
 import javax.swing.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import static com.generic.gameplay.CONFIG_GAME.N_NIVEAUX;
+
 public class Launcher extends JFrame
 {
     public static Launcher instance;
@@ -16,6 +18,8 @@ public class Launcher extends JFrame
 
     private CopyOnWriteArrayList<Player> playerProfiles;
     private int mainProfile = - 1;
+
+    private int currentLevel;
 
     public  Launcher()
     {
@@ -44,9 +48,11 @@ public class Launcher extends JFrame
     public void SoloModeSelected()
     {
         System.out.println("Solo séléctionné");
+        currentLevel = 0;
         if (isMainProfileChosen())
         {
             this.setVisible(false);
+            currentLevel++;
             LocalGame g = new LocalGame();
         }
     }
@@ -83,8 +89,18 @@ public class Launcher extends JFrame
     //TRAITEMENT AUTRE ----------
     public void onGameEnded()
     {
+        System.out.println("Game " + currentLevel + " / " + N_NIVEAUX);
         localLeaderboard.addToLeaderboard(playerProfiles.get(mainProfile));
-        this.setVisible(true);
+        localLeaderboard.print();
+        if (currentLevel == N_NIVEAUX)
+        {
+            this.setVisible(true);
+        }
+        else
+        {
+            currentLevel++;
+            LocalGame g = new LocalGame();
+        }
     }
 
     public Leaderboard getLeaderboard()

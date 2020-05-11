@@ -10,7 +10,7 @@ public class GameMap {
     // faire en sorte de "sémaphoriser" la classe.
     // Pas besoin car pas d'erreur de modification concurrente détéctée pour le
     // moment.
-    private MapObject tab[][];
+    private volatile MapObject tab[][];
     private int width;
     private int height;
     private boolean local;

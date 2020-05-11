@@ -78,7 +78,12 @@ public class SpriteManager {
         return background.size();
     }
 
-    //Optimisation probable
+    /**
+     * Optimisation très probable.
+     * On peut imaginer qu'en stockant la composition précédente de la carte
+     * on peut actualiser juste les mapobjects modifiés et non régénérer une tonne de sprites a chaque fois.
+     */
+
     public static void transfer(GameMap m, RenderThread rt)
     {
         if (m != null)
