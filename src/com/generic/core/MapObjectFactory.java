@@ -38,7 +38,10 @@ public class MapObjectFactory {
 
     public static PlaceholderBlock createPlaceholder(int x,int y, GameMap m, String type)
     {
-        PlaceholderBlock phb = new PlaceholderBlock(x, y, type);
+        /**
+         * TODO: orientation
+         */
+        PlaceholderBlock phb = new PlaceholderBlock(x, y, type, 'N');
         linkMap(phb, m);
         return phb;
     }

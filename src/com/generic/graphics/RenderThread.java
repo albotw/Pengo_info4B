@@ -17,6 +17,7 @@ import com.generic.gameplay.CONFIG;
 import com.generic.gameplay.LocalGame;
 import com.generic.net.multiplayer.OnlineClient;
 
+import javax.swing.*;
 import java.awt.*;
 
 import static com.generic.gameplay.CONFIG.LOW_RES_MODE;
@@ -45,6 +46,7 @@ public class RenderThread extends Thread {
         }
 
         fps = new FPSCounter();
+
         rp = new RenderPanel();
         go = new GameOverlay();
         w.setLayout(new BorderLayout());

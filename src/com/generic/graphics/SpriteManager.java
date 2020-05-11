@@ -1,6 +1,7 @@
 package com.generic.graphics;
 
 import com.generic.core.GameMap;
+import com.generic.core.Orientation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -113,7 +114,8 @@ public class SpriteManager {
                             }
                             else if (m.getAt(j, i).getType().equals("Penguin"))
                             {
-                                spr.loadImage("src/ressources/" + dir+ "Penguin.png");
+                                Orientation o = (Orientation)m.getAt(j, i);
+                                spr.loadImage("src/ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
                             }
                             else if (m.getAt(j, i).getType().equals("DiamondBlock"))
                             {

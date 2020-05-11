@@ -18,7 +18,7 @@ public class CONFIG {
 
     public final static String WINDOW_TITLE    = "Pengo Remake ";
 
-    public static boolean LOW_RES_MODE = true;
+    public static boolean LOW_RES_MODE = false;
 
     public final static int WH_HIGH_RES        = 925;
     public final static int WW_HIGH_RES        = 750;
