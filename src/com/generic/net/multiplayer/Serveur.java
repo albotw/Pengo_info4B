@@ -6,7 +6,6 @@ import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.generic.gameplay.OnlineGame;
 import com.generic.net.Command;
 
 public class Serveur extends Thread {
@@ -17,10 +16,10 @@ public class Serveur extends Thread {
     private ServerSocket ss;
 
     private ArrayList<ObjectOutputStream> cmdOuts;
-    private HashMap<Connexion, String> equipe1;
-    private HashMap<Connexion, String> equipe2;
+    private HashMap<OnlinePlayer, String> equipe1;
+    private HashMap<OnlinePlayer, String> equipe2;
 
-    private Connexion host;
+    private OnlinePlayer host;
 
     private OnlineGame game;
 
@@ -29,8 +28,8 @@ public class Serveur extends Thread {
 
         cmdOuts = new ArrayList<ObjectOutputStream>();
 
-        equipe1 = new HashMap<Connexion, String>();
-        equipe2 = new HashMap<Connexion, String>();
+        equipe1 = new HashMap<OnlinePlayer, String>();
+        equipe2 = new HashMap<OnlinePlayer, String>();
 
         try {
             ss = new ServerSocket(port);
@@ -45,9 +44,10 @@ public class Serveur extends Thread {
     public void run() {
         while (!flush) {
             try {
-                Connexion c = new Connexion(ss.accept());
+                OnlinePlayer c = new OnlinePlayer(ss.accept());
                 cmdOuts.add(c.getCommandOut());
-                c.start();
+                Thread threadConnexion = new Thread(c);
+                threadConnexion.start();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -70,22 +70,22 @@ public class Serveur extends Thread {
         System.out.println("joueur supprimé");
     }
 
-    public void putOnTeam1(Connexion c, String s) {
+    public void putOnTeam1(OnlinePlayer c, String s) {
         equipe1.put(c, s);
         sendCommandToAll("ADD TO TEAM 1", new String[] { s });
     }
 
-    public void putOnTeam2(Connexion c, String s) {
+    public void putOnTeam2(OnlinePlayer c, String s) {
         equipe2.put(c, s);
         sendCommandToAll("ADD TO TEAM 2", new String[] { s });
     }
 
-    public void removeFromTeam1(Connexion c) {
+    public void removeFromTeam1(OnlinePlayer c) {
         equipe1.remove(c);
         sendCommandToAll("REMOVE TEAM 1", new String[] { c.getPseudo() });
     }
 
-    public void removeFromTeam2(Connexion c) {
+    public void removeFromTeam2(OnlinePlayer c) {
         equipe2.remove(c);
         sendCommandToAll("REMOVE TEAM 2", new String[] { c.getPseudo() });
     }
@@ -101,11 +101,11 @@ public class Serveur extends Thread {
         }
     }
 
-    public Connexion getHost() {
+    public OnlinePlayer getHost() {
         return host;
     }
 
-    public void setHost(Connexion host) {
+    public void setHost(OnlinePlayer host) {
         this.host = host;
     }
 
@@ -116,22 +116,23 @@ public class Serveur extends Thread {
     }
 
     public void startGame() {
+        sendCommandToAll("GAME START", null);
         game = new OnlineGame();
     }
 
-    public HashMap<Connexion, String> getEquipe1() {
+    public HashMap<OnlinePlayer, String> getEquipe1() {
         return equipe1;
     }
 
-    public void setEquipe1(HashMap<Connexion, String> equipe1) {
+    public void setEquipe1(HashMap<OnlinePlayer, String> equipe1) {
         this.equipe1 = equipe1;
     }
 
-    public HashMap<Connexion, String> getEquipe2() {
+    public HashMap<OnlinePlayer, String> getEquipe2() {
         return equipe2;
     }
 
-    public void setEquipe2(HashMap<Connexion, String> equipe2) {
+    public void setEquipe2(HashMap<OnlinePlayer, String> equipe2) {
         this.equipe2 = equipe2;
     }
 }

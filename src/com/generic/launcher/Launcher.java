@@ -2,23 +2,33 @@ package com.generic.launcher;
 
 import com.generic.UI.LauncherUI;
 import com.generic.gameplay.LocalGame;
-import com.generic.utils.ScorePair;
-import com.generic.player.PlayerManager;
+import com.generic.gameplay.Player;
 
 import javax.swing.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Launcher extends JFrame
 {
     public static Launcher instance;
 
     private LauncherUI UI;
-    private PlayerManager pm;
-    private Leaderboard l;
+    private Leaderboard localLeaderboard;
+
+    private CopyOnWriteArrayList<Player> playerProfiles;
+    private int mainProfile = - 1;
 
     public  Launcher()
     {
         super();
         instance = this;
+
+        localLeaderboard = new Leaderboard();
+        localLeaderboard.pull();
+        localLeaderboard.push();
+
+        playerProfiles = new CopyOnWriteArrayList<Player>();
+        playerProfiles.add(new Player("Yann"));
+        mainProfile = 0;
 
         UI = new LauncherUI();
         add(UI);
@@ -28,21 +38,13 @@ public class Launcher extends JFrame
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
-
-        pm = new PlayerManager();
-        l = new Leaderboard();
-        l.pull();
-
-        l.addToLeaderboard(new ScorePair("Yann", 100000, true));
-
-        l.push();
-        l.print();
     }
 
+    // TRAITEMENT INTERFACE ----------
     public void SoloModeSelected()
     {
         System.out.println("Solo séléctionné");
-        if (pm.isMainProfileChosen())
+        if (isMainProfileChosen())
         {
             this.setVisible(false);
             LocalGame g = new LocalGame();
@@ -58,7 +60,7 @@ public class Launcher extends JFrame
     public void MultiModeSelected()
     {
         System.out.println("Mode Multi séléctionné");
-        OnlineDialog OD = new OnlineDialog(this,true);
+        Online OD = new Online(this,true);
     }
 
     public void ProfileModeSelected()
@@ -66,15 +68,10 @@ public class Launcher extends JFrame
         System.out.println("Profil séléctionné");
         ProfileDialog modal = new ProfileDialog(this, true);
 
-        if (pm.getMainProfile() != null)
+        if (isMainProfileChosen())
         {
-            UI.updateProfileMode(pm.getMainProfile().getPseudo());
+            UI.updateProfileMode(getMainProfile().getPseudo());
         }
-    }
-
-    public Leaderboard getLeaderboard()
-    {
-        return this.l;
     }
 
     public void leaderboardSelected()
@@ -83,8 +80,66 @@ public class Launcher extends JFrame
         LeaderboardDialog modal = new LeaderboardDialog(this, true);
     }
 
+    //TRAITEMENT AUTRE ----------
     public void onGameEnded()
     {
+        localLeaderboard.addToLeaderboard(playerProfiles.get(mainProfile));
         this.setVisible(true);
+    }
+
+    public Leaderboard getLeaderboard()
+    {
+        return this.localLeaderboard;
+    }
+
+    public void addPlayer(String pseudo)
+    {
+        Player p = new Player(pseudo);
+        playerProfiles.add(p);
+    }
+
+    public CopyOnWriteArrayList<Player> getPlayers()
+    {
+        return this.playerProfiles;
+    }
+
+    public void removePlayer(String pseudo)
+    {
+        playerProfiles.removeIf(p -> p.getPseudo().equals(pseudo));
+    }
+
+    public void setMainProfile(String pseudo)
+    {
+        for (Player p : playerProfiles)
+        {
+            if (p.getPseudo().equals(pseudo))
+            {
+                mainProfile = playerProfiles.indexOf(p);
+            }
+        }
+
+        System.out.println("Main profile set to " + mainProfile + " | " + playerProfiles.get(mainProfile).getPseudo());
+    }
+
+    public Player getMainProfile()
+    {
+        return playerProfiles.get(mainProfile);
+    }
+
+    public boolean isMainProfileChosen()
+    {
+        return mainProfile != -1;
+    }
+
+    public Player getPlayer(int i)
+    {
+        if (i >= 0 && i < playerProfiles.size())
+        {
+            return playerProfiles.get(i);
+        }
+        else
+        {
+            return null;
+        }
     }
 }

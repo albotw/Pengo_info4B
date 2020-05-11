@@ -4,7 +4,6 @@ import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
 import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
-import com.generic.player.*;
 import com.generic.graphics.*;
 import com.generic.AI.*;
 
@@ -25,7 +24,6 @@ public class LocalGame extends AbstractGame {
     private SpriteManager sm;
     private Window w;
 
-    private PlayerManager pm = PlayerManager.instance;
     private Player localPlayer;
     private Thread LPThread;
 
@@ -37,7 +35,7 @@ public class LocalGame extends AbstractGame {
         map.setLocal(true);
 
         AIs = new HashMap<MapEntity, AI>();
-        localPlayer = pm.getMainProfile();
+        localPlayer = launcher.getMainProfile();
         sm = SpriteManager.createSpriteManager();
 
         renderer = new RenderThread();
@@ -66,14 +64,12 @@ public class LocalGame extends AbstractGame {
                     AI ai = new AI();
 
                     if (PLAYER_IS_PENGUIN) {
-                        Animal a = new Animal(initX, initY);
-                        map.place(a, initX, initY);
+                        Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                         ai.setControlledObject(a);
                         AIs.put(a, ai);
                     }
                     else if (PLAYER_IS_ANIMAL) {
-                        Penguin p = new Penguin(initX, initY);
-                        map.place(p, initX, initY);
+                        Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                         ai.setControlledObject(p);
                         AIs.put(p, ai);
                     }
@@ -96,12 +92,10 @@ public class LocalGame extends AbstractGame {
                 loop = false;
 
                 if (PLAYER_IS_PENGUIN) {
-                    Penguin p = new Penguin(initX, initY);
-                    map.place(p, initX, initY);
+                    Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                     localPlayer.setControlledObject(p);
                 } else if (PLAYER_IS_ANIMAL) {
-                    Animal a = new Animal(initX, initY);
-                    map.place(a, initX, initY);
+                    Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                     localPlayer.setControlledObject(a);
                 }
 
@@ -164,7 +158,7 @@ public class LocalGame extends AbstractGame {
 
     public void victory() {
         // a ajouter: déréférencement dans les objets.
-        pm.getMainProfile().setPoints("GameEnded", time.getTime());
+        launcher.getMainProfile().setPoints("GameEnded", time.getTime());
         time.stopTimer();
         stop();
         GameEndDialog ged = new GameEndDialog(w, false, true);
@@ -273,16 +267,13 @@ public class LocalGame extends AbstractGame {
 
             if (map.getAt(initX, initY).getType().equals("IceBlock")) {
                 loop = false;
-                Animal a = new Animal(initX, initY);
+                Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                 if (PLAYER_IS_PENGUIN) {
                     AI bot = (AI) (owner);
-                    map.place(a, initX, initY);
                     bot.setControlledObject(a);
-
                     AIs.put(a, bot);
                 } else if (PLAYER_IS_ANIMAL) {
                     Player pl = (Player) (owner);
-                    map.place(a, initX, initY);
                     pl.setControlledObject(a);
                 }
             }
@@ -303,15 +294,13 @@ public class LocalGame extends AbstractGame {
 
             if (map.getAt(initX, initY).getType().equals("void")) {
                 loop = false;
-                Penguin p = new Penguin(initX, initY);
+                Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
 
                 if (PLAYER_IS_PENGUIN) {
                     Player pl = (Player) owner;
-                    map.place(p, initX, initY);
                     pl.setControlledObject(p);
                 } else if (PLAYER_IS_ANIMAL) {
                     AI bot = (AI) (owner);
-                    map.place(p, initX, initY);
                     bot.setControlledObject(p);
 
                     AIs.put(p, bot);

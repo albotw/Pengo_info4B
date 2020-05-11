@@ -2,8 +2,6 @@ package com.generic.core;
 
 import static com.generic.gameplay.CONFIG.*;
 
-import com.generic.gameplay.AbstractGame;
-
 public abstract class MapObject {
     protected int x;
     protected int y;
@@ -13,7 +11,6 @@ public abstract class MapObject {
     public MapObject(int x, int y) {
         this.x = x;
         this.y = y;
-        this.m = AbstractGame.instance.getMap();
     }
 
     abstract void destroy(MapObject killer);
@@ -78,7 +75,7 @@ public abstract class MapObject {
         return type;
     }
 
-    public void setMap() {
-        this.m = AbstractGame.instance.getMap();
+    public void setMap(GameMap m) {
+        this.m = m;
     }
 }

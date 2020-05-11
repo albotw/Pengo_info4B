@@ -1,7 +1,7 @@
 package com.generic.net.multiplayer;
 
 import com.generic.core.MapEntity;
-import com.generic.gameplay.OnlineGame;
+import com.generic.gameplay.AbstractPlayer;
 import com.generic.net.Command;
 
 import java.io.*;
@@ -14,20 +14,17 @@ import static com.generic.gameplay.CONFIG_GAME.TEAM_2_IS_ANIMAL;
 /**
  * TODO: refactor -> OnlinePlayer
  */
-public class Connexion extends Thread {
+public class OnlinePlayer extends AbstractPlayer {
     private Socket socket;
     private ObjectOutputStream commandOut;
     private ObjectInputStream commandIn;
-    private int points;
 
     private int equipe = 0;
-    private String pseudo;
-    private MapEntity controlledObject;
-    private int currentLives;
 
     private Serveur srv = Serveur.instance;
 
-    public Connexion(Socket s) {
+    public OnlinePlayer(Socket s) {
+        super("");
         socket = s;
         System.out.println("CONNEXION [SERVER] => " + s.toString());
         try {
@@ -85,6 +82,13 @@ public class Connexion extends Thread {
                     if (controlledObject != null)
                         controlledObject.goRight();
                 }
+                else if (cmd.getVal().equals("ACTION"))
+                {
+                    if (controlledObject != null)
+                    {
+                        controlledObject.action();
+                    }
+                }
             }
             commandOut.close();
             commandIn.close();
@@ -124,25 +128,5 @@ public class Connexion extends Thread {
 
     public ObjectOutputStream getCommandOut() {
         return this.commandOut;
-    }
-
-    public String getPseudo() {
-        return this.pseudo;
-    }
-
-    public MapEntity getControlledObject() {
-        return controlledObject;
-    }
-
-    public void setControlledObject(MapEntity controlledObject) {
-        this.controlledObject = controlledObject;
-    }
-
-    public int getPoints() {
-        return points;
-    }
-
-    public void setPoints(int points) {
-        this.points = points;
     }
 }

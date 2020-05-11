@@ -1,12 +1,11 @@
-package com.generic.gameplay;
+package com.generic.net.multiplayer;
 
 import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
 import com.generic.launcher.Launcher;
-import com.generic.net.multiplayer.NetworkManager;
-import com.generic.player.InputHandler;
+import com.generic.utils.InputHandler;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
@@ -50,6 +49,9 @@ public class OnlineClient extends Thread {
             else if (ih.RIGHT)
                 nm.RIGHT();
 
+            if (ih.ACTION)
+                nm.ACTION();
+
             ih.flush();
 
             try {
@@ -65,26 +67,13 @@ public class OnlineClient extends Thread {
     }
 
     public void overrideMap(int x, int y, String type) {
-        switch (type) {
-            case "IceBlock":
-                m.place(new IceBlock(x, y), x, y);
-                break;
-
-            case "DiamondBlock":
-                m.place(new DiamondBlock(x, y), x, y);
-                break;
-
-            case "Penguin":
-                m.place(new Penguin(x, y), x, y);
-                break;
-
-            case "Animal":
-                m.place(new Animal(x, y), x, y);
-                break;
-
-            case "":
-                m.release(x, y);
-                break;
+        if (type.equals(""))
+        {
+            m.release(x, y);
+        }
+        else
+        {
+            MapObjectFactory.createPlaceholder(x, y, this.m, type);
         }
     }
 

@@ -1,4 +1,4 @@
-package com.generic.player;
+package com.generic.utils;
 
 import java.awt.*;
 import java.awt.event.*;

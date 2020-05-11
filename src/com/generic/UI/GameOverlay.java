@@ -2,8 +2,7 @@ package com.generic.UI;
 
 import com.generic.gameplay.LocalGame;
 import com.generic.launcher.Launcher;
-import com.generic.player.Player;
-import com.generic.player.PlayerManager;
+import com.generic.gameplay.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -36,7 +35,7 @@ public class GameOverlay extends JPanel {
 
         if (!CLIENT)
         {
-            localPlayer = PlayerManager.instance.getMainProfile();
+            localPlayer = Launcher.instance.getMainProfile();
             g = (LocalGame) LocalGame.instance;
         }
 
@@ -44,7 +43,7 @@ public class GameOverlay extends JPanel {
     }
 
     public void update() {
-        Player p = PlayerManager.instance.getMainProfile();
+        Player p = Launcher.instance.getMainProfile();
         if (p != null)
         {
             pseudo = p.getPseudo();

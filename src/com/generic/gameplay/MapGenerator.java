@@ -3,6 +3,7 @@ package com.generic.gameplay;
 import com.generic.core.GameMap;
 import com.generic.core.IceBlock;
 import com.generic.core.MapObject;
+import com.generic.core.MapObjectFactory;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
@@ -20,7 +21,7 @@ public class MapGenerator {
     {
         for (int i = 0; i < m.getHeight(); i++) {
             for (int j = 0; j < m.getWidth(); j++) {
-                m.place(new IceBlock(j, i), j, i);
+                MapObjectFactory.createIceBlock(j, i, this.m);
             }
         }
         m.release(x, y);

@@ -1,6 +1,6 @@
 package com.generic.net.multiplayer;
 
-import com.generic.launcher.OnlineDialog;
+import com.generic.launcher.Online;
 import com.generic.net.Command;
 
 import java.io.ObjectInputStream;
@@ -21,9 +21,10 @@ public class NetworkManager implements Runnable {
 
     private boolean endConnexion;
 
-    private OnlineDialog manager;
 
-    public NetworkManager(OnlineDialog manager) {
+    private Online manager;
+
+    public NetworkManager(Online manager) {
         this.manager = manager;
     }
 
@@ -110,6 +111,8 @@ public class NetworkManager implements Runnable {
     public void RIGHT() {
         sendCommand("MOVE RIGHT", null);
     }
+
+    public void ACTION() { sendCommand("ACTION", null);}
 
     public void startGame() {
         sendCommand("START GAME", null);

@@ -1,11 +1,8 @@
 package com.generic.gameplay;
 
-import com.generic.core.Animal;
-import com.generic.core.DiamondBlock;
-import com.generic.core.GameMap;
-import com.generic.core.MapObject;
-import com.generic.core.Penguin;
+import com.generic.core.*;
 import com.generic.graphics.Window;
+import com.generic.launcher.Launcher;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.*;
@@ -16,6 +13,7 @@ public abstract class AbstractGame {
     protected MapGenerator mg;
     protected GameMap map;
     protected GameTimer time;
+    protected Launcher launcher = Launcher.instance;
 
     public AbstractGame() {
         instance = this;
@@ -38,8 +36,7 @@ public abstract class AbstractGame {
                 if (map.getAt(initX, initY) != null) {
                     if (map.getAt(initX, initY).getType().equals("IceBlock")) {
                         loop = false;
-                        DiamondBlock d = new DiamondBlock(initX, initY);
-                        map.place(d, initX, initY);
+                        MapObjectFactory.createDiamondBlock(initX, initY, this.map);
                     }
                 }
             } while (loop && cpt != 3);

@@ -3,16 +3,16 @@ package com.generic.UI;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import com.generic.launcher.OnlineDialog;
+import com.generic.launcher.Online;
 
 public class OnlineUI extends JPanel {
     private JButton joinGame;
     private JButton hostGame;
     private JButton Close;
 
-    private OnlineDialog manager;
+    private Online manager;
 
-    public OnlineUI(OnlineDialog od) {
+    public OnlineUI(Online od) {
         super();
         this.manager = od;
 

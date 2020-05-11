@@ -2,14 +2,15 @@ package com.generic.launcher;
 
 import com.generic.utils.ScorePair;
 import com.generic.net.Command;
-import com.generic.player.Player;
+import com.generic.gameplay.Player;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.Socket;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class Leaderboard {
+public class Leaderboard implements Serializable {
     // contient des paires Pseudo[string] | score[Integer]
     private CopyOnWriteArrayList<ScorePair> ladder;
 

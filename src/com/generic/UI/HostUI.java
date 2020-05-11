@@ -1,6 +1,6 @@
 package com.generic.UI;
 
-import com.generic.launcher.OnlineDialog;
+import com.generic.launcher.Online;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,9 +19,9 @@ public class HostUI extends JPanel {
     private JList equipe2;
     private JButton close;
 
-    private OnlineDialog manager;
+    private Online manager;
 
-    public HostUI(OnlineDialog od) {
+    public HostUI(Online od) {
         super();
         this.manager = od;
         setLayout(new BorderLayout());

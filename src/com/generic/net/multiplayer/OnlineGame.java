@@ -1,15 +1,12 @@
-package com.generic.gameplay;
+package com.generic.net.multiplayer;
 
 import com.generic.AI.AI;
-import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
-import com.generic.graphics.RenderThread;
+import com.generic.gameplay.AbstractGame;
 import com.generic.graphics.Window;
-import com.generic.launcher.Launcher;
-import com.generic.net.multiplayer.Connexion;
+import com.generic.net.multiplayer.OnlinePlayer;
 import com.generic.net.multiplayer.Serveur;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -18,30 +15,28 @@ import java.util.Set;
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.gameplay.CONFIG_GAME.*;
-import static com.generic.gameplay.CONFIG_GAME.PLAYER_IS_ANIMAL;
 import static com.generic.utils.Equations.RandomizedInt;
 
 import static java.lang.Thread.sleep;
 
 public class OnlineGame extends AbstractGame implements Runnable {
     // a modifier avec les IA.
-    private HashMap<MapEntity, Connexion> equipe1;
-    private HashMap<MapEntity, Connexion> equipe2;
+    private HashMap<MapEntity, OnlinePlayer> equipe1;
+    private HashMap<MapEntity, OnlinePlayer> equipe2;
     private HashMap<MapEntity, AI> AIs;
     private Window w;
 
-    private Connexion host;
+    private OnlinePlayer host;
 
     private Serveur srv = Serveur.instance;
 
     private int AILives = AI_INIT_LIVES;
 
     public OnlineGame() {
-
         super();
         map.setLocal(false);
-        equipe1 = new HashMap<MapEntity, Connexion>();
-        equipe2 = new HashMap<MapEntity, Connexion>();
+        equipe1 = new HashMap<MapEntity, OnlinePlayer>();
+        equipe2 = new HashMap<MapEntity, OnlinePlayer>();
         AIs = new HashMap<MapEntity, AI>();
 
         host = srv.getHost();
@@ -56,12 +51,12 @@ public class OnlineGame extends AbstractGame implements Runnable {
         // map.place(p_host, 10, 10);
         // host.setControlledObject(p_host);
 
-        Set<Connexion> set1 = Serveur.instance.getEquipe1().keySet();
-        Set<Connexion> set2 = Serveur.instance.getEquipe2().keySet();
+        Set<OnlinePlayer> set1 = Serveur.instance.getEquipe1().keySet();
+        Set<OnlinePlayer> set2 = Serveur.instance.getEquipe2().keySet();
 
         Iterator it1 = set1.iterator();
         while (it1.hasNext()) {
-            Connexion owner = (Connexion) (it1.next());
+            OnlinePlayer owner = (OnlinePlayer) (it1.next());
 
             boolean loop = true;
             do {
@@ -72,17 +67,17 @@ public class OnlineGame extends AbstractGame implements Runnable {
                     loop = false;
 
                     if (TEAM_2_IS_ANIMAL) {
-                        Penguin p = new Penguin(initX, initY);
-                        map.place(p, initX, initY);
+                        Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                         owner.setControlledObject(p);
 
                         equipe1.put(p, owner);
+                        System.out.println("### added player to team 1 ###");
                     } else if (TEAM_1_IS_ANIMAL) {
-                        Animal a = new Animal(initX, initY);
-                        map.place(a, initX, initY);
+                        Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                         owner.setControlledObject(a);
 
                         equipe1.put(a, owner);
+                        System.out.println("### added player to team 1 ###");
                     }
                 }
             } while (loop);
@@ -91,7 +86,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
         if (PvP) {
             Iterator it2 = set2.iterator();
             while (it2.hasNext()) {
-                Connexion owner = (Connexion) (it2.next());
+                OnlinePlayer owner = (OnlinePlayer) (it2.next());
 
                 boolean loop = true;
                 do {
@@ -102,14 +97,12 @@ public class OnlineGame extends AbstractGame implements Runnable {
                         loop = false;
 
                         if (TEAM_1_IS_ANIMAL) {
-                            Penguin p = new Penguin(initX, initY);
-                            map.place(p, initX, initY);
+                            Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                             owner.setControlledObject(p);
 
                             equipe2.put(p, owner);
                         } else if (TEAM_2_IS_ANIMAL) {
-                            Animal a = new Animal(initX, initY);
-                            map.place(a, initX, initY);
+                            Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                             owner.setControlledObject(a);
 
                             equipe2.put(a, owner);
@@ -135,13 +128,11 @@ public class OnlineGame extends AbstractGame implements Runnable {
                         AI ai = new AI();
 
                         if (!TEAM_1_IS_ANIMAL) {
-                            Animal a = new Animal(initX, initY);
-                            map.place(a, initX, initY);
+                            Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                             ai.setControlledObject(a);
                             AIs.put(a, ai);
                         } else {
-                            Penguin p = new Penguin(initX, initY);
-                            map.place(p, initX, initY);
+                            Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                             ai.setControlledObject(p);
                             AIs.put(p, ai);
                         }
@@ -164,7 +155,6 @@ public class OnlineGame extends AbstractGame implements Runnable {
     @Override
     public void gameOver() {
         System.out.println("### APPEL GAME OVER ##");
-        host.setPoints(100);
         time.stopTimer();
         stop();
         srv.sendCommandToAll("GAME END", new String[] { "DEFEAT", "" + host.getPoints() });
@@ -201,21 +191,17 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
             if (map.getAt(initX, initY).getType().equals("IceBlock")) {
                 loop = false;
-                Animal a = new Animal(initX, initY);
+                Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                 if (PvE) {
                     if (TEAM_1_IS_ANIMAL) // connexion = animal
                     {
-                        Connexion player = (Connexion) (owner);
-                        map.place(a, initX, initY);
+                        OnlinePlayer player = (OnlinePlayer) (owner);
                         player.setControlledObject(a);
-
                         equipe1.put(a, player);
                     } else // IA = animal
                     {
                         AI bot = (AI) (owner);
-                        map.place(a, initX, initY);
                         bot.setControlledObject(a);
-
                         AIs.put(a, bot);
                     }
                 }
@@ -236,18 +222,16 @@ public class OnlineGame extends AbstractGame implements Runnable {
 
                 if (map.getAt(initX, initY).getType().equals("void")) {
                     loop = false;
-                    Penguin p = new Penguin(initX, initY);
+                    Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                     if (PvE) {
                         if (TEAM_1_IS_ANIMAL) {
                             AI bot = (AI) owner;
-                            map.place(p, initX, initY);
                             bot.setControlledObject(p);
                             AIs.put(p, bot);
                         } else if (!TEAM_1_IS_ANIMAL) {
-                            Connexion Player = (Connexion) owner;
-                            map.place(p, initX, initY);
-                            Player.setControlledObject(p);
-                            equipe1.put(p, Player);
+                            OnlinePlayer player = (OnlinePlayer) owner;
+                            player.setControlledObject(p);
+                            equipe1.put(p, player);
                         }
                     }
                 }
@@ -259,7 +243,6 @@ public class OnlineGame extends AbstractGame implements Runnable {
     @Override
     public void victory() {
         System.out.println("### APPEL VICTOIRE ##");
-        host.setPoints(100);
         time.stopTimer();
         stop();
         srv.sendCommandToAll("GAME END", new String[] { "VICTORY", "" + host.getPoints() });
@@ -284,7 +267,7 @@ public class OnlineGame extends AbstractGame implements Runnable {
                 }
             } else // animal == Connexion
             {
-                Connexion owner = equipe1.get(a);
+                OnlinePlayer owner = equipe1.get(a);
                 equipe1.remove(a);
                 owner.setControlledObject(null);
                 owner.removeLive();
@@ -297,19 +280,27 @@ public class OnlineGame extends AbstractGame implements Runnable {
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
         if (PvE) {
-            if (TEAM_1_IS_ANIMAL) // Penquin == IA
+            if (!TEAM_1_IS_ANIMAL) // Penquin = connexion
             {
-                Connexion owner = equipe1.get(p);
+                OnlinePlayer owner = equipe1.get(p);
                 owner.setControlledObject(null);
 
                 // setPoints;
 
                 owner.removeLive();
-            } else // animal == Connexion
+            } else //penguin = IA
             {
-                Connexion owner = equipe1.get(p);
+                AI owner = AIs.get(p);
+
                 owner.setControlledObject(null);
-                owner.removeLive();
+                // setPoints;
+
+                AILives = AILives - 1;
+                if (AILives == 0) {
+                    victory();
+                } else {
+                    respawnPenguin(owner);
+                }
             }
         }
     }
