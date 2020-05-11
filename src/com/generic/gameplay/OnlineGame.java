@@ -244,10 +244,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
                             bot.setControlledObject(p);
                             AIs.put(p, bot);
                         } else if (!TEAM_1_IS_ANIMAL) {
-                            Connexion bot = (Connexion) owner;
+                            Connexion Player = (Connexion) owner;
                             map.place(p, initX, initY);
-                            bot.setControlledObject(p);
-                            AIs.put(p, bot);
+                            Player.setControlledObject(p);
+                            equipe1.put(p, Player);
                         }
                     }
                 }
