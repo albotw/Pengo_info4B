@@ -7,7 +7,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import static com.generic.gameplay.CONFIG.*;
-import static com.generic.gameplay.CONFIG.SPRITE_SIZE;
 
 //Singleton OK
 
@@ -97,21 +96,32 @@ public class SpriteManager {
                         if (!m.getAt(j, i).getType().equals("void"))
                         {
                             Sprite spr = new Sprite(xpos, ypos);
+                            String dir = "";
+
+                            if (LOW_RES_MODE)
+                            {
+                                dir = "SD/";
+                            }
+                            else
+                            {
+                                dir = "HD/";
+                            }
+
                             if(m.getAt(j, i).getType().equals("IceBlock"))
                             {
-                                spr.loadImage("src/ressources/IceBlock.png");
+                                spr.loadImage("src/ressources/"+ dir + "IceBlock.png");
                             }
                             else if (m.getAt(j, i).getType().equals("Penguin"))
                             {
-                                spr.loadImage("src/ressources/Penguin.png");
+                                spr.loadImage("src/ressources/" + dir+ "Penguin.png");
                             }
                             else if (m.getAt(j, i).getType().equals("DiamondBlock"))
                             {
-                                spr.loadImage("src/ressources/DiamondBlock.png");
+                                spr.loadImage("src/ressources/" + dir + "DiamondBlock.png");
                             }
                             else if (m.getAt(j, i).getType().equals("Animal"))
                             {
-                                spr.loadImage("src/ressources/Animal.png");
+                                spr.loadImage("src/ressources/" + dir + "Animal.png");
                             }
                             instance.addSprite(spr, "foreground");
                         }
@@ -120,31 +130,60 @@ public class SpriteManager {
                     {
                         Sprite spr = new Sprite(xpos, ypos);
 
+                        String dir = "";
+
+                        if (LOW_RES_MODE)
+                        {
+                            dir = "SD/";
+                        }
+                        else
+                        {
+                            dir = "HD/";
+                        }
+
                         if (i == -1)
                         {
-                            if (j == -1) spr.loadImage("src/ressources/WA_HG.png");
-                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/WA_HD.png");
-                            else spr.loadImage("src/ressources/WallH.png");
+                            if (j == -1) spr.loadImage("src/ressources/" +dir + "WA_HG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/"+ dir +"WA_HD.png");
+                            else spr.loadImage("src/ressources/"+dir+"WallH.png");
                         }
                         else if (i == GRID_HEIGHT)
                         {
-                            if(j == -1) spr.loadImage("src/ressources/WA_BG.png");
-                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/WA_BD.png");
-                            else spr.loadImage("src/ressources/WallB.png");
+                            if(j == -1) spr.loadImage("src/ressources/"+dir+"WA_BG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/"+dir+"WA_BD.png");
+                            else spr.loadImage("src/ressources/"+dir+"WallB.png");
                         }
                         else if (j == - 1)
                         {
-                            spr.loadImage("src/ressources/WallG.png");
+                            spr.loadImage("src/ressources/"+dir+"WallG.png");
                         }
                         else if (j == GRID_WIDTH)
                         {
-                            spr.loadImage("src/ressources/WallD.png");
+                            spr.loadImage("src/ressources/"+dir+"WallD.png");
                         }
                         instance.addSprite(spr, "background");
                     }
-                    xpos += SPRITE_SIZE;
+
+                    if (LOW_RES_MODE)
+                    {
+                        xpos += SPRITE_SIZE_SD;
+                    }
+                    else
+                    {
+                        xpos += SPRITE_SIZE_HD;
+                    }
+
                 }
-                ypos += SPRITE_SIZE;
+
+                if (LOW_RES_MODE)
+                {
+                    ypos += SPRITE_SIZE_SD;
+                }
+                else
+                {
+                    ypos += SPRITE_SIZE_HD;
+                }
+
             }
         }
     }

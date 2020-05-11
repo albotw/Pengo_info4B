@@ -52,7 +52,6 @@ public class ScoreServer {
                 System.out.println("--- Error on load -> blank ladder ---");
                 l = new Leaderboard();
             }
-
         }catch(Exception e){e.printStackTrace();}
     }
 

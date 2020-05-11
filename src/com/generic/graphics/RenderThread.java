@@ -19,6 +19,7 @@ import com.generic.net.multiplayer.OnlineClient;
 
 import java.awt.*;
 
+import static com.generic.gameplay.CONFIG.LOW_RES_MODE;
 import static com.generic.gameplay.CONFIG.WINDOW_TITLE;
 
 public class RenderThread extends Thread {
@@ -34,7 +35,15 @@ public class RenderThread extends Thread {
     private boolean client;
 
     public RenderThread() {
-        this.w = new Window(CONFIG.WINDOW_WIDTH, CONFIG.WINDOW_HEIGHT);
+        if (LOW_RES_MODE)
+        {
+            this.w = new Window(CONFIG.WW_LOW_RES, CONFIG.WH_LOW_RES);
+        }
+        else
+        {
+            this.w = new Window(CONFIG.WW_HIGH_RES, CONFIG.WH_HIGH_RES);
+        }
+
         fps = new FPSCounter();
         rp = new RenderPanel();
         go = new GameOverlay();
