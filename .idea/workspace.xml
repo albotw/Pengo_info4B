@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bcb0f6eb-6f87-4262-970f-a0296307cefd" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/CONFIG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/CONFIG.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/OnlineGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/OnlineGame.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -219,6 +217,7 @@
       <workItem from="1589098275357" duration="2240000" />
       <workItem from="1589103957313" duration="1419000" />
       <workItem from="1589115802139" duration="15000000" />
+      <workItem from="1589186246785" duration="1231000" />
     </task>
     <servers />
   </component>
