@@ -50,19 +50,19 @@ public abstract class AbstractGame {
 
         if (map.getAt(x, y - 1).getType().equals("DiamondBlock")) {
             if (map.getAt(x, y - 2).getType().equals("DiamondBlock")) {
-                victory(); // db en position bas, alignement vertical
+                gameEnd(); // db en position bas, alignement vertical
             }
         }
 
         if (map.getAt(x, y + 1).getType().equals("DiamondBlock")) {
             if (map.getAt(x, y - 1).getType().equals("DiamondBlock")) {
-                victory(); // db en position millieu, alignement vertical
+                gameEnd(); // db en position millieu, alignement vertical
             }
         }
 
         if (map.getAt(x, y + 1).getType().equals("DiamondBlock")) {
             if (map.getAt(x, y + 2).getType().equals("DiamondBlock")) {
-                victory(); // db en position haut, alignement vertical
+                gameEnd(); // db en position haut, alignement vertical
             }
         }
 
@@ -70,7 +70,7 @@ public abstract class AbstractGame {
         {
             if (map.getAt(x - 2, y).getType().equals("DiamondBlock"))
             {
-                victory(); //db en position droite, alignement horizontal
+                gameEnd(); //db en position droite, alignement horizontal
             }
         }
 
@@ -78,7 +78,7 @@ public abstract class AbstractGame {
         {
             if (map.getAt(x + 1, y).getType().equals("DiamondBlock"))
             {
-                victory(); //db en position milieu, alignement horizontal
+                gameEnd(); //db en position milieu, alignement horizontal
             }
         }
 
@@ -86,7 +86,7 @@ public abstract class AbstractGame {
         {
             if (map.getAt(x + 2, y).getType().equals("DiamondBlock"))
             {
-                victory(); //db en position gauche, alignement horizontal
+                gameEnd(); //db en position gauche, alignement horizontal
             }
         }
 
@@ -115,15 +115,13 @@ public abstract class AbstractGame {
 
     public abstract void start();
 
-    public abstract void gameOver();
+    public abstract void gameEnd();
 
     public abstract void respawnAnimal(Object owner);
 
     public abstract void respawnPenguin(Object owner);
 
     public abstract void stop();
-
-    public abstract void victory();
 
     public abstract void animalKilled(Animal a, MapObject killer);
 

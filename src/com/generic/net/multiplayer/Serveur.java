@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import com.generic.gameplay.CONFIG_GAME;
 import com.generic.net.Command;
 
 public class Serveur extends Thread {
@@ -106,7 +107,28 @@ public class Serveur extends Thread {
     {
         Command cmd = new Command(val, params);
 
-        Iterator it = equipe1.entrySet().iterator();
+        Iterator it = equipe1.keySet().iterator();
+        while(it.hasNext())
+        {
+            try {
+                OnlinePlayer tmp = (OnlinePlayer) (it.next());
+                tmp.getCommandOut().writeObject(cmd);
+            }catch(Exception e){e.printStackTrace();}
+        }
+    }
+
+    public void sendCommandToTeam2(String val, String[] params)
+    {
+        Command cmd = new Command(val, params);
+
+        Iterator it = equipe2.keySet().iterator();
+        while(it.hasNext())
+        {
+            try {
+                OnlinePlayer tmp = (OnlinePlayer) (it.next());
+                tmp.getCommandOut().writeObject(cmd);
+            }catch(Exception e){e.printStackTrace();}
+        }
     }
 
     public OnlinePlayer getHost() {
@@ -124,8 +146,22 @@ public class Serveur extends Thread {
     }
 
     public void startGame() {
-        sendCommandToAll("GAME START", null);
-        game = new OnlineGame();
+        if (CONFIG_GAME.PvP)
+        {
+            if (!equipe1.isEmpty() && !equipe2.isEmpty())
+            {
+                sendCommandToAll("GAME START", null);
+                game = new OnlineGame();
+            }
+        }
+        else if (CONFIG_GAME.PvE)
+        {
+            if (!equipe1.isEmpty())
+            {
+                sendCommandToAll("GAME START", null);
+                game = new OnlineGame();
+            }
+        }
     }
 
     public HashMap<OnlinePlayer, String> getEquipe1() {

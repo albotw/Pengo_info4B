@@ -113,6 +113,12 @@ public class LocalGame extends AbstractGame {
         initIA();
     }
 
+    @Override
+    public void gameEnd()
+    {
+
+    }
+
     public void gameOver() {
         // a ajouter: déréférencement dans les objets
         time.stopTimer();

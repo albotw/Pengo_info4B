@@ -73,8 +73,6 @@ public class RenderThread extends Thread {
             w.setTitle(WINDOW_TITLE + " | FPS: " + fps.get());
             w.revalidate();
             rp.repaint();
-
-            // go.update();
             go.repaint();
             try {
                 sleep(16);
@@ -95,5 +93,10 @@ public class RenderThread extends Thread {
 
     public Window getWindow() {
         return this.w;
+    }
+
+    public GameOverlay getGameOverlay()
+    {
+        return this.go;
     }
 }

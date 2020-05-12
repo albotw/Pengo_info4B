@@ -52,6 +52,8 @@ public class ScoreServer {
                 System.out.println("--- Error on load -> blank ladder ---");
                 l = new Leaderboard();
             }
+            ois.close();
+            fis.close();
         }catch(Exception e){e.printStackTrace();}
     }
 
@@ -64,6 +66,8 @@ public class ScoreServer {
             oos.writeObject(l);
 
             System.out.println("--- wrote savefile ---");
+            oos.close();
+            fos.close();
         }catch(Exception e){e.printStackTrace();}
     }
 
