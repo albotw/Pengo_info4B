@@ -12,7 +12,7 @@ public class CONFIG_GAME {
     public static boolean PLAYER_IS_ANIMAL = false;
     public static boolean PLAYER_IS_PENGUIN = true;
     public static int N_AI = 1;
-    public static int N_NIVEAUX = 1;
+    public static int N_NIVEAUX = 2;
     public static boolean CLIENT = false;
 
     public static boolean TEAM_1_IS_ANIMAL = false;

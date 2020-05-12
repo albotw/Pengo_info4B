@@ -19,7 +19,7 @@ import static com.generic.utils.Equations.RandomizedInt;
 
 import static java.lang.Thread.sleep;
 
-public class OnlineGame extends AbstractGame implements Runnable {
+public class OnlineGame extends AbstractGame{
     // a modifier avec les IA.
     private HashMap<MapEntity, OnlinePlayer> equipe1;
     private HashMap<MapEntity, OnlinePlayer> equipe2;
@@ -152,6 +152,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
         initIA();
     }
 
+    /**
+     * TODO A MODIFIER PVP
+     */
+
     @Override
     public void gameOver() {
         System.out.println("### APPEL GAME OVER ##");
@@ -182,6 +186,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
         map.deleteMap();
     }
 
+    /**
+     * TODO A MODIFIER PVP
+     */
+
     @Override
     public void respawnAnimal(Object owner) {
         boolean loop = true;
@@ -208,6 +216,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
             }
         } while (loop);
     }
+
+    /**
+     * TODO A MODIFIER PVP
+     */
 
     @Override
     public void respawnPenguin(Object owner) {
@@ -240,6 +252,10 @@ public class OnlineGame extends AbstractGame implements Runnable {
         }
     }
 
+    /**
+     * TODO A MODIFIER PVP
+     */
+
     @Override
     public void victory() {
         System.out.println("### APPEL VICTOIRE ##");
@@ -249,6 +265,9 @@ public class OnlineGame extends AbstractGame implements Runnable {
         srv.stopServer();
     }
 
+    /**
+     * TODO A MODIFIER PVP
+     */
     @Override
     public void animalKilled(Animal a, MapObject killer) {
         if (PvE) {
@@ -277,6 +296,9 @@ public class OnlineGame extends AbstractGame implements Runnable {
         }
     }
 
+    /**
+     * TODO A MODIFIER PVP
+     */
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
         if (PvE) {
@@ -358,8 +380,4 @@ public class OnlineGame extends AbstractGame implements Runnable {
         }
     }
 
-    @Override
-    public void run() {
-
-    }
 }
