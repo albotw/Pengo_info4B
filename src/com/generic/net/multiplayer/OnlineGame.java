@@ -22,13 +22,17 @@ import static java.lang.Thread.sleep;
 public class OnlineGame extends AbstractGame{
     // a modifier avec les IA.
     private HashMap<MapEntity, OnlinePlayer> equipe1;
+    private int equipe1Restants;
     private HashMap<MapEntity, OnlinePlayer> equipe2;
+    private int equipe2Restants;
     private HashMap<MapEntity, AI> AIs;
     private Window w;
 
     private OnlinePlayer host;
 
     private Serveur srv = Serveur.instance;
+
+    private int equipeGagnante;
 
     private int AILives = AI_INIT_LIVES;
 
@@ -72,11 +76,13 @@ public class OnlineGame extends AbstractGame{
 
                         equipe1.put(p, owner);
                         System.out.println("### added player to team 1 ###");
+                        equipe1Restants++;
                     } else if (TEAM_1_IS_ANIMAL) {
                         Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                         owner.setControlledObject(a);
 
                         equipe1.put(a, owner);
+                        equipe1Restants++;
                         System.out.println("### added player to team 1 ###");
                     }
                 }
@@ -101,11 +107,13 @@ public class OnlineGame extends AbstractGame{
                             owner.setControlledObject(p);
 
                             equipe2.put(p, owner);
+                            equipe2Restants++;
                         } else if (TEAM_2_IS_ANIMAL) {
                             Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                             owner.setControlledObject(a);
 
                             equipe2.put(a, owner);
+                            equipe2Restants++;
                         }
                     }
                 } while (loop);
@@ -156,7 +164,6 @@ public class OnlineGame extends AbstractGame{
      * TODO A MODIFIER PVP
      */
 
-    @Override
     public void gameOver() {
         System.out.println("### APPEL GAME OVER ##");
         time.stopTimer();
@@ -200,17 +207,24 @@ public class OnlineGame extends AbstractGame{
             if (map.getAt(initX, initY).getType().equals("IceBlock")) {
                 loop = false;
                 Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
-                if (PvE) {
-                    if (TEAM_1_IS_ANIMAL) // connexion = animal
-                    {
-                        OnlinePlayer player = (OnlinePlayer) (owner);
-                        player.setControlledObject(a);
-                        equipe1.put(a, player);
-                    } else // IA = animal
+                if (TEAM_1_IS_ANIMAL) // connexion (team 1) = animal
+                {
+                    OnlinePlayer player = (OnlinePlayer) (owner);
+                    player.setControlledObject(a);
+                    equipe1.put(a, player);
+                } else
+                {
+                    if (PvE) //IA = animal
                     {
                         AI bot = (AI) (owner);
                         bot.setControlledObject(a);
                         AIs.put(a, bot);
+                    }
+                    else if (PvP) // connexion(team 2) = animal
+                    {
+                        OnlinePlayer player = (OnlinePlayer)(owner);
+                        player.setControlledObject(a);
+                        equipe2.put(a, player);
                     }
                 }
             }
@@ -235,15 +249,25 @@ public class OnlineGame extends AbstractGame{
                 if (map.getAt(initX, initY).getType().equals("void")) {
                     loop = false;
                     Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
-                    if (PvE) {
-                        if (TEAM_1_IS_ANIMAL) {
-                            AI bot = (AI) owner;
+                    if (!TEAM_1_IS_ANIMAL) //connexion (team 1) = pingouin
+                    {
+                        OnlinePlayer player = (OnlinePlayer) owner;
+                        player.setControlledObject(p);
+                        equipe1.put(p, player);
+                    }
+                    else
+                    {
+                        if (PvE)    //IA = animal
+                        {
+                            AI bot = (AI)(owner);
                             bot.setControlledObject(p);
                             AIs.put(p, bot);
-                        } else if (!TEAM_1_IS_ANIMAL) {
+                        }
+                        else if (PvP)   //connexion(team 2) = pingouin
+                        {
                             OnlinePlayer player = (OnlinePlayer) owner;
                             player.setControlledObject(p);
-                            equipe1.put(p, player);
+                            equipe2.put(p, player);
                         }
                     }
                 }
@@ -377,6 +401,37 @@ public class OnlineGame extends AbstractGame{
     public void overrideMap(int x, int y, String type) {
         if (srv != null) {
             srv.sendCommandToAll("WRITE MAP", new String[] { "" + x, "" + y, type });
+        }
+    }
+
+    public void playerKilled(OnlinePlayer p)
+    {
+        if (p.getEquipe() == 1)
+        {
+            equipe1Restants--;
+        }
+        else if (p.getEquipe() == 2)
+        {
+            equipe2Restants--;
+        }
+
+        if (equipe1Restants <= 0 && PvE)
+        {
+            equipeGagnante = 0;
+            gameOver();
+        }
+        else if (equipe1Restants <= 0 && PvP)
+        {
+            equipeGagnante = 2;
+            gameOver();
+            victory();
+        }
+
+        if (equipe2Restants <= 0 && PvP)
+        {
+            equipeGagnante = 1;
+            gameOver();
+            victory();
         }
     }
 

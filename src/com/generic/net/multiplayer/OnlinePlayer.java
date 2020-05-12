@@ -103,7 +103,7 @@ public class OnlinePlayer extends AbstractPlayer {
         currentLives--;
         if (currentLives <= 0)
         {
-            OnlineGame.instance.gameOver();
+            Serveur.instance.getGame().playerKilled(this);
         }
         else
         {
@@ -124,6 +124,10 @@ public class OnlinePlayer extends AbstractPlayer {
                 OnlineGame.instance.respawnAnimal(this);
             }
         }
+    }
+
+    public int getEquipe(){
+        return this.equipe;
     }
 
     public ObjectOutputStream getCommandOut() {

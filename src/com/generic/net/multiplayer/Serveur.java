@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import com.generic.net.Command;
 
@@ -101,6 +102,13 @@ public class Serveur extends Thread {
         }
     }
 
+    public void sendCommandToTeam1(String val, String[] params)
+    {
+        Command cmd = new Command(val, params);
+
+        Iterator it = equipe1.entrySet().iterator();
+    }
+
     public OnlinePlayer getHost() {
         return host;
     }
@@ -135,4 +143,6 @@ public class Serveur extends Thread {
     public void setEquipe2(HashMap<OnlinePlayer, String> equipe2) {
         this.equipe2 = equipe2;
     }
+
+    public OnlineGame getGame(){return this.game;}
 }

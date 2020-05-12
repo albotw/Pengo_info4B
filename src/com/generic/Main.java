@@ -2,7 +2,6 @@ package com.generic;
 import com.generic.gameplay.CONFIG;
 import com.generic.launcher.Launcher;
 import com.generic.launcher.Leaderboard;
-import com.generic.net.score.ScoreServer;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
