@@ -69,7 +69,7 @@ public class Player extends AbstractPlayer
         currentLives--;
         if (currentLives <= 0)
         {
-            LocalGame.instance.gameOver();
+            LocalGame.instance.gameEnd();
         }
         else
         {

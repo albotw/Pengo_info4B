@@ -25,6 +25,8 @@ public class OnlineClient extends Thread {
     public OnlineClient(NetworkManager nm) {
         instance = this;
         setCLIENT(true);
+        Launcher.instance.incrementCurrentLevel();
+
         this.nm = nm;
         this.sm = SpriteManager.createSpriteManager();
 
@@ -60,6 +62,11 @@ public class OnlineClient extends Thread {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void updateUI(String[] params)
+    {
+        rt.getGameOverlay().update(params);
     }
 
     public GameMap getMap() {

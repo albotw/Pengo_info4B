@@ -146,7 +146,7 @@ public class Online extends JDialog {
         System.out.println("taille equipe = " + compo + " | pvp = " + modePvP + " | equipe1 <=> animaux =" + equipe1Animal + " | niveaux = " + nbNiveaux + " | IAs = " + nbIA);
         net.sendCommand("TEAM MAX SIZE", new String[]{"" + compo});
 
-        card.show(cardPanel, "0");
+        card.show(cardPanel, "1");
     }
 
     public void connectSelected() {

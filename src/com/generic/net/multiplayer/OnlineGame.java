@@ -160,17 +160,6 @@ public class OnlineGame extends AbstractGame{
         initIA();
     }
 
-    /**
-     * TODO A MODIFIER PVP
-     */
-
-    public void gameOver() {
-        System.out.println("### APPEL GAME OVER ##");
-        time.stopTimer();
-        stop();
-        srv.sendCommandToAll("GAME END", new String[] { "DEFEAT", "" + host.getPoints() });
-        srv.stopServer();
-    }
 
     public void stop() {
         Iterator it = AIs.entrySet().iterator();
@@ -279,13 +268,27 @@ public class OnlineGame extends AbstractGame{
     /**
      * TODO A MODIFIER PVP
      */
-
     @Override
-    public void victory() {
+    public void gameEnd() {
         System.out.println("### APPEL VICTOIRE ##");
         time.stopTimer();
         stop();
-        srv.sendCommandToAll("GAME END", new String[] { "VICTORY", "" + host.getPoints() });
+        if (equipeGagnante == 1)
+        {
+            srv.sendCommandToTeam1("GAME END", new String[]{"VICTORY"});
+            if (PvP)
+            {
+                srv.sendCommandToTeam2("GAME END", new String[]{"DEFEAT"});
+            }
+        }
+        else if (equipeGagnante == 2)
+        {
+            srv.sendCommandToTeam1("GAME END", new String[]{"DEFEAT"});
+            if (PvP)
+            {
+                srv.sendCommandToTeam2("GAME END", new String[]{"VICTORY"});
+            }
+        }
         srv.stopServer();
     }
 
@@ -298,13 +301,15 @@ public class OnlineGame extends AbstractGame{
             if (!TEAM_1_IS_ANIMAL) // animal == IA
             {
                 AI owner = AIs.get(a);
-
                 owner.setControlledObject(null);
-                // setPoints;
+
+                OnlinePlayer op = equipe1.get(killer);
+                op.setPoints("AnimalKilled", 0);
 
                 AILives = AILives - 1;
                 if (AILives == 0) {
-                    victory();
+                    equipeGagnante = 1;
+                    gameEnd();
                 } else {
                     respawnAnimal(owner);
                 }
@@ -312,24 +317,24 @@ public class OnlineGame extends AbstractGame{
             {
                 OnlinePlayer owner = equipe1.get(a);
                 equipe1.remove(a);
+                owner.setPoints("AnimalKilled", 0);
                 owner.setControlledObject(null);
                 owner.removeLive();
             }
         } else if (PvP) {
             if(TEAM_1_IS_ANIMAL) { // animal == JOUEURS
                 OnlinePlayer owner = equipe1.get(a);
+                owner.setPoints("AnimalKilled", 0);
                 owner.setControlledObject(null);
                 owner.removeLive();
 
             }
             else{
                 OnlinePlayer owner = equipe2.get(a);
+                owner.setPoints("AnimalKilled", 0);
                 owner.setControlledObject(null);
                 owner.removeLive();
-
-                }
-
-
+            }
         }
     }
 
@@ -339,40 +344,40 @@ public class OnlineGame extends AbstractGame{
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
         if (PvE) {
-            if (!TEAM_1_IS_ANIMAL) // Penquin = connexion
+            if (!TEAM_1_IS_ANIMAL) // Penquin = connexion (team 1)
             {
                 OnlinePlayer owner = equipe1.get(p);
                 owner.setControlledObject(null);
-
-                // setPoints;
-
+                owner.setPoints("AnimalKilled", 0);
                 owner.removeLive();
             } else //penguin = IA
             {
                 AI owner = AIs.get(p);
-
                 owner.setControlledObject(null);
-                // setPoints;
+
+                OnlinePlayer op = equipe1.get(killer);
+                op.setPoints("AnimalKilled", 0);
 
                 AILives = AILives - 1;
                 if (AILives == 0) {
-                    victory();
+                    equipeGagnante = 1;
+                    gameEnd();
                 } else {
                     respawnPenguin(owner);
                 }
             }
         }
         if (PvP) {
-            if (!TEAM_1_IS_ANIMAL) {
-
+            if (!TEAM_1_IS_ANIMAL) {    //pingouin = connexion(team 1)
                 OnlinePlayer owner = equipe1.get(p);
+                owner.setPoints("AnimalKilled", 0);
                 owner.setControlledObject(null);
                 owner.removeLive();
-
-            } else {
-                OnlinePlayer ownver = equipe2.get(p);
-                ownver.setControlledObject(null);
-                ownver.removeLive();
+            }else {                     //pingouin = connexion (team 2)
+                OnlinePlayer owner = equipe2.get(p);
+                owner.setPoints("AnimalKilled", 0);
+                owner.setControlledObject(null);
+                owner.removeLive();
             }
         }
     }
@@ -440,23 +445,16 @@ public class OnlineGame extends AbstractGame{
             equipe2Restants--;
         }
 
-        if (equipe1Restants <= 0 && PvE)
-        {
-            equipeGagnante = 0;
-            gameOver();
-        }
-        else if (equipe1Restants <= 0 && PvP)
+        if (equipe1Restants <= 0)
         {
             equipeGagnante = 2;
-            gameOver();
-            victory();
+            gameEnd();
         }
 
         if (equipe2Restants <= 0 && PvP)
         {
             equipeGagnante = 1;
-            gameOver();
-            victory();
+            gameEnd();
         }
     }
 

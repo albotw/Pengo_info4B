@@ -1,5 +1,6 @@
 package com.generic.net.multiplayer;
 
+import com.generic.launcher.Launcher;
 import com.generic.launcher.Online;
 import com.generic.net.Command;
 
@@ -33,7 +34,7 @@ public class NetworkManager implements Runnable {
         try {
             while (!endConnexion) {
                 Command cmd = (Command) (commandIn.readObject());
-                System.out.println("CLIENT | " + cmd.toString());
+                //System.out.println("CLIENT | " + cmd.toString());
 
                 if (cmd.getVal().equals("ADD TO TEAM 1")) {
                     manager.addToTeam1(cmd.getParam(0));
@@ -58,6 +59,11 @@ public class NetworkManager implements Runnable {
                 else if (cmd.getVal().equals("WRITE MAP"))
                 {
                     manager.getClient().overrideMap(Integer.parseInt(cmd.getParam(0)), Integer.parseInt(cmd.getParam(1)), cmd.getParam(2));
+                }
+                else if (cmd.getVal().equals("UPDATE PLAYER DATA"))
+                {
+                    System.out.println("RECEPTION COMMAND");
+                    manager.getClient().updateUI(cmd.getParams());
                 }
             }
 

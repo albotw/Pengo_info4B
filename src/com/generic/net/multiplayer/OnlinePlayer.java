@@ -6,6 +6,7 @@ import com.generic.net.Command;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.Iterator;
 
 import static com.generic.gameplay.CONFIG_GAME.TEAM_1_IS_ANIMAL;
 import static com.generic.gameplay.CONFIG_GAME.TEAM_2_IS_ANIMAL;
@@ -37,6 +38,23 @@ public class OnlinePlayer extends AbstractPlayer {
 
     public void run() {
         try {
+
+            Iterator it = Serveur.instance.getEquipe1().values().iterator();
+            while(it.hasNext())
+            {
+                String tmp = (String)(it.next());
+                Command cmd = new Command("ADD TO TEAM 1", new String[]{tmp});
+                commandOut.writeObject(cmd);
+            }
+
+            Iterator it2 = Serveur.instance.getEquipe2().values().iterator();
+            while(it2.hasNext())
+            {
+                String tmp = (String)(it2.next());
+                Command cmd = new Command("ADD TO TEAM 2", new String[]{tmp});
+                commandOut.writeObject(cmd);
+            }
+
             boolean loop = true;
             while (loop) {
                 Command cmd = (Command) (commandIn.readObject());
@@ -101,6 +119,15 @@ public class OnlinePlayer extends AbstractPlayer {
     public void removeLive()
     {
         currentLives--;
+
+        Command cmd = new Command("UPDATE PLAYER DATA", new String[]{"VIES", ""+currentLives});
+        try {
+            commandOut.writeObject(cmd);
+        }catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+
         if (currentLives <= 0)
         {
             Serveur.instance.getGame().playerKilled(this);
@@ -133,4 +160,16 @@ public class OnlinePlayer extends AbstractPlayer {
     public ObjectOutputStream getCommandOut() {
         return this.commandOut;
     }
+
+    public void setPoints(String context, int time)
+    {
+        super.setPoints(context, time);
+        System.out.println("ENVOI CMD");
+        Command cmd = new Command("UPDATE PLAYER DATA", new String[]{"POINTS", ""+points});
+        try {
+            commandOut.writeObject(cmd);
+        }
+        catch(Exception e){e.printStackTrace();}
+    }
+
 }

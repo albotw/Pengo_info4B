@@ -5,6 +5,7 @@ import com.generic.launcher.Leaderboard;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -32,6 +33,22 @@ public class Main {
 
             oos.writeObject(new Leaderboard());
             System.out.println("--- création d'une sauvegarde de ladder vide ---");
+            oos.close();
+            fos.close();
+        }catch(Exception e){e.printStackTrace();}
+
+        try{
+            FileOutputStream fos = new FileOutputStream("src/saves/PlayerProfiles.sav");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+            ArrayList<String> pseudos = new ArrayList<String>();
+
+            pseudos.add("Default");
+
+            oos.writeObject(pseudos);
+
+            oos.close();
+            fos.close();
         }catch(Exception e){e.printStackTrace();}
     }
 }
