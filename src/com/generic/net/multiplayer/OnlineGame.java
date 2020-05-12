@@ -362,19 +362,20 @@ public class OnlineGame extends AbstractGame{
                 }
             }
         }
-        if(PvP){
-            OnlinePlayer owner = equipe1.get(p);
-            owner.setControlledObject(null);
-            owner.removeLive();
+        if (PvP) {
+            if (!TEAM_1_IS_ANIMAL) {
 
-        }
-        else{
-            OnlinePlayer ownver = equipe2.get(p);
-            ownver.setControlledObject(null);
-            ownver.removeLive();
+                OnlinePlayer owner = equipe1.get(p);
+                owner.setControlledObject(null);
+                owner.removeLive();
+
+            } else {
+                OnlinePlayer ownver = equipe2.get(p);
+                ownver.setControlledObject(null);
+                ownver.removeLive();
+            }
         }
     }
-
     @Override
     public void stunTriggered(char dirMur) {
         /**
