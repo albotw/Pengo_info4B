@@ -292,6 +292,19 @@ public class OnlineGame extends AbstractGame{
                 owner.removeLive();
             }
         } else if (PvP) {
+            if(TEAM_1_IS_ANIMAL) { // animal == JOUEURS
+                OnlinePlayer owner = equipe1.get(a);
+                owner.setControlledObject(null);
+                owner.removeLive();
+
+            }
+            else{
+                OnlinePlayer owner = equipe2.get(a);
+                owner.setControlledObject(null);
+                owner.removeLive();
+
+                }
+
 
         }
     }
@@ -324,6 +337,17 @@ public class OnlineGame extends AbstractGame{
                     respawnPenguin(owner);
                 }
             }
+        }
+        if(PvP){
+            OnlinePlayer owner = equipe1.get(p);
+            owner.setControlledObject(null);
+            owner.removeLive();
+
+        }
+        else{
+            OnlinePlayer ownver = equipe2.get(p);
+            ownver.setControlledObject(null);
+            ownver.removeLive();
         }
     }
 
