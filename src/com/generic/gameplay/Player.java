@@ -15,62 +15,57 @@ public class Player extends AbstractPlayer
 {
     private InputHandler ih;
 
-    private boolean flush;
+    private volatile boolean flush;
 
     public Player(String pseudo)
     {
         super(pseudo);
     }
 
-
     public void run()
     {
-        System.out.println("Démarrage player");
+        System.out.println("--- Thread player démarré ---");
         ih = new InputHandler(((LocalGame)(LocalGame.instance)).getWindow());
-        while(!flush)
+        this.flush = false;
+
+        while(!flush && !Thread.currentThread().isInterrupted())
         {
             if (controlledObject != null)
             {
-                linkInput();
+                if (ih.UP == true) {controlledObject.goUp(); }
+                else if (ih.DOWN == true) {controlledObject.goDown(); }
+                else if (ih.LEFT == true) {controlledObject.goLeft(); }
+                else if (ih.RIGHT == true) {controlledObject.goRight(); }
+                else if (ih.ACTION == true)
+                {
+                    if (controlledObject.getType().equals("Penguin")) {
+                        ((MapEntity) (controlledObject)).action();
+                    }
+                }
+                if (ih != null){ih.flush();}
             }
             try
             {
                 sleep(16);
-            }catch(Exception e) {e.printStackTrace(); }
+            }catch(Exception e) {
+                e.printStackTrace();
+                Thread.currentThread().interrupt();
+            }
         }
 
         this.controlledObject = null;
-        ih.flush();
         this.ih    = null;
-        this.flush = false;
-    }
-
-    public void linkInput()
-    {
-        if (ih.UP == true) {controlledObject.goUp(); }
-        else if (ih.DOWN == true) {controlledObject.goDown(); }
-        else if (ih.LEFT == true) {controlledObject.goLeft(); }
-        else if (ih.RIGHT == true) {controlledObject.goRight(); }
-        else if (ih.ACTION == true)
-        {
-            if (controlledObject.getType().equals("Penguin")) {
-                ((MapEntity) (controlledObject)).action();
-            }
-        }
-        ih.flush();
+        System.out.println("--- Thread player arrété ---");
     }
 
     public void flush()
     {
         flush = true;
-        //this.interrupt();
-        //éventuellement clear le score apres upload
-        //et les vies ou appeller reset
+        ih.stop();
     }
 
     public void removeLive()
     {
-        //methode appellée quand un pingouin meurt.
         currentLives--;
         if (currentLives <= 0)
         {

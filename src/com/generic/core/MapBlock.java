@@ -68,7 +68,6 @@ public abstract class MapBlock extends MapObject{
                 }
                 break;
             case 'G':
-
                 if (x != 0)
                 {
                     if(!m.getAt(x - 1, y).getType().equals("void"))
@@ -91,8 +90,6 @@ public abstract class MapBlock extends MapObject{
                 }
                 break;
             case 'D':
-
-
                 if (x < GRID_WIDTH - 1)
                 {
                     if(!m.getAt(x + 1, y).getType().equals("void")) {

@@ -41,6 +41,8 @@ public class Leaderboard implements Serializable {
             ladder.add(sp);
         }
 
+        push();
+
         // System.out.println();
         // print();
     }

@@ -1,0 +1,7 @@
+Problèmes incorrigibles constatés:
+    - impossible de savoir pourquoi le repaint du renderpanel ne s'effectue pas en mode solo
+    - problèmes de fuite de mémoire assez sévère -> difficile a résoudre car pas de méthode delete définie.
+        -> IMPOSSIBLE DE SAVOIR SI UN OBJET EST VRAIMENT SUPPRIME OU NON.
+    - problèmes a l'arrêt des threads
+    - apres un nombre très important de parties d'affilée, une ConcurrentModificationException peut apparaitre
+        -> lien probable avec les fuites de mémoire.

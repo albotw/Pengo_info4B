@@ -1,6 +1,7 @@
 package com.generic.graphics;
 
 import com.generic.core.GameMap;
+import com.generic.core.Orientation;
 
 import javax.swing.*;
 import java.awt.*;
@@ -77,7 +78,12 @@ public class SpriteManager {
         return background.size();
     }
 
-    //Optimisation probable
+    /**
+     * Optimisation très probable.
+     * On peut imaginer qu'en stockant la composition précédente de la carte
+     * on peut actualiser juste les mapobjects modifiés et non régénérer une tonne de sprites a chaque fois.
+     */
+
     public static void transfer(GameMap m, RenderThread rt)
     {
         if (m != null)
@@ -113,7 +119,8 @@ public class SpriteManager {
                             }
                             else if (m.getAt(j, i).getType().equals("Penguin"))
                             {
-                                spr.loadImage("src/ressources/" + dir+ "Penguin.png");
+                                Orientation o = (Orientation)m.getAt(j, i);
+                                spr.loadImage("src/ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
                             }
                             else if (m.getAt(j, i).getType().equals("DiamondBlock"))
                             {

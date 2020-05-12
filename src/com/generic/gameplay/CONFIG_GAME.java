@@ -11,7 +11,6 @@ public class CONFIG_GAME {
     public static int AI_INIT_LIVES = 1;
     public static boolean PLAYER_IS_ANIMAL = false;
     public static boolean PLAYER_IS_PENGUIN = true;
-    public static int N_PLAYERS = 1;
     public static int N_AI = 1;
     public static int N_NIVEAUX = 1;
     public static boolean CLIENT = false;

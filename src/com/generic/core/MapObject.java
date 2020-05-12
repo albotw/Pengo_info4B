@@ -78,4 +78,12 @@ public abstract class MapObject {
     public void setMap(GameMap m) {
         this.m = m;
     }
+
+    public void flush()
+    {
+        this.x = -1;
+        this.y = -1;
+        this.m = null;
+        this.type = "";
+    }
 }

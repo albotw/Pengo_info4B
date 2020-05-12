@@ -144,11 +144,11 @@ public class LocalGame extends AbstractGame {
             it.remove();
         }
 
-        localPlayer.flush();
+
         try {
             System.out.println("En attente de l'arrêt d'un Thread Player");
-            LPThread.interrupt();
-            LPThread.join();
+            localPlayer.flush();
+            //LPThread.interrupt();
         } catch (Exception e) {
             e.printStackTrace();
         }

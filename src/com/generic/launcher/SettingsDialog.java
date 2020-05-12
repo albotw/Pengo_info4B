@@ -85,22 +85,19 @@ public class SettingsDialog extends JDialog {
 
     public void fillUI()
     {
-        /**
-         * TODO utiliser boucle ici, on est pas des sauvages
-         */
         PenguinControl.setSelected(true);
         AnimalControl.setSelected(false);
-        NbIA.addItem("3 instances");
-        NbIA.addItem("4 instances");
-        NbIA.addItem("5 instances");
-        NbIA.addItem("6 instances");
-        NbIA.addItem("7 instances");
+
+        for (int i = 3; i < 7; i++)
+        {
+            NbIA.addItem(""+i+" instances");
+        }
 
         NbNiveau.addItem("1 niveau");
-        NbNiveau.addItem("2 niveaux");
-        NbNiveau.addItem("3 niveaux");
-        NbNiveau.addItem("4 niveaux");
-        NbNiveau.addItem("5 niveaux");
+        for(int i = 2; i < 6; i++)
+        {
+            NbNiveau.addItem(""+i+" niveaux");
+        }
     }
 
     public void CloseSelected()

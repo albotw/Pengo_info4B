@@ -10,6 +10,8 @@ public class InputHandler implements KeyListener {
     public boolean RIGHT;
     public boolean ACTION;
 
+    private Window w;
+
     public void flush() {
         UP = false;
         DOWN = false;
@@ -20,8 +22,14 @@ public class InputHandler implements KeyListener {
 
     public InputHandler(Window w) {
         flush();
+        this.w = w;
         w.addKeyListener(this);
-        System.out.println("-- Created Input Listener --");
+        System.out.println("--- Created Input Listener ---");
+    }
+
+    public void stop()
+    {
+        w.removeKeyListener(this);
     }
 
     @Override
