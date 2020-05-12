@@ -66,7 +66,15 @@
       <recent name="E:\Yann\Code\projet_info4B_2019_2020" />
     </key>
   </component>
-  <component name="RunManager" selected="Compound.ServeurScore  + Pengo">
+  <component name="RunManager" selected="Compound.ServeurScore + PENGO - low Res">
+    <configuration name="PENGO -LOW RES" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
+      <module name="projet_info4B_2019_2020" />
+      <option name="PROGRAM_PARAMETERS" value="-lowResMode" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Pengo -NOBUILD" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
       <module name="projet_info4B_2019_2020" />
@@ -87,8 +95,13 @@
       </method>
     </configuration>
     <configuration name="ServeurScore  + Pengo" type="CompoundRunConfigurationType">
-      <toRun name="Serveur Score" type="Application" />
       <toRun name="Pengo" type="Application" />
+      <toRun name="Serveur Score" type="Application" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ServeurScore + PENGO - low Res" type="CompoundRunConfigurationType">
+      <toRun name="PENGO -LOW RES" type="Application" />
+      <toRun name="Serveur Score" type="Application" />
       <method v="2" />
     </configuration>
     <configuration name="ServeurScore + PENGO x2" type="CompoundRunConfigurationType">
@@ -98,9 +111,8 @@
       <method v="2" />
     </configuration>
     <configuration default="true" type="CompoundRunConfigurationType">
-      <toRun name="Pengo -NOBUILD" type="Application" />
+      <toRun name="PENGO -LOW RES" type="Application" />
       <toRun name="Serveur Score" type="Application" />
-      <toRun name="Pengo" type="Application" />
       <method v="2" />
     </configuration>
     <configuration name="Pengo + Score" type="Multirun" factoryName="Multirun" separateTabs="false" startOneByOne="true" markFailedProcess="true" hideSuccessProcess="true" delayTime="0">
@@ -109,10 +121,12 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Application.PENGO -LOW RES" />
       <item itemvalue="Application.Serveur Score" />
       <item itemvalue="Application.Pengo" />
       <item itemvalue="Application.Pengo -NOBUILD" />
       <item itemvalue="Compound.ServeurScore + PENGO x2" />
+      <item itemvalue="Compound.ServeurScore + PENGO - low Res" />
       <item itemvalue="Compound.ServeurScore  + Pengo" />
       <item itemvalue="Multirun.Pengo + Score" />
     </list>
@@ -219,6 +233,7 @@
       <workItem from="1589192201061" duration="3158000" />
       <workItem from="1589222942276" duration="6577000" />
       <workItem from="1589229581266" duration="110000" />
+      <workItem from="1589272303164" duration="3433000" />
     </task>
     <servers />
   </component>
@@ -230,10 +245,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="361" y="71" key="#Project_Structure/0.0.1536.824@0.0.1536.824" timestamp="1583844406364" />
-    <state x="321" y="148" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589115852431">
+    <state x="813" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589275588224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="321" y="148" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589115852431" />
+    <state x="813" y="62" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589275588224" />
     <state x="321" y="154" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583682317441" />
     <state x="731" y="321" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1588968550513">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -254,10 +269,10 @@
     </state>
     <state x="690" y="303" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1588951745406" />
     <state x="690" y="315" key="#com.intellij.ide.util.PackageChooserDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583681857876" />
-    <state x="689" y="311" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1589105207511">
+    <state x="689" y="311" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1589275512815">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="689" y="311" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589105207511" />
+    <state x="689" y="311" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589275512815" />
     <state x="689" y="323" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583682201613" />
     <state x="606" y="343" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1583839888493">
       <screen x="0" y="23" width="1440" height="807" />
@@ -300,32 +315,32 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="0" y="0" key="FileDocumentManager.FileCacheConflict/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1588951670682" />
-    <state width="1921" height="983" key="GridCell.Tab.0.bottom" timestamp="1589229691284">
+    <state width="1899" height="330" key="GridCell.Tab.0.bottom" timestamp="1589275721839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="80" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1589101767600" />
-    <state width="1921" height="983" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589229691284" />
+    <state width="1899" height="330" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589275721839" />
     <state width="1899" height="712" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589116940749" />
     <state width="590" height="289" key="GridCell.Tab.0.bottom/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583688698332" />
-    <state width="1921" height="983" key="GridCell.Tab.0.center" timestamp="1589229691284">
+    <state width="1899" height="330" key="GridCell.Tab.0.center" timestamp="1589275721839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="80" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1589101767599" />
-    <state width="1921" height="983" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589229691284" />
+    <state width="1899" height="330" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589275721839" />
     <state width="1899" height="712" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589116940749" />
     <state width="590" height="289" key="GridCell.Tab.0.center/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583688698332" />
-    <state width="1921" height="983" key="GridCell.Tab.0.left" timestamp="1589229691283">
+    <state width="1899" height="330" key="GridCell.Tab.0.left" timestamp="1589275721839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="80" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1589101767599" />
-    <state width="1921" height="983" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589229691283" />
+    <state width="1899" height="330" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589275721839" />
     <state width="1899" height="712" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589116940749" />
     <state width="590" height="289" key="GridCell.Tab.0.left/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583688698332" />
-    <state width="1921" height="983" key="GridCell.Tab.0.right" timestamp="1589229691284">
+    <state width="1899" height="330" key="GridCell.Tab.0.right" timestamp="1589275721839">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1493" height="80" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1589101767599" />
-    <state width="1921" height="983" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589229691284" />
+    <state width="1899" height="330" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589275721839" />
     <state width="1899" height="712" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1589116940749" />
     <state width="590" height="289" key="GridCell.Tab.0.right/0.0.1920.1080/1920.0.1920.1080@0.0.1920.1080" timestamp="1583688698332" />
     <state width="1899" height="209" key="GridCell.Tab.1.bottom" timestamp="1589140002171">
@@ -392,9 +407,9 @@
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1584800598131" />
     <state x="531" y="236" width="672" height="677" key="run.anything.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1587846530082" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1589056402500">
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1589273447754">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589056402500" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1589273447754" />
   </component>
 </project>

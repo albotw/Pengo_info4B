@@ -1,8 +1,10 @@
 package com.generic.launcher;
 
+import com.generic.UI.HostSettingsUI;
 import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
+import com.generic.gameplay.CONFIG_GAME;
 import com.generic.net.multiplayer.OnlineClient;
 import com.generic.net.multiplayer.NetworkManager;
 import com.generic.net.multiplayer.Serveur;
@@ -16,6 +18,7 @@ public class Online extends JDialog {
     private OnlineUI onlineUI;
     private HostUI hostUI;
     private JoinUI joinUI;
+    private HostSettingsUI settingsUI;
     private int stage;
     /**
      * 0 = onlineUI 1 = hostUI 2 = joinUI
@@ -43,6 +46,7 @@ public class Online extends JDialog {
         onlineUI = new OnlineUI(this);
         hostUI = new HostUI(this);
         joinUI = new JoinUI(this);
+        settingsUI = new HostSettingsUI(this);
 
         // this.getContentPane().add(onlineUI);
         cardPanel = new JPanel();
@@ -54,6 +58,7 @@ public class Online extends JDialog {
         cardPanel.add(onlineUI, "0");
         cardPanel.add(hostUI, "1");
         cardPanel.add(joinUI, "2");
+        cardPanel.add(settingsUI, "3");
 
         card.show(cardPanel, "0");
         net = new NetworkManager(this);
@@ -125,9 +130,23 @@ public class Online extends JDialog {
     }
 
     public void settingsSelected() {
-        /**
-         * Quand l'hôte clique sur réglages.
-         */
+        stage = 3;
+        card.show(cardPanel, "3");
+    }
+
+    public void saveGameSettings(int compo, boolean modePvP, boolean equipe1Animal, int nbNiveaux, int nbIA)
+    {
+        //soit on met a jour le CONFIG_GAME direct comme c'est l'hote
+        //soit on passe par le network manager avec l'envoi de commande, etc..
+        CONFIG_GAME.setPvP(modePvP);
+        CONFIG_GAME.setTeam1IsAnimal(equipe1Animal);
+        CONFIG_GAME.setnNiveaux(nbNiveaux);
+        CONFIG_GAME.setnAi(nbIA);
+
+        System.out.println("taille equipe = " + compo + " | pvp = " + modePvP + " | equipe1 <=> animaux =" + equipe1Animal + " | niveaux = " + nbNiveaux + " | IAs = " + nbIA);
+        net.sendCommand("TEAM MAX SIZE", new String[]{"" + compo});
+
+        card.show(cardPanel, "0");
     }
 
     public void connectSelected() {

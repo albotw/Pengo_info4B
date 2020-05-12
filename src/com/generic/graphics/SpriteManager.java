@@ -119,8 +119,15 @@ public class SpriteManager {
                             }
                             else if (m.getAt(j, i).getType().equals("Penguin"))
                             {
-                                Orientation o = (Orientation)m.getAt(j, i);
-                                spr.loadImage("src/ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
+                                if (LOW_RES_MODE)
+                                {
+                                    spr.loadImage("src/ressources/"+dir+"Penguin.png");
+                                }
+                                else
+                                {
+                                    Orientation o = (Orientation)m.getAt(j, i);
+                                    spr.loadImage("src/ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
+                                }
                             }
                             else if (m.getAt(j, i).getType().equals("DiamondBlock"))
                             {
