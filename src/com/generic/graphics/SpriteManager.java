@@ -3,8 +3,6 @@ package com.generic.graphics;
 import com.generic.core.GameMap;
 import com.generic.core.Orientation;
 
-import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 import static com.generic.gameplay.CONFIG.*;
@@ -135,7 +133,15 @@ public class SpriteManager {
                             }
                             else if (m.getAt(j, i).getType().equals("Animal"))
                             {
-                                spr.loadImage("src/ressources/" + dir + "Animal.png");
+                                if (LOW_RES_MODE)
+                                {
+                                    spr.loadImage("src/ressources/" + dir + "Animal.png");
+                                }
+                                else
+                                {
+                                    Orientation o = (Orientation)m.getAt(j, i);
+                                    spr.loadImage("src/ressources/" + dir+ "Darknut_"+o.getOrientation()+".png");
+                                }
                             }
                             instance.addSprite(spr, "foreground");
                         }

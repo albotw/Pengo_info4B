@@ -64,16 +64,23 @@ public class RenderThread extends Thread {
         System.out.println("--- RenderThread started ---");
         fps.start();
         while (continueDrawing) {
-            if (client)
+            if (client) {
                 SpriteManager.transfer(OnlineClient.instance.getMap(), this);
-            else
+            }
+            else {
                 SpriteManager.transfer(LocalGame.instance.getMap(), this);
+            }
 
             fps.frame();
             w.setTitle(WINDOW_TITLE + " | FPS: " + fps.get());
             w.revalidate();
             rp.repaint();
             go.repaint();
+
+            if (!client)
+            {
+                go.updateLocal();
+            }
             try {
                 sleep(16);
             } catch (InterruptedException e) {

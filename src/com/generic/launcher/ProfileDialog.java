@@ -1,7 +1,7 @@
 package com.generic.launcher;
 
 import com.generic.UI.PlaceholderTextField;
-import com.generic.gameplay.Player;
+import com.generic.gameplay.LocalPlayer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -100,7 +100,7 @@ public class ProfileDialog extends JDialog {
     public void refreshList()
     {
         mod.removeAllElements();
-        for (Player p : launcher.getPlayers())
+        for (LocalPlayer p : launcher.getPlayers())
         {
             if (p == launcher.getMainProfile())
             {

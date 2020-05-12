@@ -2,7 +2,7 @@ package com.generic.launcher;
 
 import com.generic.UI.LauncherUI;
 import com.generic.gameplay.LocalGame;
-import com.generic.gameplay.Player;
+import com.generic.gameplay.LocalPlayer;
 
 import javax.swing.*;
 import java.io.FileInputStream;
@@ -21,10 +21,12 @@ public class Launcher extends JFrame
     private LauncherUI UI;
     private Leaderboard localLeaderboard;
 
-    private CopyOnWriteArrayList<Player> playerProfiles;
+    private CopyOnWriteArrayList<LocalPlayer> playerProfiles;
     private int mainProfile = - 1;
 
     private int currentLevel;
+
+    private LocalGame game;
 
     public  Launcher()
     {
@@ -35,7 +37,7 @@ public class Launcher extends JFrame
         localLeaderboard.pull();
         localLeaderboard.push();
 
-        playerProfiles = new CopyOnWriteArrayList<Player>();
+        playerProfiles = new CopyOnWriteArrayList<LocalPlayer>();
         loadProfiles();
 
         UI = new LauncherUI();
@@ -57,7 +59,7 @@ public class Launcher extends JFrame
         {
             this.setVisible(false);
             currentLevel++;
-            LocalGame g = new LocalGame();
+            game = new LocalGame();
         }
     }
 
@@ -166,12 +168,12 @@ public class Launcher extends JFrame
 
     public void addPlayer(String pseudo)
     {
-        Player p = new Player(pseudo);
+        LocalPlayer p = new LocalPlayer(pseudo);
         playerProfiles.add(p);
         saveProfiles();
     }
 
-    public CopyOnWriteArrayList<Player> getPlayers()
+    public CopyOnWriteArrayList<LocalPlayer> getPlayers()
     {
         return this.playerProfiles;
     }
@@ -184,7 +186,7 @@ public class Launcher extends JFrame
 
     public void setMainProfile(String pseudo)
     {
-        for (Player p : playerProfiles)
+        for (LocalPlayer p : playerProfiles)
         {
             if (p.getPseudo().equals(pseudo))
             {
@@ -195,7 +197,7 @@ public class Launcher extends JFrame
         System.out.println("Main profile set to " + mainProfile + " | " + playerProfiles.get(mainProfile).getPseudo());
     }
 
-    public Player getMainProfile()
+    public LocalPlayer getMainProfile()
     {
         return playerProfiles.get(mainProfile);
     }
@@ -205,7 +207,7 @@ public class Launcher extends JFrame
         return mainProfile != -1;
     }
 
-    public Player getPlayer(int i)
+    public LocalPlayer getPlayer(int i)
     {
         if (i >= 0 && i < playerProfiles.size())
         {
@@ -216,4 +218,6 @@ public class Launcher extends JFrame
             return null;
         }
     }
+
+    public LocalGame getGame(){return this.game;}
 }

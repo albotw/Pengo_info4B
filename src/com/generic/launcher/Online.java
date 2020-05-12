@@ -173,11 +173,11 @@ public class Online extends JDialog {
     }
 
     public void join1Selected() {
-        net.joinTeam1(Launcher.instance.getMainProfile().getPseudo());
+        net.joinTeam1();
     }
 
     public void join2Selected() {
-        net.joinTeam2(Launcher.instance.getMainProfile().getPseudo());
+        net.joinTeam2();
     }
 
     public void removeTeam1(String pseudo) {

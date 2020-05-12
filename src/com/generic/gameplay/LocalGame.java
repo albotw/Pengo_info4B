@@ -24,14 +24,15 @@ public class LocalGame extends AbstractGame {
     private SpriteManager sm;
     private Window w;
 
-    private Player localPlayer;
+    private LocalPlayer localPlayer;
     private Thread LPThread;
 
     private int AIlives = AI_INIT_LIVES;
 
+    private boolean AIwin;
+
     public LocalGame(){
         super();
-        setCLIENT(false);
         map.setLocal(true);
 
         AIs = new HashMap<MapEntity, AI>();
@@ -116,14 +117,13 @@ public class LocalGame extends AbstractGame {
     @Override
     public void gameEnd()
     {
-
-    }
-
-    public void gameOver() {
-        // a ajouter: déréférencement dans les objets
         time.stopTimer();
+        if (!AIwin)
+        {
+            localPlayer.setPoints("GameEnd", time.getTime());
+        }
         stop();
-        GameEndDialog GED = new GameEndDialog(w, false, false);
+        GameEndDialog GED = new GameEndDialog(w, false, !AIwin);
         try {
             sleep(2000);
         } catch (Exception e) {
@@ -162,22 +162,6 @@ public class LocalGame extends AbstractGame {
 
     }
 
-    public void victory() {
-        // a ajouter: déréférencement dans les objets.
-        launcher.getMainProfile().setPoints("GameEnded", time.getTime());
-        time.stopTimer();
-        stop();
-        GameEndDialog ged = new GameEndDialog(w, false, true);
-        try {
-            sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        ged.Fermer();
-        renderer.stopRendering();
-        Launcher.instance.onGameEnded();
-    }
-
     public void animalKilled(Animal a, MapObject killer) {
         if (PLAYER_IS_PENGUIN) {
             AI owner = AIs.get(a);
@@ -187,7 +171,8 @@ public class LocalGame extends AbstractGame {
 
             AIlives = AIlives - 1;
             if (AIlives == 0) {
-                victory();
+                AIwin = false;
+                gameEnd();
             } else {
                 respawnAnimal(owner);
             }
@@ -257,7 +242,8 @@ public class LocalGame extends AbstractGame {
 
             AIlives = AIlives - 1;
             if (AIlives == 0) {
-                victory();
+                AIwin = false;
+                gameEnd();
             } else {
                 respawnPenguin(owner);
             }
@@ -279,7 +265,7 @@ public class LocalGame extends AbstractGame {
                     bot.setControlledObject(a);
                     AIs.put(a, bot);
                 } else if (PLAYER_IS_ANIMAL) {
-                    Player pl = (Player) (owner);
+                    LocalPlayer pl = (LocalPlayer) (owner);
                     pl.setControlledObject(a);
                 }
             }
@@ -303,7 +289,7 @@ public class LocalGame extends AbstractGame {
                 Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
 
                 if (PLAYER_IS_PENGUIN) {
-                    Player pl = (Player) owner;
+                    LocalPlayer pl = (LocalPlayer) owner;
                     pl.setControlledObject(p);
                 } else if (PLAYER_IS_ANIMAL) {
                     AI bot = (AI) (owner);
@@ -327,11 +313,13 @@ public class LocalGame extends AbstractGame {
         return this.w;
     }
 
-    public Player getLocalPlayer() {
+    public LocalPlayer getLocalPlayer() {
         return this.localPlayer;
     }
 
     public int getAIlives() {
         return this.AIlives;
     }
+
+    public void setAIwin(boolean val){this.AIwin = val;}
 }

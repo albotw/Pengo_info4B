@@ -2,7 +2,7 @@ package com.generic.launcher;
 
 import com.generic.utils.ScorePair;
 import com.generic.net.Command;
-import com.generic.gameplay.Player;
+import com.generic.gameplay.LocalPlayer;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -19,7 +19,7 @@ public class Leaderboard implements Serializable {
     }
 
     // Cas de leaderboard local
-    public void addToLeaderboard(Player p) {
+    public void addToLeaderboard(LocalPlayer p) {
         ScorePair toInsert = new ScorePair(p.getPseudo(), p.getPoints(), true);
         addToLeaderboard(toInsert);
     }

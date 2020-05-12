@@ -1,6 +1,5 @@
 package com.generic.net.multiplayer;
 
-import com.generic.core.MapEntity;
 import com.generic.gameplay.AbstractPlayer;
 import com.generic.net.Command;
 
@@ -12,9 +11,6 @@ import static com.generic.gameplay.CONFIG_GAME.TEAM_1_IS_ANIMAL;
 import static com.generic.gameplay.CONFIG_GAME.TEAM_2_IS_ANIMAL;
 
 
-/**
- * TODO: refactor -> OnlinePlayer
- */
 public class OnlinePlayer extends AbstractPlayer {
     private Socket socket;
     private ObjectOutputStream commandOut;
@@ -34,6 +30,15 @@ public class OnlinePlayer extends AbstractPlayer {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void sendCommand(String val, String[] params)
+    {
+        Command cmd = new Command(val, params);
+        try
+        {
+            commandOut.writeObject(cmd);
+        }catch(Exception e){e.printStackTrace();}
     }
 
     public void run() {
@@ -60,6 +65,7 @@ public class OnlinePlayer extends AbstractPlayer {
                 Command cmd = (Command) (commandIn.readObject());
                 System.out.println("SERVER | " + cmd.toString());
 
+                //code a optimiser ?
                 if (cmd.getVal().equals("DISCONNECT")) {
                     commandOut.writeObject(new Command("DISCONNECT", null));
                     if (equipe == 1)
@@ -87,6 +93,7 @@ public class OnlinePlayer extends AbstractPlayer {
                     srv.setHost(this);
                 } else if (cmd.getVal().equals("START GAME")) {
                     srv.startGame();
+                    sendCommand("UPDATE PLAYER DATA", new String[]{"VIES", ""+currentLives});
                 } else if (cmd.getVal().equals("MOVE UP")) {
                     if (controlledObject != null)
                         controlledObject.goUp();
@@ -120,13 +127,7 @@ public class OnlinePlayer extends AbstractPlayer {
     {
         currentLives--;
 
-        Command cmd = new Command("UPDATE PLAYER DATA", new String[]{"VIES", ""+currentLives});
-        try {
-            commandOut.writeObject(cmd);
-        }catch(Exception e)
-        {
-            e.printStackTrace();
-        }
+        sendCommand("UPDATE PLAYER DATA", new String[]{"VIES", ""+currentLives});
 
         if (currentLives <= 0)
         {
@@ -164,12 +165,7 @@ public class OnlinePlayer extends AbstractPlayer {
     public void setPoints(String context, int time)
     {
         super.setPoints(context, time);
-        System.out.println("ENVOI CMD");
-        Command cmd = new Command("UPDATE PLAYER DATA", new String[]{"POINTS", ""+points});
-        try {
-            commandOut.writeObject(cmd);
-        }
-        catch(Exception e){e.printStackTrace();}
+        sendCommand("UPDATE PLAYER DATA", new String[]{"POINTS", ""+points});
     }
 
 }

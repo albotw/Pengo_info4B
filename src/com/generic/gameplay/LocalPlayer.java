@@ -1,6 +1,7 @@
 package com.generic.gameplay;
 
 import com.generic.core.MapEntity;
+import com.generic.launcher.Launcher;
 import com.generic.utils.InputHandler;
 
 import static com.generic.gameplay.CONFIG_GAME.*;
@@ -11,13 +12,13 @@ import static java.lang.Thread.sleep;
  * TODO: généralisation pour toute MapEntity
  */
 
-public class Player extends AbstractPlayer
+public class LocalPlayer extends AbstractPlayer
 {
     private InputHandler ih;
 
     private volatile boolean flush;
 
-    public Player(String pseudo)
+    public LocalPlayer(String pseudo)
     {
         super(pseudo);
     }
@@ -69,7 +70,8 @@ public class Player extends AbstractPlayer
         currentLives--;
         if (currentLives <= 0)
         {
-            LocalGame.instance.gameEnd();
+            Launcher.instance.getGame().setAIwin(true);
+            Launcher.instance.getGame().gameEnd();
         }
         else
         {
