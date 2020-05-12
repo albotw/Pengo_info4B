@@ -397,7 +397,6 @@ public class OnlineGame extends AbstractGame{
             }
         }
     }
-
     @Override
     public void stunTriggered(char dirMur) {
         /**
