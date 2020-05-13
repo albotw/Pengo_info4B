@@ -6,16 +6,16 @@ import com.generic.gameplay.AbstractGame;
 import com.generic.gameplay.LocalGame;
 
 import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG.INFINI;
 import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
-public class GenericStrategy implements Strategy{
+public class GenericStrategy_nobandir implements Strategy{
     private MapObject target;
     private AI bot;
     private MapObject controlledObject;
-    private char bannedDir;
 
-    public GenericStrategy(AI bot)
+    public GenericStrategy_nobandir(AI bot)
     {
         this.bot = bot;
         System.out.println("created strategy");
@@ -60,7 +60,6 @@ public class GenericStrategy implements Strategy{
 
     public void updateControlledObject(MapObject co)
     {
-        bannedDir = '\0';
         this.controlledObject = co;
     }
 
@@ -127,22 +126,18 @@ public class GenericStrategy implements Strategy{
         System.out.println("h = " + d_up + " | b = " + d_down + " | g = " + d_left + " | d = " + d_right);
 
         // on prend la plus petite valeur et on se déplace sur la case
-        if (d_up < d_down && d_up < d_left && d_up < d_right && bannedDir != 'H') {
+        if (d_up < d_down && d_up < d_left && d_up < d_right) {
             System.out.println("Décide d'aller en haut");
             controlledObject.goUp();
-            bannedDir = 'B';
-        } else if (d_down < d_up && d_down < d_left && d_down < d_right && bannedDir != 'B') {
+        } else if (d_down < d_up && d_down < d_left && d_down < d_right) {
             System.out.println("Décide d'aller en bas");
             controlledObject.goDown();
-            bannedDir = 'H';
-        } else if (d_left < d_up && d_left < d_right && d_left < d_down && bannedDir != 'G') {
+        } else if (d_left < d_up && d_left < d_right && d_left < d_down) {
             System.out.println("Décide d'aller a gauche");
             controlledObject.goLeft();
-            bannedDir = 'D';
-        } else if (d_right < d_up && d_right < d_down && d_right < d_left && bannedDir != 'D') {
+        } else if (d_right < d_up && d_right < d_down && d_right < d_left) {
             // System.out.println("Décide d'aller a droite");
             controlledObject.goRight();
-            bannedDir = 'G';
         } else {
             System.out.println("état indécisif");
 
@@ -150,33 +145,29 @@ public class GenericStrategy implements Strategy{
             do {
                 int d_rand = RandomizedInt(0, 3);
 
-                if (d_up != INFINI && d_rand == 0 && bannedDir != 'H') {
+                if (d_up != INFINI && d_rand == 0) {
                     controlledObject.goUp();
                     loop = false;
-                    bannedDir = 'B';
                     System.out.println("Après tirage décide d'aller en haut");
-                } else if (d_down != INFINI && d_rand == 1 && bannedDir != 'B') {
+                } else if (d_down != INFINI && d_rand == 1) {
                     controlledObject.goDown();
                     loop = false;
-                    bannedDir = 'H';
                     System.out.println("Après tirage décide d'aller en bas");
-                } else if (d_left != INFINI && d_rand == 2 && bannedDir != 'G') {
+                } else if (d_left != INFINI && d_rand == 2) {
                     controlledObject.goLeft();
                     loop = false;
-                    bannedDir = 'D';
                     System.out.println("Après tirage décide d'aller à gauche");
-                } else if (d_right != INFINI && d_rand == 3 && bannedDir != 'D') {
+                } else if (d_right != INFINI && d_rand == 3) {
                     controlledObject.goRight();
                     loop = false;
-                    bannedDir = 'G';
                     System.out.println("Après tirage décide d'aller a droite");
                 } else {
                     System.out.println("Tirage invalide");
                 }
 
-                try{
-                    Thread.currentThread().sleep(500);
-                }catch(Exception e){e.printStackTrace();}
+                //try{
+                //    Thread.currentThread().sleep(500);
+                //}catch(Exception e){e.printStackTrace();}
             } while (loop);
         }
     }
