@@ -174,11 +174,9 @@ public class OnlineGame extends AbstractGame{
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             AI tmp = (AI) pair.getValue();
-            tmp.flush();
             try {
                 System.out.println("En attente de l'arrêt d'un Thread IA");
-                tmp.join();
-                tmp.interrupt();
+                tmp.flush();
             } catch (Exception e) {
                 e.printStackTrace();
             }

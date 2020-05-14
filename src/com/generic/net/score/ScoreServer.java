@@ -9,29 +9,30 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 
-public class ScoreServer {
+public class ScoreServer extends Thread{
     private final int port = 9090;
     private Leaderboard l;
     public static ScoreServer instance;
-
-    public static void main(String[] args) {
-        try {
-            ScoreServer srv = new ScoreServer();
-        }catch(Exception e){e.printStackTrace();}
-    }
+    private ServerSocket s;
 
     public ScoreServer() throws Exception
     {
-        ServerSocket s = new ServerSocket(port);
+        s = new ServerSocket(port);
         instance = this;
 
         System.out.println("SOCKET ECOUTE CREE => " + s);
 
         loadSavefile();
+        start();
+    }
 
+    public void run()
+    {
         while (true) {
-            Connexion connexion = new Connexion(s.accept());
-            connexion.start();
+            try{
+                Connexion connexion = new Connexion(s.accept());
+                connexion.start();
+            }catch(Exception e){e.printStackTrace();}
         }
     }
 

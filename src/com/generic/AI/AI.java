@@ -4,6 +4,7 @@ import com.generic.core.Animal;
 import com.generic.core.GameMap;
 import com.generic.core.MapObject;
 import com.generic.gameplay.AbstractGame;
+import com.generic.launcher.Launcher;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.utils.Equations.RandomizedInt;
@@ -32,7 +33,7 @@ public class AI extends Thread {
     private Strategy strat;
 
     public AI() {
-        strat = new GenericStrategy_nobandir(this);
+        strat = new AStarStrategy();
     }
 
     public void run() {

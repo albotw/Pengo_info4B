@@ -86,6 +86,10 @@ public class OnlineClient extends Thread {
         {
             go.setRemainigEnemies(Integer.parseInt(params[1]));
         }
+        else if (params[0].equals("PSEUDO"))
+        {
+            go.setPseudo(params[1]);
+        }
     }
 
     public GameMap getMap() {

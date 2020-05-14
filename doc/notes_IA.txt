@@ -22,3 +22,21 @@ rouge -> évite le joueur a tout prix ainsi que les blocs qui lui sont envoyés
 afin d'éviter de faire revenir l'ia sur ses pas dans un tirage aléatoire:
 lors du tirage d'un mouvement (par exemple Haut), on stocke l'opposé dans une variable afin que lors d'un prochain tirage, l'IA ne revienne pas sur ses pas
 faire attention aux culs de sac, on pourrait imaginer que on prend en compte ce système uniquement si il y a deux directions possible pour se déplacer
+
+
+défense bloc spé:
+1ere étape: trouver un bloc de diamant
+    |- localiser tous les blocs de diamant
+2e étape: entier aléatoire entre 1 et 5 qui servira de rayon
+3e étape: on cible un bloc dans le rayon du bloc spé
+    |- si on en trouve pas, on retire le bloc de diamant de la liste
+    |- on réitère sur un autre bloc
+4e étape: tant qu'il n'est pas détruit on se dirige vers lui
+5e étape: si il est détruit on retourne a l'étape 1.
+
+ciblage joueur:
+on parcourt la carte en intégralité.
+dès qu'on tombe sur un joueur, on l'ajoute dans une arrayList de MapObject
+apres avoir parcouru la carte,
+on tire un entier au hasard
+et on définit la cible comme étant arraylist.get(rand).

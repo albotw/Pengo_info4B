@@ -8,10 +8,10 @@ import java.awt.*;
 import java.io.File;
 
 public class GameOverlay extends JPanel {
-    private String pseudo;
-    private int score;
-    private int vies;
-    private int remainigEnemies;
+    private String pseudo = "";
+    private int score = 0;
+    private int vies = 0;
+    private int remainigEnemies = 0;
 
     private boolean showRemainingEnemies = true;
 
