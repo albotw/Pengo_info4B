@@ -149,9 +149,9 @@ public class Online extends JDialog {
         card.show(cardPanel, "1");
     }
 
-    public void connectSelected() {
+    public void connectSelected(String ip, int port) {
 
-        net.connect("127.0.0.1", 8080);
+        net.connect(ip, port);
         networkThread = new Thread(net);
         networkThread.start();
         net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());

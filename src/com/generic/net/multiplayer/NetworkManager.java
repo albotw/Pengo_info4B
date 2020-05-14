@@ -15,8 +15,6 @@ import java.net.Socket;
 
 public class NetworkManager implements Runnable {
     private Socket socket;
-    private int port = 8080;
-    private String IP = "127.0.0.1";
     private ObjectInputStream commandIn;
     private ObjectOutputStream commandOut;
 

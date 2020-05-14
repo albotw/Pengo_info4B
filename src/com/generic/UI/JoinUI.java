@@ -74,15 +74,18 @@ public class JoinUI extends JPanel {
         connecter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                deconnecter.setEnabled(true);
-                join1.setEnabled(true);
-                join2.setEnabled(true);
-                connecter.setEnabled(false);
-                IP.setEnabled(false);
-                port.setEnabled(false);
-                close.setEnabled(false);
+                if (!IP.getText().equals("") && !port.getText().equals(""))
+                {
+                    deconnecter.setEnabled(true);
+                    join1.setEnabled(true);
+                    join2.setEnabled(true);
+                    connecter.setEnabled(false);
+                    IP.setEnabled(false);
+                    port.setEnabled(false);
+                    close.setEnabled(false);
 
-                manager.connectSelected();
+                    manager.connectSelected(IP.getText(), Integer.parseInt(port.getText()));
+                }
             }
         });
 
