@@ -27,6 +27,7 @@ public class Main {
         try{
             ScoreServer srv = new ScoreServer();
         }catch(Exception e){e.printStackTrace();}
+
         Launcher l = new Launcher();
     }
 
