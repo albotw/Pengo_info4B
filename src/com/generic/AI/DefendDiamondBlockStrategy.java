@@ -66,22 +66,12 @@ public class DefendDiamondBlockStrategy implements Strategy{
 
         for (int i = 0; i < m.getHeight(); i++)
         {
-            for (int j = 0; j < m.getWidth(); i++)
+            for (int j = 0; j < m.getWidth(); j++)
             {
                 MapObject tmp = m.getAt(j, i);
-                if (controlledObject.getType().equals("Penguin"))
+                if (tmp.getType().equals("DiamondBlock"))
                 {
-                    if (tmp.getType().equals("Animal"))
-                    {
-                        targetList.add(tmp);
-                    }
-                }
-                else if (controlledObject.getType().equals("Animal"))
-                {
-                    if (tmp.getType().equals("Penguin"))
-                    {
-                        targetList.add(tmp);
-                    }
+                    targetList.add(tmp);
                 }
             }
         }
@@ -92,6 +82,11 @@ public class DefendDiamondBlockStrategy implements Strategy{
 
     public void acquireTarget()
     {
+        if (target == null)
+        {
+            acquireTargetList();
+        }
+
         int x = target.getX();
         int y = target.getY();
 

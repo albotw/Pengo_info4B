@@ -27,7 +27,7 @@ public class AStarInvertStrategy implements Strategy{
 
         for (int i = 0; i < m.getHeight(); i++)
         {
-            for (int j = 0; j < m.getWidth(); i++)
+            for (int j = 0; j < m.getWidth(); j++)
             {
                 MapObject tmp = m.getAt(j, i);
                 if (controlledObject.getType().equals("Penguin"))
@@ -53,16 +53,32 @@ public class AStarInvertStrategy implements Strategy{
 
     public void process()
     {
-        System.out.println("process");
-
-        testDirection();
-
-        switch (direction)
+        if (target != null)
         {
-            case 'H': controlledObject.goUp(); break;
-            case 'B': controlledObject.goDown(); break;
-            case 'G': controlledObject.goLeft(); break;
-            case 'D': controlledObject.goRight(); break;
+            GameMap m = AbstractGame.instance.getMap();
+            if (m.getAt(target.getX(), target.getY()) == target)
+            {
+                System.out.println("déplacement vers la cible");
+                testDirection();
+
+                switch (direction)
+                {
+                    case 'H': controlledObject.goUp(); break;
+                    case 'B': controlledObject.goDown(); break;
+                    case 'G': controlledObject.goLeft(); break;
+                    case 'D': controlledObject.goRight(); break;
+                }
+            }
+            else
+            {
+                System.out.println("recherche de cible");
+                acquireTarget();
+            }
+        }
+        else
+        {
+            System.out.println("recherche de cible");
+            acquireTarget();
         }
     }
 

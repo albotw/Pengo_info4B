@@ -27,15 +27,24 @@ public class AStarStrategy implements Strategy{
 
         if (target != null)
         {
-            System.out.println("déplacement vers la cible");
-            testDirection();
-
-            switch (direction)
+            GameMap m = AbstractGame.instance.getMap();
+            if (m.getAt(target.getX(), target.getY()) == target)
             {
-                case 'H': controlledObject.goUp(); break;
-                case 'B': controlledObject.goDown(); break;
-                case 'G': controlledObject.goLeft(); break;
-                case 'D': controlledObject.goRight(); break;
+                System.out.println("déplacement vers la cible");
+                testDirection();
+
+                switch (direction)
+                {
+                    case 'H': controlledObject.goUp(); break;
+                    case 'B': controlledObject.goDown(); break;
+                    case 'G': controlledObject.goLeft(); break;
+                    case 'D': controlledObject.goRight(); break;
+                }
+            }
+            else
+            {
+                System.out.println("recherche de cible");
+                acquireTarget();
             }
         }
         else
@@ -105,6 +114,19 @@ public class AStarStrategy implements Strategy{
         else if (d_right < d_up && d_right < d_down && d_right < d_left)
         {
             direction = 'D';
+        }
+
+        if (m.getAt(x - 1, y).getType().equals("DiamondBlock") || m.getAt(x + 1, y).getType().equals("DiamondBlock"))
+        {
+            int rand = RandomizedInt(0, 1);
+            if (rand == 0) direction = 'H';
+            else direction = 'B';
+        }
+        else if (m.getAt(x, y - 1).getType().equals("DiamondBlock") || m.getAt(x, y + 1).getType().equals("DiamondBlock"))
+        {
+            int rand = RandomizedInt(0, 1);
+            if (rand == 0) direction = 'G';
+            else direction = 'D';
         }
     }
 
