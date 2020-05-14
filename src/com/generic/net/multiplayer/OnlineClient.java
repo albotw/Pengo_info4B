@@ -1,6 +1,7 @@
 package com.generic.net.multiplayer;
 
 import com.generic.UI.GameEndDialog;
+import com.generic.UI.GameOverlay;
 import com.generic.core.*;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
@@ -24,7 +25,6 @@ public class OnlineClient extends Thread {
 
     public OnlineClient(NetworkManager nm) {
         instance = this;
-        setCLIENT(true);
         Launcher.instance.incrementCurrentLevel();
 
         this.nm = nm;
@@ -66,7 +66,26 @@ public class OnlineClient extends Thread {
 
     public void updateUI(String[] params)
     {
-        rt.getGameOverlay().update(params);
+        GameOverlay go = rt.getGameOverlay();
+        if (params[0].equals("POINTS"))
+        {
+            go.setScore(Integer.parseInt(params[1]));
+        }
+        else if (params[0].equals("VIES"))
+        {
+            go.setVies(Integer.parseInt(params[1]));
+        }
+        else if (params[0].equals("HIDE"))
+        {
+            if (params[1].equals("ENEMI"))
+            {
+                go.setShowRemainingEnemies(false);
+            }
+        }
+        else if (params[0].equals("ENEMI"))
+        {
+            go.setRemainigEnemies(Integer.parseInt(params[1]));
+        }
     }
 
     public GameMap getMap() {

@@ -22,7 +22,6 @@ public class NetworkManager implements Runnable {
 
     private boolean endConnexion;
 
-
     private Online manager;
 
     public NetworkManager(Online manager) {
@@ -62,7 +61,6 @@ public class NetworkManager implements Runnable {
                 }
                 else if (cmd.getVal().equals("UPDATE PLAYER DATA"))
                 {
-                    System.out.println("RECEPTION COMMAND");
                     manager.getClient().updateUI(cmd.getParams());
                 }
             }
@@ -128,11 +126,11 @@ public class NetworkManager implements Runnable {
         sendCommand("SET PSEUDO", new String[] { pseudo });
     }
 
-    public void joinTeam1(String pseudo) {
+    public void joinTeam1() {
         sendCommand("JOIN TEAM 1", null);
     }
 
-    public void joinTeam2(String pseudo) {
+    public void joinTeam2() {
         sendCommand("JOIN TEAM 2", null);
     }
 

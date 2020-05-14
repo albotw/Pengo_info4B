@@ -13,14 +13,12 @@ public class CONFIG_GAME {
     public static boolean PLAYER_IS_PENGUIN = true;
     public static int N_AI = 1;
     public static int N_NIVEAUX = 1;
-    public static boolean CLIENT = false;
 
     public static boolean TEAM_1_IS_ANIMAL = false;
     public static boolean TEAM_2_IS_ANIMAL = true;
 
     public static boolean PvE = true;
     public static boolean PvP = false;
-
 
     public static void setPlayerIsPenguin(boolean val) {
         PLAYER_IS_ANIMAL = !val;
@@ -43,9 +41,6 @@ public class CONFIG_GAME {
     public static void setnNiveaux(int val) {
         N_NIVEAUX = val;
     }
-
-    public static void setCLIENT(boolean val){
-        CLIENT = val;}
 
     public static void setPvP(boolean val)
     {

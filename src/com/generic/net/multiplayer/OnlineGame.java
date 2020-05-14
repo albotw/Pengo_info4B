@@ -158,6 +158,14 @@ public class OnlineGame extends AbstractGame{
         initDiamondBlocks();
         initPlayers();
         initIA();
+        if (PvE)
+        {
+            srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", ""+AILives});
+        }
+        else
+        {
+            srv.sendCommandToAll("UPDATE PLAYER DATA", new String[]{"HIDE", "ENEMI"});
+        }
     }
 
 
@@ -307,6 +315,7 @@ public class OnlineGame extends AbstractGame{
                 op.setPoints("AnimalKilled", 0);
 
                 AILives = AILives - 1;
+                srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", ""+AILives});
                 if (AILives == 0) {
                     equipeGagnante = 1;
                     gameEnd();
@@ -359,6 +368,7 @@ public class OnlineGame extends AbstractGame{
                 op.setPoints("AnimalKilled", 0);
 
                 AILives = AILives - 1;
+                srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", ""+AILives});
                 if (AILives == 0) {
                     equipeGagnante = 1;
                     gameEnd();
@@ -370,12 +380,18 @@ public class OnlineGame extends AbstractGame{
         if (PvP) {
             if (!TEAM_1_IS_ANIMAL) {    //pingouin = connexion(team 1)
                 OnlinePlayer owner = equipe1.get(p);
-                owner.setPoints("AnimalKilled", 0);
+
+                OnlinePlayer op = equipe2.get(killer);
+                op.setPoints("AnimalKilled", 0);
+
                 owner.setControlledObject(null);
                 owner.removeLive();
             }else {                     //pingouin = connexion (team 2)
                 OnlinePlayer owner = equipe2.get(p);
-                owner.setPoints("AnimalKilled", 0);
+
+                OnlinePlayer op = equipe1.get(killer);
+                op.setPoints("AnimalKilled", 0);
+
                 owner.setControlledObject(null);
                 owner.removeLive();
             }
