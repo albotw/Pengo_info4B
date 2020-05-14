@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="projet_info4B_2019_2020:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/projet_info4B_2019_2020_jar</output-path>
+    <root id="archive" name="projet_info4B_2019_2020.jar">
+      <element id="module-output" name="projet_info4B_2019_2020" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/ressources" />
+      <element id="dir-copy" path="$PROJECT_DIR$/src/saves" />
+    </root>
+  </artifact>
+</component>
