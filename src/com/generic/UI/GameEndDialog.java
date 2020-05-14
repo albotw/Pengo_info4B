@@ -11,12 +11,12 @@ public class GameEndDialog extends JDialog {
             super(parent, modal);
 
             if (victoire) {
-                ImageIcon victory = new ImageIcon("src/ressources/victoire.png");
+                ImageIcon victory = new ImageIcon("ressources/victoire.png");
                 img = new ImagePanel(victory.getImage());
                 System.out.println(victory.toString());
             }
             else{
-                ImageIcon defeat = new ImageIcon("src/ressources/defeat.png");
+                ImageIcon defeat = new ImageIcon("ressources/defeat.png");
                 img = new ImagePanel(defeat.getImage());
             }
             img.setBounds(0, 0, 600, 600);

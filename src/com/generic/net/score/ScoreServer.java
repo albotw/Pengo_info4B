@@ -39,7 +39,7 @@ public class ScoreServer extends Thread{
     public void loadSavefile()
     {
         try {
-            FileInputStream fis = new FileInputStream("src/saves/ladder.sav");
+            FileInputStream fis = new FileInputStream("saves/ladder.sav");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object tmp = ois.readObject();
 
@@ -61,7 +61,7 @@ public class ScoreServer extends Thread{
     public void writeSavefile()
     {
         try{
-            FileOutputStream fos = new FileOutputStream("src/saves/ladder.sav");
+            FileOutputStream fos = new FileOutputStream("saves/ladder.sav");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             oos.writeObject(l);

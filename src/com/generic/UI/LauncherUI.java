@@ -74,7 +74,7 @@ public class LauncherUI extends JPanel {
             }
         });
 
-        ImageIcon pengoLogo = new ImageIcon("src/ressources/Pengo-Logo.png");
+        ImageIcon pengoLogo = new ImageIcon("ressources/Pengo-Logo.png");
         Pengo = new ImagePanel(pengoLogo.getImage());
 
         Pengo.setBounds(0, 0, 580, 170);

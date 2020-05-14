@@ -113,7 +113,7 @@ public class Launcher extends JFrame
     public void loadProfiles()
     {
         try{
-            FileInputStream fis = new FileInputStream("src/saves/PlayerProfiles.sav");
+            FileInputStream fis = new FileInputStream("saves/PlayerProfiles.sav");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object tmp = ois.readObject();
 
@@ -142,7 +142,7 @@ public class Launcher extends JFrame
     public void saveProfiles()
     {
         try{
-            FileOutputStream fos = new FileOutputStream("src/saves/PlayerProfiles.sav");
+            FileOutputStream fos = new FileOutputStream("saves/PlayerProfiles.sav");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             ArrayList<String> pseudos = new ArrayList<String>();

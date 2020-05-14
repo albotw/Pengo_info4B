@@ -22,11 +22,11 @@ public class GameOverlay extends JPanel {
     public GameOverlay() {
         super();
         this.setPreferredSize(new Dimension(750, 50));
-        ImageIcon ii = new ImageIcon("src/ressources/GameOverlayWindow.png");
+        ImageIcon ii = new ImageIcon("ressources/GameOverlayWindow.png");
         this.background = ii.getImage();
 
         try{
-            police = Font.createFont(Font.TRUETYPE_FONT, new File("src/ressources/police.ttf"));
+            police = Font.createFont(Font.TRUETYPE_FONT, new File("ressources/police.ttf"));
 
             System.out.println(police.toString());
         }catch(Exception e){e.printStackTrace();}

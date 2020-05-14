@@ -113,34 +113,34 @@ public class SpriteManager {
 
                             if(m.getAt(j, i).getType().equals("IceBlock"))
                             {
-                                spr.loadImage("src/ressources/"+ dir + "IceBlock.png");
+                                spr.loadImage("ressources/"+ dir + "IceBlock.png");
                             }
                             else if (m.getAt(j, i).getType().equals("Penguin"))
                             {
                                 if (LOW_RES_MODE)
                                 {
-                                    spr.loadImage("src/ressources/"+dir+"Penguin.png");
+                                    spr.loadImage("ressources/"+dir+"Penguin.png");
                                 }
                                 else
                                 {
                                     Orientation o = (Orientation)m.getAt(j, i);
-                                    spr.loadImage("src/ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
+                                    spr.loadImage("ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
                                 }
                             }
                             else if (m.getAt(j, i).getType().equals("DiamondBlock"))
                             {
-                                spr.loadImage("src/ressources/" + dir + "DiamondBlock.png");
+                                spr.loadImage("ressources/" + dir + "DiamondBlock.png");
                             }
                             else if (m.getAt(j, i).getType().equals("Animal"))
                             {
                                 if (LOW_RES_MODE)
                                 {
-                                    spr.loadImage("src/ressources/" + dir + "Animal.png");
+                                    spr.loadImage("ressources/" + dir + "Animal.png");
                                 }
                                 else
                                 {
                                     Orientation o = (Orientation)m.getAt(j, i);
-                                    spr.loadImage("src/ressources/" + dir+ "Darknut_"+o.getOrientation()+".png");
+                                    spr.loadImage("ressources/" + dir+ "Darknut_"+o.getOrientation()+".png");
                                 }
                             }
                             instance.addSprite(spr, "foreground");
@@ -163,23 +163,23 @@ public class SpriteManager {
 
                         if (i == -1)
                         {
-                            if (j == -1) spr.loadImage("src/ressources/" +dir + "WA_HG.png");
-                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/"+ dir +"WA_HD.png");
-                            else spr.loadImage("src/ressources/"+dir+"WallH.png");
+                            if (j == -1) spr.loadImage("ressources/" +dir + "WA_HG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("ressources/"+ dir +"WA_HD.png");
+                            else spr.loadImage("ressources/"+dir+"WallH.png");
                         }
                         else if (i == GRID_HEIGHT)
                         {
-                            if(j == -1) spr.loadImage("src/ressources/"+dir+"WA_BG.png");
-                            else if (j == GRID_WIDTH) spr.loadImage("src/ressources/"+dir+"WA_BD.png");
-                            else spr.loadImage("src/ressources/"+dir+"WallB.png");
+                            if(j == -1) spr.loadImage("ressources/"+dir+"WA_BG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("ressources/"+dir+"WA_BD.png");
+                            else spr.loadImage("ressources/"+dir+"WallB.png");
                         }
                         else if (j == - 1)
                         {
-                            spr.loadImage("src/ressources/"+dir+"WallG.png");
+                            spr.loadImage("ressources/"+dir+"WallG.png");
                         }
                         else if (j == GRID_WIDTH)
                         {
-                            spr.loadImage("src/ressources/"+dir+"WallD.png");
+                            spr.loadImage("ressources/"+dir+"WallD.png");
                         }
                         instance.addSprite(spr, "background");
                     }
