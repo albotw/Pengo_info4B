@@ -33,7 +33,7 @@ public class AI extends Thread {
     private Strategy strat;
 
     public AI() {
-        strat = new AStarInvertStrategy(this);
+        strat = new AStarStrategy();
     }
 
     public void run() {
@@ -44,7 +44,6 @@ public class AI extends Thread {
                 checkStun();
                 checkRespawn();
                 if (!respawnActive && !flush) {
-                    strat.setTargetFromMap(Launcher.instance.getMainProfile().getControlledObject());
                     strat.process();
                 }
             } else {
@@ -55,7 +54,7 @@ public class AI extends Thread {
                 sleep(tickRate);
             } catch (Exception e) {
                 e.printStackTrace();
-                this.stop();
+                this.interrupt();
             }
         }
 

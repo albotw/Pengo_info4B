@@ -4,18 +4,27 @@ import com.generic.core.GameMap;
 import com.generic.core.MapObject;
 import com.generic.gameplay.AbstractGame;
 
+import java.util.ArrayList;
+
+import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
 public class DefendDiamondBlockStrategy implements Strategy{
     public char direction;
-    public AI bot;
     private MapObject controlledObject;
     private MapObject target;
     private GameMap m = AbstractGame.instance.getMap();
+    private ArrayList<MapObject> targetList;
 
-    public DefendDiamondBlockStrategy(AI bot)
+    public DefendDiamondBlockStrategy()
     {
-        this.bot = bot;
+        targetList = new ArrayList<MapObject>();
+    }
+
+
+    public void updateControlledObject(MapObject o)
+    {
+        this.controlledObject = o;
     }
 
     public void process()
@@ -27,6 +36,7 @@ public class DefendDiamondBlockStrategy implements Strategy{
             if (m.getAt(target.getX(), target.getY()) == target)
             {
                 //si le bloc existe on se dirige vers lui
+                System.out.println("moving towards target");
                 setDirection();
                 switch (direction)
                 {
@@ -38,14 +48,80 @@ public class DefendDiamondBlockStrategy implements Strategy{
             }
             else
             {
+                System.out.println("recherche cible");
                 acquireTarget();
             }
         }
+        else
+        {
+            System.out.println("recherche cible");
+            acquireTarget();
+        }
+    }
+
+    public void acquireTargetList()
+    {
+        targetList.clear();
+        GameMap m = AbstractGame.instance.getMap();
+
+        for (int i = 0; i < m.getHeight(); i++)
+        {
+            for (int j = 0; j < m.getWidth(); i++)
+            {
+                MapObject tmp = m.getAt(j, i);
+                if (controlledObject.getType().equals("Penguin"))
+                {
+                    if (tmp.getType().equals("Animal"))
+                    {
+                        targetList.add(tmp);
+                    }
+                }
+                else if (controlledObject.getType().equals("Animal"))
+                {
+                    if (tmp.getType().equals("Penguin"))
+                    {
+                        targetList.add(tmp);
+                    }
+                }
+            }
+        }
+
+        int rand = RandomizedInt(0, targetList.size() - 1);
+        target = targetList.get(rand);
     }
 
     public void acquireTarget()
     {
+        int x = target.getX();
+        int y = target.getY();
 
+        int rayon = RandomizedInt(1, 3);
+
+        int searchX = x - rayon;
+        int searchY = y - rayon;
+        boolean loop = true;
+        do{
+            MapObject tmp = AbstractGame.instance.getMap().getAt(searchX, searchY);
+            if (tmp.getType().equals("IceBlock"))
+            {
+                loop = false;
+                target = tmp;
+            }
+            else
+            {
+                if (searchX < (x + rayon)) searchX++;
+                else
+                {
+                    searchX = x - rayon;
+                    searchY++;
+                }
+            }
+        }while(searchY < (y + rayon) && loop);
+
+        if (loop == false)
+        {
+            acquireTargetList();
+        }
     }
 
     private void setDirection()
@@ -73,6 +149,19 @@ public class DefendDiamondBlockStrategy implements Strategy{
         else if (d_right < d_up && d_right < d_down && d_right < d_left)
         {
             direction = 'D';
+        }
+
+        if (m.getAt(x - 1, y).getType().equals("DiamondBlock") || m.getAt(x + 1, y).getType().equals("DiamondBlock"))
+        {
+            int rand = RandomizedInt(0, 1);
+            if (rand == 0) direction = 'H';
+            else direction = 'B';
+        }
+        else if (m.getAt(x, y - 1).getType().equals("DiamondBlock") || m.getAt(x, y + 1).getType().equals("DiamondBlock"))
+        {
+            int rand = RandomizedInt(0, 1);
+            if (rand == 0) direction = 'G';
+            else direction = 'D';
         }
     }
 }

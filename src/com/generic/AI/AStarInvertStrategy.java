@@ -4,17 +4,51 @@ import com.generic.core.GameMap;
 import com.generic.core.MapObject;
 import com.generic.gameplay.AbstractGame;
 
+import java.util.ArrayList;
+
+import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
 public class AStarInvertStrategy implements Strategy{
     public char direction;
     private MapObject controlledObject;
-    private AI bot;
     private MapObject target;
+    private ArrayList<MapObject> targetList;
 
-    public AStarInvertStrategy(AI bot)
+    public AStarInvertStrategy()
     {
-        this.bot = bot;
+        targetList = new ArrayList<MapObject>();
+    }
+
+    public void acquireTarget()
+    {
+        targetList.clear();
+        GameMap m = AbstractGame.instance.getMap();
+
+        for (int i = 0; i < m.getHeight(); i++)
+        {
+            for (int j = 0; j < m.getWidth(); i++)
+            {
+                MapObject tmp = m.getAt(j, i);
+                if (controlledObject.getType().equals("Penguin"))
+                {
+                    if (tmp.getType().equals("Animal"))
+                    {
+                        targetList.add(tmp);
+                    }
+                }
+                else if (controlledObject.getType().equals("Animal"))
+                {
+                    if (tmp.getType().equals("Penguin"))
+                    {
+                        targetList.add(tmp);
+                    }
+                }
+            }
+        }
+
+        int rand = RandomizedInt(0, targetList.size() - 1);
+        target = targetList.get(rand);
     }
 
     public void process()
@@ -88,15 +122,5 @@ public class AStarInvertStrategy implements Strategy{
     public void updateControlledObject(MapObject co)
     {
         this.controlledObject = co;
-    }
-
-    public void setTargetFromMap(MapObject o)
-    {
-        this.target = o;
-    }
-
-    public void acquireTarget()
-    {
-
     }
 }

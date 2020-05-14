@@ -11,13 +11,10 @@ import static com.generic.utils.Equations.RandomizedInt;
 public class RandStrategy implements Strategy{
 
     public char direction;
-    public AI bot;
     private MapObject controlledObject;
 
-    public RandStrategy(AI bot)
+    public RandStrategy()
     {
-        this.bot = bot;
-
         int rand  = RandomizedInt(0, 3);
         switch (rand)
         {
@@ -125,15 +122,5 @@ public class RandStrategy implements Strategy{
     public void updateControlledObject(MapObject co)
     {
         this.controlledObject = co;
-    }
-
-    public void setTargetFromMap(MapObject o)
-    {
-
-    }
-
-    public void acquireTarget()
-    {
-
     }
 }
