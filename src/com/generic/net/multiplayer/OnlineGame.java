@@ -61,6 +61,7 @@ public class OnlineGame extends AbstractGame{
         Iterator it1 = set1.iterator();
         while (it1.hasNext()) {
             OnlinePlayer owner = (OnlinePlayer) (it1.next());
+            owner.sendBaseData();
 
             boolean loop = true;
             do {
@@ -93,6 +94,8 @@ public class OnlineGame extends AbstractGame{
             Iterator it2 = set2.iterator();
             while (it2.hasNext()) {
                 OnlinePlayer owner = (OnlinePlayer) (it2.next());
+
+                owner.sendBaseData();
 
                 boolean loop = true;
                 do {

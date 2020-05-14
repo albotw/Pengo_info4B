@@ -156,6 +156,8 @@ public class Serveur extends Thread {
         }
         else if (CONFIG_GAME.PvE)
         {
+            equipe1.putAll(equipe2);
+            equipe2.clear();
             if (!equipe1.isEmpty())
             {
                 sendCommandToAll("GAME START", null);
