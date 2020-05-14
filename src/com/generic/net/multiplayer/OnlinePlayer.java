@@ -153,6 +153,13 @@ public class OnlinePlayer extends AbstractPlayer {
         }
     }
 
+    public void sendBaseData()
+    {
+        sendCommand("UPDATE PLAYER DATA", new String[]{"PSEUDO", this.pseudo});
+        sendCommand("UPDATE PLAYER DATA", new String[]{"VIES", ""+currentLives});
+        sendCommand("UPDATE PLAYER DATA", new String[]{"POINTS", ""+points});
+    }
+
     public int getEquipe(){
         return this.equipe;
     }
