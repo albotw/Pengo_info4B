@@ -36,15 +36,15 @@ public abstract class AbstractPlayer implements Runnable{
                     points = points + 5000;
                     addLiveDelta = addLiveDelta  +5000;
                 }
-                if(time > 20 && time <= 29){
+                else if(time > 20 && time <= 29){
                     points = points + 2000;
                     addLiveDelta = addLiveDelta  +2000;
                 }
-                if(time > 29 && time <= 39){
+                else if(time > 29 && time <= 39){
                     points = points + 1000;
                     addLiveDelta = addLiveDelta  +1000;
                 }
-                if(time > 39 && time <= 60){
+                else if(time > 39 && time <= 60){
                     points = points + 500;
                     addLiveDelta = addLiveDelta  +5000;
                 }
@@ -52,12 +52,14 @@ public abstract class AbstractPlayer implements Runnable{
                     points = points + 150;
 
                 break;
+
+            case "Reset":
+                points = 0;
         }
         if (addLiveDelta >= 4000)
         {
             currentLives++;
         }
-        System.out.println(pseudo + " | Points = " + points);
     }
 
     public int getPoints() {

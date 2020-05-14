@@ -46,7 +46,6 @@ public class ScoreServer extends Thread{
             l = (Leaderboard)(tmp);
             if (l != null) {
                 System.out.println("--- Loaded savefile ---");
-                l.print();
             }
             else
             {

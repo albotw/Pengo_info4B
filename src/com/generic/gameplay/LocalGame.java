@@ -10,6 +10,7 @@ import com.generic.AI.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static com.generic.gameplay.CONFIG.*;
 import static com.generic.gameplay.CONFIG_GAME.*;
@@ -107,7 +108,6 @@ public class LocalGame extends AbstractGame {
     }
 
     public void start() {
-        System.out.println("--- Game started ---");
         time.start();
         initDiamondBlocks();
         initPlayers();
@@ -123,9 +123,9 @@ public class LocalGame extends AbstractGame {
             localPlayer.setPoints("GameEnd", time.getTime());
         }
         stop();
-        GameEndDialog GED = new GameEndDialog(w, false, !AIwin);
+        GameEndDialog GED = new GameEndDialog(w, false, !AIwin, time.getTime(), localPlayer.getPoints());
         try {
-            sleep(2000);
+            sleep(5000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -175,18 +175,12 @@ public class LocalGame extends AbstractGame {
                 respawnAnimal(owner);
             }
         } else if (PLAYER_IS_ANIMAL) {
-            System.out.println("Animal tué");
             localPlayer.setControlledObject(null);
             localPlayer.removeLive();
         }
     }
 
     public void stunTriggered(char dirMur) {
-        /**
-         * TODO: Optimisation
-         */
-        System.out.println("STUN!");
-
         switch (dirMur) {
             case 'G':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
@@ -229,7 +223,6 @@ public class LocalGame extends AbstractGame {
 
     public void penguinKilled(Penguin p, MapObject Killer) {
         if (PLAYER_IS_PENGUIN) {
-            System.out.println("Pingouin tué");
             localPlayer.setControlledObject(null);
             localPlayer.removeLive();
         } else if (PLAYER_IS_ANIMAL) {

@@ -27,8 +27,6 @@ public class GameOverlay extends JPanel {
 
         try{
             police = Font.createFont(Font.TRUETYPE_FONT, new File("ressources/police.ttf"));
-
-            System.out.println(police.toString());
         }catch(Exception e){e.printStackTrace();}
 
         setBackground(Color.BLACK);

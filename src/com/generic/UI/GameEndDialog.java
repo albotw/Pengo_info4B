@@ -3,36 +3,27 @@ package com.generic.UI;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.io.File;
 
 public class GameEndDialog extends JDialog {
 
-    private ImagePanel img;
-    public GameEndDialog(Frame parent, boolean modal, boolean victoire){
-            super(parent, modal);
+    public GameEndDialog(Frame parent, boolean modal, boolean victoire, int temps, int score){
+        super(parent, modal);
 
-            if (victoire) {
-                ImageIcon victory = new ImageIcon("ressources/victoire.png");
-                img = new ImagePanel(victory.getImage());
-                System.out.println(victory.toString());
-            }
-            else{
-                ImageIcon defeat = new ImageIcon("ressources/defeat.png");
-                img = new ImagePanel(defeat.getImage());
-            }
-            img.setBounds(0, 0, 600, 600);
-            add(img);
-            setLayout(new BorderLayout());
-            setSize(410,298);
-            setLocationRelativeTo(null);
-            setVisible(true);
-            setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-            repaint();
+        GEDPanel panel = new GEDPanel(victoire, temps, score);
+        panel.setBounds(0, 0, 500, 250);
+        add(panel);
+        setBackground(Color.BLACK);
+        setSize(515,290);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Fin de la partie");
+        repaint();
+    }
 
-        }
-        public void Fermer () {
-            this.setVisible(false);
-            this.dispose();
-        }
-
-
+    public void Fermer () {
+        this.setVisible(false);
+        this.dispose();
+    }
 }

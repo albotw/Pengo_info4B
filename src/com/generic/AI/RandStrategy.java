@@ -27,11 +27,9 @@ public class RandStrategy implements Strategy{
 
     public void process()
     {
-        System.out.println("process");
         int rand = RandomizedInt(0, 10);
         if (testDirections() && rand <= 8)
         {
-            System.out.println("direction valide");
             switch (direction)
             {
                 case 'H': controlledObject.goUp(); break;
@@ -42,7 +40,6 @@ public class RandStrategy implements Strategy{
         }
         else
         {
-            System.out.println("direction invalide");
             refreshDirection();
         }
     }

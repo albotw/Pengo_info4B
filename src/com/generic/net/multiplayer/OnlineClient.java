@@ -125,7 +125,7 @@ public class OnlineClient extends Thread {
         boolean victoire = false;
         if (params[0].equals("VICTORY"))
             victoire = true;
-        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, victoire);
+        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, victoire, 20, 5000);
         try {
             sleep(2000);
         } catch (Exception e) {

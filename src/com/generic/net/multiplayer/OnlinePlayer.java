@@ -63,7 +63,6 @@ public class OnlinePlayer extends AbstractPlayer {
             boolean loop = true;
             while (loop) {
                 Command cmd = (Command) (commandIn.readObject());
-                System.out.println("SERVER | " + cmd.toString());
 
                 //code a optimiser ?
                 if (cmd.getVal().equals("DISCONNECT")) {
@@ -75,36 +74,62 @@ public class OnlinePlayer extends AbstractPlayer {
 
                     srv.removePlayer(this.commandOut);
                     loop = false;
-                } else if (cmd.getVal().equals("SET PSEUDO")) {
+                }
+                else if (cmd.getVal().equals("SET PSEUDO"))
+                {
                     this.pseudo = cmd.getParam(0);
-                } else if (cmd.getVal().equals("JOIN TEAM 1")) {
+                }
+                else if (cmd.getVal().equals("JOIN TEAM 1"))
+                {
                     if (equipe == 2) {
                         srv.removeFromTeam2(this);
                     }
                     srv.putOnTeam1(this, pseudo);
                     this.equipe = 1;
-                } else if (cmd.getVal().equals("JOIN TEAM 2")) {
+                }
+                else if (cmd.getVal().equals("JOIN TEAM 2"))
+                {
                     if (equipe == 1) {
                         srv.removeFromTeam1(this);
                     }
                     srv.putOnTeam2(this, pseudo);
                     this.equipe = 2;
-                } else if (cmd.getVal().equals("SET HOST")) {
+                }
+                else if (cmd.getVal().equals("SET HOST"))
+                {
                     srv.setHost(this);
-                } else if (cmd.getVal().equals("START GAME")) {
+                }
+                else if (cmd.getVal().equals("START GAME"))
+                {
                     srv.startGame();
-                } else if (cmd.getVal().equals("MOVE UP")) {
+                }
+                else if (cmd.getVal().equals("MOVE UP"))
+                {
                     if (controlledObject != null)
+                    {
                         controlledObject.goUp();
-                } else if (cmd.getVal().equals("MOVE DOWN")) {
+                    }
+                }
+                else if (cmd.getVal().equals("MOVE DOWN"))
+                {
                     if (controlledObject != null)
+                    {
                         controlledObject.goDown();
-                } else if (cmd.getVal().equals("MOVE LEFT")) {
+                    }
+                }
+                else if (cmd.getVal().equals("MOVE LEFT"))
+                {
                     if (controlledObject != null)
+                    {
                         controlledObject.goLeft();
-                } else if (cmd.getVal().equals("MOVE RIGHT")) {
+                    }
+                }
+                else if (cmd.getVal().equals("MOVE RIGHT"))
+                {
                     if (controlledObject != null)
+                    {
                         controlledObject.goRight();
+                    }
                 }
                 else if (cmd.getVal().equals("ACTION"))
                 {

@@ -5,3 +5,5 @@ Problèmes incorrigibles constatés:
     - problèmes a l'arrêt des threads (ça va mieux)
     - apres un nombre très important de parties d'affilée, une ConcurrentModificationException peut apparaitre
         -> lien probable avec les fuites de mémoire.
+    - corruption de la carte constatée avec beaucoup d'IA, se produit forcément en 5 parties
+        -> dégats constatés: duplication d'objets (surtout joueur et IceBlock) repositionnement incorrect.

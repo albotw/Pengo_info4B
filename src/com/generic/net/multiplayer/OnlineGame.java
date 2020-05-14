@@ -76,7 +76,6 @@ public class OnlineGame extends AbstractGame{
                         owner.setControlledObject(p);
 
                         equipe1.put(p, owner);
-                        System.out.println("### added player to team 1 ###");
                         equipe1Restants++;
                     } else if (TEAM_1_IS_ANIMAL) {
                         Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
@@ -84,7 +83,6 @@ public class OnlineGame extends AbstractGame{
 
                         equipe1.put(a, owner);
                         equipe1Restants++;
-                        System.out.println("### added player to team 1 ###");
                     }
                 }
             } while (loop);
@@ -279,7 +277,6 @@ public class OnlineGame extends AbstractGame{
      */
     @Override
     public void gameEnd() {
-        System.out.println("### APPEL VICTOIRE ##");
         time.stopTimer();
         stop();
         if (equipeGagnante == 1)
@@ -403,7 +400,6 @@ public class OnlineGame extends AbstractGame{
         /**
          * TODO: Optimisation
          */
-        System.out.println("STUN!");
 
         switch (dirMur) {
             case 'G':

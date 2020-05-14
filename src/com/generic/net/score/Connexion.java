@@ -32,8 +32,6 @@ public class Connexion extends Thread {
             while (loop) {
                 Command cmd = (Command) (commandIn.readObject());
 
-                System.out.println(cmd.toString());
-
                 if (cmd.getVal().equals("GET SCORE")) {
                     for (int i = 0; i < l.getLadder().size(); i++) {
                         String score = "" + l.getLadder().get(i).getScore();

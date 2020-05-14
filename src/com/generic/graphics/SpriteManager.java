@@ -12,8 +12,8 @@ import static com.generic.gameplay.CONFIG.*;
 public class SpriteManager {
     public static SpriteManager instance;
 
-    private volatile ArrayList<Sprite> foreground;
-    private volatile ArrayList<Sprite> background;
+    private ArrayList<Sprite> foreground;
+    private ArrayList<Sprite> background;
 
     private SpriteManager()
     {

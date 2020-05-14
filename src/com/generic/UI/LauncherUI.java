@@ -24,7 +24,6 @@ public class LauncherUI extends JPanel {
         setLayout(null);
 
         manager      = Launcher.instance;
-        System.out.println(manager.toString());
         SoloMode     = new JButton("Mode Solo");
         SoloSettings = new JButton("Réglages (Solo)");
         MultiMode    = new JButton("Mode Réseau");

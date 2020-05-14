@@ -44,7 +44,6 @@ public abstract class AbstractGame {
     }
 
     public void checkDiamondBlocks(DiamondBlock db) {
-        System.out.println("### check DiamondBlocks ###");
         int x = db.getX();
         int y = db.getY();
 

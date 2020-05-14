@@ -33,21 +33,28 @@ public class NetworkManager implements Runnable {
                 Command cmd = (Command) (commandIn.readObject());
                 //System.out.println("CLIENT | " + cmd.toString());
 
-                if (cmd.getVal().equals("ADD TO TEAM 1")) {
+                if (cmd.getVal().equals("ADD TO TEAM 1"))
+                {
                     manager.addToTeam1(cmd.getParam(0));
-                } else if (cmd.getVal().equals("ADD TO TEAM 2")) {
+                }
+                else if (cmd.getVal().equals("ADD TO TEAM 2"))
+                {
                     manager.addToTeam2(cmd.getParam(0));
-                } else if (cmd.getVal().equals("GAME START")) {
+                }
+                else if (cmd.getVal().equals("GAME START"))
+                {
                     manager.gameStart();
-                } else if (cmd.getVal().equals("TEAM 1 FULL")) {
-                    manager.team1Full();
-                } else if (cmd.getVal().equals("TEAM 2 FULL")) {
-                    manager.team2Full();
-                } else if (cmd.getVal().equals("DISCONNECT")) {
+                }
+                else if (cmd.getVal().equals("DISCONNECT"))
+                {
                     endConnexion = true;
-                } else if (cmd.getVal().equals("REMOVE TEAM 1")) {
+                }
+                else if (cmd.getVal().equals("REMOVE TEAM 1"))
+                {
                     manager.removeTeam1(cmd.getParam(0));
-                } else if (cmd.getVal().equals("REMOVE TEAM 2")) {
+                }
+                else if (cmd.getVal().equals("REMOVE TEAM 2"))
+                {
                     manager.removeTeam2(cmd.getParam(0));
                 }
                 else if(cmd.getVal().equals("GAME END")){

@@ -29,7 +29,7 @@ public class LocalPlayer extends AbstractPlayer
         ih = new InputHandler(((LocalGame)(LocalGame.instance)).getWindow());
         this.flush = false;
 
-        while(!flush && !Thread.currentThread().isInterrupted())
+        while(!flush)
         {
             if (controlledObject != null)
             {
@@ -47,10 +47,9 @@ public class LocalPlayer extends AbstractPlayer
             }
             try
             {
-                sleep(16);
+                sleep(50);
             }catch(Exception e) {
                 e.printStackTrace();
-                Thread.currentThread().interrupt();
             }
         }
 
