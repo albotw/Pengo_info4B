@@ -119,10 +119,18 @@ public class AI extends Thread {
 
         int rand = RandomizedInt(1,4);
         switch (rand){
-            case 1 : strat = new AStarInvertStrategy(); break;
+            case 1 : strat = new AStarInvertStrategy();
+                System.out.println("InvASTAR");break;
+
             case 2 : strat = new AStarStrategy();
+                System.out.println("ASTAR");break;
+
             case 3 : strat = new DefendDiamondBlockStrategy();
+                System.out.println("DDB");break;
+
             case 4 : strat = new RandStrategy();
+                System.out.println("RAND");break;
+
         }
 
         System.out.println("reset bannedDir");
