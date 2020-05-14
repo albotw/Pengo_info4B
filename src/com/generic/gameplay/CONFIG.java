@@ -26,7 +26,7 @@ public class CONFIG {
     public final static int WH_LOW_RES = 520;
     public final static int WW_LOW_RES = 400;
 
-    public final static int AI_TICK_RATE       = 400;
+    public final static int AI_TICK_RATE       = 450;
     public final static int STUN_TIME          = 2000;
 
     public final static int GRID_WIDTH         = 13;

@@ -66,6 +66,7 @@ public class OnlineClient extends Thread {
 
     public void updateUI(String[] params)
     {
+        System.out.println("UI UPDATE RECEIVED ###");
         GameOverlay go = rt.getGameOverlay();
         if (params[0].equals("POINTS"))
         {
@@ -96,14 +97,26 @@ public class OnlineClient extends Thread {
         return this.m;
     }
 
-    public void overrideMap(int x, int y, String type) {
-        if (type.equals(""))
+    public void overrideMap(String[] params) {
+        System.out.println("OVERRIDE MAP ### | " + params[2]);
+        if (params[2].equals(""))
         {
-            m.release(x, y);
+            m.release(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
         }
         else
         {
-            MapObjectFactory.createPlaceholder(x, y, this.m, type);
+            int x= Integer.parseInt(params[0]);
+            int y= Integer.parseInt(params[1]);
+            if (params.length == 4) //l'objet possède une orientation
+            {
+                MapObject tmp = MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3]);
+                m.place(tmp, x, y);
+            }
+            else
+            {
+                MapObject tmp = MapObjectFactory.createPlaceholder(x, y, m, params[2], "");
+                m.place(tmp, x, y);
+            }
         }
     }
 

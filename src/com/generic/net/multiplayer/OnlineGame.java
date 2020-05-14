@@ -442,9 +442,9 @@ public class OnlineGame extends AbstractGame{
 
     }
 
-    public void overrideMap(int x, int y, String type) {
+    public void overrideMap(int x, int y, String type, String direction) {
         if (srv != null) {
-            srv.sendCommandToAll("WRITE MAP", new String[] { "" + x, "" + y, type });
+            srv.sendCommandToAll("WRITE MAP", new String[] { "" + x, "" + y, type, direction});
         }
     }
 

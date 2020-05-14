@@ -57,7 +57,7 @@ public class NetworkManager implements Runnable {
                 }
                 else if (cmd.getVal().equals("WRITE MAP"))
                 {
-                    manager.getClient().overrideMap(Integer.parseInt(cmd.getParam(0)), Integer.parseInt(cmd.getParam(1)), cmd.getParam(2));
+                    manager.getClient().overrideMap(cmd.getParams());
                 }
                 else if (cmd.getVal().equals("UPDATE PLAYER DATA"))
                 {

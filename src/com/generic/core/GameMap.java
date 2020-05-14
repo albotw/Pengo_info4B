@@ -43,7 +43,14 @@ public class GameMap {
 
         if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
-            srv.overrideMap(x, y, o.getType());
+            if (o.getType().equals("Penguin") || o.getType().equals("Animal"))
+            {
+                srv.overrideMap(x, y, o.getType(), ((Orientation)(o)).getOrientation());
+            }
+            else
+            {
+                srv.overrideMap(x, y, o.getType(), "");
+            }
         }
     }
 
@@ -54,7 +61,7 @@ public class GameMap {
 
         if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
-            srv.overrideMap(x, y, "");
+            srv.overrideMap(x, y, "", "");
         }
     }
 

@@ -93,8 +93,6 @@ public class OnlinePlayer extends AbstractPlayer {
                     srv.setHost(this);
                 } else if (cmd.getVal().equals("START GAME")) {
                     srv.startGame();
-                    sendCommand("UPDATE PLAYER DATA", new String[]{"PSEUDO", pseudo});
-                    sendCommand("UPDATE PLAYER DATA", new String[]{"VIES", ""+currentLives});
                 } else if (cmd.getVal().equals("MOVE UP")) {
                     if (controlledObject != null)
                         controlledObject.goUp();
