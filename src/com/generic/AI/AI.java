@@ -33,7 +33,11 @@ public class AI extends Thread {
     private Strategy strat;
 
     public AI() {
+
         strat = new AStarStrategy();
+        strat = new AStarInvertStrategy();
+        strat = new DefendDiamondBlockStrategy();
+        strat = new RandStrategy();
     }
 
     public void run() {
@@ -112,6 +116,23 @@ public class AI extends Thread {
     }
 
     public void setControlledObject(MapObject controlledObject) {
+
+        int rand = RandomizedInt(1,4);
+        switch (rand){
+            case 1 : strat = new AStarInvertStrategy();
+                System.out.println("InvASTAR");break;
+
+            case 2 : strat = new AStarStrategy();
+                System.out.println("ASTAR");break;
+
+            case 3 : strat = new DefendDiamondBlockStrategy();
+                System.out.println("DDB");break;
+
+            case 4 : strat = new RandStrategy();
+                System.out.println("RAND");break;
+
+        }
+
         System.out.println("reset bannedDir");
         respawnActive = true;
         respawnTimer = 2000;
