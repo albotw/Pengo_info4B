@@ -2,7 +2,7 @@ package com.generic.core;
 
 import com.generic.gameplay.AbstractGame;
 
-public class Animal extends MapEntity {
+public class Animal extends MapEntity implements Variante{
     private boolean isStun;
     private String variante;
 

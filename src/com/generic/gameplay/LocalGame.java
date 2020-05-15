@@ -99,6 +99,7 @@ public class LocalGame extends AbstractGame {
                 } else if (PLAYER_IS_ANIMAL) {
                     Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                     localPlayer.setControlledObject(a);
+                    a.setVariante("DARKNUT");
                 }
 
                 LPThread = new Thread(localPlayer);
@@ -256,6 +257,7 @@ public class LocalGame extends AbstractGame {
                 } else if (PLAYER_IS_ANIMAL) {
                     LocalPlayer pl = (LocalPlayer) (owner);
                     pl.setControlledObject(a);
+                    a.setVariante("DARKNUT");
                 }
             }
         } while (loop);

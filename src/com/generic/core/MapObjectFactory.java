@@ -31,14 +31,14 @@ public class MapObjectFactory {
         return a;
     }
 
-    public static PlaceholderBlock createPlaceholder(int x, int y, GameMap m, String type, String orientation) {
+    public static PlaceholderBlock createPlaceholder(int x, int y, GameMap m, String type, String orientation, String variante) {
 
         if (orientation.length() == 0) {
-            PlaceholderBlock phb = new PlaceholderBlock(x, y, type, '\0');
+            PlaceholderBlock phb = new PlaceholderBlock(x, y, type, '\0', variante);
             linkMap(phb, m);
             return phb;
         } else {
-            PlaceholderBlock phb = new PlaceholderBlock(x, y, type, orientation.charAt(0));
+            PlaceholderBlock phb = new PlaceholderBlock(x, y, type, orientation.charAt(0), variante);
             linkMap(phb, m);
             return phb;
         }

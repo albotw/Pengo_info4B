@@ -3,6 +3,7 @@ package com.generic.graphics;
 import com.generic.core.Animal;
 import com.generic.core.GameMap;
 import com.generic.core.Orientation;
+import com.generic.core.Variante;
 
 import java.util.ArrayList;
 
@@ -108,9 +109,9 @@ public class SpriteManager {
                                 if (LOW_RES_MODE) {
                                     spr.loadImage("ressources/" + dir + "Animal.png");
                                 } else {
-                                    Animal tmp = (Animal) (m.getAt(j, i));
                                     Orientation o = (Orientation) m.getAt(j, i);
-                                    spr.loadImage("ressources/" + dir + "/" + tmp.getVariante() + "/" + o.getOrientation() + ".png");
+                                    Variante v = (Variante)m.getAt(j, i);
+                                    spr.loadImage("ressources/" + dir + "/" + v.getVariante() + "/" + o.getOrientation() + ".png");
                                 }
                             }
                             instance.addSprite(spr, "foreground");

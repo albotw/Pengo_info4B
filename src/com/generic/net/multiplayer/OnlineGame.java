@@ -76,7 +76,7 @@ public class OnlineGame extends AbstractGame {
                     } else if (TEAM_1_IS_ANIMAL) {
                         Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                         owner.setControlledObject(a);
-
+                        a.setVariante("DARKNUT");
                         equipe1.put(a, owner);
                         equipe1Restants++;
                     }
@@ -108,7 +108,7 @@ public class OnlineGame extends AbstractGame {
                         } else if (TEAM_2_IS_ANIMAL) {
                             Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                             owner.setControlledObject(a);
-
+                            a.setVariante("MOLBLIN");
                             equipe2.put(a, owner);
                             equipe2Restants++;
                         }
@@ -197,6 +197,7 @@ public class OnlineGame extends AbstractGame {
                     OnlinePlayer player = (OnlinePlayer) (owner);
                     player.setControlledObject(a);
                     equipe1.put(a, player);
+                    a.setVariante("DARKNUT");
                 } else {
                     if (PvE) //IA = animal
                     {
@@ -208,6 +209,7 @@ public class OnlineGame extends AbstractGame {
                         OnlinePlayer player = (OnlinePlayer) (owner);
                         player.setControlledObject(a);
                         equipe2.put(a, player);
+                        a.setVariante("MOLBLIN");
                     }
                 }
             }
@@ -221,36 +223,35 @@ public class OnlineGame extends AbstractGame {
             sleep(500);
         } catch (Exception e) {
             e.printStackTrace();
-            boolean loop = true;
-            do {
-                int initX = RandomizedInt(0, GRID_WIDTH - 1);
-                int initY = RandomizedInt(0, GRID_HEIGHT - 1);
+        }
+        boolean loop = true;
+        do {
+            int initX = RandomizedInt(0, GRID_WIDTH - 1);
+            int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (map.getAt(initX, initY).getType().equals("void")) {
-                    loop = false;
-                    Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
-                    if (!TEAM_1_IS_ANIMAL) //connexion (team 1) = pingouin
+            if (map.getAt(initX, initY).getType().equals("void")) {
+                loop = false;
+                Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
+                if (!TEAM_1_IS_ANIMAL) //connexion (team 1) = pingouin
+                {
+                    OnlinePlayer player = (OnlinePlayer) owner;
+                    player.setControlledObject(p);
+                    equipe1.put(p, player);
+                } else {
+                    if (PvE)    //IA = animal
+                    {
+                        AI bot = (AI) (owner);
+                        bot.setControlledObject(p);
+                        AIs.put(p, bot);
+                    } else if (PvP)   //connexion(team 2) = pingouin
                     {
                         OnlinePlayer player = (OnlinePlayer) owner;
                         player.setControlledObject(p);
-                        equipe1.put(p, player);
-                    } else {
-                        if (PvE)    //IA = animal
-                        {
-                            AI bot = (AI) (owner);
-                            bot.setControlledObject(p);
-                            AIs.put(p, bot);
-                        } else if (PvP)   //connexion(team 2) = pingouin
-                        {
-                            OnlinePlayer player = (OnlinePlayer) owner;
-                            player.setControlledObject(p);
-                            equipe2.put(p, player);
-                        }
+                        equipe2.put(p, player);
                     }
                 }
-            } while (loop);
-
-        }
+            }
+        } while (loop);
     }
 
     @Override
@@ -337,6 +338,7 @@ public class OnlineGame extends AbstractGame {
                     equipeGagnante = 1;
                     gameEnd();
                 } else {
+                    System.out.println("call respawn");
                     respawnPenguin(owner);
                 }
             }
@@ -404,9 +406,9 @@ public class OnlineGame extends AbstractGame {
 
     }
 
-    public void overrideMap(int x, int y, String type, String direction) {
+    public void overrideMap(int x, int y, String type, String direction, String variante) {
         if (srv != null) {
-            srv.sendCommandToAll("WRITE MAP", new String[]{"" + x, "" + y, type, direction});
+            srv.sendCommandToAll("WRITE MAP", new String[]{"" + x, "" + y, type, direction, variante});
         }
     }
 

@@ -90,18 +90,21 @@ public class OnlineClient extends Thread {
     }
 
     public void overrideMap(String[] params) {
-        if (params[2].equals("")) {
+        if (params[2].equals("")) { //cas de la suppression
             m.release(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
         } else {
             int x = Integer.parseInt(params[0]);
             int y = Integer.parseInt(params[1]);
-            if (params.length == 4) //l'objet possède une orientation
+            if (params.length == 4) //l'objet possède une orientation mais pas de variante (lonk)
             {
-                MapObject tmp = MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3]);
-                m.place(tmp, x, y);
-            } else {
-                MapObject tmp = MapObjectFactory.createPlaceholder(x, y, m, params[2], "");
-                m.place(tmp, x, y);
+                MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3], "");
+            }
+            else if (params.length == 5) { //cas de la variante avec les animaux
+                MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3], params[4]);
+            }
+            else    //cas de tous les autres blocs
+            {
+                MapObjectFactory.createPlaceholder(x, y, m, params[2], "", "");
             }
         }
     }
