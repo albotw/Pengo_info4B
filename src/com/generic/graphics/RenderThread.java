@@ -1,12 +1,12 @@
 /**
  * Nom de la classe: RenderThread
- *
+ * <p>
  * Description: thread responsable de l'affichage et de la gestion de sprites dans un JPanel
- *
+ * <p>
  * Version: 1.0
- *
+ * <p>
  * Date: 08/03/2020
- *
+ * <p>
  * Auteur: Yann
  */
 
@@ -17,7 +17,6 @@ import com.generic.gameplay.CONFIG;
 import com.generic.gameplay.LocalGame;
 import com.generic.net.multiplayer.OnlineClient;
 
-import javax.swing.*;
 import java.awt.*;
 
 import static com.generic.gameplay.CONFIG.LOW_RES_MODE;
@@ -36,12 +35,9 @@ public class RenderThread extends Thread {
     private boolean client;
 
     public RenderThread() {
-        if (LOW_RES_MODE)
-        {
+        if (LOW_RES_MODE) {
             this.w = new Window(CONFIG.WW_LOW_RES, CONFIG.WH_LOW_RES);
-        }
-        else
-        {
+        } else {
             this.w = new Window(CONFIG.WW_HIGH_RES, CONFIG.WH_HIGH_RES);
         }
 
@@ -56,7 +52,7 @@ public class RenderThread extends Thread {
         continueDrawing = true;
     }
 
-    public void setClient(boolean val){
+    public void setClient(boolean val) {
         this.client = val;
     }
 
@@ -66,8 +62,7 @@ public class RenderThread extends Thread {
         while (continueDrawing) {
             if (client) {
                 SpriteManager.transfer(OnlineClient.instance.getMap(), this);
-            }
-            else {
+            } else {
                 SpriteManager.transfer(LocalGame.instance.getMap(), this);
             }
 
@@ -77,8 +72,7 @@ public class RenderThread extends Thread {
             rp.repaint();
             go.repaint();
 
-            if (!client)
-            {
+            if (!client) {
                 go.updateLocal();
             }
             try {
@@ -103,8 +97,7 @@ public class RenderThread extends Thread {
         return this.w;
     }
 
-    public GameOverlay getGameOverlay()
-    {
+    public GameOverlay getGameOverlay() {
         return this.go;
     }
 }

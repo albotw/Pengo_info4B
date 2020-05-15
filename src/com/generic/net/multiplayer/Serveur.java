@@ -1,14 +1,14 @@
 package com.generic.net.multiplayer;
 
+import com.generic.gameplay.CONFIG_GAME;
+import com.generic.net.Command;
+
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import com.generic.gameplay.CONFIG_GAME;
-import com.generic.net.Command;
 
 public class Serveur extends Thread {
     static final int port = 8080;
@@ -73,22 +73,22 @@ public class Serveur extends Thread {
 
     public void putOnTeam1(OnlinePlayer c, String s) {
         equipe1.put(c, s);
-        sendCommandToAll("ADD TO TEAM 1", new String[] { s });
+        sendCommandToAll("ADD TO TEAM 1", new String[]{s});
     }
 
     public void putOnTeam2(OnlinePlayer c, String s) {
         equipe2.put(c, s);
-        sendCommandToAll("ADD TO TEAM 2", new String[] { s });
+        sendCommandToAll("ADD TO TEAM 2", new String[]{s});
     }
 
     public void removeFromTeam1(OnlinePlayer c) {
         equipe1.remove(c);
-        sendCommandToAll("REMOVE TEAM 1", new String[] { c.getPseudo() });
+        sendCommandToAll("REMOVE TEAM 1", new String[]{c.getPseudo()});
     }
 
     public void removeFromTeam2(OnlinePlayer c) {
         equipe2.remove(c);
-        sendCommandToAll("REMOVE TEAM 2", new String[] { c.getPseudo() });
+        sendCommandToAll("REMOVE TEAM 2", new String[]{c.getPseudo()});
     }
 
     public void sendCommandToAll(String val, String[] params) {
@@ -102,31 +102,31 @@ public class Serveur extends Thread {
         }
     }
 
-    public void sendCommandToTeam1(String val, String[] params)
-    {
+    public void sendCommandToTeam1(String val, String[] params) {
         Command cmd = new Command(val, params);
 
         Iterator it = equipe1.keySet().iterator();
-        while(it.hasNext())
-        {
+        while (it.hasNext()) {
             try {
                 OnlinePlayer tmp = (OnlinePlayer) (it.next());
                 tmp.getCommandOut().writeObject(cmd);
-            }catch(Exception e){e.printStackTrace();}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
-    public void sendCommandToTeam2(String val, String[] params)
-    {
+    public void sendCommandToTeam2(String val, String[] params) {
         Command cmd = new Command(val, params);
 
         Iterator it = equipe2.keySet().iterator();
-        while(it.hasNext())
-        {
+        while (it.hasNext()) {
             try {
                 OnlinePlayer tmp = (OnlinePlayer) (it.next());
                 tmp.getCommandOut().writeObject(cmd);
-            }catch(Exception e){e.printStackTrace();}
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -145,20 +145,15 @@ public class Serveur extends Thread {
     }
 
     public void startGame() {
-        if (CONFIG_GAME.PvP)
-        {
-            if (!equipe1.isEmpty() && !equipe2.isEmpty())
-            {
+        if (CONFIG_GAME.PvP) {
+            if (!equipe1.isEmpty() && !equipe2.isEmpty()) {
                 sendCommandToAll("GAME START", null);
                 game = new OnlineGame();
             }
-        }
-        else if (CONFIG_GAME.PvE)
-        {
+        } else if (CONFIG_GAME.PvE) {
             equipe1.putAll(equipe2);
             equipe2.clear();
-            if (!equipe1.isEmpty())
-            {
+            if (!equipe1.isEmpty()) {
                 sendCommandToAll("GAME START", null);
                 game = new OnlineGame();
             }
@@ -169,17 +164,11 @@ public class Serveur extends Thread {
         return equipe1;
     }
 
-    public void setEquipe1(HashMap<OnlinePlayer, String> equipe1) {
-        this.equipe1 = equipe1;
-    }
-
     public HashMap<OnlinePlayer, String> getEquipe2() {
         return equipe2;
     }
 
-    public void setEquipe2(HashMap<OnlinePlayer, String> equipe2) {
-        this.equipe2 = equipe2;
+    public OnlineGame getGame() {
+        return this.game;
     }
-
-    public OnlineGame getGame(){return this.game;}
 }

@@ -16,28 +16,25 @@ public class GEDPanel extends JPanel {
     private Font police;
     private int timeScore;
 
-    public GEDPanel(boolean victoire, int temps, int score)
-    {
+    public GEDPanel(boolean victoire, int temps, int score) {
         super();
 
-        if(temps <= 20){
+        if (temps <= 20) {
             timeScore = 5000;
-        }
-        else if(temps > 20 && temps <= 29){
+        } else if (temps > 20 && temps <= 29) {
             timeScore = 2000;
-        }
-        else if(temps > 29 && temps <= 39){
+        } else if (temps > 29 && temps <= 39) {
             timeScore = 1000;
-        }
-        else if(temps > 39 && temps <= 60){
+        } else if (temps > 39 && temps <= 60) {
             timeScore = 500;
-        }
-        else
+        } else
             timeScore = 150;
 
-        try{
+        try {
             police = Font.createFont(Font.TRUETYPE_FONT, new File("ressources/police.ttf"));
-        }catch(Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         ImageIcon icon = new ImageIcon("ressources/GameEndBg.png");
         bg = icon.getImage();
@@ -47,8 +44,7 @@ public class GEDPanel extends JPanel {
             timeMessage = "Tu as fini en " + temps + " secondes";
             scoreMessage = "" + timeScore + " points supplémentaires !";
 
-        }
-        else{
+        } else {
             message = "Défaite...";
             timeMessage = "Tu as résisté " + temps + " secondes";
             scoreMessage = "";
@@ -60,8 +56,7 @@ public class GEDPanel extends JPanel {
         repaint();
     }
 
-    public void draw(Graphics g)
-    {
+    public void draw(Graphics g) {
         System.out.println("repaint fenêtre");
         g.drawImage(bg, 0, 0, this);
         g.setFont(police.deriveFont(32f));
@@ -74,8 +69,7 @@ public class GEDPanel extends JPanel {
     }
 
     @Override
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         draw(g);
     }

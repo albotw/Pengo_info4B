@@ -1,40 +1,40 @@
 package com.generic.core;
 
-public abstract class MapEntity extends MapObject implements Orientation{
+public abstract class MapEntity extends MapObject implements Orientation {
     private char orientation = 'N';
-    public MapEntity(int x, int y)
-    {
+
+    public MapEntity(int x, int y) {
         super(x, y);
     }
 
     public abstract void action();
 
-    public void goUp()
-    {
+    public void goUp() {
         orientation = 'N';
         super.goUp();
     }
 
-    public void goLeft()
-    {
+    public void goLeft() {
         orientation = 'W';
         super.goLeft();
     }
 
-    public void goRight()
-    {
+    public void goRight() {
         orientation = 'E';
         super.goRight();
     }
 
-    public void goDown()
-    {
+    public void goDown() {
         orientation = 'S';
         super.goDown();
     }
 
 
-    public String  getOrientation() {
+    public String getOrientation() {
         return "" + orientation;
+    }
+
+    public void setOrientation(char direction) {
+        this.orientation = direction;
     }
 }

@@ -1,8 +1,8 @@
 package com.generic.launcher;
 
-import com.generic.utils.ScorePair;
-import com.generic.net.Command;
 import com.generic.gameplay.LocalPlayer;
+import com.generic.net.Command;
+import com.generic.utils.ScorePair;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -26,22 +26,24 @@ public class Leaderboard implements Serializable {
 
     // cas de ScoreServer
     public synchronized void addToLeaderboard(ScorePair sp) {
-        boolean added = false;
-        int i = 0;
-        while (i < ladder.size() && !added) {
-            if (ladder.get(i).getScore() <= sp.getScore()) {
-                ladder.add(i, sp);
-                added = true;
-            } else
-                i++;
-        }
+        if (sp.getScore() > 0) {
+            boolean added = false;
+            int i = 0;
+            while (i < ladder.size() && !added) {
+                if (ladder.get(i).getScore() <= sp.getScore()) {
+                    ladder.add(i, sp);
+                    added = true;
+                } else
+                    i++;
+            }
 
-        // si c'est le pire score, on l'ajoute a la fin
-        if (!added) {
-            ladder.add(sp);
-        }
+            // si c'est le pire score, on l'ajoute a la fin
+            if (!added) {
+                ladder.add(sp);
+            }
 
-        push();
+            push();
+        }
 
         // System.out.println();
         // print();
@@ -90,8 +92,8 @@ public class Leaderboard implements Serializable {
 
             commandOut.writeObject(new Command("DISCONNECT", null));
 
-            commandIn.close();
             commandOut.close();
+            commandIn.close();
             socket.close();
 
         } catch (Exception e) {
@@ -108,13 +110,13 @@ public class Leaderboard implements Serializable {
 
             for (ScorePair tmp : ladder) {
                 if (tmp.isLocal()) {
-                    Command cmd = new Command("SET SCORE", new String[] { "" + tmp.getScore(), tmp.getPseudo() });
+                    Command cmd = new Command("SET SCORE", new String[]{"" + tmp.getScore(), tmp.getPseudo()});
                     commandOut.writeObject(cmd);
                     tmp.setLocal(false);
                 }
             }
 
-            commandOut.writeObject(new Command("SET SCORE", new String[] { "END" }));
+            commandOut.writeObject(new Command("SET SCORE", new String[]{"END"}));
             commandOut.writeObject(new Command("DISCONNECT", null));
             commandOut.close();
             socket.close();

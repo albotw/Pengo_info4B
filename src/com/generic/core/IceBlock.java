@@ -15,11 +15,11 @@ public class IceBlock extends MapBlock {
         AbstractGame.instance.getMap().release(x, y);
 
         try {
-            sleep(100);
+            Thread.currentThread().sleep(100);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void onGlideEnded(){}
+    public void onGlideEnded() {}
 }

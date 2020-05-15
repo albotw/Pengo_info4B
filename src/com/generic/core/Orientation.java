@@ -1,5 +1,7 @@
 package com.generic.core;
 
 public interface Orientation {
-    String  getOrientation();
+    String getOrientation();
+
+    void setOrientation(char direction);
 }

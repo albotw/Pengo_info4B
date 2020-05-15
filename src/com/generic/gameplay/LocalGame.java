@@ -1,18 +1,19 @@
 package com.generic.gameplay;
 
+import com.generic.AI.AI;
 import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
+import com.generic.graphics.RenderThread;
+import com.generic.graphics.SpriteManager;
 import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
-import com.generic.graphics.*;
-import com.generic.AI.*;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.gameplay.CONFIG_GAME.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
@@ -32,7 +33,7 @@ public class LocalGame extends AbstractGame {
 
     private boolean AIwin;
 
-    public LocalGame(){
+    public LocalGame() {
         super();
         map.setLocal(true);
 
@@ -69,8 +70,7 @@ public class LocalGame extends AbstractGame {
                         Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                         ai.setControlledObject(a);
                         AIs.put(a, ai);
-                    }
-                    else if (PLAYER_IS_ANIMAL) {
+                    } else if (PLAYER_IS_ANIMAL) {
                         Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                         ai.setControlledObject(p);
                         AIs.put(p, ai);
@@ -99,6 +99,7 @@ public class LocalGame extends AbstractGame {
                 } else if (PLAYER_IS_ANIMAL) {
                     Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                     localPlayer.setControlledObject(a);
+                    a.setVariante("DARKNUT");
                 }
 
                 LPThread = new Thread(localPlayer);
@@ -115,11 +116,9 @@ public class LocalGame extends AbstractGame {
     }
 
     @Override
-    public void gameEnd()
-    {
+    public void gameEnd() {
         time.stopTimer();
-        if (!AIwin)
-        {
+        if (!AIwin) {
             localPlayer.setPoints("GameEnd", time.getTime());
         }
         stop();
@@ -258,6 +257,7 @@ public class LocalGame extends AbstractGame {
                 } else if (PLAYER_IS_ANIMAL) {
                     LocalPlayer pl = (LocalPlayer) (owner);
                     pl.setControlledObject(a);
+                    a.setVariante("DARKNUT");
                 }
             }
         } while (loop);
@@ -292,25 +292,15 @@ public class LocalGame extends AbstractGame {
         } while (loop);
     }
 
-    public RenderThread getRenderer() {
-        return this.renderer;
-    }
-
-    public SpriteManager getSpriteManager() {
-        return this.sm;
-    }
-
     public Window getWindow() {
         return this.w;
-    }
-
-    public LocalPlayer getLocalPlayer() {
-        return this.localPlayer;
     }
 
     public int getAIlives() {
         return this.AIlives;
     }
 
-    public void setAIwin(boolean val){this.AIwin = val;}
+    public void setAIwin(boolean val) {
+        this.AIwin = val;
+    }
 }

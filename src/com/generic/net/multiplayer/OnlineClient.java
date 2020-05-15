@@ -2,7 +2,9 @@ package com.generic.net.multiplayer;
 
 import com.generic.UI.GameEndDialog;
 import com.generic.UI.GameOverlay;
-import com.generic.core.*;
+import com.generic.core.GameMap;
+import com.generic.core.MapObject;
+import com.generic.core.MapObjectFactory;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
 import com.generic.launcher.Launcher;
@@ -10,7 +12,6 @@ import com.generic.utils.InputHandler;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
-import static com.generic.gameplay.CONFIG_GAME.*;
 
 public class OnlineClient extends Thread {
     private NetworkManager nm;
@@ -20,6 +21,8 @@ public class OnlineClient extends Thread {
     private SpriteManager sm;
 
     public static OnlineClient instance;
+
+    private int points;
 
     private boolean stopClient;
 
@@ -64,31 +67,20 @@ public class OnlineClient extends Thread {
         }
     }
 
-    public void updateUI(String[] params)
-    {
-        System.out.println("UI UPDATE RECEIVED ###");
+    public void updateUI(String[] params) {
         GameOverlay go = rt.getGameOverlay();
-        if (params[0].equals("POINTS"))
-        {
-            go.setScore(Integer.parseInt(params[1]));
-        }
-        else if (params[0].equals("VIES"))
-        {
+        if (params[0].equals("POINTS")) {
+            points = Integer.parseInt(params[1]);
+            go.setScore(points);
+        } else if (params[0].equals("VIES")) {
             go.setVies(Integer.parseInt(params[1]));
-        }
-        else if (params[0].equals("HIDE"))
-        {
-            if (params[1].equals("ENEMI"))
-            {
+        } else if (params[0].equals("HIDE")) {
+            if (params[1].equals("ENEMI")) {
                 go.setShowRemainingEnemies(false);
             }
-        }
-        else if (params[0].equals("ENEMI"))
-        {
+        } else if (params[0].equals("ENEMI")) {
             go.setRemainigEnemies(Integer.parseInt(params[1]));
-        }
-        else if (params[0].equals("PSEUDO"))
-        {
+        } else if (params[0].equals("PSEUDO")) {
             go.setPseudo(params[1]);
         }
     }
@@ -98,24 +90,21 @@ public class OnlineClient extends Thread {
     }
 
     public void overrideMap(String[] params) {
-        System.out.println("OVERRIDE MAP ### | " + params[2]);
-        if (params[2].equals(""))
-        {
+        if (params[2].equals("")) { //cas de la suppression
             m.release(Integer.parseInt(params[0]), Integer.parseInt(params[1]));
-        }
-        else
-        {
-            int x= Integer.parseInt(params[0]);
-            int y= Integer.parseInt(params[1]);
-            if (params.length == 4) //l'objet possède une orientation
+        } else {
+            int x = Integer.parseInt(params[0]);
+            int y = Integer.parseInt(params[1]);
+            if (params.length == 4) //l'objet possède une orientation mais pas de variante (lonk)
             {
-                MapObject tmp = MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3]);
-                m.place(tmp, x, y);
+                MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3], "");
             }
-            else
+            else if (params.length == 5) { //cas de la variante avec les animaux
+                MapObjectFactory.createPlaceholder(x, y, m, params[2], params[3], params[4]);
+            }
+            else    //cas de tous les autres blocs
             {
-                MapObject tmp = MapObjectFactory.createPlaceholder(x, y, m, params[2], "");
-                m.place(tmp, x, y);
+                MapObjectFactory.createPlaceholder(x, y, m, params[2], "", "");
             }
         }
     }
@@ -125,7 +114,9 @@ public class OnlineClient extends Thread {
         boolean victoire = false;
         if (params[0].equals("VICTORY"))
             victoire = true;
-        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, victoire, 20, 5000);
+
+        int temps = Integer.parseInt(params[1]);
+        GameEndDialog GED = new GameEndDialog(rt.getWindow(), false, victoire, temps, points);
         try {
             sleep(2000);
         } catch (Exception e) {
@@ -137,6 +128,5 @@ public class OnlineClient extends Thread {
         ih.flush();
 
         Launcher.instance.onGameEnded();
-
     }
 }

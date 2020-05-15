@@ -1,15 +1,9 @@
 package com.generic.core;
 
+import com.generic.gameplay.AbstractGame;
 import com.generic.net.multiplayer.OnlineGame;
 
-import com.generic.gameplay.AbstractGame;
-
 public class GameMap {
-    // SINGLETON OK
-
-    // faire en sorte de "sémaphoriser" la classe.
-    // Pas besoin car pas d'erreur de modification concurrente détéctée pour le
-    // moment.
     private volatile MapObject tab[][];
     private int width;
     private int height;
@@ -21,17 +15,14 @@ public class GameMap {
         this.height = height;
     }
 
-    public void setLocal(boolean val)
-    {
+    public void setLocal(boolean val) {
         this.local = val;
     }
 
     public MapObject getAt(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height || tab == null || tab[x][y] == null) {
             return new Void(x, y);
-        }
-        else
-        {
+        } else {
             return tab[x][y];
         }
     }
@@ -43,13 +34,15 @@ public class GameMap {
 
         if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
-            if (o.getType().equals("Penguin") || o.getType().equals("Animal"))
-            {
-                srv.overrideMap(x, y, o.getType(), ((Orientation)(o)).getOrientation());
+            if (o.getType().equals("Penguin")) {
+                srv.overrideMap(x, y, o.getType(), ((Orientation) (o)).getOrientation(), "");
             }
-            else
+            else if (o.getType().equals("Animal"))
             {
-                srv.overrideMap(x, y, o.getType(), "");
+                srv.overrideMap(x, y, o.getType(), ((Orientation) (o)).getOrientation(), ((Animal)(o)).getVariante());
+            }
+            else {
+                srv.overrideMap(x, y, o.getType(), "", "");
             }
         }
     }
@@ -61,7 +54,7 @@ public class GameMap {
 
         if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
-            srv.overrideMap(x, y, "", "");
+            srv.overrideMap(x, y, "", "", "");
         }
     }
 

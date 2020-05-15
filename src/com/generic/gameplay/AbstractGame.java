@@ -1,11 +1,11 @@
 package com.generic.gameplay;
 
 import com.generic.core.*;
-import com.generic.graphics.Window;
 import com.generic.launcher.Launcher;
 
-import static com.generic.gameplay.CONFIG.*;
-import static com.generic.utils.Equations.*;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.utils.Equations.RandomizedInt;
 
 public abstract class AbstractGame {
     public static AbstractGame instance;
@@ -65,30 +65,23 @@ public abstract class AbstractGame {
             }
         }
 
-        if (map.getAt(x - 1, y).getType().equals("DiamondBlock"))
-        {
-            if (map.getAt(x - 2, y).getType().equals("DiamondBlock"))
-            {
+        if (map.getAt(x - 1, y).getType().equals("DiamondBlock")) {
+            if (map.getAt(x - 2, y).getType().equals("DiamondBlock")) {
                 gameEnd(); //db en position droite, alignement horizontal
             }
         }
 
-        if (map.getAt(x - 1, y).getType().equals("DiamondBlock"))
-        {
-            if (map.getAt(x + 1, y).getType().equals("DiamondBlock"))
-            {
+        if (map.getAt(x - 1, y).getType().equals("DiamondBlock")) {
+            if (map.getAt(x + 1, y).getType().equals("DiamondBlock")) {
                 gameEnd(); //db en position milieu, alignement horizontal
             }
         }
 
-        if (map.getAt(x + 1, y).getType().equals("DiamondBlock"))
-        {
-            if (map.getAt(x + 2, y).getType().equals("DiamondBlock"))
-            {
+        if (map.getAt(x + 1, y).getType().equals("DiamondBlock")) {
+            if (map.getAt(x + 2, y).getType().equals("DiamondBlock")) {
                 gameEnd(); //db en position gauche, alignement horizontal
             }
         }
-
 
 
         /**
@@ -130,9 +123,5 @@ public abstract class AbstractGame {
 
     public GameMap getMap() {
         return this.map;
-    }
-
-    public GameTimer getGameTimer() {
-        return this.time;
     }
 }

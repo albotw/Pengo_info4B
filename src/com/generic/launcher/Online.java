@@ -5,8 +5,8 @@ import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
 import com.generic.gameplay.CONFIG_GAME;
-import com.generic.net.multiplayer.OnlineClient;
 import com.generic.net.multiplayer.NetworkManager;
+import com.generic.net.multiplayer.OnlineClient;
 import com.generic.net.multiplayer.Serveur;
 
 import javax.swing.*;
@@ -119,25 +119,26 @@ public class Online extends JDialog {
         card.show(cardPanel, "3");
     }
 
-    public void saveGameSettings(boolean modePvP, boolean equipe1Animal, int nbNiveaux, int nbIA)
-    {
+    public void saveGameSettings(boolean modePvP, boolean equipe1Animal, int nbIA) {
         //soit on met a jour le CONFIG_GAME direct comme c'est l'hote
         //soit on passe par le network manager avec l'envoi de commande, etc..
         CONFIG_GAME.setPvP(modePvP);
         CONFIG_GAME.setTeam1IsAnimal(equipe1Animal);
-        CONFIG_GAME.setnNiveaux(nbNiveaux);
+        CONFIG_GAME.setnNiveaux(1);
         CONFIG_GAME.setnAi(nbIA);
 
-        System.out.println("pvp = " + modePvP + " | equipe1 <=> animaux =" + equipe1Animal + " | niveaux = " + nbNiveaux + " | IAs = " + nbIA);
+        System.out.println("pvp = " + modePvP + " | equipe1 <=> animaux =" + equipe1Animal + " | IAs = " + nbIA);
         card.show(cardPanel, "1");
     }
 
     public void connectSelected(String ip, int port) {
-
-        net.connect(ip, port);
-        networkThread = new Thread(net);
-        networkThread.start();
-        net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());
+        boolean connected = net.connect(ip, port);
+        if (connected) {
+            networkThread = new Thread(net);
+            networkThread.start();
+            net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());
+            joinUI.connected();
+        }
     }
 
     public void closeSelected() {
@@ -182,13 +183,6 @@ public class Online extends JDialog {
         this.dispose();
     }
 
-    public NetworkManager getNm() {
-        return net;
-    }
-
-    public void setNm(NetworkManager nm) {
-        this.net = nm;
-    }
 
     public DefaultListModel getE1() {
         return this.modE1;

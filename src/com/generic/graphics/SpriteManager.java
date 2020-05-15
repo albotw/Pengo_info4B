@@ -1,7 +1,9 @@
 package com.generic.graphics;
 
+import com.generic.core.Animal;
 import com.generic.core.GameMap;
 import com.generic.core.Orientation;
+import com.generic.core.Variante;
 
 import java.util.ArrayList;
 
@@ -15,64 +17,48 @@ public class SpriteManager {
     private ArrayList<Sprite> foreground;
     private ArrayList<Sprite> background;
 
-    private SpriteManager()
-    {
+    private SpriteManager() {
         instance = this;
         foreground = new ArrayList<Sprite>();
         background = new ArrayList<Sprite>();
     }
 
-    public static SpriteManager createSpriteManager()
-    {
-        if (instance == null)
-        {
+    public static SpriteManager createSpriteManager() {
+        if (instance == null) {
             instance = new SpriteManager();
         }
 
         return instance;
     }
 
-    public synchronized void addSprite(Sprite spr, String position)
-    {
-        if (position == "foreground")
-        {
+    public synchronized void addSprite(Sprite spr, String position) {
+        if (position == "foreground") {
             foreground.add(spr);
-        }
-        else if (position == "background")
-        {
+        } else if (position == "background") {
             background.add(spr);
         }
     }
 
-    public synchronized void flushSprites()
-    {
+    public synchronized void flushSprites() {
         foreground.clear();
         background.clear();
     }
 
-    public synchronized Sprite getSprite(int index, String position)
-    {
-        if (position == "foreground" && !foreground.isEmpty())
-        {
+    public synchronized Sprite getSprite(int index, String position) {
+        if (position == "foreground" && !foreground.isEmpty()) {
             return foreground.get(index);
-        }
-        else if (position == "background" && !background.isEmpty())
-        {
+        } else if (position == "background" && !background.isEmpty()) {
             return background.get(index);
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
 
-    public int getFSize()
-    {
+    public int getFSize() {
         return foreground.size();
     }
 
-    public int getBSize()
-    {
+    public int getBSize() {
         return background.size();
     }
 
@@ -82,125 +68,92 @@ public class SpriteManager {
      * on peut actualiser juste les mapobjects modifiés et non régénérer une tonne de sprites a chaque fois.
      */
 
-    public static void transfer(GameMap m, RenderThread rt)
-    {
-        if (m != null)
-        {
+    public static void transfer(GameMap m, RenderThread rt) {
+        if (m != null) {
             instance.flushSprites();
+
+            if (!LOW_RES_MODE) {
+                Sprite bg = new Sprite(SPRITE_SIZE_HD, SPRITE_SIZE_HD);
+                bg.loadImage("ressources/gameBg.png");
+                instance.addSprite(bg, "background");
+            }
 
             int xpos = 0;
             int ypos = 0;
-            for (int i = -1; i <= GRID_HEIGHT; i++)
-            {
+            for (int i = -1; i <= GRID_HEIGHT; i++) {
                 xpos = 0;
-                for (int j = -1; j <= GRID_WIDTH; j++)
-                {
-                    if (i != -1 && i != GRID_HEIGHT && j != -1 && j != GRID_WIDTH)
-                    {
-                        if (!m.getAt(j, i).getType().equals("void"))
-                        {
+                for (int j = -1; j <= GRID_WIDTH; j++) {
+                    if (i != -1 && i != GRID_HEIGHT && j != -1 && j != GRID_WIDTH) {
+                        if (!m.getAt(j, i).getType().equals("void")) {
                             Sprite spr = new Sprite(xpos, ypos);
                             String dir = "";
 
-                            if (LOW_RES_MODE)
-                            {
+                            if (LOW_RES_MODE) {
                                 dir = "SD/";
-                            }
-                            else
-                            {
+                            } else {
                                 dir = "HD/";
                             }
 
-                            if(m.getAt(j, i).getType().equals("IceBlock"))
-                            {
-                                spr.loadImage("ressources/"+ dir + "IceBlock.png");
-                            }
-                            else if (m.getAt(j, i).getType().equals("Penguin"))
-                            {
-                                if (LOW_RES_MODE)
-                                {
-                                    spr.loadImage("ressources/"+dir+"Penguin.png");
+                            if (m.getAt(j, i).getType().equals("IceBlock")) {
+                                spr.loadImage("ressources/" + dir + "IceBlock.png");
+                            } else if (m.getAt(j, i).getType().equals("Penguin")) {
+                                if (LOW_RES_MODE) {
+                                    spr.loadImage("ressources/" + dir + "Penguin.png");
+                                } else {
+                                    Orientation o = (Orientation) m.getAt(j, i);
+                                    spr.loadImage("ressources/" + dir + "Lonk_" + o.getOrientation() + ".png");
                                 }
-                                else
-                                {
-                                    Orientation o = (Orientation)m.getAt(j, i);
-                                    spr.loadImage("ressources/" + dir+ "Lonk_"+o.getOrientation()+".png");
-                                }
-                            }
-                            else if (m.getAt(j, i).getType().equals("DiamondBlock"))
-                            {
+                            } else if (m.getAt(j, i).getType().equals("DiamondBlock")) {
                                 spr.loadImage("ressources/" + dir + "DiamondBlock.png");
-                            }
-                            else if (m.getAt(j, i).getType().equals("Animal"))
-                            {
-                                if (LOW_RES_MODE)
-                                {
+                            } else if (m.getAt(j, i).getType().equals("Animal")) {
+                                if (LOW_RES_MODE) {
                                     spr.loadImage("ressources/" + dir + "Animal.png");
-                                }
-                                else
-                                {
-                                    Orientation o = (Orientation)m.getAt(j, i);
-                                    spr.loadImage("ressources/" + dir+ "Darknut_"+o.getOrientation()+".png");
+                                } else {
+                                    Orientation o = (Orientation) m.getAt(j, i);
+                                    Variante v = (Variante)m.getAt(j, i);
+                                    spr.loadImage("ressources/" + dir + "/" + v.getVariante() + "/" + o.getOrientation() + ".png");
                                 }
                             }
                             instance.addSprite(spr, "foreground");
                         }
-                    }
-                    else
-                    {
+                    } else {
                         Sprite spr = new Sprite(xpos, ypos);
 
                         String dir = "";
 
-                        if (LOW_RES_MODE)
-                        {
+                        if (LOW_RES_MODE) {
                             dir = "SD/";
-                        }
-                        else
-                        {
+                        } else {
                             dir = "HD/";
                         }
 
-                        if (i == -1)
-                        {
-                            if (j == -1) spr.loadImage("ressources/" +dir + "WA_HG.png");
-                            else if (j == GRID_WIDTH) spr.loadImage("ressources/"+ dir +"WA_HD.png");
-                            else spr.loadImage("ressources/"+dir+"WallH.png");
-                        }
-                        else if (i == GRID_HEIGHT)
-                        {
-                            if(j == -1) spr.loadImage("ressources/"+dir+"WA_BG.png");
-                            else if (j == GRID_WIDTH) spr.loadImage("ressources/"+dir+"WA_BD.png");
-                            else spr.loadImage("ressources/"+dir+"WallB.png");
-                        }
-                        else if (j == - 1)
-                        {
-                            spr.loadImage("ressources/"+dir+"WallG.png");
-                        }
-                        else if (j == GRID_WIDTH)
-                        {
-                            spr.loadImage("ressources/"+dir+"WallD.png");
+                        if (i == -1) {
+                            if (j == -1) spr.loadImage("ressources/" + dir + "WA_HG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("ressources/" + dir + "WA_HD.png");
+                            else spr.loadImage("ressources/" + dir + "WallH.png");
+                        } else if (i == GRID_HEIGHT) {
+                            if (j == -1) spr.loadImage("ressources/" + dir + "WA_BG.png");
+                            else if (j == GRID_WIDTH) spr.loadImage("ressources/" + dir + "WA_BD.png");
+                            else spr.loadImage("ressources/" + dir + "WallB.png");
+                        } else if (j == -1) {
+                            spr.loadImage("ressources/" + dir + "WallG.png");
+                        } else if (j == GRID_WIDTH) {
+                            spr.loadImage("ressources/" + dir + "WallD.png");
                         }
                         instance.addSprite(spr, "background");
                     }
 
-                    if (LOW_RES_MODE)
-                    {
+                    if (LOW_RES_MODE) {
                         xpos += SPRITE_SIZE_SD;
-                    }
-                    else
-                    {
+                    } else {
                         xpos += SPRITE_SIZE_HD;
                     }
 
                 }
 
-                if (LOW_RES_MODE)
-                {
+                if (LOW_RES_MODE) {
                     ypos += SPRITE_SIZE_SD;
-                }
-                else
-                {
+                } else {
                     ypos += SPRITE_SIZE_HD;
                 }
 

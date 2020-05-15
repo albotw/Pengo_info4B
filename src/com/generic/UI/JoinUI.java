@@ -34,17 +34,17 @@ public class JoinUI extends JPanel {
 
         setLayout(new BorderLayout());
 
-        IP          = new PlaceholderTextField("Adresse IP");
-        port        = new PlaceholderTextField("Port");
-        connecter   = new JButton("Rejoindre");
+        IP = new PlaceholderTextField("Adresse IP");
+        port = new PlaceholderTextField("Port");
+        connecter = new JButton("Rejoindre");
         deconnecter = new JButton("Se déconnecter");
-        join1       = new JButton("Rejoindre l'équipe 1");
-        join2       = new JButton("Rejoindre l'équipe 2");
-        close       = new JButton("Fermer");
-        equipe1     = new JList();
-        equipe2     = new JList();
-        modE1       = manager.getE1();
-        modE2       = manager.getE2();
+        join1 = new JButton("Rejoindre l'équipe 1");
+        join2 = new JButton("Rejoindre l'équipe 2");
+        close = new JButton("Fermer");
+        equipe1 = new JList();
+        equipe2 = new JList();
+        modE1 = manager.getE1();
+        modE2 = manager.getE2();
 
         equipe1.setModel(modE1);
         equipe2.setModel(modE2);
@@ -74,16 +74,7 @@ public class JoinUI extends JPanel {
         connecter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!IP.getText().equals("") && !port.getText().equals(""))
-                {
-                    deconnecter.setEnabled(true);
-                    join1.setEnabled(true);
-                    join2.setEnabled(true);
-                    connecter.setEnabled(false);
-                    IP.setEnabled(false);
-                    port.setEnabled(false);
-                    close.setEnabled(false);
-
+                if (!IP.getText().equals("") && !port.getText().equals("") && !IP.getText().equals(IP.getPHText()) && !port.getText().equals(port.getPHText())) {
                     manager.connectSelected(IP.getText(), Integer.parseInt(port.getText()));
                 }
             }
@@ -146,93 +137,16 @@ public class JoinUI extends JPanel {
         add(north, BorderLayout.NORTH);
     }
 
-    public void addToTeam1(String pseudo) {
-        modE1.addElement(pseudo);
+    public void connected() {
+        deconnecter.setEnabled(true);
+        join1.setEnabled(true);
+        join2.setEnabled(true);
+        connecter.setEnabled(false);
+        IP.setEnabled(false);
+        port.setEnabled(false);
+        close.setEnabled(false);
     }
 
-    public void addToTeam2(String pseudo) {
-        modE2.addElement(pseudo);
-    }
-
-    public PlaceholderTextField getIP() {
-        return IP;
-    }
-
-    public void setIP(PlaceholderTextField IP) {
-        this.IP = IP;
-    }
-
-    public PlaceholderTextField getPort() {
-        return port;
-    }
-
-    public void setPort(PlaceholderTextField port) {
-        this.port = port;
-    }
-
-    public JButton getConnecter() {
-        return connecter;
-    }
-
-    public void setConnecter(JButton connecter) {
-        this.connecter = connecter;
-    }
-
-    public JButton getJoin1() {
-        return join1;
-    }
-
-    public void setJoin1(JButton join1) {
-        this.join1 = join1;
-    }
-
-    public JButton getJoin2() {
-        return join2;
-    }
-
-    public void setJoin2(JButton join2) {
-        this.join2 = join2;
-    }
-
-    public JList getEquipe1() {
-        return equipe1;
-    }
-
-    public void setEquipe1(JList equipe1) {
-        this.equipe1 = equipe1;
-    }
-
-    public JList getEquipe2() {
-        return equipe2;
-    }
-
-    public void setEquipe2(JList equipe2) {
-        this.equipe2 = equipe2;
-    }
-
-    public DefaultListModel getModE1() {
-        return modE1;
-    }
-
-    public void setModE1(DefaultListModel modE1) {
-        this.modE1 = modE1;
-    }
-
-    public DefaultListModel getModE2() {
-        return modE2;
-    }
-
-    public void setModE2(DefaultListModel modE2) {
-        this.modE2 = modE2;
-    }
-
-    public JButton getDeconnecter() {
-        return deconnecter;
-    }
-
-    public void setDeconnecter(JButton deconnecter) {
-        this.deconnecter = deconnecter;
-    }
 
     public JButton getClose() {
         return close;

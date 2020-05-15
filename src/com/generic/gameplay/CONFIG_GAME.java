@@ -7,11 +7,11 @@ package com.generic.gameplay;
  */
 
 public class CONFIG_GAME {
-    public static int PLAYER_INIT_LIVES = 1;
-    public static int AI_INIT_LIVES = 2;
+    public static int PLAYER_INIT_LIVES = 2;
+    public static int AI_INIT_LIVES = 6;
     public static boolean PLAYER_IS_ANIMAL = false;
     public static boolean PLAYER_IS_PENGUIN = true;
-    public static int N_AI = 1;
+    public static int N_AI = 6;
     public static int N_NIVEAUX = 1;
 
     public static boolean TEAM_1_IS_ANIMAL = false;
@@ -33,7 +33,6 @@ public class CONFIG_GAME {
         AI_INIT_LIVES = val;
     }
 
-
     public static void setnAi(int val) {
         N_AI = val;
     }
@@ -42,14 +41,12 @@ public class CONFIG_GAME {
         N_NIVEAUX = val;
     }
 
-    public static void setPvP(boolean val)
-    {
+    public static void setPvP(boolean val) {
         PvP = val;
         PvE = !val;
     }
 
-    public static void setTeam1IsAnimal(boolean val)
-    {
+    public static void setTeam1IsAnimal(boolean val) {
         TEAM_1_IS_ANIMAL = val;
         TEAM_2_IS_ANIMAL = !val;
     }

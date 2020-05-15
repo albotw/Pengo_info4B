@@ -26,12 +26,12 @@ public class HostUI extends JPanel {
         this.manager = od;
         setLayout(new BorderLayout());
         startGame = new JButton("Lancer la partie");
-        Settings  = new JButton("Paramètres");
-        Join1     = new JButton("Rejoindre Equipe1");
-        Join2     = new JButton("Rejoindre Equipe2");
-        equipe1   = new JList();
-        equipe2   = new JList();
-        close     = new JButton("Retour");
+        Settings = new JButton("Paramètres");
+        Join1 = new JButton("Rejoindre Equipe1");
+        Join2 = new JButton("Rejoindre Equipe2");
+        equipe1 = new JList();
+        equipe2 = new JList();
+        close = new JButton("Retour");
 
         modE1 = manager.getE1();
         modE2 = manager.getE2();
@@ -85,8 +85,8 @@ public class HostUI extends JPanel {
 
         JPanel north = new JPanel();
         north.setLayout(new GridLayout(1, 2));
-        north.add(Join1);
-        north.add(Join2);
+        north.add(startGame);
+        north.add(Settings);
 
         JPanel center = new JPanel();
         center.setLayout(new GridLayout(1, 2));
@@ -97,8 +97,8 @@ public class HostUI extends JPanel {
         JPanel south = new JPanel();
         JPanel southTop = new JPanel();
         southTop.setLayout(new GridLayout(1, 2));
-        southTop.add(startGame);
-        southTop.add(Settings);
+        southTop.add(Join1);
+        southTop.add(Join2);
         south.setLayout(new GridLayout(2, 1));
         south.add(southTop);
         south.add(close);
@@ -106,70 +106,6 @@ public class HostUI extends JPanel {
         add(north, BorderLayout.NORTH);
         add(south, BorderLayout.SOUTH);
         add(center, BorderLayout.CENTER);
-    }
-
-    public JButton getStartGame() {
-        return startGame;
-    }
-
-    public void setStartGame(JButton startGame) {
-        this.startGame = startGame;
-    }
-
-    public JButton getSettings() {
-        return Settings;
-    }
-
-    public void setSettings(JButton settings) {
-        Settings = settings;
-    }
-
-    public JButton getJoin1() {
-        return Join1;
-    }
-
-    public void setJoin1(JButton join1) {
-        Join1 = join1;
-    }
-
-    public JButton getJoin2() {
-        return Join2;
-    }
-
-    public void setJoin2(JButton join2) {
-        Join2 = join2;
-    }
-
-    public JList getEquipe1() {
-        return equipe1;
-    }
-
-    public void setEquipe1(JList equipe1) {
-        this.equipe1 = equipe1;
-    }
-
-    public DefaultListModel getModE1() {
-        return modE1;
-    }
-
-    public void setModE1(DefaultListModel modE1) {
-        this.modE1 = modE1;
-    }
-
-    public DefaultListModel getModE2() {
-        return modE2;
-    }
-
-    public void setModE2(DefaultListModel modE2) {
-        this.modE2 = modE2;
-    }
-
-    public JList getEquipe2() {
-        return equipe2;
-    }
-
-    public void setEquipe2(JList equipe2) {
-        this.equipe2 = equipe2;
     }
 
     public JButton getClose() {
