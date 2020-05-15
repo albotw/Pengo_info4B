@@ -82,12 +82,13 @@ public class RenderThread extends Thread {
                 go.updateLocal();
             }
             try {
-                sleep(16);
+                sleep(18);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
+        System.out.println("--- Arrêt RenderThread ---");
         SpriteManager.instance.flushSprites();
         w.setVisible(false);
         w.dispose();

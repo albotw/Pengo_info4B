@@ -23,14 +23,12 @@ public class AStarStrategy implements Strategy{
 
     public void process()
     {
-        System.out.println("process");
 
         if (target != null)
         {
             GameMap m = AbstractGame.instance.getMap();
             if (m.getAt(target.getX(), target.getY()) == target)
             {
-                System.out.println("déplacement vers la cible");
                 testDirection();
 
                 switch (direction)
@@ -43,13 +41,11 @@ public class AStarStrategy implements Strategy{
             }
             else
             {
-                System.out.println("recherche de cible");
                 acquireTarget();
             }
         }
         else
         {
-            System.out.println("recherche de cible");
             acquireTarget();
         }
     }
@@ -81,10 +77,11 @@ public class AStarStrategy implements Strategy{
             }
         }
 
-        System.out.println("fin de parcours de la carte");
-
         int rand = RandomizedInt(0, targetList.size() - 1);
-        target = targetList.get(rand);
+        if (rand < targetList.size())
+        {
+            target = targetList.get(rand);
+        }
     }
 
     public void testDirection()

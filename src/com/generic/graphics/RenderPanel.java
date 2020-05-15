@@ -31,7 +31,6 @@ public class RenderPanel extends JPanel{
             if (sp != null) g2d.drawImage(sp.getTexture(), sp.getX(), sp.getY(), this);
         }
 
-        //System.out.println("repainted");
     }
 
     @Override
@@ -43,7 +42,6 @@ public class RenderPanel extends JPanel{
     @Override
     public void paintComponent(Graphics g)
     {
-        //System.out.println("called paintComponent");
         super.paintComponent(g);
         draw(g);
         Toolkit.getDefaultToolkit().sync();

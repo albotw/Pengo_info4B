@@ -19,9 +19,8 @@ public class AI extends Thread {
     private MapObject target;
     private MapObject controlledObject;
 
-    private boolean stunActive; // a déplacer dans la classe de controle spé animal
-    private int stunTimer; // a déplacer dans la classe de controle spé animal (temps de stun, var locale
-                           // basée sur la constante de CONFIG
+    private boolean stunActive;
+    private int stunTimer;
 
     private boolean respawnActive;
     private int respawnTimer;
@@ -30,28 +29,22 @@ public class AI extends Thread {
 
     private int tickRate = AI_TICK_RATE;
 
-    private Strategy strat;
+    private Strategy currentStrat;
 
     public AI() {
 
-        strat = new AStarStrategy();
-        strat = new AStarInvertStrategy();
-        strat = new DefendDiamondBlockStrategy();
-        strat = new RandStrategy();
     }
 
     public void run() {
         while (!flush && !isInterrupted()) {
-            System.out.println("test flush = " + flush);
             if (controlledObject != null && !flush)
             {
                 checkStun();
                 checkRespawn();
                 if (!respawnActive && !flush) {
-                    strat.process();
+                    currentStrat.process();
                 }
             } else {
-                System.out.println("reset bannedDir");
             }
 
             try {
@@ -64,11 +57,10 @@ public class AI extends Thread {
 
         target = null;
         controlledObject = null;
-        System.out.println("arret thread IA");
+        System.out.println("--- Arrêt Thread IA ---");
     }
 
     public void flush() {
-        System.out.println("flush triggered");
         flush = true;
     }
 
@@ -116,27 +108,29 @@ public class AI extends Thread {
     }
 
     public void setControlledObject(MapObject controlledObject) {
+        setCurrentStrat();
+        respawnActive = true;
+        respawnTimer = 2000;
+        currentStrat.updateControlledObject(controlledObject);
+        this.controlledObject = controlledObject;
+    }
 
+    public void setCurrentStrat()
+    {
         int rand = RandomizedInt(1,4);
         switch (rand){
-            case 1 : strat = new AStarInvertStrategy();
+            case 1 : currentStrat = new AStarInvertStrategy();
                 System.out.println("InvASTAR");break;
 
-            case 2 : strat = new AStarStrategy();
+            case 2 : currentStrat = new AStarStrategy();
                 System.out.println("ASTAR");break;
 
-            case 3 : strat = new DefendDiamondBlockStrategy();
+            case 3 : currentStrat = new DefendDiamondBlockStrategy();
                 System.out.println("DDB");break;
 
-            case 4 : strat = new RandStrategy();
+            case 4 : currentStrat = new RandStrategy();
                 System.out.println("RAND");break;
 
         }
-
-        System.out.println("reset bannedDir");
-        respawnActive = true;
-        respawnTimer = 2000;
-        strat.updateControlledObject(controlledObject);
-        this.controlledObject = controlledObject;
     }
 }

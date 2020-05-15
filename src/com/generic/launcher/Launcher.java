@@ -28,7 +28,7 @@ public class Launcher extends JFrame
 
     private LocalGame game;
 
-    public  Launcher()
+    public Launcher()
     {
         super();
         instance = this;
@@ -53,10 +53,10 @@ public class Launcher extends JFrame
     // TRAITEMENT INTERFACE ----------
     public void SoloModeSelected()
     {
-        System.out.println("Solo séléctionné");
         currentLevel = 0;
         if (isMainProfileChosen())
         {
+            getMainProfile().setPoints("Reset", 0);
             this.setVisible(false);
             currentLevel++;
             game = new LocalGame();
@@ -65,20 +65,19 @@ public class Launcher extends JFrame
 
     public void SoloSettingsSelected()
     {
-        System.out.println("Réglages solo séléctionnés");
+
         SettingsDialog SD = new SettingsDialog(this,true);
     }
 
     public void MultiModeSelected()
     {
         currentLevel = 0;
-        System.out.println("Mode Multi séléctionné");
         Online OD = new Online(this,true);
     }
 
     public void ProfileModeSelected()
     {
-        System.out.println("Profil séléctionné");
+
         ProfileDialog modal = new ProfileDialog(this, true);
 
         if (isMainProfileChosen())
@@ -89,7 +88,6 @@ public class Launcher extends JFrame
 
     public void leaderboardSelected()
     {
-        System.out.println("Leaderboard séléctionné");
         LeaderboardDialog modal = new LeaderboardDialog(this, true);
     }
 
@@ -98,7 +96,6 @@ public class Launcher extends JFrame
     {
         System.out.println("Game " + currentLevel + " / " + N_NIVEAUX);
         localLeaderboard.addToLeaderboard(playerProfiles.get(mainProfile));
-        localLeaderboard.print();
         if (currentLevel >= N_NIVEAUX)
         {
             this.setVisible(true);
@@ -113,7 +110,7 @@ public class Launcher extends JFrame
     public void loadProfiles()
     {
         try{
-            FileInputStream fis = new FileInputStream("src/saves/PlayerProfiles.sav");
+            FileInputStream fis = new FileInputStream("saves/PlayerProfiles.sav");
             ObjectInputStream ois = new ObjectInputStream(fis);
             Object tmp = ois.readObject();
 
@@ -142,7 +139,7 @@ public class Launcher extends JFrame
     public void saveProfiles()
     {
         try{
-            FileOutputStream fos = new FileOutputStream("src/saves/PlayerProfiles.sav");
+            FileOutputStream fos = new FileOutputStream("saves/PlayerProfiles.sav");
             ObjectOutputStream oos = new ObjectOutputStream(fos);
 
             ArrayList<String> pseudos = new ArrayList<String>();
@@ -193,8 +190,6 @@ public class Launcher extends JFrame
                 mainProfile = playerProfiles.indexOf(p);
             }
         }
-
-        System.out.println("Main profile set to " + mainProfile + " | " + playerProfiles.get(mainProfile).getPseudo());
     }
 
     public LocalPlayer getMainProfile()

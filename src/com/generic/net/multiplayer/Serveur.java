@@ -69,7 +69,6 @@ public class Serveur extends Thread {
 
     public void removePlayer(ObjectOutputStream oos) {
         cmdOuts.remove(oos);
-        System.out.println("joueur supprimé");
     }
 
     public void putOnTeam1(OnlinePlayer c, String s) {

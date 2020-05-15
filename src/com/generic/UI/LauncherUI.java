@@ -24,7 +24,6 @@ public class LauncherUI extends JPanel {
         setLayout(null);
 
         manager      = Launcher.instance;
-        System.out.println(manager.toString());
         SoloMode     = new JButton("Mode Solo");
         SoloSettings = new JButton("Réglages (Solo)");
         MultiMode    = new JButton("Mode Réseau");
@@ -74,7 +73,7 @@ public class LauncherUI extends JPanel {
             }
         });
 
-        ImageIcon pengoLogo = new ImageIcon("src/ressources/Pengo-Logo.png");
+        ImageIcon pengoLogo = new ImageIcon("ressources/Pengo-Logo.png");
         Pengo = new ImagePanel(pengoLogo.getImage());
 
         Pengo.setBounds(0, 0, 580, 170);

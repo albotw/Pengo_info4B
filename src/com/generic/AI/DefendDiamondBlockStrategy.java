@@ -29,14 +29,11 @@ public class DefendDiamondBlockStrategy implements Strategy{
 
     public void process()
     {
-        System.out.println("process");
 
         if (target != null)
         {
             if (m.getAt(target.getX(), target.getY()) == target)
             {
-                //si le bloc existe on se dirige vers lui
-                System.out.println("moving towards target");
                 setDirection();
                 switch (direction)
                 {
@@ -48,13 +45,11 @@ public class DefendDiamondBlockStrategy implements Strategy{
             }
             else
             {
-                System.out.println("recherche cible");
                 acquireTarget();
             }
         }
         else
         {
-            System.out.println("recherche cible");
             acquireTarget();
         }
     }

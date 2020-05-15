@@ -68,12 +68,10 @@ public class Online extends JDialog {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
     }
 
     public void addToTeam1(String pseudo) {
         modE1.addElement(pseudo);
-
     }
 
     public void addToTeam2(String pseudo) {
@@ -86,18 +84,6 @@ public class Online extends JDialog {
         Launcher.instance.setVisible(false);
 
         Client = new OnlineClient(net);
-    }
-
-    public void team1Full() {
-        /**
-         * * optionnelle, pour bloquer automatiquement le bouton de l'équipe 1
-         */
-    }
-
-    public void team2Full() {
-        /**
-         * * optionnelle, pour bloquer automatiquement le bouton de l'équipe 2
-         */
     }
 
     public void joinGameSelected() {
@@ -121,7 +107,6 @@ public class Online extends JDialog {
         networkThread.start();
         net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());
         net.setHost();
-
     }
 
     // * options uniquement valable pour l'hote
@@ -134,7 +119,7 @@ public class Online extends JDialog {
         card.show(cardPanel, "3");
     }
 
-    public void saveGameSettings(int compo, boolean modePvP, boolean equipe1Animal, int nbNiveaux, int nbIA)
+    public void saveGameSettings(boolean modePvP, boolean equipe1Animal, int nbNiveaux, int nbIA)
     {
         //soit on met a jour le CONFIG_GAME direct comme c'est l'hote
         //soit on passe par le network manager avec l'envoi de commande, etc..
@@ -143,15 +128,13 @@ public class Online extends JDialog {
         CONFIG_GAME.setnNiveaux(nbNiveaux);
         CONFIG_GAME.setnAi(nbIA);
 
-        System.out.println("taille equipe = " + compo + " | pvp = " + modePvP + " | equipe1 <=> animaux =" + equipe1Animal + " | niveaux = " + nbNiveaux + " | IAs = " + nbIA);
-        net.sendCommand("TEAM MAX SIZE", new String[]{"" + compo});
-
+        System.out.println("pvp = " + modePvP + " | equipe1 <=> animaux =" + equipe1Animal + " | niveaux = " + nbNiveaux + " | IAs = " + nbIA);
         card.show(cardPanel, "1");
     }
 
-    public void connectSelected() {
+    public void connectSelected(String ip, int port) {
 
-        net.connect("127.0.0.1", 8080);
+        net.connect(ip, port);
         networkThread = new Thread(net);
         networkThread.start();
         net.sendPseudo(Launcher.instance.getMainProfile().getPseudo());

@@ -88,13 +88,13 @@ public class SettingsDialog extends JDialog {
         PenguinControl.setSelected(true);
         AnimalControl.setSelected(false);
 
-        for (int i = 3; i < 7; i++)
+        for (int i = 1; i <= 4; i++)
         {
             NbIA.addItem(""+i+" instances");
         }
 
         NbNiveau.addItem("1 niveau");
-        for(int i = 2; i < 6; i++)
+        for(int i = 2; i <= 5; i++)
         {
             NbNiveau.addItem(""+i+" niveaux");
         }
@@ -102,7 +102,7 @@ public class SettingsDialog extends JDialog {
 
     public void CloseSelected()
     {
-        int     nAI             = NbIA.getSelectedIndex() + 3;
+        int     nAI             = NbIA.getSelectedIndex() + 1;
         int     nNiveaux        = NbNiveau.getSelectedIndex() + 1;
         boolean playerIsPenguin = PenguinControl.isSelected();
 

@@ -33,10 +33,7 @@ public class HostSettingsUI extends JPanel {
 
         this.manager = manager;
 
-        setLayout(new GridLayout(5, 1));
-
-        repartition = new JComboBox();
-        add(repartition);
+        setLayout(new GridLayout(4, 1));
 
         JPanel jp2 = new JPanel();
         jp2.setLayout(new GridLayout(2, 2));
@@ -66,11 +63,6 @@ public class HostSettingsUI extends JPanel {
 
         save = new JButton("Sauvegarder");
         add(save);
-
-        for (int i = 1; i < 5; i++)
-        {
-            repartition.addItem("" + i + " vs " + i);
-        }
 
         for (int i = 3; i < 8; i++)
         {
@@ -109,12 +101,11 @@ public class HostSettingsUI extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 boolean team1animal = equipe1animaux.isSelected();
-                int compo = repartition.getSelectedIndex() + 1;
                 boolean modePvp = pvp.isSelected();
                 int nombreNiveaux = nbNiveaux.getSelectedIndex() + 1;
                 int nombreIA = nbIA.getSelectedIndex() + 3;
 
-                manager.saveGameSettings(compo, modePvp, team1animal, nombreNiveaux, nombreIA);
+                manager.saveGameSettings(modePvp, team1animal, nombreNiveaux, nombreIA);
             }
         });
     }
