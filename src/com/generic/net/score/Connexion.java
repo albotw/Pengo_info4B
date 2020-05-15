@@ -1,8 +1,8 @@
 package com.generic.net.score;
 
-import com.generic.utils.ScorePair;
 import com.generic.launcher.Leaderboard;
 import com.generic.net.Command;
+import com.generic.utils.ScorePair;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -36,10 +36,10 @@ public class Connexion extends Thread {
                     for (int i = 0; i < l.getLadder().size(); i++) {
                         String score = "" + l.getLadder().get(i).getScore();
                         String pseudo = "" + l.getLadder().get(i).getPseudo();
-                        Command out = new Command("SET SCORE", new String[] { score, pseudo });
+                        Command out = new Command("SET SCORE", new String[]{score, pseudo});
                         commandOut.writeObject(out);
                     }
-                    commandOut.writeObject(new Command("SET SCORE", new String[] { "END" }));
+                    commandOut.writeObject(new Command("SET SCORE", new String[]{"END"}));
                 } else if (cmd.getVal().equals("SET SCORE")) {
                     if (!cmd.getParam(0).equals("END")) {
                         String pseudo = cmd.getParam(1);

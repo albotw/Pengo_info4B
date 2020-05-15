@@ -1,7 +1,8 @@
 package com.generic.utils;
 
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class InputHandler implements KeyListener {
     public boolean UP;
@@ -27,8 +28,7 @@ public class InputHandler implements KeyListener {
         System.out.println("--- Created Input Listener ---");
     }
 
-    public void stop()
-    {
+    public void stop() {
         w.removeKeyListener(this);
     }
 

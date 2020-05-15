@@ -19,17 +19,16 @@ public class ProfileDialog extends JDialog {
 
     private Launcher launcher = Launcher.instance;
 
-    public ProfileDialog(Frame parent, boolean modal)
-    {
+    public ProfileDialog(Frame parent, boolean modal) {
         super(parent, modal);
 
         profileList = new JList<String>();
         mod = new DefaultListModel();
         profileList.setModel(mod);
 
-        addProfile    = new JButton("Ajouter un profil");
+        addProfile = new JButton("Ajouter un profil");
         deleteProfile = new JButton("Supprimer un profil");
-        profileName   = new PlaceholderTextField("Entrez le nom du profil ici");
+        profileName = new PlaceholderTextField("Entrez le nom du profil ici");
         selectProfile = new JButton("Séléctionner le profil");
 
         setLayout(new BorderLayout());
@@ -97,54 +96,42 @@ public class ProfileDialog extends JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
     }
 
-    public void refreshList()
-    {
+    public void refreshList() {
         mod.removeAllElements();
-        for (LocalPlayer p : launcher.getPlayers())
-        {
-            if (p == launcher.getMainProfile())
-            {
+        for (LocalPlayer p : launcher.getPlayers()) {
+            if (p == launcher.getMainProfile()) {
                 mod.addElement(p.getPseudo() + " (Séléctionné)");
-            }
-            else
-            {
+            } else {
                 mod.addElement(p.getPseudo());
             }
         }
     }
 
-    public void CloseSelected()
-    {
+    public void CloseSelected() {
         this.setVisible(false);
         this.dispose();
     }
 
-    public void addProfileSelected()
-    {
-        if (!profileName.getText().equals(""))
-        {
+    public void addProfileSelected() {
+        if (!profileName.getText().equals("")) {
             launcher.addPlayer(profileName.getText());
             refreshList();
         }
     }
 
-    public void deleteProfileSelected()
-    {
+    public void deleteProfileSelected() {
         int index = profileList.getSelectedIndex();
-        if (index != -1)
-        {
-            String pseudo = (String)mod.get(index);
+        if (index != -1) {
+            String pseudo = (String) mod.get(index);
             launcher.removePlayer(pseudo);
             refreshList();
         }
     }
 
-    public void selectProfileSelected()
-    {
+    public void selectProfileSelected() {
         int index = profileList.getSelectedIndex();
-        if (index != -1)
-        {
-            String pseudo = (String)mod.get(index);
+        if (index != -1) {
+            String pseudo = (String) mod.get(index);
             launcher.setMainProfile(pseudo);
         }
     }

@@ -4,6 +4,7 @@ import com.generic.gameplay.AbstractGame;
 
 public class Animal extends MapEntity {
     private boolean isStun;
+    private String variante;
 
     public Animal(int x, int y) {
         super(x, y);
@@ -31,9 +32,6 @@ public class Animal extends MapEntity {
         AbstractGame.instance.animalKilled(this, source);
     }
 
-    /**
-     * TODO: Déplacement opti ?
-     */
     public void goLeft() {
         if (!isStun) {
             if (m.getAt(x - 1, y).getType().equals("Penguin")) {
@@ -76,5 +74,13 @@ public class Animal extends MapEntity {
             }
             super.goDown();
         }
+    }
+
+    public void setVariante(String var) {
+        this.variante = var;
+    }
+
+    public String getVariante() {
+        return this.variante;
     }
 }

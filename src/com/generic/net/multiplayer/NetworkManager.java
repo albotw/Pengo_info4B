@@ -1,6 +1,5 @@
 package com.generic.net.multiplayer;
 
-import com.generic.launcher.Launcher;
 import com.generic.launcher.Online;
 import com.generic.net.Command;
 
@@ -33,39 +32,23 @@ public class NetworkManager implements Runnable {
                 Command cmd = (Command) (commandIn.readObject());
                 //System.out.println("CLIENT | " + cmd.toString());
 
-                if (cmd.getVal().equals("ADD TO TEAM 1"))
-                {
+                if (cmd.getVal().equals("ADD TO TEAM 1")) {
                     manager.addToTeam1(cmd.getParam(0));
-                }
-                else if (cmd.getVal().equals("ADD TO TEAM 2"))
-                {
+                } else if (cmd.getVal().equals("ADD TO TEAM 2")) {
                     manager.addToTeam2(cmd.getParam(0));
-                }
-                else if (cmd.getVal().equals("GAME START"))
-                {
+                } else if (cmd.getVal().equals("GAME START")) {
                     manager.gameStart();
-                }
-                else if (cmd.getVal().equals("DISCONNECT"))
-                {
+                } else if (cmd.getVal().equals("DISCONNECT")) {
                     endConnexion = true;
-                }
-                else if (cmd.getVal().equals("REMOVE TEAM 1"))
-                {
+                } else if (cmd.getVal().equals("REMOVE TEAM 1")) {
                     manager.removeTeam1(cmd.getParam(0));
-                }
-                else if (cmd.getVal().equals("REMOVE TEAM 2"))
-                {
+                } else if (cmd.getVal().equals("REMOVE TEAM 2")) {
                     manager.removeTeam2(cmd.getParam(0));
-                }
-                else if(cmd.getVal().equals("GAME END")){
+                } else if (cmd.getVal().equals("GAME END")) {
                     manager.getClient().gameEnd(cmd.getParams());
-                }
-                else if (cmd.getVal().equals("WRITE MAP"))
-                {
+                } else if (cmd.getVal().equals("WRITE MAP")) {
                     manager.getClient().overrideMap(cmd.getParams());
-                }
-                else if (cmd.getVal().equals("UPDATE PLAYER DATA"))
-                {
+                } else if (cmd.getVal().equals("UPDATE PLAYER DATA")) {
                     manager.getClient().updateUI(cmd.getParams());
                 }
             }
@@ -79,7 +62,7 @@ public class NetworkManager implements Runnable {
         }
     }
 
-    public void connect(String IP, int port) {
+    public boolean connect(String IP, int port) {
         try {
             socket = new Socket(IP, port);
             System.out.println("CONNEXION [CLIENT] =>" + socket.toString());
@@ -88,7 +71,9 @@ public class NetworkManager implements Runnable {
             endConnexion = false;
         } catch (Exception e) {
             e.printStackTrace();
+            endConnexion = true;
         }
+        return !endConnexion;
     }
 
     public void sendCommand(String val, String[] params) {
@@ -121,14 +106,16 @@ public class NetworkManager implements Runnable {
         sendCommand("MOVE RIGHT", null);
     }
 
-    public void ACTION() { sendCommand("ACTION", null);}
+    public void ACTION() {
+        sendCommand("ACTION", null);
+    }
 
     public void startGame() {
         sendCommand("START GAME", null);
     }
 
     public void sendPseudo(String pseudo) {
-        sendCommand("SET PSEUDO", new String[] { pseudo });
+        sendCommand("SET PSEUDO", new String[]{pseudo});
     }
 
     public void joinTeam1() {

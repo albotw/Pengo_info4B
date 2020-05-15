@@ -1,18 +1,11 @@
 package com.generic.AI;
 
 import com.generic.core.Animal;
-import com.generic.core.GameMap;
 import com.generic.core.MapObject;
-import com.generic.gameplay.AbstractGame;
-import com.generic.launcher.Launcher;
 
-import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG.AI_TICK_RATE;
+import static com.generic.gameplay.CONFIG.STUN_TIME;
 import static com.generic.utils.Equations.RandomizedInt;
-import static com.generic.utils.Equations.VectorialDistance;
-
-/**
- * TODO: Implémenter pattern Strategy
- */
 
 public class AI extends Thread {
 
@@ -37,8 +30,7 @@ public class AI extends Thread {
 
     public void run() {
         while (!flush && !isInterrupted()) {
-            if (controlledObject != null && !flush)
-            {
+            if (controlledObject != null && !flush) {
                 checkStun();
                 checkRespawn();
                 if (!respawnActive && !flush) {
@@ -95,42 +87,63 @@ public class AI extends Thread {
         }
     }
 
-    public MapObject getTarget() {
-        return target;
-    }
-
     public void setTarget(MapObject target) {
         this.target = target;
     }
 
-    public MapObject getControlledObject() {
-        return controlledObject;
-    }
-
     public void setControlledObject(MapObject controlledObject) {
-        setCurrentStrat();
-        respawnActive = true;
-        respawnTimer = 2000;
-        currentStrat.updateControlledObject(controlledObject);
         this.controlledObject = controlledObject;
+        if (controlledObject != null) {
+            setCurrentStrat();
+            respawnActive = true;
+            respawnTimer = 2000;
+        }
+        currentStrat.updateControlledObject(controlledObject);
     }
 
-    public void setCurrentStrat()
-    {
-        int rand = RandomizedInt(1,4);
-        switch (rand){
-            case 1 : currentStrat = new AStarInvertStrategy();
-                System.out.println("InvASTAR");break;
+    public void setCurrentStrat() {
+        int rand = RandomizedInt(1, 4);
+        switch (rand) {
+            case 1: {
+                currentStrat = new AStarInvertStrategy();
+                if (controlledObject.getType().equals("Animal")) {
+                    ((Animal) controlledObject).setVariante("STALFOS");
+                }
+                System.out.println("InvASTAR");
+                break;
+            }
 
-            case 2 : currentStrat = new AStarStrategy();
-                System.out.println("ASTAR");break;
 
-            case 3 : currentStrat = new DefendDiamondBlockStrategy();
-                System.out.println("DDB");break;
+            case 2: {
+                currentStrat = new AStarStrategy();
+                if (controlledObject.getType().equals("Animal")) {
+                    ((Animal) controlledObject).setVariante("MOLBLIN");
+                }
+                System.out.println("ASTAR");
+                break;
+            }
 
-            case 4 : currentStrat = new RandStrategy();
-                System.out.println("RAND");break;
+
+            case 3: {
+                currentStrat = new DefendDiamondBlockStrategy();
+                if (controlledObject.getType().equals("Animal")) {
+                    ((Animal) controlledObject).setVariante("DARKNUT");
+                }
+                System.out.println("DDB");
+                break;
+            }
+
+
+            case 4: {
+                currentStrat = new RandStrategy();
+                if (controlledObject.getType().equals("Animal")) {
+                    ((Animal) controlledObject).setVariante("LEECHER");
+                }
+                System.out.println("RAND");
+                break;
+            }
 
         }
     }
+
 }

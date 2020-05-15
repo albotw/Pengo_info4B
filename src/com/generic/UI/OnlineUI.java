@@ -1,9 +1,11 @@
 package com.generic.UI;
 
+import com.generic.launcher.Online;
+
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import com.generic.launcher.Online;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class OnlineUI extends JPanel {
     private JButton joinGame;
@@ -20,7 +22,7 @@ public class OnlineUI extends JPanel {
 
         joinGame = new JButton("Se connecter à une partie");
         hostGame = new JButton("héberger une partie");
-        Close    = new JButton("Fermer");
+        Close = new JButton("Fermer");
 
         joinGame.addActionListener(new ActionListener() {
             @Override

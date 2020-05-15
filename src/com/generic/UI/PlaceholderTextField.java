@@ -8,8 +8,7 @@ import java.awt.event.FocusListener;
 public class PlaceholderTextField extends JTextField {
     private String placeholder;
 
-    public PlaceholderTextField(String ph)
-    {
+    public PlaceholderTextField(String ph) {
         super();
         this.placeholder = ph;
         this.setForeground(Color.GRAY);
@@ -17,8 +16,7 @@ public class PlaceholderTextField extends JTextField {
         addFocusListener(new FocusListener() {
             @Override
             public void focusGained(FocusEvent e) {
-                if (getText().equals(placeholder))
-                {
+                if (getText().equals(placeholder)) {
                     setText("");
                     setForeground(Color.BLACK);
                 }
@@ -26,8 +24,7 @@ public class PlaceholderTextField extends JTextField {
 
             @Override
             public void focusLost(FocusEvent e) {
-                if (getText().isEmpty())
-                {
+                if (getText().isEmpty()) {
                     setForeground(Color.GRAY);
                     setText(placeholder);
                 }
@@ -35,9 +32,12 @@ public class PlaceholderTextField extends JTextField {
         });
     }
 
-    public void flush()
-    {
+    public void flush() {
         setForeground(Color.GRAY);
         setText(placeholder);
+    }
+
+    public String getPHText() {
+        return this.placeholder;
     }
 }

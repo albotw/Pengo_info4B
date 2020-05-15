@@ -8,10 +8,10 @@ public class DiamondBlock extends MapBlock {
         this.type = "DiamondBlock";
     }
 
-    public void destroy(MapObject killer) {}
+    public void destroy(MapObject killer) {
+    }
 
-    public void onGlideEnded()
-    {
+    public void onGlideEnded() {
         AbstractGame.instance.checkDiamondBlocks(this);
     }
 }

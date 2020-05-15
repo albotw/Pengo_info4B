@@ -1,6 +1,5 @@
 package com.generic.UI;
 
-import com.generic.gameplay.LocalGame;
 import com.generic.launcher.Launcher;
 
 import javax.swing.*;
@@ -25,35 +24,34 @@ public class GameOverlay extends JPanel {
         ImageIcon ii = new ImageIcon("ressources/GameOverlayWindow.png");
         this.background = ii.getImage();
 
-        try{
+        try {
             police = Font.createFont(Font.TRUETYPE_FONT, new File("ressources/police.ttf"));
-        }catch(Exception e){e.printStackTrace();}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         setBackground(Color.BLACK);
     }
 
-    public void updateLocal()
-    {
+    public void updateLocal() {
         pseudo = Launcher.instance.getMainProfile().getPseudo();
         score = Launcher.instance.getMainProfile().getPoints();
         vies = Launcher.instance.getMainProfile().getRemainigLives();
-        if (Launcher.instance.getGame() != null)
-        {
+        if (Launcher.instance.getGame() != null) {
             remainigEnemies = Launcher.instance.getGame().getAIlives();
         }
     }
 
-    public void draw(Graphics g)
-    {
+    public void draw(Graphics g) {
         if (background != null)
             g.drawImage(this.background, 0, 0, this);
 
         g.setFont(police.deriveFont(14f));
         g.setColor(Color.WHITE);
         g.drawString(pseudo, 20, 30);
-        g.drawString(""+score + " Points", 200, 30);
-        g.drawString("" +vies + " Vies", 400, 30);
-        if (showRemainingEnemies) g.drawString(""+remainigEnemies + " à tuer", 600, 30);
+        g.drawString("" + score + " Points", 200, 30);
+        g.drawString("" + vies + " Vies", 400, 30);
+        if (showRemainingEnemies) g.drawString("" + remainigEnemies + " à tuer", 600, 30);
     }
 
     @Override
@@ -78,24 +76,12 @@ public class GameOverlay extends JPanel {
         this.score = score;
     }
 
-    public int getVies() {
-        return vies;
-    }
-
     public void setVies(int vies) {
         this.vies = vies;
     }
 
-    public int getRemainigEnemies() {
-        return remainigEnemies;
-    }
-
     public void setRemainigEnemies(int remainigEnemies) {
         this.remainigEnemies = remainigEnemies;
-    }
-
-    public boolean isShowRemainingEnemies() {
-        return showRemainingEnemies;
     }
 
     public void setShowRemainingEnemies(boolean showRemainingEnemies) {

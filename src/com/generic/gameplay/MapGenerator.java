@@ -1,11 +1,11 @@
 package com.generic.gameplay;
 
 import com.generic.core.GameMap;
-import com.generic.core.IceBlock;
 import com.generic.core.MapObject;
 import com.generic.core.MapObjectFactory;
 
-import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.RandomizedInt;
 
 public class MapGenerator {
@@ -17,8 +17,7 @@ public class MapGenerator {
         m = AbstractGame.instance.getMap();
     }
 
-    public void pre_init()
-    {
+    public void pre_init() {
         for (int i = 0; i < m.getHeight(); i++) {
             for (int j = 0; j < m.getWidth(); j++) {
                 MapObjectFactory.createIceBlock(j, i, this.m);
@@ -119,15 +118,11 @@ public class MapGenerator {
             path_init();
     }
 
-    public boolean isEmpty(int x, int y)
-    {
+    public boolean isEmpty(int x, int y) {
         MapObject mo = m.getAt(x, y);
-        if (mo.getType().equals("void"))
-        {
+        if (mo.getType().equals("void")) {
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
     }

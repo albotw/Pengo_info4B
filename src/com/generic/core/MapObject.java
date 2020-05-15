@@ -1,6 +1,7 @@
 package com.generic.core;
 
-import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 
 public abstract class MapObject {
     protected int x;
@@ -79,8 +80,7 @@ public abstract class MapObject {
         this.m = m;
     }
 
-    public void flush()
-    {
+    public void flush() {
         this.x = -1;
         this.y = -1;
         this.m = null;

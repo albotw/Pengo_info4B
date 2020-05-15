@@ -7,31 +7,30 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LeaderboardDialogUI extends JPanel{
+public class LeaderboardDialogUI extends JPanel {
     private JButton refresh;
     private JButton close;
     private JPanel center;
 
     private LeaderboardDialog manager;
 
-    public LeaderboardDialogUI(LeaderboardDialog ld)
-    {
+    public LeaderboardDialogUI(LeaderboardDialog ld) {
         super();
 
         this.manager = ld;
 
         setLayout(new BorderLayout());
 
-        JPanel north  = new JPanel();
-               center = new JPanel();
-        JPanel south  = new JPanel();
+        JPanel north = new JPanel();
+        center = new JPanel();
+        JPanel south = new JPanel();
 
 
         north.setLayout(new GridLayout(1, 1));
         south.setLayout(new GridLayout(1, 1));
 
         refresh = new JButton("Actualiser");
-        close   = new JButton("Fermer");
+        close = new JButton("Fermer");
 
         refresh.addActionListener(new ActionListener() {
             @Override
@@ -55,8 +54,7 @@ public class LeaderboardDialogUI extends JPanel{
         add(center, BorderLayout.CENTER);
     }
 
-    public JPanel getCenterPanel()
-    {
+    public JPanel getCenterPanel() {
         return this.center;
     }
 }

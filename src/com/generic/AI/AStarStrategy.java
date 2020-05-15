@@ -9,68 +9,58 @@ import java.util.ArrayList;
 import static com.generic.utils.Equations.RandomizedInt;
 import static com.generic.utils.Equations.VectorialDistance;
 
-public class AStarStrategy implements Strategy{
+public class AStarStrategy implements Strategy {
     public char direction;
     private MapObject controlledObject;
     private MapObject target;
 
     private ArrayList<MapObject> targetList;
 
-    public AStarStrategy()
-    {
+    public AStarStrategy() {
         targetList = new ArrayList<MapObject>();
     }
 
-    public void process()
-    {
-
-        if (target != null)
-        {
+    public void process() {
+        if (target != null) {
             GameMap m = AbstractGame.instance.getMap();
-            if (m.getAt(target.getX(), target.getY()) == target)
-            {
+            if (m.getAt(target.getX(), target.getY()) == target) {
                 testDirection();
 
-                switch (direction)
-                {
-                    case 'H': controlledObject.goUp(); break;
-                    case 'B': controlledObject.goDown(); break;
-                    case 'G': controlledObject.goLeft(); break;
-                    case 'D': controlledObject.goRight(); break;
+                switch (direction) {
+                    case 'H':
+                        controlledObject.goUp();
+                        break;
+                    case 'B':
+                        controlledObject.goDown();
+                        break;
+                    case 'G':
+                        controlledObject.goLeft();
+                        break;
+                    case 'D':
+                        controlledObject.goRight();
+                        break;
                 }
-            }
-            else
-            {
+            } else {
                 acquireTarget();
             }
-        }
-        else
-        {
+        } else {
             acquireTarget();
         }
     }
 
-    public void acquireTarget()
-    {
+    public void acquireTarget() {
         targetList.clear();
         GameMap m = AbstractGame.instance.getMap();
 
-        for (int i = 0; i < m.getHeight(); i++)
-        {
-            for (int j = 0; j < m.getWidth(); j++)
-            {
+        for (int i = 0; i < m.getHeight(); i++) {
+            for (int j = 0; j < m.getWidth(); j++) {
                 MapObject tmp = m.getAt(j, i);
-                if (controlledObject.getType().equals("Penguin"))
-                {
-                    if (tmp.getType().equals("Animal"))
-                    {
+                if (controlledObject.getType().equals("Penguin")) {
+                    if (tmp.getType().equals("Animal")) {
                         targetList.add(tmp);
                     }
-                }
-                else if (controlledObject.getType().equals("Animal"))
-                {
-                    if (tmp.getType().equals("Penguin"))
-                    {
+                } else if (controlledObject.getType().equals("Animal")) {
+                    if (tmp.getType().equals("Penguin")) {
                         targetList.add(tmp);
                     }
                 }
@@ -78,14 +68,12 @@ public class AStarStrategy implements Strategy{
         }
 
         int rand = RandomizedInt(0, targetList.size() - 1);
-        if (rand < targetList.size())
-        {
+        if (rand < targetList.size()) {
             target = targetList.get(rand);
         }
     }
 
-    public void testDirection()
-    {
+    public void testDirection() {
         GameMap m = AbstractGame.instance.getMap();
 
         int x = controlledObject.getX();
@@ -96,39 +84,28 @@ public class AStarStrategy implements Strategy{
         double d_up = VectorialDistance(x, target.getX(), y - 1, target.getY());
         double d_down = VectorialDistance(x, target.getX(), y + 1, target.getY());
 
-        if (d_up <= d_down && d_up <= d_left && d_up <= d_right)
-        {
+        if (d_up <= d_down && d_up <= d_left && d_up <= d_right) {
             direction = 'H';
-        }
-        else if (d_down < d_up && d_down <= d_left && d_down <= d_right)
-        {
+        } else if (d_down < d_up && d_down <= d_left && d_down <= d_right) {
             direction = 'B';
-        }
-        else if (d_left < d_up && d_left <= d_right && d_left < d_down)
-        {
+        } else if (d_left < d_up && d_left <= d_right && d_left < d_down) {
             direction = 'G';
-        }
-        else if (d_right < d_up && d_right < d_down && d_right < d_left)
-        {
+        } else if (d_right < d_up && d_right < d_down && d_right < d_left) {
             direction = 'D';
         }
 
-        if (m.getAt(x - 1, y).getType().equals("DiamondBlock") || m.getAt(x + 1, y).getType().equals("DiamondBlock"))
-        {
+        if (m.getAt(x - 1, y).getType().equals("DiamondBlock") || m.getAt(x + 1, y).getType().equals("DiamondBlock")) {
             int rand = RandomizedInt(0, 1);
             if (rand == 0) direction = 'H';
             else direction = 'B';
-        }
-        else if (m.getAt(x, y - 1).getType().equals("DiamondBlock") || m.getAt(x, y + 1).getType().equals("DiamondBlock"))
-        {
+        } else if (m.getAt(x, y - 1).getType().equals("DiamondBlock") || m.getAt(x, y + 1).getType().equals("DiamondBlock")) {
             int rand = RandomizedInt(0, 1);
             if (rand == 0) direction = 'G';
             else direction = 'D';
         }
     }
 
-    public void updateControlledObject(MapObject co)
-    {
+    public void updateControlledObject(MapObject co) {
         this.controlledObject = co;
     }
 

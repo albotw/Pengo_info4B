@@ -6,5 +6,6 @@ public class Void extends MapObject {
         this.type = "void";
     }
 
-    public void destroy(MapObject killer) {}
+    public void destroy(MapObject killer) {
+    }
 }

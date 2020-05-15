@@ -18,18 +18,18 @@ public class LauncherUI extends JPanel {
 
     private ImagePanel Pengo;
 
-    public LauncherUI()
-    {
+    public LauncherUI() {
         super();
         setLayout(null);
 
-        manager      = Launcher.instance;
-        SoloMode     = new JButton("Mode Solo");
-        SoloSettings = new JButton("Réglages (Solo)");
-        MultiMode    = new JButton("Mode Réseau");
-        Profile      = new JButton("Profils");
-        leaderboard  = new JButton("Leaderboard");
-        Quit         = new JButton("Quitter");
+        manager = Launcher.instance;
+        SoloMode = new ImageButton("Solo", "ressources/button_focus_small.png", "ressources/button_noFocus_small.png");
+        SoloSettings = new ImageButton("Réglages", "ressources/button_focus_small.png", "ressources/button_noFocus_small.png");
+        MultiMode = new ImageButton("Multijoueur", "ressources/button_focus_large.png", "ressources/button_noFocus_large.png");
+        Profile = new ImageButton("Profils", "ressources/button_focus_large.png", "ressources/button_noFocus_large.png");
+        leaderboard = new ImageButton("Leaderboard", "ressources/button_focus_large.png", "ressources/button_noFocus_large.png");
+
+        Quit = new ImageButton("Quitter", "ressources/button_focus_large.png", "ressources/button_noFocus_large.png");
 
         SoloMode.addActionListener(new ActionListener() {
             @Override
@@ -69,16 +69,23 @@ public class LauncherUI extends JPanel {
         Quit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.exit(0);
+                manager.quit();
             }
         });
 
-        ImageIcon pengoLogo = new ImageIcon("ressources/Pengo-Logo.png");
+        ImageIcon pengoLogo = new ImageIcon("ressources/LOGO.png");
         Pengo = new ImagePanel(pengoLogo.getImage());
+        Pengo.setOpaque(false);
+
+        ImageIcon bg = new ImageIcon("ressources/menuBg.png");
+        ImagePanel background = new ImagePanel(bg.getImage());
+
+        background.setBounds(0, 0, 600, 450);
 
         Pengo.setBounds(0, 0, 580, 170);
 
         SoloMode.setBounds(145, 185, 140, 30);
+
         SoloSettings.setBounds(295, 185, 140, 30);
 
         MultiMode.setBounds(145, 225, 290, 30);
@@ -100,11 +107,12 @@ public class LauncherUI extends JPanel {
         add(leaderboard);
         add(Quit);
         add(copyright);
+
+        add(background);
         repaint();
     }
 
-    public void updateProfileMode(String pseudo)
-    {
+    public void updateProfileMode(String pseudo) {
         Profile.setText("Profils (" + pseudo + ")");
     }
 }
@@ -112,11 +120,10 @@ public class LauncherUI extends JPanel {
 /**
  * On a une fenêtre de 580 par 370
  * on met une marge de 15 pixels en dessous du logo -> y=185 de base
- *
+ * <p>
  * 580 / 2 = 290
  * 290 / 2 = 145
- *
+ * <p>
  * ce qui nous donne 145(vide) | 290(bouton) | 145(vide)
  * OU 145(vide) | 140(bouton) | 10(vide) | 140(bouton) | 145(vide)
- *
  */

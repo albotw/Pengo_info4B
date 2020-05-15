@@ -4,8 +4,6 @@ import com.generic.AI.AI;
 import com.generic.core.*;
 import com.generic.gameplay.AbstractGame;
 import com.generic.graphics.Window;
-import com.generic.net.multiplayer.OnlinePlayer;
-import com.generic.net.multiplayer.Serveur;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -16,17 +14,15 @@ import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 import static com.generic.gameplay.CONFIG_GAME.*;
 import static com.generic.utils.Equations.RandomizedInt;
-
 import static java.lang.Thread.sleep;
 
-public class OnlineGame extends AbstractGame{
-    // a modifier avec les IA.
+public class OnlineGame extends AbstractGame {
+
     private HashMap<MapEntity, OnlinePlayer> equipe1;
     private int equipe1Restants;
     private HashMap<MapEntity, OnlinePlayer> equipe2;
     private int equipe2Restants;
     private HashMap<MapEntity, AI> AIs;
-    private Window w;
 
     private OnlinePlayer host;
 
@@ -159,12 +155,9 @@ public class OnlineGame extends AbstractGame{
         initDiamondBlocks();
         initPlayers();
         initIA();
-        if (PvE)
-        {
-            srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", ""+AILives});
-        }
-        else
-        {
+        if (PvE) {
+            srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", "" + AILives});
+        } else {
             srv.sendCommandToAll("UPDATE PLAYER DATA", new String[]{"HIDE", "ENEMI"});
         }
     }
@@ -189,10 +182,6 @@ public class OnlineGame extends AbstractGame{
         map.deleteMap();
     }
 
-    /**
-     * TODO A MODIFIER PVP
-     */
-
     @Override
     public void respawnAnimal(Object owner) {
         boolean loop = true;
@@ -208,17 +197,15 @@ public class OnlineGame extends AbstractGame{
                     OnlinePlayer player = (OnlinePlayer) (owner);
                     player.setControlledObject(a);
                     equipe1.put(a, player);
-                } else
-                {
+                } else {
                     if (PvE) //IA = animal
                     {
                         AI bot = (AI) (owner);
                         bot.setControlledObject(a);
                         AIs.put(a, bot);
-                    }
-                    else if (PvP) // connexion(team 2) = animal
+                    } else if (PvP) // connexion(team 2) = animal
                     {
-                        OnlinePlayer player = (OnlinePlayer)(owner);
+                        OnlinePlayer player = (OnlinePlayer) (owner);
                         player.setControlledObject(a);
                         equipe2.put(a, player);
                     }
@@ -227,9 +214,6 @@ public class OnlineGame extends AbstractGame{
         } while (loop);
     }
 
-    /**
-     * TODO A MODIFIER PVP
-     */
 
     @Override
     public void respawnPenguin(Object owner) {
@@ -250,16 +234,13 @@ public class OnlineGame extends AbstractGame{
                         OnlinePlayer player = (OnlinePlayer) owner;
                         player.setControlledObject(p);
                         equipe1.put(p, player);
-                    }
-                    else
-                    {
+                    } else {
                         if (PvE)    //IA = animal
                         {
-                            AI bot = (AI)(owner);
+                            AI bot = (AI) (owner);
                             bot.setControlledObject(p);
                             AIs.put(p, bot);
-                        }
-                        else if (PvP)   //connexion(team 2) = pingouin
+                        } else if (PvP)   //connexion(team 2) = pingouin
                         {
                             OnlinePlayer player = (OnlinePlayer) owner;
                             player.setControlledObject(p);
@@ -272,35 +253,24 @@ public class OnlineGame extends AbstractGame{
         }
     }
 
-    /**
-     * TODO A MODIFIER PVP
-     */
     @Override
     public void gameEnd() {
         time.stopTimer();
         stop();
-        if (equipeGagnante == 1)
-        {
-            srv.sendCommandToTeam1("GAME END", new String[]{"VICTORY"});
-            if (PvP)
-            {
-                srv.sendCommandToTeam2("GAME END", new String[]{"DEFEAT"});
+        if (equipeGagnante == 1) {
+            srv.sendCommandToTeam1("GAME END", new String[]{"VICTORY", "" + time.getTime()});
+            if (PvP) {
+                srv.sendCommandToTeam2("GAME END", new String[]{"DEFEAT", "" + time.getTime()});
             }
-        }
-        else if (equipeGagnante == 2)
-        {
-            srv.sendCommandToTeam1("GAME END", new String[]{"DEFEAT"});
-            if (PvP)
-            {
-                srv.sendCommandToTeam2("GAME END", new String[]{"VICTORY"});
+        } else if (equipeGagnante == 2) {
+            srv.sendCommandToTeam1("GAME END", new String[]{"DEFEAT", "" + time.getTime()});
+            if (PvP) {
+                srv.sendCommandToTeam2("GAME END", new String[]{"VICTORY", "" + time.getTime()});
             }
         }
         srv.stopServer();
     }
 
-    /**
-     * TODO A MODIFIER PVP
-     */
     @Override
     public void animalKilled(Animal a, MapObject killer) {
         if (PvE) {
@@ -313,7 +283,7 @@ public class OnlineGame extends AbstractGame{
                 op.setPoints("AnimalKilled", 0);
 
                 AILives = AILives - 1;
-                srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", ""+AILives});
+                srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", "" + AILives});
                 if (AILives == 0) {
                     equipeGagnante = 1;
                     gameEnd();
@@ -329,14 +299,13 @@ public class OnlineGame extends AbstractGame{
                 owner.removeLive();
             }
         } else if (PvP) {
-            if(TEAM_1_IS_ANIMAL) { // animal == JOUEURS
+            if (TEAM_1_IS_ANIMAL) { // animal == JOUEURS
                 OnlinePlayer owner = equipe1.get(a);
                 owner.setPoints("AnimalKilled", 0);
                 owner.setControlledObject(null);
                 owner.removeLive();
 
-            }
-            else{
+            } else {
                 OnlinePlayer owner = equipe2.get(a);
                 owner.setPoints("AnimalKilled", 0);
                 owner.setControlledObject(null);
@@ -345,9 +314,6 @@ public class OnlineGame extends AbstractGame{
         }
     }
 
-    /**
-     * TODO A MODIFIER PVP
-     */
     @Override
     public void penguinKilled(Penguin p, MapObject killer) {
         if (PvE) {
@@ -366,7 +332,7 @@ public class OnlineGame extends AbstractGame{
                 op.setPoints("AnimalKilled", 0);
 
                 AILives = AILives - 1;
-                srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", ""+AILives});
+                srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", "" + AILives});
                 if (AILives == 0) {
                     equipeGagnante = 1;
                     gameEnd();
@@ -384,7 +350,7 @@ public class OnlineGame extends AbstractGame{
 
                 owner.setControlledObject(null);
                 owner.removeLive();
-            }else {                     //pingouin = connexion (team 2)
+            } else {                     //pingouin = connexion (team 2)
                 OnlinePlayer owner = equipe2.get(p);
 
                 OnlinePlayer op = equipe1.get(killer);
@@ -395,12 +361,9 @@ public class OnlineGame extends AbstractGame{
             }
         }
     }
+
     @Override
     public void stunTriggered(char dirMur) {
-        /**
-         * TODO: Optimisation
-         */
-
         switch (dirMur) {
             case 'G':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
@@ -443,29 +406,23 @@ public class OnlineGame extends AbstractGame{
 
     public void overrideMap(int x, int y, String type, String direction) {
         if (srv != null) {
-            srv.sendCommandToAll("WRITE MAP", new String[] { "" + x, "" + y, type, direction});
+            srv.sendCommandToAll("WRITE MAP", new String[]{"" + x, "" + y, type, direction});
         }
     }
 
-    public void playerKilled(OnlinePlayer p)
-    {
-        if (p.getEquipe() == 1)
-        {
+    public void playerKilled(OnlinePlayer p) {
+        if (p.getEquipe() == 1) {
             equipe1Restants--;
-        }
-        else if (p.getEquipe() == 2)
-        {
+        } else if (p.getEquipe() == 2) {
             equipe2Restants--;
         }
 
-        if (equipe1Restants <= 0)
-        {
+        if (equipe1Restants <= 0) {
             equipeGagnante = 2;
             gameEnd();
         }
 
-        if (equipe2Restants <= 0 && PvP)
-        {
+        if (equipe2Restants <= 0 && PvP) {
             equipeGagnante = 1;
             gameEnd();
         }
