@@ -6,7 +6,8 @@ import com.generic.gameplay.LocalGame;
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 
-public class Penguin extends MapEntity {
+public class Penguin extends MapEntity{
+
     public Penguin(int x, int y) {
         super(x, y);
         this.type = "Penguin";

@@ -97,6 +97,8 @@ public class AI extends Thread {
             setCurrentStrat();
             respawnActive = true;
             respawnTimer = 2000;
+            stunActive = false;
+            stunTimer = 0;
         }
         currentStrat.updateControlledObject(controlledObject);
     }

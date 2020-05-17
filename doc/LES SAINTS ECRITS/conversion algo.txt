@@ -70,7 +70,7 @@ ANCIEN ALGO ////////////////////////////////////////////////////////////////////
 package com.generic.gameplay;
 
 import com.generic.core.IceBlock;
-import com.generic.core.GameMap;
+import com.generic.gameplay.GameMap;
 import com.generic.graphics.SpriteManager;
 import com.generic.utils.Paire;
 import com.generic.utils.Pile;

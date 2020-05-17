@@ -2,8 +2,6 @@ package com.generic.core;
 
 import com.generic.gameplay.AbstractGame;
 
-import static java.lang.Thread.sleep;
-
 public class IceBlock extends MapBlock {
 
     public IceBlock(int x, int y) {

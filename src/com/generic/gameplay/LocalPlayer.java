@@ -47,7 +47,7 @@ public class LocalPlayer extends AbstractPlayer {
                 ih.flush();
             }
             try {
-                sleep(16);
+                sleep(25);
             } catch (Exception e) {
                 e.printStackTrace();
             }

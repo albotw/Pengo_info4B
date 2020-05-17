@@ -1,6 +1,6 @@
 package com.generic.AI;
 
-import com.generic.core.GameMap;
+import com.generic.gameplay.GameMap;
 import com.generic.core.MapObject;
 import com.generic.gameplay.AbstractGame;
 

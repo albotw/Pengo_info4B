@@ -1,6 +1,5 @@
 package com.generic.gameplay;
 
-import com.generic.core.GameMap;
 import com.generic.core.MapObject;
 import com.generic.core.MapObjectFactory;
 

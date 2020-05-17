@@ -1,5 +1,7 @@
 package com.generic.core;
 
+import com.generic.gameplay.GameMap;
+
 public class MapObjectFactory {
 
     private static void linkMap(MapObject mo, GameMap m) {

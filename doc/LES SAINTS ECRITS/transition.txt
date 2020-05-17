@@ -1,0 +1,13 @@
+Gestion de la transition:
+Quand un bloc souhaite se déplacer:
+	flag transition à true
+	flag direction mis a jour pour savoir dans quelle direction transitionner.
+	Le sprite manager récupère les flag.
+
+Si un bloc est dans un état de transition:
+	on peut considérer que sa position actuelle est celle de la case ou il s'est déplacé
+	(dans la map, le bloc est à sa nouvelle position mais dans l'affichage non)
+	on modifie la position du sprite comme étant sa position actuelle moins
+	(sa position d'avant + la valeur de step)
+	une fois que le step atteint la position actuelle sur la carte
+	flag transition remis a false.

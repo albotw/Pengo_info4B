@@ -1,7 +1,8 @@
 package com.generic.graphics;
 
-import com.generic.core.Animal;
-import com.generic.core.GameMap;
+import com.generic.core.MapObject;
+import com.generic.core.SubPixel;
+import com.generic.gameplay.GameMap;
 import com.generic.core.Orientation;
 import com.generic.core.Variante;
 
@@ -85,7 +86,74 @@ public class SpriteManager {
                 for (int j = -1; j <= GRID_WIDTH; j++) {
                     if (i != -1 && i != GRID_HEIGHT && j != -1 && j != GRID_WIDTH) {
                         if (!m.getAt(j, i).getType().equals("void")) {
-                            Sprite spr = new Sprite(xpos, ypos);
+                            MapObject tmp = m.getAt(j, i);
+                            Sprite spr = null;
+                            if (tmp.getTransitionState())
+                            {
+                                switch (tmp.getOrientation())
+                                {
+                                    case "W":
+                                    {
+                                        int old_pos = xpos + SPRITE_SIZE_HD;
+                                        int current_step_pos = old_pos - tmp.getSubpixel();
+                                        spr = new Sprite(current_step_pos, ypos);
+                                        tmp.setSubpixel(tmp.getSubpixel() + SubPixel.step);
+
+                                        if (tmp.getSubpixel() >= SPRITE_SIZE_HD)
+                                        {
+                                            tmp.setTransitionState(false);
+                                        }
+                                        break;
+                                    }
+
+                                    case "E":
+                                    {
+                                        int old_pos = xpos - SPRITE_SIZE_HD;
+                                        int current_step_pos = old_pos + tmp.getSubpixel();
+                                        spr = new Sprite(current_step_pos, ypos);
+                                        tmp.setSubpixel(tmp.getSubpixel() + SubPixel.step);
+
+                                        if (tmp.getSubpixel() >= SPRITE_SIZE_HD)
+                                        {
+                                            tmp.setTransitionState(false);
+                                        }
+                                        break;
+                                    }
+
+                                    case "N":
+                                    {
+                                        int old_pos = ypos + SPRITE_SIZE_HD;
+                                        int current_step_pos = old_pos - tmp.getSubpixel();
+                                        spr = new Sprite(xpos, current_step_pos);
+                                        tmp.setSubpixel(tmp.getSubpixel() + SubPixel.step);
+
+                                        if (tmp.getSubpixel() >= SPRITE_SIZE_HD)
+                                        {
+                                            tmp.setTransitionState(false);
+                                        }
+                                        break;
+                                    }
+
+                                    case "S":
+                                    {
+                                        int old_pos = ypos - SPRITE_SIZE_HD;
+                                        int current_step_pos = old_pos + tmp.getSubpixel();
+                                        spr = new Sprite(xpos, current_step_pos);
+                                        tmp.setSubpixel(tmp.getSubpixel() + SubPixel.step);
+
+                                        if (tmp.getSubpixel() >= SPRITE_SIZE_HD)
+                                        {
+                                            tmp.setTransitionState(false);
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                spr = new Sprite(xpos, ypos);
+                            }
+
                             String dir = "";
 
                             if (LOW_RES_MODE) {
@@ -94,24 +162,28 @@ public class SpriteManager {
                                 dir = "HD/";
                             }
 
-                            if (m.getAt(j, i).getType().equals("IceBlock")) {
+                            if (tmp.getType().equals("IceBlock")) {
                                 spr.loadImage("ressources/" + dir + "IceBlock.png");
-                            } else if (m.getAt(j, i).getType().equals("Penguin")) {
+                            }
+                            else if (tmp.getType().equals("Penguin"))
+                            {
                                 if (LOW_RES_MODE) {
                                     spr.loadImage("ressources/" + dir + "Penguin.png");
                                 } else {
-                                    Orientation o = (Orientation) m.getAt(j, i);
-                                    spr.loadImage("ressources/" + dir + "Lonk_" + o.getOrientation() + ".png");
+                                    spr.loadImage("ressources/" + dir + "Lonk_" + tmp.getOrientation() + ".png");
                                 }
-                            } else if (m.getAt(j, i).getType().equals("DiamondBlock")) {
+                            }
+                            else if (m.getAt(j, i).getType().equals("DiamondBlock"))
+                            {
                                 spr.loadImage("ressources/" + dir + "DiamondBlock.png");
-                            } else if (m.getAt(j, i).getType().equals("Animal")) {
+                            }
+                            else if (m.getAt(j, i).getType().equals("Animal"))
+                            {
                                 if (LOW_RES_MODE) {
                                     spr.loadImage("ressources/" + dir + "Animal.png");
                                 } else {
-                                    Orientation o = (Orientation) m.getAt(j, i);
                                     Variante v = (Variante)m.getAt(j, i);
-                                    spr.loadImage("ressources/" + dir + "/" + v.getVariante() + "/" + o.getOrientation() + ".png");
+                                    spr.loadImage("ressources/" + dir + "/" + v.getVariante() + "/" + tmp.getOrientation() + ".png");
                                 }
                             }
                             instance.addSprite(spr, "foreground");

@@ -2,8 +2,7 @@ package com.generic.net.multiplayer;
 
 import com.generic.UI.GameEndDialog;
 import com.generic.UI.GameOverlay;
-import com.generic.core.GameMap;
-import com.generic.core.MapObject;
+import com.generic.gameplay.GameMap;
 import com.generic.core.MapObjectFactory;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;

@@ -1,6 +1,5 @@
 package com.generic.launcher;
 
-import com.generic.Main;
 import com.generic.UI.LauncherUI;
 import com.generic.gameplay.LocalGame;
 import com.generic.gameplay.LocalPlayer;
