@@ -128,8 +128,16 @@ public class LocalGame extends AbstractGame {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         GED.Fermer();
         renderer.stopRendering();
+        renderer = null;
+        sm = null;
+        w = null;
+        AIs.clear();
+        LPThread = null;
+        localPlayer = null;
+
         Launcher.instance.onGameEnded();
     }
 
@@ -151,7 +159,7 @@ public class LocalGame extends AbstractGame {
         try {
             System.out.println("En attente de l'arrêt d'un Thread Player");
             localPlayer.flush();
-            //LPThread.interrupt();
+            LPThread.interrupt();
         } catch (Exception e) {
             e.printStackTrace();
         }

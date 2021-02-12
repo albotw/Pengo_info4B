@@ -3,14 +3,15 @@ package com.generic.core;
 import com.generic.gameplay.AbstractGame;
 import com.generic.gameplay.LocalGame;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.CONFIG.*;
 
 public class Penguin extends MapEntity{
 
     public Penguin(int x, int y) {
         super(x, y);
         this.type = "Penguin";
+        sprite.toggleOrientation();
+        sprite.loadImage("LONK");
     }
 
     public void goUp() {

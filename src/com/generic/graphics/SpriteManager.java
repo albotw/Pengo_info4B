@@ -1,9 +1,7 @@
 package com.generic.graphics;
 
 import com.generic.core.MapObject;
-import com.generic.core.SubPixel;
 import com.generic.gameplay.GameMap;
-import com.generic.core.Orientation;
 import com.generic.core.Variante;
 
 import java.util.ArrayList;
@@ -22,6 +20,7 @@ public class SpriteManager {
         instance = this;
         foreground = new ArrayList<Sprite>();
         background = new ArrayList<Sprite>();
+        generateBackground();
     }
 
     public static SpriteManager createSpriteManager() {
@@ -32,17 +31,14 @@ public class SpriteManager {
         return instance;
     }
 
-    public synchronized void addSprite(Sprite spr, String position) {
-        if (position == "foreground") {
-            foreground.add(spr);
-        } else if (position == "background") {
-            background.add(spr);
-        }
+    public static void flushSprites()
+    {
+        instance.foreground.clear();
+        instance.background.clear();
     }
 
-    public synchronized void flushSprites() {
-        foreground.clear();
-        background.clear();
+    public synchronized void addSprite(Sprite spr) {
+        foreground.add(spr);
     }
 
     public synchronized Sprite getSprite(int index, String position) {
@@ -69,7 +65,84 @@ public class SpriteManager {
      * on peut actualiser juste les mapobjects modifiés et non régénérer une tonne de sprites a chaque fois.
      */
 
-    public static void transfer(GameMap m, RenderThread rt) {
+    public static void transfer(GameMap m, RenderThread rt)
+    {
+        if (m != null)
+        {
+            instance.foreground.clear();
+            for (int i = 0; i < GRID_HEIGHT; i++)
+            {
+                for (int j = 0; j < GRID_WIDTH; j++)
+                {
+                    MapObject tmp = m.getAt(j, i);
+                    if (!tmp.getType().equals("void"))
+                    {
+                        instance.addSprite(tmp.getSprite());
+                    }
+                }
+            }
+        }
+    }
+
+    public void generateBackground()
+    {
+        for (int i = 0; i <= GRID_HEIGHT+1; i++)
+        {
+            for (int j = 0; j <= GRID_WIDTH+1; j++)
+            {
+                Sprite spr = null;
+                if (i == 0)
+                {
+                    spr = new Sprite(j * SPRITE_SIZE, 0);
+                    if (j == 0)
+                    {
+                        spr.loadImage("WA_HG");
+                    }
+                    else if (j == GRID_WIDTH+1)
+                    {
+                        spr.loadImage("WA_HD");
+                    }
+                    else
+                    {
+                        spr.loadImage("WallH");
+                    }
+                }
+                else if (i == GRID_HEIGHT +1)
+                {
+                    spr = new Sprite(j * SPRITE_SIZE, i * SPRITE_SIZE);
+                    if (j == 0)
+                    {
+                        spr.loadImage("WA_BG");
+                    }
+                    else if (j == GRID_WIDTH +1)
+                    {
+                        spr.loadImage("WA_BD");
+                    }
+                    else
+                    {
+                        spr.loadImage("WallB");
+                    }
+                }
+                else if (j == 0)
+                {
+                    spr = new Sprite(0, i * SPRITE_SIZE);
+                    spr.loadImage("WallG");
+                }
+                else if (j == GRID_WIDTH + 1)
+                {
+                    spr = new Sprite(j * SPRITE_SIZE, i * SPRITE_SIZE);
+                    spr.loadImage("WallD");
+                }
+
+                if (spr != null)
+                {
+                    instance.background.add(spr);
+                }
+            }
+        }
+    }
+    /*
+    public static void transfer_old(GameMap m, RenderThread rt) {
         if (m != null) {
             instance.flushSprites();
 
@@ -231,5 +304,5 @@ public class SpriteManager {
 
             }
         }
-    }
+    }*/
 }

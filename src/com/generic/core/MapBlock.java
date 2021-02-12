@@ -10,7 +10,7 @@ public abstract class MapBlock extends MapObject {
 
     private void tick_wait() {
         try {
-            Thread.currentThread().sleep(30);
+            Thread.currentThread().sleep(16);
         } catch (Exception e) {
             e.printStackTrace();
         }

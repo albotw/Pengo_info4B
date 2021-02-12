@@ -10,6 +10,7 @@ public class Animal extends MapEntity implements Variante{
         super(x, y);
         this.type = "Animal";
         this.isStun = false;
+        sprite.toggleOrientation();
     }
 
     public void action() {
@@ -33,6 +34,7 @@ public class Animal extends MapEntity implements Variante{
     }
 
     public void goLeft() {
+        super.setOrientation('W');
         if (!isStun) {
             if (m.getAt(x - 1, y).getType().equals("Penguin")) {
                 m.getAt(x - 1, y).destroy(this);
@@ -44,6 +46,7 @@ public class Animal extends MapEntity implements Variante{
     }
 
     public void goRight() {
+        super.setOrientation('E');
         if (!isStun) {
             if (m.getAt(x + 1, y).getType().equals("Penguin")) {
                 m.getAt(x + 1, y).destroy(this);
@@ -55,6 +58,7 @@ public class Animal extends MapEntity implements Variante{
     }
 
     public void goUp() {
+        super.setOrientation('N');
         if (!isStun) {
             if (m.getAt(x, y - 1).getType().equals("Penguin")) {
                 m.getAt(x, y - 1).destroy(this);
@@ -66,6 +70,7 @@ public class Animal extends MapEntity implements Variante{
     }
 
     public void goDown() {
+        super.setOrientation('S');
         if (!isStun) {
             if (m.getAt(x, y + 1).getType().equals("Penguin")) {
                 m.getAt(x, y + 1).destroy(this);
@@ -78,6 +83,7 @@ public class Animal extends MapEntity implements Variante{
 
     public void setVariante(String var) {
         this.variante = var;
+        sprite.loadImage(variante);
     }
 
     public String getVariante() {

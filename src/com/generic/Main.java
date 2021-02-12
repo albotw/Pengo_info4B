@@ -18,8 +18,6 @@ public class Main {
         if (args.length != 0) {
             if (args[0].equals("-createSave")) {
                 generateDummySaveFiles();
-            } else if (args[0].equals("-lowResMode")) {
-                CONFIG.setLowResMode(true);
             }
         }
 

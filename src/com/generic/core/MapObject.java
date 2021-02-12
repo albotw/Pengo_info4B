@@ -1,11 +1,12 @@
 package com.generic.core;
 
 import com.generic.gameplay.GameMap;
+import com.generic.graphics.Sprite;
 
 import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
 import static com.generic.gameplay.CONFIG.GRID_WIDTH;
 
-public abstract class MapObject implements SubPixel, Orientation{
+public abstract class MapObject{
     protected char orientation = 'N';
 
     protected int x;
@@ -13,53 +14,55 @@ public abstract class MapObject implements SubPixel, Orientation{
     protected GameMap m;
     protected String type;
 
-    protected boolean transition;
-    protected int sp;
+    protected Sprite sprite;
 
     public MapObject(int x, int y) {
         this.x = x;
         this.y = y;
+        this.sprite = new Sprite();
+        this.sprite.setPosition(x, y);
     }
 
     abstract void destroy(MapObject killer);
 
+    public void update()
+    {
+        m.place(this, x, y);
+        sprite.setPosition(x, y);
+    }
     public void goLeft() {
         this.orientation = 'W';
         if (x > 0) {
-            transition = true;
             m.release(x, y);
             x--;
-            m.place(this, x, y);
+            update();
         }
     }
 
     public void goRight() {
         this.orientation = 'E';
         if (x < GRID_WIDTH - 1) {
-            transition = true;
             m.release(x, y);
             x++;
-            m.place(this, x, y);
+            update();
         }
     }
 
     public void goUp() {
         this.orientation = 'N';
         if (y > 0) {
-            transition = true;
             m.release(x, y);
             y--;
-            m.place(this, x, y);
+            update();
         }
     }
 
     public void goDown() {
         this.orientation = 'S';
         if (y < GRID_HEIGHT - 1) {
-            transition = true;
             m.release(x, y);
             y++;
-            m.place(this, x, y);
+            update();
         }
     }
 
@@ -87,34 +90,21 @@ public abstract class MapObject implements SubPixel, Orientation{
         this.m = m;
     }
 
+    public Sprite getSprite() { return this.sprite; }
+
     public void flush() {
         this.x = -1;
         this.y = -1;
         this.m = null;
         this.type = "";
+        this.sprite = null;
+        this.m = null;
     }
 
     public String getOrientation() {return "" + orientation;}
 
-    public void setOrientation(char direction){this.orientation = direction;}
-
-    public void setSubpixel(int val){
-        this.sp = val;
-    }
-
-    public boolean getTransitionState()
-    {
-        return this.transition;
-    }
-
-    public void setTransitionState(boolean val)
-    {
-        this.transition = val;
-        this.sp = 0;
-    }
-
-    public int getSubpixel()
-    {
-        return this.sp;
+    public void setOrientation(char direction){
+        this.orientation = direction;
+        this.sprite.setOrientation(this.orientation);
     }
 }

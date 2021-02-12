@@ -1,6 +1,7 @@
 package com.generic.core;
 
-public class PlaceholderBlock extends MapObject implements Orientation, Variante{
+
+public class PlaceholderBlock extends MapObject implements Variante{
     private char orientation = 'N';
     private String variante;
 

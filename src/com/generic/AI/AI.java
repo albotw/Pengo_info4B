@@ -36,7 +36,6 @@ public class AI extends Thread {
                 if (!respawnActive && !flush) {
                     currentStrat.process();
                 }
-            } else {
             }
 
             try {
@@ -69,18 +68,18 @@ public class AI extends Thread {
     public void checkStun() {
         if (controlledObject.getType().equals("Animal")) {
             Animal a = (Animal) (controlledObject);
-            if (stunActive == false && a.isStun()) {
+            if (stunActive && a.isStun()) {
                 stunActive = true;
                 stunTimer = STUN_TIME;
                 System.out.println("Stun Actif " + stunTimer + " ms restant");
             }
 
-            if (stunActive == true) {
+            if (stunActive) {
                 stunTimer -= AI_TICK_RATE;
                 System.out.println("Stun Actif " + stunTimer + " ms restant");
             }
 
-            if (stunTimer == 0) {
+            if (stunTimer <= 0) {
                 stunActive = false;
                 a.deactivateStun();
             }

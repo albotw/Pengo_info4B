@@ -2,7 +2,6 @@ package com.generic.gameplay;
 
 import com.generic.core.Animal;
 import com.generic.core.MapObject;
-import com.generic.core.Orientation;
 import com.generic.core.Void;
 import com.generic.net.multiplayer.OnlineGame;
 
@@ -38,11 +37,11 @@ public class GameMap {
         if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
             if (o.getType().equals("Penguin")) {
-                srv.overrideMap(x, y, o.getType(), ((Orientation) (o)).getOrientation(), "");
+                srv.overrideMap(x, y, o.getType(), o.getOrientation(), "");
             }
             else if (o.getType().equals("Animal"))
             {
-                srv.overrideMap(x, y, o.getType(), ((Orientation) (o)).getOrientation(), ((Animal)(o)).getVariante());
+                srv.overrideMap(x, y, o.getType(), o.getOrientation(), ((Animal)(o)).getVariante());
             }
             else {
                 srv.overrideMap(x, y, o.getType(), "", "");
