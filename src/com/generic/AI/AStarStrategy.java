@@ -20,6 +20,14 @@ public class AStarStrategy implements Strategy {
         targetList = new ArrayList<MapObject>();
     }
 
+    public void flush()
+    {
+        direction = '\0';
+        controlledObject = null;
+        target = null;
+        targetList.clear();
+    }
+
     public void process() {
         if (target != null) {
             GameMap m = AbstractGame.instance.getMap();

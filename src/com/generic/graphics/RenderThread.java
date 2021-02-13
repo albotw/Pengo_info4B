@@ -81,6 +81,11 @@ public class RenderThread extends Thread {
         SpriteManager.instance.flushSprites();
         w.setVisible(false);
         w.dispose();
+
+        fps = null;
+        w = null;
+        rp = null;
+        go = null;
     }
 
     public void stopRendering() {

@@ -25,10 +25,8 @@ public abstract class AbstractGame {
     }
 
     public void initDiamondBlocks() {
-        boolean loop = true;
-        int cpt = 0;
         for (int k = 0; k < 3; k++) {
-            loop = true;
+            boolean loop = true;
             do {
                 int initX = RandomizedInt(1, GRID_WIDTH - 2);
                 int initY = RandomizedInt(1, GRID_HEIGHT - 2);
@@ -39,7 +37,7 @@ public abstract class AbstractGame {
                         MapObjectFactory.createDiamondBlock(initX, initY, this.map);
                     }
                 }
-            } while (loop && cpt != 3);
+            } while (loop);
         }
     }
 

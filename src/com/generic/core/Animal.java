@@ -31,6 +31,7 @@ public class Animal extends MapEntity implements Variante{
     public void destroy(MapObject source) {
         AbstractGame.instance.getMap().release(x, y);
         AbstractGame.instance.animalKilled(this, source);
+        this.sprite = null;
     }
 
     public void goLeft() {

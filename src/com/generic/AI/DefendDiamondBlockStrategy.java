@@ -20,13 +20,20 @@ public class DefendDiamondBlockStrategy implements Strategy {
         targetList = new ArrayList<MapObject>();
     }
 
+    public void flush()
+    {
+        direction = '\0';
+        controlledObject = null;
+        target = null;
+        m = null;
+        targetList.clear();
+    }
 
     public void updateControlledObject(MapObject o) {
         this.controlledObject = o;
     }
 
     public void process() {
-
         if (target != null) {
             if (m.getAt(target.getX(), target.getY()) == target) {
                 setDirection();

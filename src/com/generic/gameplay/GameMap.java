@@ -87,6 +87,7 @@ public class GameMap {
     public void deleteMap() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
+                if (tab[j][i] != null) {tab[j][i].flush();}
                 tab[j][i] = null;
             }
         }

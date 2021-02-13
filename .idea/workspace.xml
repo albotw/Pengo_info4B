@@ -77,7 +77,7 @@
       <recent name="E:\Yann\Code\projet_info4B_2019_2020\src\ressources" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Pengo">
+  <component name="RunManager" selected="Compound.Pengo x2">
     <configuration name="Pengo x2" type="CompoundRunConfigurationType">
       <toRun name="Pengo" type="Application" />
       <toRun name="Pengo -NOBUILD" type="Application" />
@@ -232,29 +232,12 @@
       <workItem from="1589744284811" duration="3257000" />
       <workItem from="1613157707592" duration="7199000" />
       <workItem from="1613164940485" duration="1939000" />
+      <workItem from="1613207753635" duration="2591000" />
+      <workItem from="1613229607470" duration="988000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="2" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/com/generic/launcher/Launcher.java</url>
-          <line>92</line>
-          <properties class="com.generic.launcher.Launcher" method="onGameEnded">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/generic/launcher/Launcher.java</url>
-          <line>88</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

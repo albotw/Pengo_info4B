@@ -19,6 +19,14 @@ public class AStarInvertStrategy implements Strategy {
         targetList = new ArrayList<MapObject>();
     }
 
+    public void flush()
+    {
+        direction = '\0';
+        controlledObject = null;
+        target = null;
+        targetList.clear();
+    }
+
     public void acquireTarget() {
         targetList.clear();
         GameMap m = AbstractGame.instance.getMap();

@@ -14,7 +14,6 @@ public class GameTimer extends Thread {
     public void run() {
         while (stop == false) {
             time++;
-            System.out.println("Timer = " + time);
             try {
                 sleep(1000);
             } catch (Exception e) {

@@ -29,6 +29,12 @@ public class RandStrategy implements Strategy {
         }
     }
 
+    public void flush()
+    {
+        direction = '\0';
+        controlledObject = null;
+    }
+
     public void process() {
         int rand = RandomizedInt(0, 10);
         if (testDirections() && rand <= 8) {

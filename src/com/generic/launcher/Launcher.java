@@ -93,12 +93,19 @@ public class Launcher extends JFrame {
     public void onGameEnded() {
         System.out.println("Game " + currentLevel + " / " + N_NIVEAUX);
         localLeaderboard.addToLeaderboard(playerProfiles.get(mainProfile));
+        game = null;
         if (currentLevel >= N_NIVEAUX) {
             this.setVisible(true);
         } else {
             currentLevel++;
-            LocalGame g = new LocalGame();
+            game = new LocalGame();
         }
+
+        //purge de la mémoire et des objets non supprimés
+        //nécessaire car fuite de mémoire à la fin de chaque partie.
+        //40~60 Mo de perdus.
+        System.gc();
+        System.runFinalization();
     }
 
     public void loadProfiles() {

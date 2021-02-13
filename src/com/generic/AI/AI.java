@@ -34,7 +34,12 @@ public class AI extends Thread {
                 checkStun();
                 checkRespawn();
                 if (!respawnActive && !flush) {
-                    currentStrat.process();
+                    try{
+                        currentStrat.process();
+                    }catch(Exception e)
+                    {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
 
@@ -48,6 +53,7 @@ public class AI extends Thread {
 
         target = null;
         controlledObject = null;
+        currentStrat.flush();
         System.out.println("--- Arrêt Thread IA ---");
     }
 

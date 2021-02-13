@@ -28,26 +28,32 @@ public class LocalPlayer extends AbstractPlayer {
         this.flush = false;
 
         while (!flush) {
-            if (controlledObject != null) {
-                if (ih.UP == true) {
-                    controlledObject.goUp();
-                } else if (ih.DOWN == true) {
-                    controlledObject.goDown();
-                } else if (ih.LEFT == true) {
-                    controlledObject.goLeft();
-                } else if (ih.RIGHT == true) {
-                    controlledObject.goRight();
-                } else if (ih.ACTION == true) {
-                    if (controlledObject.getType().equals("Penguin")) {
-                        ((MapEntity) (controlledObject)).action();
+            try {
+                if (controlledObject != null) {
+                    if (ih.UP == true) {
+                        controlledObject.goUp();
+                    } else if (ih.DOWN == true) {
+                        controlledObject.goDown();
+                    } else if (ih.LEFT == true) {
+                        controlledObject.goLeft();
+                    } else if (ih.RIGHT == true) {
+                        controlledObject.goRight();
+                    } else if (ih.ACTION == true) {
+                        if (controlledObject.getType().equals("Penguin")) {
+                            ((MapEntity) (controlledObject)).action();
+                        }
                     }
                 }
+            }
+            catch(Exception e)
+            {
+                System.out.println(e.getMessage());
             }
             if (ih != null) {
                 ih.flush();
             }
             try {
-                sleep(25);
+                sleep(16);
             } catch (Exception e) {
                 e.printStackTrace();
             }

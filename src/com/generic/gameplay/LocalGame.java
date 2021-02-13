@@ -149,6 +149,7 @@ public class LocalGame extends AbstractGame {
             try {
                 System.out.println("En attente de l'arrêt d'un Thread IA");
                 tmp.flush();
+                tmp.interrupt();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -170,6 +171,7 @@ public class LocalGame extends AbstractGame {
     public void animalKilled(Animal a, MapObject killer) {
         if (PLAYER_IS_PENGUIN) {
             AI owner = AIs.get(a);
+            AIs.remove(a);
             owner.setControlledObject(null);
 
             localPlayer.setPoints("AnimalKilled", 0);
