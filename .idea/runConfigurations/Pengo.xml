@@ -1,9 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Pengo" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
-    <module name="projet_info4B_2019_2020" />
-    <method v="2">
-      <option name="Make" enabled="true" />
-    </method>
-  </configuration>
-</component>

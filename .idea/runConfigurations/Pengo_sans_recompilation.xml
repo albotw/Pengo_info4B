@@ -1,7 +1,0 @@
-<component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="Pengo sans recompilation" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
-    <module name="projet_info4B_2019_2020" />
-    <method v="2" />
-  </configuration>
-</component>
