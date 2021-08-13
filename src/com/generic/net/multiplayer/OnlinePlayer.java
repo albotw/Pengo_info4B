@@ -8,8 +8,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Iterator;
 
-import static com.generic.gameplay.CONFIG_GAME.TEAM_1_IS_ANIMAL;
-import static com.generic.gameplay.CONFIG_GAME.TEAM_2_IS_ANIMAL;
+import static com.generic.gameplay.config.CONFIG_GAME.TEAM_1_IS_ANIMAL;
+import static com.generic.gameplay.config.CONFIG_GAME.TEAM_2_IS_ANIMAL;
 
 
 public class OnlinePlayer extends AbstractPlayer {

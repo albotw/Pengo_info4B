@@ -1,6 +1,6 @@
 package com.generic.net.multiplayer;
 
-import com.generic.gameplay.CONFIG_GAME;
+import com.generic.gameplay.config.CONFIG_GAME;
 import com.generic.net.Command;
 
 import java.io.IOException;

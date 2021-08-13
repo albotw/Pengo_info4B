@@ -2,17 +2,22 @@ package com.generic.net.multiplayer;
 
 import com.generic.AI.AI;
 import com.generic.core.*;
+import com.generic.core.blocks.IceBlock;
+import com.generic.core.blocks.MapBlock;
+import com.generic.core.entities.Animal;
+import com.generic.core.entities.MapEntity;
+import com.generic.core.entities.Penguin;
 import com.generic.gameplay.AbstractGame;
-import com.generic.graphics.Window;
+import com.generic.gameplay.events.ThreadID;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
-import static com.generic.gameplay.CONFIG_GAME.*;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG_GAME.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
@@ -42,7 +47,7 @@ public class OnlineGame extends AbstractGame {
         host = srv.getHost();
         mg.pre_init();
         mg.path_init();
-        start();
+        startGame();
     }
 
     @Override
@@ -64,7 +69,7 @@ public class OnlineGame extends AbstractGame {
                 int initX = RandomizedInt(0, GRID_WIDTH - 1);
                 int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (map.getAt(initX, initY).getType().equals("void")) {
+                if (map.getAt(initX, initY) == null) {
                     loop = false;
 
                     if (TEAM_2_IS_ANIMAL) {
@@ -96,7 +101,7 @@ public class OnlineGame extends AbstractGame {
                     int initX = RandomizedInt(0, GRID_WIDTH - 1);
                     int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                    if (map.getAt(initX, initY).getType().equals("void")) {
+                    if (map.getAt(initX, initY) == null) {
                         loop = false;
 
                         if (TEAM_1_IS_ANIMAL) {
@@ -128,9 +133,9 @@ public class OnlineGame extends AbstractGame {
                     int initX = RandomizedInt(0, GRID_WIDTH - 1);
                     int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                    if (map.getAt(initX, initY).getType().equals("IceBlock")) {
+                    if (map.getAt(initX, initY) instanceof IceBlock) {
                         loop = false;
-                        AI ai = new AI();
+                        AI ai = new AI(ThreadID.AI_1);
 
                         if (!TEAM_1_IS_ANIMAL) {
                             Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
@@ -150,7 +155,7 @@ public class OnlineGame extends AbstractGame {
         }
     }
 
-    public void start() {
+    public void startGame() {
         time.start();
         initDiamondBlocks();
         initPlayers();
@@ -163,14 +168,13 @@ public class OnlineGame extends AbstractGame {
     }
 
 
-    public void stop() {
+    public void endGame() {
         Iterator it = AIs.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             AI tmp = (AI) pair.getValue();
             try {
                 System.out.println("En attente de l'arrêt d'un Thread IA");
-                tmp.flush();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -189,7 +193,7 @@ public class OnlineGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY).getType().equals("IceBlock")) {
+            if (map.getAt(initX, initY) instanceof IceBlock) {
                 loop = false;
                 Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                 if (TEAM_1_IS_ANIMAL) // connexion (team 1) = animal
@@ -229,7 +233,7 @@ public class OnlineGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY).getType().equals("void")) {
+            if (map.getAt(initX, initY) == null) {
                 loop = false;
                 Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
                 if (!TEAM_1_IS_ANIMAL) //connexion (team 1) = pingouin
@@ -255,9 +259,9 @@ public class OnlineGame extends AbstractGame {
     }
 
     @Override
-    public void gameEnd() {
+    public void postGame() {
         time.stopTimer();
-        stop();
+        endGame();
         if (equipeGagnante == 1) {
             srv.sendCommandToTeam1("GAME END", new String[]{"VICTORY", "" + time.getTime()});
             if (PvP) {
@@ -287,7 +291,7 @@ public class OnlineGame extends AbstractGame {
                 srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", "" + AILives});
                 if (AILives == 0) {
                     equipeGagnante = 1;
-                    gameEnd();
+                    postGame();
                 } else {
                     respawnAnimal(owner);
                 }
@@ -336,7 +340,7 @@ public class OnlineGame extends AbstractGame {
                 srv.sendCommandToTeam1("UPDATE PLAYER DATA", new String[]{"ENEMI", "" + AILives});
                 if (AILives == 0) {
                     equipeGagnante = 1;
-                    gameEnd();
+                    postGame();
                 } else {
                     System.out.println("call respawn");
                     respawnPenguin(owner);
@@ -370,7 +374,7 @@ public class OnlineGame extends AbstractGame {
             case 'G':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
                     MapObject mo = map.getAt(0, i);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -379,7 +383,7 @@ public class OnlineGame extends AbstractGame {
             case 'D':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
                     MapObject mo = map.getAt(GRID_WIDTH - 1, i);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -388,7 +392,7 @@ public class OnlineGame extends AbstractGame {
             case 'H':
                 for (int i = 0; i < GRID_WIDTH; i++) {
                     MapObject mo = map.getAt(i, 0);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -397,7 +401,7 @@ public class OnlineGame extends AbstractGame {
             case 'B':
                 for (int i = 0; i < GRID_WIDTH; i++) {
                     MapObject mo = map.getAt(i, GRID_HEIGHT - 1);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -421,12 +425,12 @@ public class OnlineGame extends AbstractGame {
 
         if (equipe1Restants <= 0) {
             equipeGagnante = 2;
-            gameEnd();
+            postGame();
         }
 
         if (equipe2Restants <= 0 && PvP) {
             equipeGagnante = 1;
-            gameEnd();
+            postGame();
         }
     }
 

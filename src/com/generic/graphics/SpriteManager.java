@@ -2,11 +2,10 @@ package com.generic.graphics;
 
 import com.generic.core.MapObject;
 import com.generic.gameplay.GameMap;
-import com.generic.core.Variante;
 
 import java.util.ArrayList;
 
-import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.config.CONFIG.*;
 
 //Singleton OK
 
@@ -75,7 +74,7 @@ public class SpriteManager {
                 for (int j = 0; j < GRID_WIDTH; j++)
                 {
                     MapObject tmp = m.getAt(j, i);
-                    if (!tmp.getType().equals("void"))
+                    if (tmp != null)
                     {
                         instance.addSprite(tmp.getSprite());
                     }

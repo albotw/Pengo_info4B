@@ -1,6 +1,6 @@
 package com.generic.UI;
 
-import com.generic.gameplay.CONFIG;
+import com.generic.gameplay.config.CONFIG;
 
 import javax.swing.*;
 import java.awt.*;

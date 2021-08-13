@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static com.generic.gameplay.CONFIG_GAME.*;
+import static com.generic.gameplay.config.CONFIG_GAME.*;
 
 public class SettingsDialog extends JDialog {
 

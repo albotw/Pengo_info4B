@@ -1,16 +1,18 @@
 package com.generic.gameplay;
 
-import com.generic.core.MapEntity;
+import com.generic.core.entities.MapEntity;
 import com.generic.core.MapObject;
 
-import static com.generic.gameplay.CONFIG_GAME.PLAYER_INIT_LIVES;
+import static com.generic.gameplay.config.CONFIG_GAME.PLAYER_INIT_LIVES;
 
 public abstract class AbstractPlayer implements Runnable {
     protected String pseudo;
     protected int currentLives;
-    protected int points;
     protected MapEntity controlledObject;
-    private int addLiveDelta;
+
+    protected int points;
+    protected int nextLiveCounter;
+    protected int nextLiveThresold = 4000;
 
     public AbstractPlayer(String pseudo) {
         this.pseudo = pseudo;
@@ -22,37 +24,51 @@ public abstract class AbstractPlayer implements Runnable {
 
     public abstract void removeLive();
 
-    public void setPoints(String context, int time) {
-        switch (context) {
-            case "AnimalKilled":
-                points = points + 400;
-                addLiveDelta = addLiveDelta + 400;
-                break;
+    public void addKillPoints()
+    {
+        points += 400;
+        nextLiveCounter += 400;
+        addLive();
+    }
 
-            case "GameEnd":
-                if (time <= 20) {
-                    points = points + 5000;
-                    addLiveDelta = addLiveDelta + 5000;
-                } else if (time > 20 && time <= 29) {
-                    points = points + 2000;
-                    addLiveDelta = addLiveDelta + 2000;
-                } else if (time > 29 && time <= 39) {
-                    points = points + 1000;
-                    addLiveDelta = addLiveDelta + 1000;
-                } else if (time > 39 && time <= 60) {
-                    points = points + 500;
-                    addLiveDelta = addLiveDelta + 5000;
-                } else
-                    points = points + 150;
-
-                break;
-
-            case "Reset":
-                points = 0;
-        }
-        if (addLiveDelta >= 4000) {
+    public void addLive()
+    {
+        if (nextLiveCounter >= nextLiveThresold)
+        {
             currentLives++;
+            nextLiveThresold *= 1.3;
         }
+    }
+
+    public void addEndPoints(int time)
+    {
+        if (time <= 20)
+        {
+            points += 5000;
+            nextLiveCounter += 5000;
+        }
+        else if (time > 20 && time <= 29)
+        {
+            points += 2000;
+            nextLiveCounter += 2000;
+        }
+        else if (time > 29 && time <= 39)
+        {
+            points += 1000;
+            nextLiveCounter += 1000;
+        }
+        else if (time > 39 && time <= 60)
+        {
+            points += 500;
+            nextLiveCounter += 500;
+        }
+
+        addLive();
+    }
+
+    //TODO: supprimer
+    public void setPoints(String context, int time) {
+
     }
 
     public int getPoints() {

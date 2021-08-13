@@ -15,7 +15,7 @@ package com.generic.graphics;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.generic.gameplay.CONFIG.*;
+import static com.generic.gameplay.config.CONFIG.*;
 
 public class Sprite {
     protected int x;

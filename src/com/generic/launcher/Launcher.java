@@ -12,7 +12,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import static com.generic.gameplay.CONFIG_GAME.N_NIVEAUX;
+import static com.generic.gameplay.config.CONFIG_GAME.N_NIVEAUX;
 
 public class Launcher extends JFrame {
     public static Launcher instance;

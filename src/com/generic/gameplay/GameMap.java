@@ -1,8 +1,8 @@
 package com.generic.gameplay;
 
-import com.generic.core.Animal;
+import com.generic.core.entities.Animal;
 import com.generic.core.MapObject;
-import com.generic.core.Void;
+import com.generic.core.entities.Penguin;
 import com.generic.net.multiplayer.OnlineGame;
 
 public class GameMap {
@@ -23,7 +23,9 @@ public class GameMap {
 
     public MapObject getAt(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height || tab == null || tab[x][y] == null) {
-            return new Void(x, y);
+            //TODO: fuite de mémoire ?
+            //return new Void(x, y);
+            return null;
         } else {
             return tab[x][y];
         }
@@ -36,15 +38,15 @@ public class GameMap {
 
         if (!local) {
             OnlineGame srv = (OnlineGame) (AbstractGame.instance);
-            if (o.getType().equals("Penguin")) {
-                srv.overrideMap(x, y, o.getType(), o.getOrientation(), "");
+            if (o instanceof Penguin) {
+                srv.overrideMap(x, y, "Penguin", o.getOrientation(), "");
             }
-            else if (o.getType().equals("Animal"))
+            else if (o instanceof Animal)
             {
-                srv.overrideMap(x, y, o.getType(), o.getOrientation(), ((Animal)(o)).getVariante());
+                srv.overrideMap(x, y, "Animal", o.getOrientation(), ((Animal)(o)).getVariante());
             }
             else {
-                srv.overrideMap(x, y, o.getType(), "", "");
+                srv.overrideMap(x, y, o.getClass().getName(), "", "");
             }
         }
     }
@@ -87,7 +89,7 @@ public class GameMap {
     public void deleteMap() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
-                if (tab[j][i] != null) {tab[j][i].flush();}
+                if (tab[j][i] != null) {tab[j][i].clean();}
                 tab[j][i] = null;
             }
         }

@@ -2,9 +2,10 @@ package com.generic.gameplay;
 
 import com.generic.core.MapObject;
 import com.generic.core.MapObjectFactory;
+import com.generic.gameplay.v2.GameController;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.RandomizedInt;
 
 public class MapGenerator {
@@ -12,8 +13,8 @@ public class MapGenerator {
     int y = GRID_HEIGHT - 1;
     GameMap m;
 
-    public MapGenerator() {
-        m = AbstractGame.instance.getMap();
+    public MapGenerator(GameMap map) {
+        m = map;
     }
 
     public void pre_init() {
@@ -31,7 +32,7 @@ public class MapGenerator {
             x = 0;
             for (; x < GRID_WIDTH; x = x + 2) {
                 // System.out.println("position courante x = " + x + " | y = " + y);
-                if (m.getAt(x, y).getType().equals("void")) {
+                if (m.getAt(x, y) == null) {
 
                     if (!isEmpty(x, y - 2) && (y - 2) >= 0) {
                         // System.out.println("part en haut vers [" + x + "," + (y - 2) + "]");
@@ -119,7 +120,7 @@ public class MapGenerator {
 
     public boolean isEmpty(int x, int y) {
         MapObject mo = m.getAt(x, y);
-        if (mo.getType().equals("void")) {
+        if (mo == null) {
             return true;
         } else {
             return false;

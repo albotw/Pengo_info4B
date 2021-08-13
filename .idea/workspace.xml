@@ -7,7 +7,105 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcb0f6eb-6f87-4262-970f-a0296307cefd" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jnativehook_2_1_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/AnimalKilledEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/BotLostEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/Event.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/EventIO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/RespawnAnimalEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/RespawnPenguinEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/StunTriggeredEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/events/ThreadID.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/v2/GameController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/v2/Gameplay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/v2/LocalGameplay.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/generic/gameplay/v2/MapObjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/PENGO__DUMMY_SAVES.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Pengo_sans_sauvegardes.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/runConfigurations/Pengo__NOBUILD.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/runConfigurations/Pengo_sans_recompilation.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/LES SAINTS ECRITS/conversion algo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/LES SAINTS ECRITS/conversion algo.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doc/LES SAINTS ECRITS/notes.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/LES SAINTS ECRITS/notes.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/projet_info4B_2019_2020_jar/projet_info4B_2019_2020.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/projet_info4B_2019_2020_jar/projet_info4B_2019_2020.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/PlayerProfiles.sav" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/PlayerProfiles.sav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/AI.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/AI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/AStarInvertStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/AStarStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/DefendDiamondBlockStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/RandStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/AI/Strategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/UI/GEDPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/UI/GEDPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/Animal.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/DiamondBlock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/IceBlock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/MapBlock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/MapEntity.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/MapObject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/MapObject.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/MapObjectFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/MapObjectFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/Penguin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/PlaceholderBlock.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/Variante.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/core/Void.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/AbstractGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/AbstractGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/AbstractPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/AbstractPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/CONFIG.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/CONFIG_GAME.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/GameMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/LocalGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/LocalGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/LocalPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/LocalPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/MapGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/gameplay/MapGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/RenderPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/RenderPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/RenderThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/RenderThread.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/Sprite.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/Sprite.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/SpriteManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/graphics/SpriteManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/launcher/Launcher.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/launcher/Launcher.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/launcher/Online.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/launcher/Online.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/launcher/SettingsDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/launcher/SettingsDialog.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/OnlineClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/OnlineClient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/OnlineGame.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/OnlineGame.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/OnlinePlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/OnlinePlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/Serveur.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/net/multiplayer/Serveur.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/projet_info4B_2019_2020/com/generic/utils/InputHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/projet_info4B_2019_2020.iml" beforeDir="false" afterPath="$PROJECT_DIR$/projet_info4B_2019_2020.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/AI/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/AI/AI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/AI/AStarInvertStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/AI/strategy/AStarInvertStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/AI/AStarStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/AI/strategy/AStarStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/AI/DefendDiamondBlockStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/AI/strategy/DefendDiamondBlockStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/AI/RandStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/AI/strategy/RandStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/AI/Strategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/AI/strategy/Strategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/UI/GEDPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/UI/GEDPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/entities/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/DiamondBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/blocks/DiamondBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/IceBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/blocks/IceBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/MapBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/blocks/MapBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/MapEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/entities/MapEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/MapObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/MapObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/MapObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/MapObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/Penguin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/entities/Penguin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/PlaceholderBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/core/blocks/PlaceholderBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/Variante.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/core/Void.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/AbstractGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/AbstractGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/AbstractPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/AbstractPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/CONFIG.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/config/CONFIG.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/CONFIG_GAME.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/config/CONFIG_GAME.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/LocalGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/LocalGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/LocalPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/LocalPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/gameplay/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/gameplay/MapGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/graphics/RenderPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/graphics/RenderPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/graphics/RenderThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/graphics/RenderThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/graphics/Sprite.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/graphics/Sprite.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/graphics/SpriteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/graphics/SpriteManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/launcher/Launcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/launcher/Launcher.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/launcher/Online.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/launcher/Online.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/launcher/SettingsDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/launcher/SettingsDialog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/net/multiplayer/OnlineClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/net/multiplayer/OnlineClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/net/multiplayer/OnlineGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/net/multiplayer/OnlineGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/net/multiplayer/OnlinePlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/net/multiplayer/OnlinePlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/net/multiplayer/Serveur.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/generic/net/multiplayer/Serveur.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/generic/utils/InputHandler.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,13 +119,24 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -45,11 +154,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/jnativehook/targets" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
@@ -77,7 +187,15 @@
       <recent name="E:\Yann\Code\projet_info4B_2019_2020\src\ressources" />
     </key>
   </component>
-  <component name="RunManager" selected="Compound.Pengo x2">
+  <component name="RunManager" selected="Application.Pengo debug core">
+    <configuration name="Pengo debug core" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
+      <module name="projet_info4B_2019_2020" />
+      <option name="PROGRAM_PARAMETERS" value="-debugMainGame" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Pengo x2" type="CompoundRunConfigurationType">
       <toRun name="Pengo" type="Application" />
       <toRun name="Pengo -NOBUILD" type="Application" />
@@ -101,8 +219,9 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.PENGO -DUMMY SAVES" />
-      <item itemvalue="Application.Pengo -NOBUILD" />
+      <item itemvalue="Application.Pengo debug core" />
+      <item itemvalue="Application.Pengo sans sauvegardes" />
+      <item itemvalue="Application.Pengo sans recompilation" />
       <item itemvalue="Application.Pengo" />
       <item itemvalue="Compound.Pengo x2" />
       <item itemvalue="JAR Application.Pengo -jar" />
@@ -234,6 +353,19 @@
       <workItem from="1613164940485" duration="1939000" />
       <workItem from="1613207753635" duration="2591000" />
       <workItem from="1613229607470" duration="988000" />
+      <workItem from="1626719839664" duration="3632000" />
+      <workItem from="1626770709184" duration="4137000" />
+      <workItem from="1626885261390" duration="34000" />
+      <workItem from="1626960398387" duration="5601000" />
+      <workItem from="1627138418511" duration="3798000" />
+      <workItem from="1627653655374" duration="4007000" />
+      <workItem from="1627911958533" duration="2468000" />
+      <workItem from="1627917058879" duration="2340000" />
+      <workItem from="1627922330576" duration="3781000" />
+      <workItem from="1628013494400" duration="165000" />
+      <workItem from="1628072461844" duration="35000" />
+      <workItem from="1628082479848" duration="894000" />
+      <workItem from="1628099378772" duration="11000" />
     </task>
     <servers />
   </component>

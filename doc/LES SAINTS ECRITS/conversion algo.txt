@@ -69,14 +69,14 @@ ANCIEN ALGO ////////////////////////////////////////////////////////////////////
 
 package com.generic.gameplay;
 
-import com.generic.core.IceBlock;
+import com.generic.core.blocks.IceBlock;
 import com.generic.gameplay.GameMap;
 import com.generic.graphics.SpriteManager;
 import com.generic.utils.Paire;
 import com.generic.utils.Pile;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.*;
 
 

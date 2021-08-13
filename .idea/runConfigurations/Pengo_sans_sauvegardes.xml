@@ -1,0 +1,10 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Pengo sans sauvegardes" type="Application" factoryName="Application">
+    <option name="MAIN_CLASS_NAME" value="com.generic.Main" />
+    <module name="projet_info4B_2019_2020" />
+    <option name="PROGRAM_PARAMETERS" value="-createSave" />
+    <method v="2">
+      <option name="Make" enabled="true" />
+    </method>
+  </configuration>
+</component>

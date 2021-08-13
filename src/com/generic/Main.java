@@ -1,6 +1,6 @@
 package com.generic;
 
-import com.generic.gameplay.CONFIG;
+import com.generic.gameplay.v2.GameController;
 import com.generic.launcher.Launcher;
 import com.generic.launcher.Leaderboard;
 import com.generic.net.score.ScoreServer;
@@ -19,14 +19,23 @@ public class Main {
             if (args[0].equals("-createSave")) {
                 generateDummySaveFiles();
             }
+            else if (args[0].equals("-debugMainGame"))
+            {
+                GameController gc = GameController.createGameController();
+                gc.start();
+            }
+            else
+            {
+                try {
+                    sc_srv = new ScoreServer();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                l = new Launcher();
+            }
         }
 
-        try {
-            sc_srv = new ScoreServer();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        l = new Launcher();
+
     }
 
     public static void generateDummySaveFiles() {

@@ -1,8 +1,13 @@
 package com.generic.core;
 
+import com.generic.core.blocks.DiamondBlock;
+import com.generic.core.blocks.IceBlock;
+import com.generic.core.blocks.PlaceholderBlock;
+import com.generic.core.entities.Animal;
+import com.generic.core.entities.Penguin;
 import com.generic.gameplay.GameMap;
 
-public class MapObjectFactory {
+public class MapObjectFactory<T> {
 
     private static void linkMap(MapObject mo, GameMap m) {
         mo.setMap(m);

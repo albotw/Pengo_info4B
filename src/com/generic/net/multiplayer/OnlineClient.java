@@ -7,14 +7,12 @@ import com.generic.core.MapObjectFactory;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
 import com.generic.launcher.Launcher;
-import com.generic.utils.InputHandler;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
 
 public class OnlineClient extends Thread {
     private NetworkManager nm;
-    private InputHandler ih;
     private RenderThread rt;
     private GameMap m;
     private SpriteManager sm;
@@ -42,28 +40,13 @@ public class OnlineClient extends Thread {
     }
 
     public void run() {
-        this.ih = new InputHandler(rt.getWindow());
-        while (!stopClient) {
-            if (ih.UP)
-                nm.UP();
-            else if (ih.DOWN)
-                nm.DOWN();
-            else if (ih.LEFT)
-                nm.LEFT();
-            else if (ih.RIGHT)
-                nm.RIGHT();
-
-            if (ih.ACTION)
-                nm.ACTION();
-
-            ih.flush();
+        //TODO: refaire input clavier
 
             try {
                 sleep(16);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
     }
 
     public void updateUI(String[] params) {
@@ -124,7 +107,6 @@ public class OnlineClient extends Thread {
         GED.Fermer();
         nm.sendCommand("DISCONNECT", null);
         rt.stopRendering();
-        ih.flush();
 
         Launcher.instance.onGameEnded();
     }

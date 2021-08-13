@@ -3,6 +3,11 @@ package com.generic.gameplay;
 import com.generic.AI.AI;
 import com.generic.UI.GameEndDialog;
 import com.generic.core.*;
+import com.generic.core.blocks.IceBlock;
+import com.generic.core.entities.Animal;
+import com.generic.core.entities.MapEntity;
+import com.generic.core.entities.Penguin;
+import com.generic.gameplay.events.ThreadID;
 import com.generic.graphics.RenderThread;
 import com.generic.graphics.SpriteManager;
 import com.generic.graphics.Window;
@@ -12,9 +17,9 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
-import static com.generic.gameplay.CONFIG_GAME.*;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG_GAME.*;
 import static com.generic.utils.Equations.RandomizedInt;
 import static java.lang.Thread.sleep;
 
@@ -33,24 +38,40 @@ public class LocalGame extends AbstractGame {
 
     private boolean AIwin;
 
+    private boolean stopGame = false;
+
     public LocalGame() {
         super();
         map.setLocal(true);
 
         AIs = new HashMap<MapEntity, AI>();
         localPlayer = launcher.getMainProfile();
-        sm = SpriteManager.createSpriteManager();
+        this.sm = SpriteManager.createSpriteManager();
 
         renderer = new RenderThread();
         this.w = renderer.getWindow();
+    }
 
+    public void start()
+    {
+        //Démarrage du rendu
         renderer.setClient(false);
         renderer.start();
 
+        //Création de la carte
         mg.pre_init();
         mg.path_init();
 
-        start();
+        //Démarrage de la partie
+        time.start();
+        initDiamondBlocks();
+        initPlayers();
+        initIA();
+    }
+
+    public void run()
+    {
+
     }
 
     public void initIA() {
@@ -62,9 +83,9 @@ public class LocalGame extends AbstractGame {
                 int initX = RandomizedInt(0, GRID_WIDTH - 1);
                 int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-                if (map.getAt(initX, initY).getType().equals("void")) {
+                if (map.getAt(initX, initY) == null) {
                     loop = false;
-                    AI ai = new AI();
+                    AI ai = new AI(ThreadID.AI_1);
 
                     if (PLAYER_IS_PENGUIN) {
                         Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
@@ -90,7 +111,7 @@ public class LocalGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY).getType().equals("void")) {
+            if (map.getAt(initX, initY) == null) {
                 loop = false;
 
                 if (PLAYER_IS_PENGUIN) {
@@ -108,20 +129,15 @@ public class LocalGame extends AbstractGame {
         } while (loop);
     }
 
-    public void start() {
-        time.start();
-        initDiamondBlocks();
-        initPlayers();
-        initIA();
-    }
-
     @Override
-    public void gameEnd() {
+    public void postGame() {
         time.stopTimer();
+
         if (!AIwin) {
             localPlayer.setPoints("GameEnd", time.getTime());
         }
-        stop();
+        endGame();
+
         GameEndDialog GED = new GameEndDialog(w, false, !AIwin, time.getTime(), localPlayer.getPoints());
         try {
             sleep(5000);
@@ -141,14 +157,13 @@ public class LocalGame extends AbstractGame {
         Launcher.instance.onGameEnded();
     }
 
-    public void stop() {
+    public void endGame() {
         Iterator it = AIs.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             AI tmp = (AI) pair.getValue();
             try {
                 System.out.println("En attente de l'arrêt d'un Thread IA");
-                tmp.flush();
                 tmp.interrupt();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -179,7 +194,7 @@ public class LocalGame extends AbstractGame {
             AIlives = AIlives - 1;
             if (AIlives == 0) {
                 AIwin = false;
-                gameEnd();
+                stopGame = true;
             } else {
                 respawnAnimal(owner);
             }
@@ -194,7 +209,7 @@ public class LocalGame extends AbstractGame {
             case 'G':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
                     MapObject mo = map.getAt(0, i);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -203,7 +218,7 @@ public class LocalGame extends AbstractGame {
             case 'D':
                 for (int i = 0; i < GRID_HEIGHT; i++) {
                     MapObject mo = map.getAt(GRID_WIDTH - 1, i);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -212,7 +227,7 @@ public class LocalGame extends AbstractGame {
             case 'H':
                 for (int i = 0; i < GRID_WIDTH; i++) {
                     MapObject mo = map.getAt(i, 0);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -221,7 +236,7 @@ public class LocalGame extends AbstractGame {
             case 'B':
                 for (int i = 0; i < GRID_WIDTH; i++) {
                     MapObject mo = map.getAt(i, GRID_HEIGHT - 1);
-                    if (mo.getType().equals("Animal")) {
+                    if (mo instanceof Animal) {
                         ((Animal) (mo)).activateStun();
                     }
                 }
@@ -243,7 +258,7 @@ public class LocalGame extends AbstractGame {
             AIlives = AIlives - 1;
             if (AIlives == 0) {
                 AIwin = false;
-                gameEnd();
+                postGame();
             } else {
                 respawnPenguin(owner);
             }
@@ -257,7 +272,7 @@ public class LocalGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY).getType().equals("IceBlock")) {
+            if (map.getAt(initX, initY) instanceof IceBlock) {
                 loop = false;
                 Animal a = MapObjectFactory.createAnimal(initX, initY, this.map);
                 if (PLAYER_IS_PENGUIN) {
@@ -285,7 +300,7 @@ public class LocalGame extends AbstractGame {
             int initX = RandomizedInt(0, GRID_WIDTH - 1);
             int initY = RandomizedInt(0, GRID_HEIGHT - 1);
 
-            if (map.getAt(initX, initY).getType().equals("void")) {
+            if (map.getAt(initX, initY) == null) {
                 loop = false;
                 Penguin p = MapObjectFactory.createPenguin(initX, initY, this.map);
 

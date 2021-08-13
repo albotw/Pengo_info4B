@@ -4,7 +4,7 @@ import com.generic.UI.HostSettingsUI;
 import com.generic.UI.HostUI;
 import com.generic.UI.JoinUI;
 import com.generic.UI.OnlineUI;
-import com.generic.gameplay.CONFIG_GAME;
+import com.generic.gameplay.config.CONFIG_GAME;
 import com.generic.net.multiplayer.NetworkManager;
 import com.generic.net.multiplayer.OnlineClient;
 import com.generic.net.multiplayer.Serveur;

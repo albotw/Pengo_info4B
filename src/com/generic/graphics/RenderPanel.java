@@ -3,7 +3,7 @@ package com.generic.graphics;
 import javax.swing.*;
 import java.awt.*;
 
-import static com.generic.gameplay.CONFIG.BG_DEFAULT_COLOR;
+import static com.generic.gameplay.config.CONFIG.BG_DEFAULT_COLOR;
 
 public class RenderPanel extends JPanel {
 

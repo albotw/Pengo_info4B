@@ -24,7 +24,7 @@ implémente mort: déclenche fin du jeu(),
 contient sa position, accessible directement par les animaux sans passer par la map.
 peut déclencher le stun si pres du mur.
 
-com.generic.core.Animal: hérite de ENTITE | RESSOURCE
+com.generic.core.entities.Animal: hérite de ENTITE | RESSOURCE
 dépend d'un modèle lecteur / rédacteur.
 implémente déplacement, met a jour sa position.
 implémente destruction: peut détruire un bloc sur la map.
@@ -61,3 +61,14 @@ Graphics: THREAD
 affichage.
 fenêtre.
 génération de tick ?
+
+GameController : Thread
+-> instancie les éléments
+-> lance les threads
+-> détruit les threads
+-> possède une file de signaux pour l'aiguillage
+
+Signal : abstract class
+
+SignalIn : interface
+SignalOut : interface

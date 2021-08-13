@@ -1,13 +1,17 @@
 package com.generic.gameplay;
 
 import com.generic.core.*;
+import com.generic.core.blocks.DiamondBlock;
+import com.generic.core.blocks.IceBlock;
+import com.generic.core.entities.Animal;
+import com.generic.core.entities.Penguin;
 import com.generic.launcher.Launcher;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
 import static com.generic.utils.Equations.RandomizedInt;
 
-public abstract class AbstractGame {
+public abstract class AbstractGame extends Thread{
     public static AbstractGame instance;
 
     protected MapGenerator mg;
@@ -19,7 +23,7 @@ public abstract class AbstractGame {
         instance = this;
 
         map = new GameMap(GRID_WIDTH, GRID_HEIGHT);
-        mg = new MapGenerator();
+        mg = new MapGenerator(null);
 
         time = new GameTimer();
     }
@@ -32,7 +36,7 @@ public abstract class AbstractGame {
                 int initY = RandomizedInt(1, GRID_HEIGHT - 2);
 
                 if (map.getAt(initX, initY) != null) {
-                    if (map.getAt(initX, initY).getType().equals("IceBlock")) {
+                    if (map.getAt(initX, initY) instanceof IceBlock) {
                         loop = false;
                         MapObjectFactory.createDiamondBlock(initX, initY, this.map);
                     }
@@ -42,44 +46,7 @@ public abstract class AbstractGame {
     }
 
     public void checkDiamondBlocks(DiamondBlock db) {
-        int x = db.getX();
-        int y = db.getY();
 
-        if (map.getAt(x, y - 1).getType().equals("DiamondBlock")) {
-            if (map.getAt(x, y - 2).getType().equals("DiamondBlock")) {
-                gameEnd(); // db en position bas, alignement vertical
-            }
-        }
-
-        if (map.getAt(x, y + 1).getType().equals("DiamondBlock")) {
-            if (map.getAt(x, y - 1).getType().equals("DiamondBlock")) {
-                gameEnd(); // db en position millieu, alignement vertical
-            }
-        }
-
-        if (map.getAt(x, y + 1).getType().equals("DiamondBlock")) {
-            if (map.getAt(x, y + 2).getType().equals("DiamondBlock")) {
-                gameEnd(); // db en position haut, alignement vertical
-            }
-        }
-
-        if (map.getAt(x - 1, y).getType().equals("DiamondBlock")) {
-            if (map.getAt(x - 2, y).getType().equals("DiamondBlock")) {
-                gameEnd(); //db en position droite, alignement horizontal
-            }
-        }
-
-        if (map.getAt(x - 1, y).getType().equals("DiamondBlock")) {
-            if (map.getAt(x + 1, y).getType().equals("DiamondBlock")) {
-                gameEnd(); //db en position milieu, alignement horizontal
-            }
-        }
-
-        if (map.getAt(x + 1, y).getType().equals("DiamondBlock")) {
-            if (map.getAt(x + 2, y).getType().equals("DiamondBlock")) {
-                gameEnd(); //db en position gauche, alignement horizontal
-            }
-        }
 
 
         /**
@@ -103,15 +70,13 @@ public abstract class AbstractGame {
 
     public abstract void initIA();
 
-    public abstract void start();
-
-    public abstract void gameEnd();
+    public abstract void postGame();
 
     public abstract void respawnAnimal(Object owner);
 
     public abstract void respawnPenguin(Object owner);
 
-    public abstract void stop();
+    public abstract void endGame();
 
     public abstract void animalKilled(Animal a, MapObject killer);
 

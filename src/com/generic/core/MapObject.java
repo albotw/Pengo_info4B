@@ -3,8 +3,8 @@ package com.generic.core;
 import com.generic.gameplay.GameMap;
 import com.generic.graphics.Sprite;
 
-import static com.generic.gameplay.CONFIG.GRID_HEIGHT;
-import static com.generic.gameplay.CONFIG.GRID_WIDTH;
+import static com.generic.gameplay.config.CONFIG.GRID_HEIGHT;
+import static com.generic.gameplay.config.CONFIG.GRID_WIDTH;
 
 public abstract class MapObject{
     protected char orientation = 'N';
@@ -12,7 +12,6 @@ public abstract class MapObject{
     protected int x;
     protected int y;
     protected GameMap m;
-    protected String type;
 
     protected Sprite sprite;
 
@@ -23,13 +22,14 @@ public abstract class MapObject{
         this.sprite.setPosition(x, y);
     }
 
-    abstract void destroy(MapObject killer);
+    abstract public void destroy(MapObject killer);
 
     public void update()
     {
         m.place(this, x, y);
         sprite.setPosition(x, y);
     }
+
     public void goLeft() {
         this.orientation = 'W';
         if (x > 0) {
@@ -82,23 +82,17 @@ public abstract class MapObject{
         this.y = y;
     }
 
-    public String getType() {
-        return type;
-    }
-
     public void setMap(GameMap m) {
         this.m = m;
     }
 
     public Sprite getSprite() { return this.sprite; }
 
-    public void flush() {
+    public void clean() {
         this.x = -1;
         this.y = -1;
         this.m = null;
-        this.type = "";
         this.sprite = null;
-        this.m = null;
     }
 
     public String getOrientation() {return "" + orientation;}
