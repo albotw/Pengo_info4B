@@ -2,6 +2,8 @@ package core.entities;
 
 import core.Direction;
 import core.MapObject;
+import events.PenguinKilledEvent;
+import events.ThreadID;
 import graphics.TextureID;
 import core.blocks.MapBlock;
 import gameplay.GameController;
@@ -106,9 +108,10 @@ public class Penguin extends MapEntity {
     }
 
     public void destroy(MapObject killer) {
-        GameController.instance.getMap().release(x, y);
+        GameController.instance.getMap().delete(x, y);
 
         //TODO: envoyer signal
         //GameController.instance.penguinKilled(this, killer);
+        GameController.publish(new PenguinKilledEvent(ThreadID.Game, this.controller), ThreadID.Controller);
     }
 }

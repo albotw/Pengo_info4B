@@ -1,0 +1,13 @@
+Gameplay:
+    Passage à un système d'évènements.
+    Création d'une classe maitre GameController.
+    Gameplay passe par une interface
+    Implémentation d'un LocalGameplay
+    Le controle des objets passe par une interface MapObjectController.
+
+Core:
+    Implémentation des directions sous forme d'énumération.
+    Rangement des classes.
+
+
+TODO: optimiser stun.

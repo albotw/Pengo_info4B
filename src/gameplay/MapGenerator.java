@@ -22,7 +22,7 @@ public class MapGenerator {
                 MapObjectFactory.createIceBlock(j, i, this.m);
             }
         }
-        m.release(x, y);
+        m.delete(x, y);
     }
 
     public void path_init() {

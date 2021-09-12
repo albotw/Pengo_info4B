@@ -1,11 +1,12 @@
 package gameplay;
 
+import events.*;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
 
-public class Player extends AbstractPlayer implements NativeKeyListener {
+public class Player extends AbstractPlayer implements NativeKeyListener, EventIO {
 
     private volatile boolean flush;
     private NativeKeyEvent currentInput = null;
@@ -67,23 +68,20 @@ public class Player extends AbstractPlayer implements NativeKeyListener {
     }
 
     public void removeLive() {
+        System.out.println("remove live");
         currentLives--;
         if (currentLives <= 0) {
-            //TODO: virer tout ça.
-            //Launcher.instance.getGame().setAIwin(true);
-            //Launcher.instance.getGame().postGame();
+            send(new PlayerLostEvent(ThreadID.LocalPlayer), ThreadID.Controller);
         }
         else
         {
-            //TODO: envoyer message de respawn
+            send(new RespawnPenguinEvent(ThreadID.LocalPlayer, this), ThreadID.Controller);
         }
     }
 
 
     @Override
-    public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {
-
-    }
+    public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {}
 
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
@@ -91,7 +89,10 @@ public class Player extends AbstractPlayer implements NativeKeyListener {
     }
 
     @Override
-    public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) {
+    public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) { }
+
+    @Override
+    public void grab(Event e) {
 
     }
 }

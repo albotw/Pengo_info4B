@@ -1,6 +1,6 @@
 package gameplay;
 
-import AI.AI;
+import Bot.Bot;
 import core.MapObject;
 import core.MapObjectFactory;
 import core.blocks.IceBlock;
@@ -20,14 +20,14 @@ import static utils.Equations.RandomizedInt;
 
 public class LocalGameplay implements Gameplay{
     private GameMap map = GameController.instance.map;
-    private HashMap<MapEntity, AI> bots;
+    private HashMap<MapEntity, Bot> bots;
     private Player p;
 
     private int botLives = AI_INIT_LIVES;
 
     public LocalGameplay()
     {
-        bots = new HashMap<MapEntity, AI>();
+        bots = new HashMap<MapEntity, Bot>();
     }
 
     // wallOffset -> 1 par défaut, 2 pour les DiamondBlocks
@@ -54,7 +54,11 @@ public class LocalGameplay implements Gameplay{
 
     @Override
     public void initDiamondBlocks() {
-        //TODO
+        for (int i = 0; i < 3; i++)
+        {
+            int[] coords = getEmptyCell(2, true);
+            MapObjectFactory.createDiamondBlock(coords[0], coords[1], this.map);
+        }
     }
 
     @Override
@@ -86,7 +90,7 @@ public class LocalGameplay implements Gameplay{
         for (int i = 0; i < N_AI; i++)
         {
             int[] position = getEmptyCell(1, false);
-            AI bot = new AI(ThreadID.AI_1);
+            Bot bot = new Bot(ThreadID.getAvailableBotID());
 
             MapEntity controlledEntity = null;
             if (PLAYER_IS_PENGUIN)
@@ -100,11 +104,10 @@ public class LocalGameplay implements Gameplay{
 
             bot.setControlledObject(controlledEntity);
             bots.put(controlledEntity, bot);
-            bot.setTarget(p.controlledObject); //TODO: déplacer ailleurs ?
+            bot.setTarget(p.getControlledObject()); //TODO: déplacer ailleurs ?
         }
     }
 
-    //TODO: faire interface MapObjectController pour AI et Player
     @Override
     public void respawnAnimal(MapObjectController owner) {
         int[] coords = getEmptyCell(1, true);
@@ -115,26 +118,23 @@ public class LocalGameplay implements Gameplay{
 
     @Override
     public void respawnPenguin(MapObjectController owner) {
-        try{
-            sleep(500);
-        }catch(Exception e) { e.printStackTrace(); }
-
         int[] coords = getEmptyCell(1, false);
         Penguin p = MapObjectFactory.createPenguin(coords[0], coords[1], this.map);
         owner.setControlledObject(p);
     }
 
     @Override
-    public void onAnimalKilled(MapObjectController owner, MapObjectController killer) {
+    public void onAnimalKilled(MapObjectController owner) {
+        owner.clearControlledObject();
         if (PLAYER_IS_PENGUIN)
         {
-            owner.setControlledObject(null);
-            ((AbstractPlayer)killer).addKillPoints();
+            p.addKillPoints();
 
             botLives -= 1;
             if (botLives == 0)
             {
-                GameController.publish(new Event(ThreadID.Game), ThreadID.Game);
+                //TODO: faire évènement.
+                //GameController.publish(new Event(ThreadID.Game), ThreadID.Game);
             }
             else
             {
@@ -143,23 +143,23 @@ public class LocalGameplay implements Gameplay{
         }
         else if (PLAYER_IS_ANIMAL)
         {
-            owner.setControlledObject(null);
-            ((AbstractPlayer)killer).removeLive();
+            p.removeLive();
         }
     }
 
     @Override
-    public void onPenguinKilled(MapObjectController owner, MapObjectController killer) {
-        owner.setControlledObject(null);
+    public void onPenguinKilled(MapObjectController owner) {
+        owner.clearControlledObject();
         if (PLAYER_IS_PENGUIN)
         {
-            ((AbstractPlayer) owner).removeLive();
+            p.removeLive();
         }else if (PLAYER_IS_ANIMAL)
         {
-            ((AbstractPlayer) killer).addKillPoints();
+            p.addKillPoints();
 
             botLives -= 1;
             if (botLives == 0) {
+                //TODO: modifier event
                 GameController.publish(new Event(ThreadID.Game), ThreadID.Game);
             }
         }

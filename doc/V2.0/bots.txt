@@ -1,0 +1,4 @@
+Bots:
+    changement de nom -> bot
+
+TODO: refonte complète.

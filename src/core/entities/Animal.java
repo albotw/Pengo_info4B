@@ -2,6 +2,7 @@ package core.entities;
 
 import core.Direction;
 import core.MapObject;
+import events.AnimalKilledEvent;
 import graphics.TextureID;
 import core.blocks.IceBlock;
 import gameplay.GameController;
@@ -35,8 +36,8 @@ public class Animal extends MapEntity{
 
     public void destroy(MapObject source) {
         m.release(this.x, this.y);
-        //TODO: rechanger en AnimalKilledEvent
-        GameController.publish(new Event(null, source), ThreadID.Game);
+        GameController.publish(new AnimalKilledEvent(ThreadID.Game, this.controller), ThreadID.Controller);
+        System.out.println("published event");
         clean();
     }
 

@@ -1,9 +1,7 @@
 package gameplay;
 
 
-import events.Event;
-import events.EventIO;
-import events.ThreadID;
+import events.*;
 import graphics.RenderThread;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -22,7 +20,7 @@ public class GameController extends Thread implements EventIO {
     public static GameController instance = null;
     public Queue<Event> eventQueue;
     public volatile boolean running = true;
-    public ThreadID ID = ThreadID.Game;
+    public ThreadID ID = ThreadID.Controller;
 
     private HashMap<ThreadID, EventIO> eventChannel;
 
@@ -144,9 +142,23 @@ public class GameController extends Thread implements EventIO {
             if (!eventQueue.isEmpty())
             {
                 Event e = eventQueue.poll();
-                if (e instanceof Event)
+
+                if (e instanceof AnimalKilledEvent)
                 {
-                    // faire des trucs
+                    AnimalKilledEvent event = (AnimalKilledEvent)e;
+                    gameplay.onAnimalKilled(event.getOwner());
+                }
+                else if (e instanceof PenguinKilledEvent)
+                {
+                    System.out.println("got penguin killed event");
+                    PenguinKilledEvent event = (PenguinKilledEvent) e;
+                    gameplay.onPenguinKilled(event.getOwner());
+                }
+                else if (e instanceof RespawnPenguinEvent)
+                {
+                    System.out.println("ask for respawn");
+                    RespawnPenguinEvent event = (RespawnPenguinEvent) e;
+                    gameplay.respawnPenguin(event.getController());
                 }
             }
         }

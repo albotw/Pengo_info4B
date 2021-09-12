@@ -20,8 +20,6 @@ public class GameMap {
 
     public MapObject getAt(int x, int y) {
         if (x < 0 || x >= width || y < 0 || y >= height || tab == null || tab[x][y] == null) {
-            //TODO: fuite de mémoire ?
-            //return new Void(x, y);
             return null;
         } else {
             return tab[x][y];
@@ -42,7 +40,7 @@ public class GameMap {
 
     public synchronized void delete(int x, int y)
     {
-        if (inBounds(x, y))
+        if (inBounds(x, y) && tab[x][y] != null)
         {
             tab[x][y].clean();
             tab[x][y] = null;
@@ -62,21 +60,5 @@ public class GameMap {
 
     public int getHeight() {
         return height;
-    }
-
-    public String toString() {
-        String s = "";
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
-                if (tab[j][i] == null) {
-                    s += ".";
-                } else {
-                    s += "X";
-                }
-            }
-            s += "\n";
-        }
-
-        return s;
     }
 }

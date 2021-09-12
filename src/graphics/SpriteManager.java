@@ -53,13 +53,14 @@ public class SpriteManager extends JPanel{
 
     private void loadTextures()
     {
-        //TODO: permettre le chargement de sets de textures ?
         for(TextureID tID : TextureID.values())
         {
-            String dir = "ressources/GAME/" + tID.name() + ".png";
-            ImageIcon ii = new ImageIcon(dir);
-            textureAtlas.put(tID, ii.getImage());
-            ii = null;
+            if (!tID.isVirtual())
+            {
+                String dir = "ressources/GAME/" + tID.name() + ".png";
+                ImageIcon ii = new ImageIcon(dir);
+                textureAtlas.put(tID, ii.getImage());
+            }
         }
         System.out.println("loaded " + textureAtlas.values().size() + " textures");
     }

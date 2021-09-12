@@ -10,6 +10,7 @@ public class MapObjectFactory<T> {
 
     private static void linkMap(MapObject mo, GameMap m) {
         mo.setMap(m);
+        m.delete(mo.x, mo.y);
         m.place(mo, mo.x, mo.y);
     }
 

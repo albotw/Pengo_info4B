@@ -1,18 +1,17 @@
 package gameplay;
 
-import core.MapObject;
 import core.entities.MapEntity;
 
 import static config.CONFIG_GAME.PLAYER_INIT_LIVES;
 
-public abstract class AbstractPlayer extends Thread {
+public abstract class AbstractPlayer extends Thread implements MapObjectController{
     protected String pseudo;
     protected int currentLives;
     protected MapEntity controlledObject;
 
     protected int points;
     protected int nextLiveCounter;
-    protected int nextLiveThresold = 4000;
+    protected int nextLiveThreshold = 4000;
 
     public AbstractPlayer(String pseudo) {
         this.pseudo = pseudo;
@@ -33,10 +32,10 @@ public abstract class AbstractPlayer extends Thread {
 
     public void addLive()
     {
-        if (nextLiveCounter >= nextLiveThresold)
+        if (nextLiveCounter >= nextLiveThreshold)
         {
             currentLives++;
-            nextLiveThresold *= 1.3;
+            nextLiveThreshold *= 1.3;
         }
     }
 
@@ -47,17 +46,17 @@ public abstract class AbstractPlayer extends Thread {
             points += 5000;
             nextLiveCounter += 5000;
         }
-        else if (time > 20 && time <= 29)
+        else if (time <= 30)
         {
             points += 2000;
             nextLiveCounter += 2000;
         }
-        else if (time > 29 && time <= 39)
+        else if (time <= 40)
         {
             points += 1000;
             nextLiveCounter += 1000;
         }
-        else if (time > 39 && time <= 60)
+        else if (time <= 60)
         {
             points += 500;
             nextLiveCounter += 500;
@@ -66,21 +65,25 @@ public abstract class AbstractPlayer extends Thread {
         addLive();
     }
 
-    //TODO: supprimer
-    public void setPoints(String context, int time) {
-
-    }
-
     public int getPoints() {
         return points;
     }
 
-    public MapObject getControlledObject() {
+    @Override
+    public MapEntity getControlledObject() {
         return this.controlledObject;
     }
 
+    @Override
     public void setControlledObject(MapEntity me) {
         this.controlledObject = me;
+        me.setController(this);
+    }
+
+    @Override
+    public void clearControlledObject()
+    {
+        this.controlledObject = null;
     }
 
     public String getPseudo() {

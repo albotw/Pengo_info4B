@@ -18,8 +18,8 @@ public interface Gameplay {
     public void respawnAnimal(MapObjectController owner);
     public void respawnPenguin(MapObjectController owner);
 
-    public void onAnimalKilled(MapObjectController owner, MapObjectController killer);
-    public void onPenguinKilled(MapObjectController owner, MapObjectController killer);
+    public void onAnimalKilled(MapObjectController owner);
+    public void onPenguinKilled(MapObjectController owner);
     public void onStunTriggered(char dirMur);
 
     public void stop();

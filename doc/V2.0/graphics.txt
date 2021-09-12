@@ -1,0 +1,8 @@
+Changements:
+
+fusion DrawPanel et SpriteManager
+optimisation des textures avec les références
+ajouts d'effets animés
+
+TODO: refonte GameOverlay
+TODO: texture packs

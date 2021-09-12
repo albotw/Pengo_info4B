@@ -1,7 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="" />
+    <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PengoV2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PengoV2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/AI.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/AStarInvertStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/AStarStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/DefendDiamondBlockStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/RandStrategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/Strategy.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/Main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/MapObjectFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/MapObjectFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Animal.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/MapEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/MapEntity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Penguin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Penguin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/Event.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/ThreadID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/ThreadID.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/AbstractPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/AbstractPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Gameplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Gameplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/LocalGameplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/LocalGameplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapGenerator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapObjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapObjectController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/graphics/SpriteManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/graphics/SpriteManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/graphics/TextureID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/graphics/TextureID.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/Bot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/strategy/AStarInvertStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/AStarInvertStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/strategy/AStarStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/AStarStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/strategy/DefendDiamondBlockStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/DefendDiamondBlockStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/strategy/RandStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/RandStrategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AI/strategy/Strategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/Strategy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/MapObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/MapObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/entities/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Animal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/entities/MapEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/MapEntity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/core/entities/Penguin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Penguin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/ThreadID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/ThreadID.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/AbstractPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/AbstractPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/Gameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/Gameplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/MapGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/MapObjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/MapObjectController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/SpriteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/SpriteManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/graphics/TextureID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/TextureID.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,12 +68,20 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Enum" />
+        <option value="GLSL Shader" />
         <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/Pengo_rework" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="InstancesTracker">
+    <option name="classes">
+      <map>
+        <entry key="core.entities.Animal" value="CREATION" />
+      </map>
+    </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
@@ -35,12 +97,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../openGL test engine (java)" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/jnativehook/doc" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -79,7 +142,26 @@
       <workItem from="1628774086596" duration="2965000" />
       <workItem from="1628777180644" duration="1198000" />
       <workItem from="1628851729487" duration="801000" />
+      <workItem from="1628852710078" duration="2454000" />
+      <workItem from="1628932865326" duration="697000" />
+      <workItem from="1628967810756" duration="564000" />
+      <workItem from="1628969867913" duration="715000" />
+      <workItem from="1629114248094" duration="819000" />
+      <workItem from="1629380440180" duration="2708000" />
+      <workItem from="1629882623923" duration="2890000" />
+      <workItem from="1629965819687" duration="340000" />
+      <workItem from="1630399655042" duration="2018000" />
+      <workItem from="1630484280984" duration="2391000" />
+      <workItem from="1631216902403" duration="3418000" />
+      <workItem from="1631261579959" duration="3461000" />
+      <workItem from="1631395492729" duration="1688000" />
+      <workItem from="1631458087382" duration="642000" />
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/Pengo_rework" />
+    </ignored-roots>
   </component>
 </project>
