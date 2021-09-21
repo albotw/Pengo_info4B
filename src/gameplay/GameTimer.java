@@ -20,6 +20,8 @@ public class GameTimer extends Thread {
                 e.printStackTrace();
             }
         }
+
+        System.out.println(" --- timer stopped ---");
     }
 
     public void stopTimer() {

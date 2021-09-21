@@ -54,6 +54,19 @@ public class GameMap {
             && tab != null);
     }
 
+    public void clear()
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                delete(j, i);
+            }
+        }
+
+        System.out.println("--- cleared map ---");
+    }
+
     public int getWidth() {
         return width;
     }

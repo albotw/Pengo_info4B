@@ -3,11 +3,12 @@ package Bot;
 import Bot.strategy.*;
 import core.MapObject;
 import core.entities.MapEntity;
+import events.EventQueue;
+import events.ShutdownEvent;
 import gameplay.MapObjectController;
 import graphics.TextureID;
 import core.entities.Animal;
 import events.Event;
-import events.EventIO;
 import events.ThreadID;
 import gameplay.GameController;
 
@@ -16,10 +17,9 @@ import java.util.Queue;
 
 import static config.CONFIG.AI_TICK_RATE;
 import static config.CONFIG.STUN_TIME;
-import static utils.Equations.RandomizedInt;
 
-public class Bot extends Thread implements EventIO, MapObjectController {
-    private Queue<Event> eventQueue;
+public class Bot extends Thread implements MapObjectController {
+    private EventQueue eventQueue;
     private ThreadID ID;
 
     private MapObject target;
@@ -39,10 +39,9 @@ public class Bot extends Thread implements EventIO, MapObjectController {
 
     public Bot(ThreadID id) {
         this.ID = id;
-        this.eventQueue = new ArrayDeque<Event>();
+        this.eventQueue = new EventQueue(this.ID);
 
         GameController.instance.addThread(this);
-        GameController.instance.subscribe(this.ID, this);
     }
 
     public void run() {
@@ -50,10 +49,13 @@ public class Bot extends Thread implements EventIO, MapObjectController {
             //Vérification des messages et traitement
             if (!eventQueue.isEmpty())
             {
-                Event e = eventQueue.poll();
-                //TODO: ajouter traitements
+                Event e = eventQueue.get();
+                if (e instanceof ShutdownEvent)
+                {
+                    this.running = false;
+                }
             }
-            //
+
             else if (controlledObject != null) {
                 checkStun();
                 checkRespawn();
@@ -79,6 +81,7 @@ public class Bot extends Thread implements EventIO, MapObjectController {
         currentStrat.flush();
         System.out.println("--- Arrêt Thread IA ---");
     }
+
 
     public void checkRespawn() {
         if (respawnActive) {
@@ -178,11 +181,6 @@ public class Bot extends Thread implements EventIO, MapObjectController {
             }
 
         }
-    }
-
-    @Override
-    public void grab(Event e) {
-
     }
 
     @Override

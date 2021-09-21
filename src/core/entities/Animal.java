@@ -2,6 +2,7 @@ package core.entities;
 
 import core.Direction;
 import core.MapObject;
+import core.blocks.DiamondBlock;
 import events.AnimalKilledEvent;
 import graphics.TextureID;
 import core.blocks.IceBlock;
@@ -36,7 +37,7 @@ public class Animal extends MapEntity{
 
     public void destroy(MapObject source) {
         m.release(this.x, this.y);
-        GameController.publish(new AnimalKilledEvent(ThreadID.Game, this.controller), ThreadID.Controller);
+        GameController.publish(new AnimalKilledEvent(this.controller), ThreadID.Controller);
         System.out.println("published event");
         clean();
     }
@@ -57,7 +58,10 @@ public class Animal extends MapEntity{
         super.setOrientation(Direction.LEFT);
         if (!isStun) {
             checkCollisions(x - 1, y);
-            super.goLeft();
+            if (!(m.getAt(x - 1, y) instanceof DiamondBlock))
+            {
+                super.goLeft();
+            }
         }
     }
 
@@ -65,7 +69,10 @@ public class Animal extends MapEntity{
         super.setOrientation(Direction.RIGHT);
         if (!isStun) {
             checkCollisions(x + 1, y);
-            super.goRight();
+            if (!(m.getAt(x + 1, y) instanceof DiamondBlock))
+            {
+                super.goRight();
+            }
         }
     }
 
@@ -73,7 +80,10 @@ public class Animal extends MapEntity{
         super.setOrientation(Direction.UP);
         if (!isStun) {
             checkCollisions(x, y - 1);
-            super.goUp();
+            if (!(m.getAt(x, y - 1) instanceof DiamondBlock))
+            {
+                super.goUp();
+            }
         }
     }
 
@@ -81,7 +91,10 @@ public class Animal extends MapEntity{
         super.setOrientation(Direction.DOWN);
         if (!isStun) {
             checkCollisions(x, y + 1);
-            super.goDown();
+            if (!(m.getAt(x, y + 1) instanceof DiamondBlock))
+            {
+                super.goDown();
+            }
         }
     }
 

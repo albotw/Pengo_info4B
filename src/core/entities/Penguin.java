@@ -112,6 +112,6 @@ public class Penguin extends MapEntity {
 
         //TODO: envoyer signal
         //GameController.instance.penguinKilled(this, killer);
-        GameController.publish(new PenguinKilledEvent(ThreadID.Game, this.controller), ThreadID.Controller);
+        GameController.publish(new PenguinKilledEvent(this.controller), ThreadID.Controller);
     }
 }

@@ -4,9 +4,9 @@ import gameplay.MapObjectController;
 
 public class AnimalKilledEvent extends Event{
     private MapObjectController owner;
-    public AnimalKilledEvent (ThreadID sender, MapObjectController owner)
+    public AnimalKilledEvent ( MapObjectController owner)
     {
-        super(sender);
+        super();
         this.owner = owner;
     }
 

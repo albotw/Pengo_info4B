@@ -69,7 +69,7 @@ public class LocalGameplay implements Gameplay{
     @Override
     public void initPlayers() {
         int[] position = getEmptyCell(1, false);
-        p = new Player("IAN");
+        p = new Player();
 
         MapEntity controlledEntity = null;
         if (PLAYER_IS_PENGUIN)
@@ -82,7 +82,6 @@ public class LocalGameplay implements Gameplay{
         }
 
         p.setControlledObject(controlledEntity);
-        p.start();
     }
 
     @Override
@@ -209,7 +208,8 @@ public class LocalGameplay implements Gameplay{
 
     @Override
     public void stop() {
-
+        map = null;
+        p = null;
     }
 
     @Override

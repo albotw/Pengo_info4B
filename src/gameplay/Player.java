@@ -1,18 +1,39 @@
 package gameplay;
 
+import core.entities.MapEntity;
 import events.*;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+import java.util.Queue;
 
-public class Player extends AbstractPlayer implements NativeKeyListener, EventIO {
+import static config.CONFIG_GAME.PLAYER_INIT_LIVES;
 
-    private volatile boolean flush;
+
+public class Player extends Thread implements NativeKeyListener, MapObjectController {
+
+    private volatile boolean running;
     private NativeKeyEvent currentInput = null;
+    private MapEntity controlledObject;
 
-    public Player (String pseudo) {
-        super(pseudo);
+    private int lives;
+    private int points;
+    private int nextLiveCounter;
+    private int nextLiveThreshold = 4000;
+
+    private EventQueue eventQueue;
+    private ThreadID ID;
+
+    public Player () {
+        this.ID = ThreadID.LocalPlayer;
+        this.eventQueue = new EventQueue(this.ID);
+        GameController.instance.addThread(this);
+
+        this.lives = PLAYER_INIT_LIVES;
+        this.points = 0;
     }
 
     @Override
@@ -24,9 +45,17 @@ public class Player extends AbstractPlayer implements NativeKeyListener, EventIO
 
     public void run() {
         System.out.println("--- Thread player démarré ---");
-        this.flush = false;
+        this.running = true;
 
-        while (!flush) {
+        while (running) {
+            if (!eventQueue.isEmpty())
+            {
+                Event e = eventQueue.get();
+                if (e instanceof ShutdownEvent)
+                {
+                    this.running = false;
+                }
+            }
             if (controlledObject != null && currentInput != null)
             {
                 switch(currentInput.getKeyCode())
@@ -63,22 +92,77 @@ public class Player extends AbstractPlayer implements NativeKeyListener, EventIO
         System.out.println("--- Thread player arrété ---");
     }
 
-    public void flush() {
-        flush = true;
+    public void shutdown() {
+        running = false;
     }
 
     public void removeLive() {
-        System.out.println("remove live");
-        currentLives--;
-        if (currentLives <= 0) {
-            send(new PlayerLostEvent(ThreadID.LocalPlayer), ThreadID.Controller);
+        lives--;
+        if (lives <= 0) {
+            eventQueue.send(new PlayerLostEvent(), ThreadID.Controller);
         }
         else
         {
-            send(new RespawnPenguinEvent(ThreadID.LocalPlayer, this), ThreadID.Controller);
+            eventQueue.send(new RespawnPenguinEvent(this), ThreadID.Controller);
         }
     }
 
+    public void addKillPoints()
+    {
+        this.points += 4000;
+        this.nextLiveCounter += 4000;
+        addLive();
+    }
+
+    public void addLive()
+    {
+        if (nextLiveCounter >= nextLiveThreshold)
+        {
+            lives++;
+            nextLiveThreshold *= 1.2;
+        }
+    }
+
+    public void addEndPoints(int time)
+    {
+        if (time <= 20)
+        {
+            points += 5000;
+            nextLiveCounter += 5000;
+        }
+        else if (time <= 30)
+        {
+            points += 2000;
+            nextLiveCounter += 2000;
+        }
+        else if (time <= 40)
+        {
+            points += 1000;
+            nextLiveCounter += 1000;
+        }
+        else if (time <= 60)
+        {
+            points += 500;
+            nextLiveCounter += 500;
+        }
+        addLive();
+    }
+
+    @Override
+    public MapEntity getControlledObject() {
+        return this.controlledObject;
+    }
+
+    @Override
+    public void setControlledObject(MapEntity me){
+        this.controlledObject = me;
+        me.setController(this);
+    }
+
+    @Override
+    public void clearControlledObject(){
+        this.controlledObject = null;
+    }
 
     @Override
     public void nativeKeyTyped(NativeKeyEvent nativeKeyEvent) {}
@@ -90,9 +174,4 @@ public class Player extends AbstractPlayer implements NativeKeyListener, EventIO
 
     @Override
     public void nativeKeyReleased(NativeKeyEvent nativeKeyEvent) { }
-
-    @Override
-    public void grab(Event e) {
-
-    }
 }

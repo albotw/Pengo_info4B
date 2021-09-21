@@ -2,59 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/EventQueue.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/ShutdownEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PengoV2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/PengoV2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/AI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/AStarInvertStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/AStarStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/DefendDiamondBlockStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/RandStrategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/AI/strategy/Strategy.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/MapObjectFactory.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/MapObjectFactory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/Bot/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/Bot/Bot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/Bot/strategy/AStarStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/Bot/strategy/AStarStrategy.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Animal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/MapEntity.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/MapEntity.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Penguin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Penguin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/AnimalKilledEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/AnimalKilledEvent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/Event.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/ThreadID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/ThreadID.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/AbstractPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/AbstractPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/EventIO.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/PenguinKilledEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/PenguinKilledEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/PlayerLostEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/PlayerLostEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/RespawnPenguinEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/RespawnPenguinEvent.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Gameplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Gameplay.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameTimer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameTimer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/LocalGameplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/LocalGameplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapGenerator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapGenerator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapObjectController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/MapObjectController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/graphics/SpriteManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/graphics/SpriteManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/graphics/TextureID.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/graphics/TextureID.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/AI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/strategy/AStarInvertStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/AStarInvertStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/strategy/AStarStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/AStarStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/strategy/DefendDiamondBlockStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/DefendDiamondBlockStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/strategy/RandStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/RandStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AI/strategy/Strategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/Strategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/MapObjectFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/MapObjectFactory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/Bot.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Bot/strategy/AStarStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/AStarStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/entities/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/entities/MapEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/MapEntity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/entities/Penguin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Penguin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/ThreadID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/ThreadID.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/AbstractPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/AbstractPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/EventIO.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/Gameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/Gameplay.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/gameplay/GameTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/MapGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/MapGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/MapObjectController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/MapObjectController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/SpriteManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/SpriteManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/graphics/TextureID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/graphics/TextureID.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,8 +136,15 @@
       <workItem from="1631261579959" duration="3461000" />
       <workItem from="1631395492729" duration="1688000" />
       <workItem from="1631458087382" duration="642000" />
+      <workItem from="1631623994705" duration="98000" />
+      <workItem from="1631624114380" duration="380000" />
+      <workItem from="1631624510790" duration="6572000" />
+      <workItem from="1631633364657" duration="529000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>

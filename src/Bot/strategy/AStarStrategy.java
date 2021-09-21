@@ -103,6 +103,7 @@ public class AStarStrategy implements Strategy {
             direction = 'D';
         }
 
+        /*
         if (m.getAt(x - 1, y) instanceof MapBlock) {
             int rand = RandomizedInt(0, 1);
             if (rand == 0) direction = 'H';
@@ -111,7 +112,7 @@ public class AStarStrategy implements Strategy {
             int rand = RandomizedInt(0, 1);
             if (rand == 0) direction = 'G';
             else direction = 'D';
-        }
+        }*/
     }
 
     public void updateControlledObject(MapObject co) {

@@ -5,9 +5,9 @@ import gameplay.MapObjectController;
 public class PenguinKilledEvent extends Event{
     private MapObjectController owner;
 
-    public PenguinKilledEvent(ThreadID sender, MapObjectController controller)
+    public PenguinKilledEvent(MapObjectController controller)
     {
-        super(sender);
+        super();
         this.owner = controller;
     }
 

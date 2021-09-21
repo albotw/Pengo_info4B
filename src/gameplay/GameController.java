@@ -16,13 +16,13 @@ import java.util.logging.Logger;
 import static config.CONFIG.GRID_HEIGHT;
 import static config.CONFIG.GRID_WIDTH;
 
-public class GameController extends Thread implements EventIO {
+public class GameController extends Thread {
     public static GameController instance = null;
-    public Queue<Event> eventQueue;
-    public volatile boolean running = true;
-    public ThreadID ID = ThreadID.Controller;
+    private EventQueue eventQueue;
+    private volatile boolean running = true;
+    private ThreadID ID = ThreadID.Controller;
 
-    private HashMap<ThreadID, EventIO> eventChannel;
+    private HashMap<ThreadID, EventQueue> eventChannel;
 
     private RenderThread renderer;
     protected MapGenerator mg;
@@ -57,15 +57,13 @@ public class GameController extends Thread implements EventIO {
             System.exit(1);
         };
 
-        eventChannel = new HashMap<ThreadID, EventIO>();
-        subscribe(this.ID, this);
-
+        eventChannel = new HashMap<ThreadID, EventQueue>();
         threadSet = new ArrayList<Thread>();
-        eventQueue = new ArrayDeque<Event>();
     }
 
     public void start()
     {
+        eventQueue = new EventQueue(ThreadID.Controller);
         super.start();
         map = new GameMap(GRID_WIDTH, GRID_HEIGHT);
         mg = new MapGenerator(this.map);
@@ -89,9 +87,12 @@ public class GameController extends Thread implements EventIO {
 
     public void shutdown()
     {
+        eventQueue.broadcast(new ShutdownEvent());
         gameplay.stop();
-
         renderer.stopRendering();
+        time.stopTimer();
+        map.clear();
+
         renderer = null;
         mg = null;
         time = null;
@@ -99,13 +100,14 @@ public class GameController extends Thread implements EventIO {
         for(Thread t : threadSet)
         {
             try{
-                t.interrupt();
+                //t.interrupt();
             }catch(Exception e)
             {
                 System.out.println("Un thread a rencontré une erreur lors de son arrêt");
             }
         }
         threadSet.clear();
+        eventChannel.clear();
 
         //Launcher.instance.onGameEnded();
     }
@@ -117,9 +119,9 @@ public class GameController extends Thread implements EventIO {
         t.start();
     }
 
-    public void subscribe(ThreadID ID, EventIO eio)
+    public void subscribe(ThreadID ID, EventQueue eq)
     {
-        eventChannel.put(ID, eio);
+        eventChannel.put(ID, eq);
     }
 
     public void removeThread(Thread t)
@@ -135,13 +137,20 @@ public class GameController extends Thread implements EventIO {
 
     public static void publish(Event e, ThreadID target) { instance.eventChannel.get(target).grab(e);}
 
+    public static void publishToAll(Event e) {
+        for (EventQueue eq : instance.eventChannel.values())
+        {
+            eq.grab(e);
+        }
+    }
+
     public void run()
     {
         while (running)
         {
             if (!eventQueue.isEmpty())
             {
-                Event e = eventQueue.poll();
+                Event e = eventQueue.get();
 
                 if (e instanceof AnimalKilledEvent)
                 {
@@ -160,13 +169,14 @@ public class GameController extends Thread implements EventIO {
                     RespawnPenguinEvent event = (RespawnPenguinEvent) e;
                     gameplay.respawnPenguin(event.getController());
                 }
+                else if (e instanceof PlayerLostEvent)
+                {
+                    System.out.println("player lost");
+                    running = false;
+                }
             }
         }
-    }
-
-    @Override
-    public void grab(Event e) {
-        eventQueue.add(e);
+        shutdown();
     }
 
     public GameMap getMap() { return this.map; }
