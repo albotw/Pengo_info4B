@@ -2,13 +2,13 @@ package gameplay;
 
 import core.entities.MapEntity;
 import events.*;
+import events.types.Event;
+import events.types.PlayerLostEvent;
+import events.types.RespawnPenguinEvent;
+import events.types.ShutdownEvent;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.keyboard.NativeKeyEvent;
 import org.jnativehook.keyboard.NativeKeyListener;
-
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Queue;
 
 import static config.CONFIG_GAME.PLAYER_INIT_LIVES;
 

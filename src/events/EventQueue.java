@@ -1,5 +1,6 @@
 package events;
 
+import events.types.Event;
 import gameplay.GameController;
 
 import java.util.ArrayDeque;
@@ -12,19 +13,19 @@ public class EventQueue {
     {
         this.controller = controller;
         this.queue = new ArrayDeque<Event>();
-        GameController.instance.subscribe(this.controller, this);
+        EventDispatcher.instance.subscribe(this.controller, this);
     }
 
     public void send(Event e, ThreadID targetID)
     {
         e.setSender(this.controller);
-        GameController.instance.publish(e, targetID);
+        EventDispatcher.instance.publish(e, targetID);
     }
 
     public void broadcast(Event e)
     {
         e.setSender(this.controller);
-        GameController.instance.publishToAll(e);
+        EventDispatcher.instance.publishToAll(e);
     }
 
     public void grab(Event e)

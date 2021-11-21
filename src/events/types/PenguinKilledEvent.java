@@ -1,8 +1,8 @@
-package events;
+package events.types;
 
 import gameplay.MapObjectController;
 
-public class PenguinKilledEvent extends Event{
+public class PenguinKilledEvent extends Event {
     private MapObjectController owner;
 
     public PenguinKilledEvent(MapObjectController controller)

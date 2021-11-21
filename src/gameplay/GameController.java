@@ -2,14 +2,13 @@ package gameplay;
 
 
 import events.*;
+import events.types.*;
 import graphics.RenderThread;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Queue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,14 +19,12 @@ public class GameController extends Thread {
     public static GameController instance = null;
     private EventQueue eventQueue;
     private volatile boolean running = true;
-    private ThreadID ID = ThreadID.Controller;
-
-    private HashMap<ThreadID, EventQueue> eventChannel;
 
     private RenderThread renderer;
-    protected MapGenerator mg;
-    protected GameMap map;
-    protected GameTimer time;
+    private MapGenerator mg;
+    private GameMap map;
+    private GameTimer time;
+    private EventDispatcher ed;
 
     private ArrayList<Thread> threadSet;
 
@@ -57,7 +54,7 @@ public class GameController extends Thread {
             System.exit(1);
         };
 
-        eventChannel = new HashMap<ThreadID, EventQueue>();
+        ed = EventDispatcher.createEventDispatcher();
         threadSet = new ArrayList<Thread>();
     }
 
@@ -87,7 +84,7 @@ public class GameController extends Thread {
 
     public void shutdown()
     {
-        eventQueue.broadcast(new ShutdownEvent());
+
         gameplay.stop();
         renderer.stopRendering();
         time.stopTimer();
@@ -107,7 +104,7 @@ public class GameController extends Thread {
             }
         }
         threadSet.clear();
-        eventChannel.clear();
+
 
         //Launcher.instance.onGameEnded();
     }
@@ -119,29 +116,11 @@ public class GameController extends Thread {
         t.start();
     }
 
-    public void subscribe(ThreadID ID, EventQueue eq)
-    {
-        eventChannel.put(ID, eq);
-    }
 
     public void removeThread(Thread t)
     {
         threadSet.remove(t);
         t.interrupt();
-    }
-
-    public void unsubscribe(ThreadID id)
-    {
-        eventChannel.remove(id);
-    }
-
-    public static void publish(Event e, ThreadID target) { instance.eventChannel.get(target).grab(e);}
-
-    public static void publishToAll(Event e) {
-        for (EventQueue eq : instance.eventChannel.values())
-        {
-            eq.grab(e);
-        }
     }
 
     public void run()

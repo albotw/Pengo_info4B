@@ -1,8 +1,8 @@
-package events;
+package events.types;
 
 import gameplay.MapObjectController;
 
-public class AnimalKilledEvent extends Event{
+public class AnimalKilledEvent extends Event {
     private MapObjectController owner;
     public AnimalKilledEvent ( MapObjectController owner)
     {

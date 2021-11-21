@@ -2,7 +2,7 @@ package core.entities;
 
 import core.Direction;
 import core.MapObject;
-import events.PenguinKilledEvent;
+import events.types.PenguinKilledEvent;
 import events.ThreadID;
 import graphics.TextureID;
 import core.blocks.MapBlock;

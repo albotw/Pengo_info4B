@@ -2,37 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/events/EventQueue.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/ShutdownEvent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/EventDispatcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/types/BotLostEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/Bot/Bot.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/Bot/Bot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/Bot/strategy/AStarStrategy.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/Bot/strategy/AStarStrategy.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Animal.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Animal.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Penguin.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/core/entities/Penguin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/AnimalKilledEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/AnimalKilledEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/Event.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/EventIO.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/PenguinKilledEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/PenguinKilledEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/PlayerLostEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/PlayerLostEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/events/RespawnPenguinEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/events/RespawnPenguinEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameTimer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/GameTimer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/LocalGameplay.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/LocalGameplay.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/PengoV2/gameplay/Player.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/Bot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bot/strategy/AStarStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/strategy/AStarStrategy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/entities/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Animal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/entities/Penguin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Penguin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/EventIO.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/AnimalKilledEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/EventQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/EventQueue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/PenguinKilledEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/PlayerLostEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/RespawnPenguinEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/ShutdownEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/ShutdownEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/GameMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameMap.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/GameTimer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameTimer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/Player.java" afterDir="false" />
     </list>
@@ -56,6 +39,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/gameplay/LocalGameplay.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/events/types/Event.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/gameplay/GameController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/events/EventQueue.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/events/EventDispatcher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/core/entities/Animal.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="InstancesTracker">
     <option name="classes">
       <map>
@@ -67,7 +58,9 @@
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1wBBxT3UOOYuwaBOf0IJaezWCKE" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="abbreviatePackageNames" value="true" />
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -82,8 +75,7 @@
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -140,6 +132,8 @@
       <workItem from="1631624114380" duration="380000" />
       <workItem from="1631624510790" duration="6572000" />
       <workItem from="1631633364657" duration="529000" />
+      <workItem from="1632252585269" duration="1318000" />
+      <workItem from="1637419673474" duration="54000" />
     </task>
     <servers />
   </component>

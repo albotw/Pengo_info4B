@@ -1,8 +1,8 @@
-package events;
+package events.types;
 
 import gameplay.MapObjectController;
 
-public class RespawnPenguinEvent extends Event{
+public class RespawnPenguinEvent extends Event {
     private MapObjectController obj;
 
     public RespawnPenguinEvent (MapObjectController controller) { this.obj = controller; }

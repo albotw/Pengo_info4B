@@ -4,16 +4,13 @@ import Bot.strategy.*;
 import core.MapObject;
 import core.entities.MapEntity;
 import events.EventQueue;
-import events.ShutdownEvent;
+import events.types.ShutdownEvent;
 import gameplay.MapObjectController;
 import graphics.TextureID;
 import core.entities.Animal;
-import events.Event;
+import events.types.Event;
 import events.ThreadID;
 import gameplay.GameController;
-
-import java.util.ArrayDeque;
-import java.util.Queue;
 
 import static config.CONFIG.AI_TICK_RATE;
 import static config.CONFIG.STUN_TIME;
@@ -64,6 +61,7 @@ public class Bot extends Thread implements MapObjectController {
                         currentStrat.process();
                     }catch(Exception e)
                     {
+                        System.out.println("Erreur pendant le traitement de la stratégie");
                         e.printStackTrace(System.err);
                     }
                 }

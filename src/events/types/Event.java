@@ -1,4 +1,6 @@
-package events;
+package events.types;
+
+import events.ThreadID;
 
 public class Event {
     private ThreadID sender;

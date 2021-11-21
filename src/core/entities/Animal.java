@@ -3,11 +3,10 @@ package core.entities;
 import core.Direction;
 import core.MapObject;
 import core.blocks.DiamondBlock;
-import events.AnimalKilledEvent;
+import events.types.AnimalKilledEvent;
 import graphics.TextureID;
 import core.blocks.IceBlock;
 import gameplay.GameController;
-import events.Event;
 import events.ThreadID;
 
 public class Animal extends MapEntity{
