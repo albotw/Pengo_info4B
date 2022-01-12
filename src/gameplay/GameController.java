@@ -22,7 +22,7 @@ public class GameController extends Thread {
 
     private RenderThread renderer;
     private MapGenerator mg;
-    private GameMap map;
+    public GameMap map;
     private GameTimer time;
     private EventDispatcher ed;
 

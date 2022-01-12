@@ -2,22 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/events/EventDispatcher.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/events/types/BotLostEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Bot/Bot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Bot/Bot.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/entities/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Animal.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/core/entities/Penguin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Penguin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/AnimalKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/AnimalKilledEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/EventQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/EventQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PenguinKilledEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/PenguinKilledEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/PlayerLostEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/PlayerLostEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/RespawnPenguinEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/RespawnPenguinEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/ShutdownEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/types/ShutdownEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,7 +45,7 @@
     </option>
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="ProjectId" id="1wBBxT3UOOYuwaBOf0IJaezWCKE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -72,7 +62,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/jnativehook/doc" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
@@ -134,6 +124,7 @@
       <workItem from="1631633364657" duration="529000" />
       <workItem from="1632252585269" duration="1318000" />
       <workItem from="1637419673474" duration="54000" />
+      <workItem from="1642006042173" duration="607000" />
     </task>
     <servers />
   </component>

@@ -7,6 +7,7 @@ import core.blocks.IceBlock;
 import core.entities.Animal;
 import core.entities.MapEntity;
 import core.entities.Penguin;
+import events.EventDispatcher;
 import events.types.BotLostEvent;
 import events.ThreadID;
 
@@ -134,7 +135,7 @@ public class LocalGameplay implements Gameplay{
             {
                 //TODO: faire évènement.
                 //GameController.publish(new Event(ThreadID.Game), ThreadID.Game);
-                GameController.publish(new BotLostEvent(), ThreadID.Controller);
+                EventDispatcher.instance.publish(new BotLostEvent(), ThreadID.Controller);
             }
             else
             {
@@ -160,7 +161,7 @@ public class LocalGameplay implements Gameplay{
             botLives -= 1;
             if (botLives == 0) {
                 //TODO: modifier event
-                GameController.publish(new BotLostEvent(), ThreadID.Controller);
+                EventDispatcher.instance.publish(new BotLostEvent(), ThreadID.Controller);
             }
         }
     }
