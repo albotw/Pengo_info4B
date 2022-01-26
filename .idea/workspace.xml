@@ -1,14 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/entities/Animal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Animal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/core/entities/Penguin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/core/entities/Penguin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gameplay/LocalGameplay.java" afterDir="false" />
-    </list>
+    <list default="true" id="361176d6-8d7a-4376-91a1-ba8bb723987f" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,10 +24,10 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/gameplay/LocalGameplay.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/src/events/types/Event.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/gameplay/GameController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/events/EventQueue.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/events/EventDispatcher.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/events/types/Event.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/core/entities/Animal.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="InstancesTracker">
@@ -58,6 +51,7 @@
     <option name="showVisibilityIcons" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -131,7 +125,19 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$PROJECT_DIR$/Pengo_rework" />
     </ignored-roots>
