@@ -1,5 +1,6 @@
 package fr.albotw.Engine.geometry;
 
+import graphics.TextureID;
 import org.joml.Vector3f;
 import org.lwjgl.system.MemoryUtil;
 
@@ -119,6 +120,7 @@ public class TexturedMesh extends Mesh {
                 0.0f, 0.0f,
         };
 
-        return new TexturedMesh(positions, texCoors, indices, TextureID.CUBE);
+        //return new TexturedMesh(positions, texCoors, indices, TextureID.CUBE);
+        return null;
     }
 }
