@@ -31,11 +31,13 @@ public class Main {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+                System.out.println("creating launcher");
                 l = new Launcher();
             }
         }
 
-
+        System.out.println("creating launcher");
+        l = new Launcher();
     }
 
     public static void generateDummySaveFiles() {
